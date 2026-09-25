@@ -1,0 +1,25 @@
+[
+    {
+  	"userID":1,
+  	"firstName":"Bob",
+  	"lastName":"Adams",
+    "email":"radams@gmail.com",
+    "address": "123 Park Avenue",
+    "birthDate":"803-565-4433",
+    "username":"radams",
+    "password": "password",
+    "notificationPreference": "",
+    "emergencyContacts": ""
+  },{
+  	"userID":1,
+  	"firstName":"Abby",
+  	"lastName":"Adams",
+    "email":"aadams@gmail.com",
+    "address": "123 Park Avenue",
+    "birthDate":"803-565-4433",
+    "username":"aadams",
+    "password": "password",
+    "notificationPreference": "",
+    "emergencyContacts": ""
+  }
+]
