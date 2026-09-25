@@ -1,0 +1,89 @@
+[
+  {
+    "availability": true,
+    "travelDistance": 25.0,
+    "skills": "First Aid, Emergency Response, Search and Rescue",
+    "credentials": {
+      "type": "First Aid Certification",
+      "status": "Valid"
+    },
+    "supplies": [
+      "First Aid Kit",
+      "Flashlight",
+      "Bottled Water",
+      "Emergency Radio"
+    ],
+    "isVerified": true,
+    "isDispatched": false,
+    "volunteerHours": 12.5
+  },
+  {
+    "availability": true,
+    "travelDistance": 15.0,
+    "skills": "Food Distribution, Shelter Assistance",
+    "credentials": {
+      "type": "Food Safety Certification",
+      "status": "Valid"
+    },
+    "supplies": [
+      "Bottled Water",
+      "Non-Perishable Food",
+      "Blankets"
+    ],
+    "isVerified": true,
+    "isDispatched": true,
+    "volunteerHours": 28.0
+  },
+  {
+    "availability": false,
+    "travelDistance": 40.0,
+    "skills": "Electrical Repair, Generator Maintenance",
+    "credentials": {
+      "type": "Licensed Electrician",
+      "status": "Valid"
+    },
+    "supplies": [
+      "Tool Kit",
+      "Portable Generator",
+      "Extension Cords"
+    ],
+    "isVerified": true,
+    "isDispatched": false,
+    "volunteerHours": 35.5
+  },
+  {
+    "availability": true,
+    "travelDistance": 10.0,
+    "skills": "Childcare, Elderly Assistance",
+    "credentials": {
+      "type": "CPR Certification",
+      "status": "Valid"
+    },
+    "supplies": [
+      "Blankets",
+      "Bottled Water",
+      "Hygiene Kits"
+    ],
+    "isVerified": true,
+    "isDispatched": false,
+    "volunteerHours": 8.0
+  },
+  {
+    "availability": false,
+    "travelDistance": 50.0,
+    "skills": "Construction, Debris Removal",
+    "credentials": {
+      "type": "Construction Safety Certification",
+      "status": "Valid"
+    },
+    "supplies": [
+      "Work Gloves",
+      "Safety Helmet",
+      "Safety Goggles",
+      "Hand Tools"
+    ],
+    "isVerified": false,
+    "isDispatched": false,
+    "volunteerHours": 5.5
+  }
+]
