@@ -1,0 +1,65 @@
+[
+  {
+    "requestID": "139a95f0-c8a5-4d66-a8c8-b737f99ad142",
+    "requestType": "PERSONAL",
+    "userID": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "comment": "Roof partially collapsed, need a safe place to stay",
+    "assistanceType": "SHELTER",
+    "urgency": "HIGH_PRIORITY",
+    "status": "AWAITING_ASSIGNMENT",
+    "location": {
+      "latitude": 32.7765,
+      "longitude": -79.9311,
+      "streetAddress": "123 Coastal Way",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29401"
+    },
+    "photo": "photos/139a95f0-roof.jpg",
+    "householdSize": 4,
+    "accessInstructions": "Front door blocked, use side gate. Code 4417"
+  },
+  {
+    "requestID": "c09d80ea-6594-4a46-90c1-7fc9e8b43728",
+    "requestType": "PERSONAL",
+    "userID": "f9e8d7c6-b5a4-3210-9876-543210fedcba",
+    "comment": "Diabetic, insulin ran out, no power for fridge",
+    "assistanceType": "MEDICAL",
+    "urgency": "URGENT_PRIORITY",
+    "status": "PENDING_REVIEW",
+    "location": {
+      "latitude": 32.0809,
+      "longitude": -81.0912,
+      "streetAddress": "789 Ocean Blvd",
+      "apartmentNum": 0,
+      "city": "Savannah",
+      "state": "GA",
+      "zipcode": "31401"
+    },
+    "photo": "",
+    "householdSize": 2,
+    "accessInstructions": ""
+  },
+  {
+    "requestID": "0f48612a-ff38-4cb3-a2d4-7770890c31d8",
+    "requestType": "INFRASTRUCTURE",
+    "userID": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "comment": "Power line down across the road, sparking",
+    "assistanceType": "PROPERTY_DAMAGE",
+    "urgency": "URGENT_PRIORITY",
+    "status": "PENDING_REVIEW",
+    "location": {
+      "latitude": 32.7801,
+      "longitude": -79.9352,
+      "streetAddress": "Meeting St & Calhoun St",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29401"
+    },
+    "photo": "",
+    "hazardType": "ELECTRICAL_HAZARD",
+    "reportTime": "2026-09-24T14:30:00"
+  }
+]
