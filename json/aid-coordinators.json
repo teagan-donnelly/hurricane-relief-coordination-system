@@ -8,7 +8,7 @@
     "birthDate":"803-565-4433",
     "username":"radams",
     "password": "password",
-    "notificationPreference": "",
+    "notificationPreference": "SMS",
     "emergencyContacts": [
       "Sarah Jenkins - 555-0184",
       "David Miller - 555-0167"
@@ -22,7 +22,7 @@
     "birthDate":"803-565-4433",
     "username":"aadams",
     "password": "password",
-    "notificationPreference": "",
+    "notificationPreference": "EMAIL",
     "emergencyContacts": [
       "Amanda Torres - 555-0129",
       "Marcus Chen - 555-0171"
