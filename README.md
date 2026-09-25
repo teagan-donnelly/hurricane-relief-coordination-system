@@ -15,4 +15,10 @@ All project documentation can be found in the [`docs`](docs/) folder.
 
 ## JSON Data
 
-...
+The `json` folder contains the JSON files used to store project data. Each file contains at least two objects, and the fields are designed to match the information represented in the UML class diagram.
+
+- [Aid Coordinators](json/aid-coordinators.json)
+- [Aid Requests](json/aid-request.json)
+- [Aid Requesters](json/aid-requestors.json)
+- [Hurricane Events](json/hurricane-event.json)
+- [Volunteers](json/volunteer.json)
