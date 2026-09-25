@@ -1,0 +1,42 @@
+[
+  {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "userID": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "email": "jane.doe@example.com",
+    "address": "123 Coastal Way, Charleston, SC 29401",
+    "birthDate": "1988-04-12",
+    "userName": "jdoe88",
+    "password": "hashed_password_123",
+    "notificationPreference": "EMAIL",
+    "emergencyContacts": [
+      "John Doe - 555-0192",
+      "Mary Smith - 555-0143"
+    ],
+    "householdSize": 4,
+    "assistanceType": "SHELTER",
+    "pastRequests": [
+      "REQ-2024-001: Temporary Housing",
+      "REQ-2024-089: Emergency Rations"
+    ]
+  },
+  {
+    "firstName": "Carlos",
+    "lastName": "Mendoza",
+    "userID": "f9e8d7c6-b5a4-3210-9876-543210fedcba",
+    "email": "carlos.m@example.com",
+    "address": "789 Ocean Blvd, Savannah, GA 31401",
+    "birthDate": "1995-11-23",
+    "userName": "cmendoza",
+    "password": "hashed_password_456",
+    "notificationPreference": "SMS",
+    "emergencyContacts": [
+      "Elena Mendoza - 555-0188"
+    ],
+    "householdSize": 2,
+    "assistanceType": "MEDICAL_SUPPLIES",
+    "pastRequests": [
+      "REQ-2025-012: First Aid Kit & Insulin"
+    ]
+  }
+]
