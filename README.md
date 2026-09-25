@@ -1,14 +1,18 @@
 # hurricane-relief-coordination-system
 
-This project is a hurricane relief coordination system being developed for our Software Engineering class. The goal is to make it easier for people affected by a hurricane to request help, while also giving volunteers and relief coordinators a way to organize responses, assign help, and keep track of requests.
+The Hurricane Relief Coordination System is a Java-based project designed to help coordinate disaster response after a hurricane. The system connects people requesting aid with volunteers and relief coordinators, while keeping track of requests, assignments, shelters, resources, and other information needed during relief efforts.
 
-Our team, **Cache Money**, is building the project in Java and using the requirements and design process to guide development before implementation.
+This project is being developed by our five-person team, **Cache Money**, for CSCE 247: Software Engineering.
 
 ## Documents
 
-- [Software Requirements Specification (SRS)](documents/SRS.pdf)
-- [Functional Requirements](documents/Functional-Requirements.pdf)
-- [Use Case Diagram](documents/Use-Case-Diagram.pdf)
-- [UML Class Diagram](documents/UML-Class-Diagram.pdf)
-- [Sequence Diagram](documents/Sequence-Diagram.pdf)
-- [User Personas](documents/User-Personas.pdf)
+All project documentation can be found in the [`docs`](docs/) folder.
+
+- [Requirements Document](docs/requirements.pdf)
+- [UML Class Diagram](docs/uml-class-diagram.pdf)
+- [UML Sequence Diagram 1](docs/uml-sequence-diagram1.pdf)
+- [UML Sequence Diagram 2](docs/uml-sequence-diagram2.pdf)
+
+## JSON Data
+
+...
