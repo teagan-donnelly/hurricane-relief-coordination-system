@@ -1,5 +1,5 @@
 [
-    {
+  {
   	"userID":1,
   	"firstName":"Bob",
   	"lastName":"Adams",
@@ -10,7 +10,8 @@
     "password": "password",
     "notificationPreference": "",
     "emergencyContacts": ""
-  },{
+  },
+  {
   	"userID":1,
   	"firstName":"Abby",
   	"lastName":"Adams",
