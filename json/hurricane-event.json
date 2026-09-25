@@ -1,0 +1,22 @@
+[
+    {
+    "hurricaneID": "",
+    "name": "Hurricane Tortilla",
+    "category": 5,
+    "status": "",
+    "affectedZipCodes": "",
+    "startDate":"",
+    "endDate":"",
+    "description": "Very strong winds, expected to cause major damage"
+    },
+    {
+        "hurricaneID": "",
+        "name": "Hurricane Jorge",
+        "category": 3,
+        "status": "",
+        "affectedZipCodes": "",
+        "startDate":"",
+        "endDate":"",
+        "description": "Moderate Storm"
+    }
+]
