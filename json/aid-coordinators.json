@@ -9,7 +9,10 @@
     "username":"radams",
     "password": "password",
     "notificationPreference": "",
-    "emergencyContacts": ""
+    "emergencyContacts": [
+      "Sarah Jenkins - 555-0184",
+      "David Miller - 555-0167"
+    ]
   },{
   	"userID":"bf7e8baa-33ee-4be5-8ff0-4da8c2b26660",
   	"firstName":"Abby",
@@ -20,6 +23,9 @@
     "username":"aadams",
     "password": "password",
     "notificationPreference": "",
-    "emergencyContacts": ""
+    "emergencyContacts": [
+      "Amanda Torres - 555-0129",
+      "Marcus Chen - 555-0171"
+    ]
   }
 ]
