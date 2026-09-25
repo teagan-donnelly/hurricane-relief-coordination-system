@@ -1,22 +1,29 @@
 [
-    {
-    "hurricaneID": "",
+  {
+    "hurricaneID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "name": "Hurricane Tortilla",
     "category": 5,
-    "status": "",
-    "affectedZipCodes": "",
-    "startDate":"",
-    "endDate":"",
+    "status": "ACTIVE",
+    "affectedZipCodes": [
+      "29401",
+      "29402",
+      "29403"
+    ],
+    "startDate": "2026-09-20T08:00:00",
+    "endDate": "2026-09-26T18:00:00",
     "description": "Very strong winds, expected to cause major damage"
-    },
-    {
-        "hurricaneID": "",
-        "name": "Hurricane Jorge",
-        "category": 3,
-        "status": "",
-        "affectedZipCodes": "",
-        "startDate":"",
-        "endDate":"",
-        "description": "Moderate Storm"
-    }
+  },
+  {
+    "hurricaneID": "c9bf9e57-1685-4c89-bafb-ff5af830be8a",
+    "name": "Hurricane Jorge",
+    "category": 3,
+    "status": "DISSIPATED",
+    "affectedZipCodes": [
+      "31401",
+      "31402"
+    ],
+    "startDate": "2026-09-10T12:30:00",
+    "endDate": "2026-09-15T09:15:00",
+    "description": "Moderate Storm"
+  }
 ]
