@@ -34,6 +34,7 @@ public class DataLoader extends AppConstants {
             default:
                 System.out.println("File could not be loaded");
         }
+        return new ArrayList<>();
     }
 
     /**
@@ -63,7 +64,7 @@ public class DataLoader extends AppConstants {
                 RequestStatus requestStatus = (RequestStatus) requestJSON.get(REQUEST_STATUS);
 
                 JSONObject locationObject = (JSONObject) requestJSON.get(REQUEST_LOCATION);
-                Location location;
+                Location location = null;
                 if (locationObject != null) {
                     double latitude = ((Number) locationObject.get(REQUEST_LOCATION_LATITUDE)).doubleValue();
                     double longitude = ((Number) locationObject.get(REQUEST_LOCATION_LONGITUDE)).doubleValue();
@@ -247,9 +248,9 @@ public class DataLoader extends AppConstants {
 
         data.birthDate = LocalDate.parse((String) userJSON.get(USER_BIRTHDATE));
 
-        data.notificationPreference = NotificationType.valueOf((String) userJSON.get(USER_NOIFICATION_PREFEREMCE)).toUppercase();
+        data.notificationPreference = NotificationType.valueOf(((String) userJSON.get(USER_NOIFICATION_PREFEREMCE)).toUpperCase());
                 
-        ArrayList<String> emergencyContacts = getJSONList(userJSON, USER_EMERGENCY_CONTACTS);
+        data.emergencyContacts = getJSONList(userJSON, USER_EMERGENCY_CONTACTS);
 
         return data;
     }
@@ -282,7 +283,7 @@ public class DataLoader extends AppConstants {
         ArrayList<User> users = getUsers(userFile);
 
         for (User user : users) {
-            if (user.get(USER_ID).equals(id)) return user;
+            if (user.getID().equals(id)) return user;
         }
 
         return null;
