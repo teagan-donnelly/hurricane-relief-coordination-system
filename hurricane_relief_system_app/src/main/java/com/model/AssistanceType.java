@@ -6,6 +6,7 @@ package com.model;
  */
 public enum AssistanceType {
     MEDICAL,
+    MEDICAL_SUPPLIES,
     RESCUE,
     PROPERTY_DAMAGE,
     PET_INJURY,

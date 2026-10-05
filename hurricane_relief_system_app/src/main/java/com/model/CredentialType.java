@@ -4,7 +4,7 @@ package com.model;
  * 
  * @author Teagan Donnelly
  */
-public enum Credentials {
+public enum CredentialType {
     EMT,
     PARAMEDIC,
     NURSE,

@@ -2,11 +2,11 @@ package com.model;
 
 public abstract class AppConstants {
     
-    public static final String VOLUNTEER_JSON = "hurricane-relief-coordination-system\\json\\volunteer.json";
-    public static final String COORDINATOR_JSON = "hurricane-relief-coordination-system\\json\\aid-coordinators.json";
-    public static final String REQUESTER_JSON = "hurricane-relief-coordination-system\\json\\aid-requestors.json";
-    public static final String REQUEST_JSON = "hurricane-relief-coordination-system\\json\\aid-request.json";
-    public static final String HURICANE_JSON = "hurricane-relief-coordination-system\\json\\hurricane-event.json";
+    public static final String VOLUNTEER_JSON = "hurricane_relief_system_app\\src\\main\\java\\com\\json\\volunteer.json";
+    public static final String COORDINATOR_JSON = "hurricane_relief_system_app\\src\\main\\java\\com\\json\\aid-coordinators.json";
+    public static final String REQUESTER_JSON = "hurricane_relief_system_app\\src\\main\\java\\com\\json\\aid-requestors.json";
+    public static final String REQUEST_JSON = "hurricane_relief_system_app\\src\\main\\java\\com\\json\\aid-request.json";
+    public static final String HURICANE_JSON = "hurricane_relief_system_app\\src\\main\\java\\com\\json\\hurricane-event.json";
     
     public static final String USER_ID = "userID";
     public static final String USER_FIRST_NAME = "firstName";

@@ -17,10 +17,25 @@ public class HelpRequest {
     public HelpRequest(UUID requestID, RequestType requestType, User user, String comment, 
         AssistanceType assistanceType, Urgency urgency, RequestStatus requestStatus, 
         Location location, String photo) {
+        
+        this.requestID = requestID;
+        this.requestType = requestType;
+        this.user = user;
+        this.comment = comment;
+        this.assistanceType = assistanceType;
+        this.urgency = urgency;
+        this.requestStatus = requestStatus;
+        this.location = location;
+        this.photo = photo;
     }
 
-    public HelpRequest(User user, AssistanceType assistanceType, Urgency urgency, Location location) {
-
+    public HelpRequest(UUID requestID, User user, AssistanceType assistanceType, Urgency urgency, RequestStatus requestStatus, Location location) {
+        this.requestID = requestID; 
+        this.user = user; 
+        this.assistanceType = assistanceType;
+        this.urgency = urgency;
+        this.requestStatus = requestStatus;
+        this.location = location;
     }
 
     public boolean isUrgent(Urgency urgency) {

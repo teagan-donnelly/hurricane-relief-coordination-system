@@ -4,7 +4,15 @@
     "firstName": "Jane",
     "lastName": "Doe",
     "email": "jane.doe@example.com",
-    "address": "123 Coastal Way, Charleston, SC 29401",
+    "location": {
+      "latitude": 32.7765,
+      "longitude": -79.9311,
+      "streetAddress": "123 Coastal Way, Charleston, SC 29401",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29401"
+    },
     "birthDate": "1988-04-12",
     "username": "jdoe88",
     "password": "hashed_password_123",
@@ -25,7 +33,15 @@
     "firstName": "Carlos",
     "lastName": "Mendoza",
     "email": "carlos.m@example.com",
-    "address": "789 Ocean Blvd, Savannah, GA 31401",
+    "location": {
+      "latitude": 32.7765,
+      "longitude": -79.9311,
+      "streetAddress": "1263 Coastal Way, Charleston, SC 29401",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29401"
+    },
     "birthDate": "1995-11-23",
     "username": "cmendoza",
     "password": "hashed_password_456",

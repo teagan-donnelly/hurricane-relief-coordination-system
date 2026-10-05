@@ -12,8 +12,14 @@ public class Location {
     private String state;
     private String zipcode;
 
-    public Location() {
-
+    public Location(double latitude, double longitude, String streetAddress, int appartmentNum, String city, String state, String zipcode) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.streetAddress = streetAddress;
+        this.appartmentNum = appartmentNum;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
     }
 
     public void changeCoordinates(double latitude, double longitude) {

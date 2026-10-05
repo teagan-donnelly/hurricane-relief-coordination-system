@@ -23,7 +23,7 @@ public class DataLoader extends AppConstants {
      * @return returns an arrayList of users
      */
 
-    public ArrayList<User> getUsers(String fileName) {
+    public static ArrayList<User> getUsers(String fileName) {
         switch (fileName) {
             case AppConstants.COORDINATOR_JSON:
                 return getCoordinators();
@@ -42,7 +42,7 @@ public class DataLoader extends AppConstants {
      * @return returns an arrayList of help requests
      */
 
-    public ArrayList<HelpRequest> getRequests() {
+    public static ArrayList<HelpRequest> getRequests() {
         ArrayList<HelpRequest> requests = new ArrayList<HelpRequest>();
 
         try {
@@ -52,47 +52,38 @@ public class DataLoader extends AppConstants {
             for(int i = 0; i < requestsJSON.size(); i++) {
                 JSONObject requestJSON = (JSONObject)requestsJSON.get(i);
                 
-                UUID requestID = (UUID) requestJSON.get(REQUEST_ID);
-                RequestType requestType = (RequestType) requestJSON.get(REQUEST_TYPE);
+                UUID requestID = UUID.fromString((String) requestJSON.get(REQUEST_ID));
+                RequestType requestType = RequestType.valueOf(((String) requestJSON.get(REQUEST_TYPE)).toUpperCase());
 
                 UUID requestUser = UUID.fromString((String) requestJSON.get(REQUEST_USER_ID));
                 User user = getUserbyID(requestUser, REQUESTER_JSON);
 
                 String comment = (String) requestJSON.get(REQUEST_COMMENT);
-                AssistanceType assistanceType = (AssistanceType) requestJSON.get(REQUEST_ASSISTANCE_TYPE);
-                Urgency urgency = (Urgency) requestJSON.get(REQUEST_URGENCY);
-                RequestStatus requestStatus = (RequestStatus) requestJSON.get(REQUEST_STATUS);
-
-                JSONObject locationObject = (JSONObject) requestJSON.get(REQUEST_LOCATION);
-                Location location = null;
-                if (locationObject != null) {
-                    double latitude = ((Number) locationObject.get(REQUEST_LOCATION_LATITUDE)).doubleValue();
-                    double longitude = ((Number) locationObject.get(REQUEST_LOCATION_LONGITUDE)).doubleValue();
-                    String streetAddress = (String) locationObject.get(REQUEST_LOCATION_STREET_ADDRESS);
-                    int apartmanentNumber = ((Number) locationObject.get(REQUEST_LOCATION_APPARTMENT_NUMBER)).intValue();
-                    String city = (String) locationObject.get(REQUEST_LOCATION_CITY);
-                    String state = (String) locationObject.get(REQUEST_LOCATION_STATE);
-                    String zipcode = (String) locationObject.get(REQUEST_LOCATION_ZIP);
-
-                    location = new Location(latitude, longitude, streetAddress, apartmanentNumber, city, state, zipcode);
-                }
-
+                AssistanceType assistanceType = AssistanceType.valueOf(((String) requestJSON.get(REQUEST_ASSISTANCE_TYPE)).toUpperCase());
+                Urgency urgency = Urgency.valueOf(((String) requestJSON.get(REQUEST_URGENCY)).toUpperCase());
+                RequestStatus requestStatus = RequestStatus.valueOf(((String) requestJSON.get(REQUEST_STATUS)).toUpperCase());
+                Location location = getLocation(requestJSON);
                 String photo = (String) requestJSON.get(REQUETS_PHOTO);
-
-                int householdSize = ((Number) requestJSON.get(REQUEST_HOUSEHOLD_SIZE)).intValue();
-                String accessInstructions = (String) requestJSON.get(REQUEST_ACCESS_INTRUCTIONS);
-
-                HazardType hazardType = (HazardType) requestJSON.get(REQUEST_HAZARD_TYPE);
-                LocalDateTime reportTime = (LocalDateTime) requestJSON.get(REQUEST_REPORT_TIME);
 
                 switch(requestType) {
                     
                     case PERSONAL:
+                        int householdSize = ((Number) requestJSON.get(REQUEST_HOUSEHOLD_SIZE)).intValue();
+                        String accessInstructions = (String) requestJSON.get(REQUEST_ACCESS_INTRUCTIONS);
+
                         requests.add(new PersonalRequest(requestID, requestType, user, comment, assistanceType, urgency, requestStatus, location, photo, householdSize, accessInstructions));
+                        break;
+
                     case INFRASTRUCTURE:
+                        HazardType hazardType = HazardType.valueOf(((String) requestJSON.get(REQUEST_HAZARD_TYPE)).toUpperCase());
+                        LocalDateTime reportTime = LocalDateTime.parse((String) requestJSON.get(REQUEST_REPORT_TIME));
+
                         requests.add(new InfrustructureRequest(requestID, requestType, user, comment, assistanceType, urgency, requestStatus, location, photo, hazardType, reportTime));
+                        break;
+                    
                     default:
                         requests.add(new HelpRequest(requestID, requestType, user, comment, assistanceType, urgency, requestStatus, location, photo));
+                        break;
                 }
             }
 
@@ -107,7 +98,7 @@ public class DataLoader extends AppConstants {
      * A helper method for getUser to return coordinators
      * @return returns an arrayList of coordinators
      */
-    private ArrayList<User> getCoordinators() {
+    private static ArrayList<User> getCoordinators() {
         ArrayList<User> users = new ArrayList<User>();
 
         try {
@@ -118,7 +109,7 @@ public class DataLoader extends AppConstants {
                 JSONObject coordinatorJSON = (JSONObject)coordinatorsJSON.get(i);
                 UserData data = getUserData(coordinatorJSON);
 
-                users.add(new AidCoordinator(data.firstName, data.lastName, data.id, data.email, data.address, data.birthDate, 
+                users.add(new AidCoordinator(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
                     data.userName, data.password, data.notificationPreference, data.emergencyContacts, null));
             }
 
@@ -133,7 +124,7 @@ public class DataLoader extends AppConstants {
      * A helper method for getUuser to return aid requesters
      * @return returns an arrayList of coordinators
      */
-    private ArrayList<User> getRequesters() {
+    private static ArrayList<User> getRequesters() {
         ArrayList<User> users = new ArrayList<User>();
 
         try {
@@ -145,11 +136,11 @@ public class DataLoader extends AppConstants {
                 UserData data = getUserData(requesterJSON);
 
                 int householdSize = ((Number) requesterJSON.get(USER_HOUSEHOLDSIZE)).intValue();
-                AssistanceType assistanceType = (AssistanceType)requesterJSON.get(USER_ASSISTANCE_TYPE);
+                AssistanceType assistanceType = AssistanceType.valueOf(((String) requesterJSON.get(USER_ASSISTANCE_TYPE)).toUpperCase());
 
                 ArrayList<String> pastRequests = getJSONList(requesterJSON, USER_PAST_REQUESTS);
 
-                users.add(new AidRequester(data.firstName, data.lastName, data.id, data.email, data.address, data.birthDate, 
+                users.add(new AidRequester(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
                     data.userName, data.password, data.notificationPreference, data.emergencyContacts, householdSize, assistanceType, pastRequests));
 
             }
@@ -165,7 +156,7 @@ public class DataLoader extends AppConstants {
      * A helper method for getUser to return volunteers
      * @return returns an arrayList of coordinators
      */
-    private ArrayList<User> getVolunteers() {
+    private static ArrayList<User> getVolunteers() {
         ArrayList<User> users = new ArrayList<User>();
 
         try {
@@ -181,16 +172,16 @@ public class DataLoader extends AppConstants {
 
                 ArrayList<String> userSkills = getJSONList(volunteerJSON, USER_SKILLS);
 
-                ArrayList<Credentials> userCredentials = new ArrayList<>();
+                ArrayList<Credential> userCredentials = new ArrayList<>();
                 JSONArray credentials = (JSONArray)volunteerJSON.get(USER_CREDENTIALS);
                 if (credentials != null) {
                     for (Object credential : credentials) {
                         JSONObject credentialJSON = (JSONObject) credential;
 
-                        String type = (String)credentialJSON.get(USER_CREDENTIALS_TYPE);
-                        String status = (String)credentialJSON.get(USER_CREDENTIALS_STATUS);
+                        CredentialType type = CredentialType.valueOf(((String) credentialJSON.get(USER_CREDENTIALS_TYPE)).toUpperCase());
+                        String status = (String) credentialJSON.get(USER_CREDENTIALS_STATUS);
 
-                        userCredentials.add(new Credentials(type, status));
+                        userCredentials.add(new Credential(type, status));
                     }
                 }
 
@@ -200,7 +191,7 @@ public class DataLoader extends AppConstants {
                 boolean isDispached = (boolean)volunteerJSON.get(USER_DISPACHED);
                 double volunteerHours = ((Number) volunteerJSON.get(USER_VOLUNTEER_HOURS)).doubleValue();
 
-                users.add(new Volunteer(data.firstName, data.lastName, data.id, data.email, data.address, data.birthDate, 
+                users.add(new Volunteer(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
                     data.userName, data.password, data.notificationPreference, data.emergencyContacts, availability, 
                     userSkills, userCredentials, userSupplies, isVerified, isDispached, volunteerHours));
 
@@ -222,7 +213,7 @@ public class DataLoader extends AppConstants {
         String firstName;
         String lastName;
         String email;
-        String address;
+        Location location;
         String userName;
         String password;
         LocalDate birthDate;
@@ -235,14 +226,14 @@ public class DataLoader extends AppConstants {
      * @param userJSON the user object from json to build from
      * @return returns UserData type
      */
-    private UserData getUserData(JSONObject userJSON) {
+    private static UserData getUserData(JSONObject userJSON) {
         UserData data = new UserData();
 
         data.id = UUID.fromString((String) userJSON.get(USER_ID));
         data.firstName = (String) userJSON.get(USER_FIRST_NAME);
         data.lastName = (String) userJSON.get(USER_LAST_NAME);
         data.email = (String) userJSON.get(USER_EMAIL);
-        data.address = (String) userJSON.get(USER_ADDRESS);
+        data.location = getLocation(userJSON);
         data.userName = (String) userJSON.get(USER_USERNAME);
         data.password = (String) userJSON.get(USER_PASSWORD);
 
@@ -261,7 +252,7 @@ public class DataLoader extends AppConstants {
      * @param find the list to iterate through
      * @return returns an arraylist of the json list contents
      */
-    private ArrayList<String> getJSONList(JSONObject jsonObject, String find) {
+    private static ArrayList<String> getJSONList(JSONObject jsonObject, String find) {
         ArrayList<String> arrayList = new ArrayList<>();
         JSONArray items = (JSONArray)jsonObject.get(find);
         if (items != null) {
@@ -279,14 +270,43 @@ public class DataLoader extends AppConstants {
      * @param userFile the file to look through
      * @return returns the user found or null on failure to find
      */
-    private User getUserbyID(UUID id, String userFile) {
+    private static User getUserbyID(UUID id, String userFile) {
         ArrayList<User> users = getUsers(userFile);
 
         for (User user : users) {
-            if (user.getID().equals(id)) return user;
+            if (user.getUserId().equals(id)) return user;
         }
 
         return null;
+    }
+
+    /**
+     * A helper method to construct the location
+     * @param object the Json object to read for location
+     * @return returns a new location object
+     */
+    private static Location getLocation(JSONObject object) {
+        JSONObject locationObject = (JSONObject) object.get(REQUEST_LOCATION);
+        if (locationObject != null) {
+            double latitude = ((Number) locationObject.get(REQUEST_LOCATION_LATITUDE)).doubleValue();
+            double longitude = ((Number) locationObject.get(REQUEST_LOCATION_LONGITUDE)).doubleValue();
+            String streetAddress = (String) locationObject.get(REQUEST_LOCATION_STREET_ADDRESS);
+            int apartmanentNumber = ((Number) locationObject.get(REQUEST_LOCATION_APPARTMENT_NUMBER)).intValue();
+            String city = (String) locationObject.get(REQUEST_LOCATION_CITY);
+            String state = (String) locationObject.get(REQUEST_LOCATION_STATE);
+            String zipcode = (String) locationObject.get(REQUEST_LOCATION_ZIP);
+
+            return new Location(latitude, longitude, streetAddress, apartmanentNumber, city, state, zipcode);
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<HelpRequest> requests = getRequests();
+
+		for(HelpRequest request : requests){
+			System.out.println(request);
+		}
     }
 
 }
