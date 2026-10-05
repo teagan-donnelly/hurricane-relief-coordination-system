@@ -1,6 +1,8 @@
 package com.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class HurricaneReliefApplication {
 
@@ -34,8 +36,15 @@ public class HurricaneReliefApplication {
 
     }
 
-    public RequestStatus getRequestStatus() {
-        return true;
+    public RequestStatus getRequestStatus(UUID requestID) {
+        ArrayList<HelpRequest> requests = DataLoader.getRequests();
+
+        for (HelpRequest request : requests) {
+            if(request.getRequestID().equals(requestID)) return request.getRequestStatus();
+        }
+
+        System.out.println("Could not find a request matching the given ID.");
+        return null;
     }
 
     public void login() {

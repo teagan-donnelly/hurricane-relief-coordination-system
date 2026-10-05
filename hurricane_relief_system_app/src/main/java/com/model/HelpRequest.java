@@ -54,4 +54,12 @@ public class HelpRequest {
 
     }
 
+    public UUID getRequestID() {
+        return requestID;
+    }
+
+    public RequestStatus getRequestStatus() {
+        return requestStatus;
+    }
+
 }
