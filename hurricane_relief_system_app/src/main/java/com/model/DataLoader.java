@@ -94,7 +94,10 @@ public class DataLoader extends AppConstants {
         return requests;
     }
 
-
+    /**
+     * A method to get hurricane events from json
+     * @return returns an arraylist of hurricane events
+     */
     public static ArrayList<HurricaneEvent> getHurricaneEvents() {
         ArrayList<HurricaneEvent> hurricaneEvents = new ArrayList<HurricaneEvent>();
 
@@ -129,8 +132,7 @@ public class DataLoader extends AppConstants {
     }
 
 
-
-
+    
     /**
      * A helper method for getUser to return coordinators
      * @return returns an arrayList of coordinators
@@ -339,9 +341,9 @@ public class DataLoader extends AppConstants {
     }
 
     public static void main(String[] args) {
-        ArrayList<HelpRequest> requests = getRequests();
+        ArrayList<HurricaneEvent> requests = getHurricaneEvents();
 
-		for(HelpRequest request : requests){
+		for(HurricaneEvent request : requests){
 			System.out.println(request);
 		}
     }
