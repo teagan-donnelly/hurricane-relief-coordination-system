@@ -1,6 +1,5 @@
 package com.model;
 
-<<<<<<< HEAD
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -23,15 +22,6 @@ public class AidCoordinator extends User {
     public AidCoordinator(VolunteerManager volunteers) {
         super("", "", null, "");
         this.volunteers = volunteers;
-=======
-public class AidCoordinator {
-
-    private VolunteerManager volunteers;
-
-    public AidCoordinator(String firstName, String lastName, UUID userID, String email, String address, LocalDate birthDate, String userName, String password, NotificationType notificatonPreference, ArrayList<String> emergencyContacts, VolunteerManager volunteers) {
-        super(firstName, lastName, userID, email, address, birthDate, userName, password, notificatonPreference, emergencyContacts);
-        
->>>>>>> creating-singletons
     }
 
     public void setPriority() {
@@ -39,7 +29,6 @@ public class AidCoordinator {
     }
 
     public boolean verifyCertification() {
-<<<<<<< HEAD
         return true;
     }
 
@@ -59,12 +48,3 @@ public class AidCoordinator {
         return volunteers;
     }
 }
-=======
-
-    }
-
-    public boolean runBackgroundCheck() {
-    }
-    
-}
->>>>>>> creating-singletons

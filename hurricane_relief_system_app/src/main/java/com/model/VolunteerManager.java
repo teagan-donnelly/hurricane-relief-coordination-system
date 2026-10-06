@@ -2,12 +2,12 @@ package com.model;
 
 import java.util.ArrayList;
 
-<<<<<<< HEAD
 /**
  * @author Nicolas Gauvin
  * Manages the collection of volunteers in the hurricane relief system.
  */
 public class VolunteerManager {
+    private static VolunteerManager instance;
     private ArrayList<Volunteer> volunteers;
 
     /**
@@ -27,6 +27,17 @@ public class VolunteerManager {
      */
     public VolunteerManager() {
         this.volunteers = new ArrayList<>();
+    }
+
+    /**
+     * Gets the shared VolunteerManager, creating it on first use.
+     * @return the single VolunteerManager instance
+     */
+    public static VolunteerManager getInstance() {
+        if (instance == null) {
+            instance = new VolunteerManager();
+        }
+        return instance;
     }
 
     /**
@@ -50,6 +61,15 @@ public class VolunteerManager {
     }
 
     /**
+     * Assigns a volunteer to a help request.
+     * @param volunteer Volunteer to assign
+     * @param request Help request to assign them to
+     */
+    public void assignVolunteer(Volunteer volunteer, HelpRequest request) {
+
+    }
+
+    /**
      * Gets the list of volunteers.
      * @return ArrayList of volunteers
      */
@@ -57,29 +77,3 @@ public class VolunteerManager {
         return volunteers;
     }
 }
-=======
-public class VolunteerManager {
-
-    private static VolunteerManager instance;
-    private ArrayList<Volunteer> volunteers;
-
-    private VolunteerManager() {
-        volunteers = new ArrayList<>();
-    }
-
-    public static VolunteerManager getInstance() {
-    }
-    
-    public void addVolunteer(Volunteer volunteer) {
-
-    }
-
-    public void removeVolunteer(Volunteer volunteer) {
-        
-    }
-
-    public void assignVolunteer(Volunteer volunteer, HelpRequest request) {
-
-}
-}
->>>>>>> creating-singletons
