@@ -94,6 +94,43 @@ public class DataLoader extends AppConstants {
         return requests;
     }
 
+
+    public static ArrayList<HurricaneEvent> getHurricaneEvents() {
+        ArrayList<HurricaneEvent> hurricaneEvents = new ArrayList<HurricaneEvent>();
+
+        try {
+            FileReader reader = new FileReader(HURICANE_JSON);
+            JSONArray hurricanesJSON = (JSONArray)new JSONParser().parse(reader);
+
+            for(int i = 0; i < hurricanesJSON.size(); i++) {
+                JSONObject hurricaneJSON = (JSONObject) hurricanesJSON.get(i);
+                
+                UUID hurricaneID = UUID.fromString((String) hurricaneJSON.get(HURRICANE_ID));
+                String name = (String) hurricaneJSON.get(HURRICANE_NAME);
+                int category = ((Number) hurricaneJSON.get(HURRICANE_CATEGORY)).intValue();
+                HurricaneStatus status = HurricaneStatus.valueOf(((String) hurricaneJSON.get(HURRICANE_STATUS)).toUpperCase());
+
+                ArrayList<String> affectedZipcodes = getJSONList(hurricaneJSON, HURRICANE_AFFECTED_ZIPCODES);
+
+                LocalDateTime startDate = LocalDateTime.parse((String) hurricaneJSON.get(HURRICANE_START_DATE));
+                LocalDateTime endDate = LocalDateTime.parse((String) hurricaneJSON.get(HURRICANE_END_DATE));
+                String description = (String) hurricaneJSON.get(HURRICANE_DESCRIPTION);
+
+                
+                hurricaneEvents.add(new HurricaneEvent(hurricaneID, name, category, status, affectedZipcodes, startDate, endDate, description));
+                        
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hurricaneEvents;
+    }
+
+
+
+
     /**
      * A helper method for getUser to return coordinators
      * @return returns an arrayList of coordinators

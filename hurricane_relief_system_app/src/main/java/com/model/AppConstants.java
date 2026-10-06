@@ -57,5 +57,15 @@ public abstract class AppConstants {
 
     public static final String REQUEST_HAZARD_TYPE = "hazardType";
     public static final String REQUEST_REPORT_TIME = "reportTime";
+
+
+    public static final String HURRICANE_ID = "hurricaneID";
+    public static final String HURRICANE_NAME = "name";
+    public static final String HURRICANE_CATEGORY = "category";
+    public static final String HURRICANE_STATUS = "status";
+    public static final String HURRICANE_AFFECTED_ZIPCODES = "affectedZipCodes";
+    public static final String HURRICANE_START_DATE = "startDate";
+    public static final String HURRICANE_END_DATE = "endDate";
+    public static final String HURRICANE_DESCRIPTION = "description";
     
 }
