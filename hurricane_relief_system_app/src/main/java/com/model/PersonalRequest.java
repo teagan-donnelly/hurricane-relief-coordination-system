@@ -27,4 +27,12 @@ public class PersonalRequest extends HelpRequest {
         this.accessInstructions = accessInstructions;
     }
 
+    public int getHouseholdSize() {
+        return householdSize;
+    }
+
+    public String getAccessInstructions() {
+        return accessInstructions;
+    }
+
 }

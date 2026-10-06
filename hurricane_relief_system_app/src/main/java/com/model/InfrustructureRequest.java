@@ -26,4 +26,12 @@ public class InfrustructureRequest extends HelpRequest {
         this.hazardType = hazardType;
         this.reportTime = reportTime;
     }
+
+    public HazardType getHazardType() {
+        return hazardType;
+    }
+
+    public LocalDateTime getReportTime() {
+        return reportTime;
+    }
 }

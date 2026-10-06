@@ -9,4 +9,12 @@ public class Credential {
         this.credentialType = credentialType;
         this.status = status;
     }
+
+    public CredentialType getType() {
+        return credentialType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

@@ -23,4 +23,16 @@ public class AidRequester extends User {
         this.pastRequests = pastRequests;
     
     }
+
+    public int getHouseholdSize() {
+        return householdSize;
+    }
+
+    public AssistanceType getAssistanceType() {
+        return assistanceType;
+    }
+
+    public ArrayList<String> getPastRequests() {
+        return pastRequests;
+    }
 }

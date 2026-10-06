@@ -56,4 +56,40 @@ public abstract class User {
     public UUID getUserId() {
         return userID;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public NotificationType getNotificationPreference() {
+        return notificationPreference;
+    }
+
+    public ArrayList<String> getEmergencyContacts() {
+        return emergencyContacts;
+    }
 }

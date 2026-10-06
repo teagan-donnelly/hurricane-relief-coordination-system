@@ -45,4 +45,32 @@ public class Location {
             Math.pow(longitudeDifference, 2)
         );
     }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public int getApartmentNum() {
+        return appartmentNum;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
 }

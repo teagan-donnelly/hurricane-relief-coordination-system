@@ -62,4 +62,31 @@ public class HelpRequest {
         return requestStatus;
     }
 
+    public RequestType getRequestType() {
+        return requestType;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public AssistanceType getAssistanceType() {
+        return assistanceType;
+    }
+
+    public Urgency getUrgency() {
+        return urgency;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
 }
