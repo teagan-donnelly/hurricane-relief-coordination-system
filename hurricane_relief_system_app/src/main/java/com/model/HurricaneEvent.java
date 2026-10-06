@@ -1,10 +1,4 @@
 package com.model;
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.UUID;
-public class HurricaneEvent {
-    private UUID hurricanID;
-=======
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +7,6 @@ import java.util.UUID;
 public class HurricaneEvent {
 
     private UUID hurricaneID;
->>>>>>> Aden-workspace
     private String name;
     private int category;
     private HurricaneStatus status;
@@ -22,18 +15,26 @@ public class HurricaneEvent {
     private LocalDateTime endDate;
     private String description;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     public HurricaneEvent(UUID hurricanID, String name, int category, HurricaneStatus status, ArrayList<String> affectedZipCodes, LocalDateTime startDate, LocalDateTime endDate, String description) {
-
+        this.hurricaneID = hurricanID;
+        this.name = name;
+        this.category = category;
+        this.status = status;
+        this.affectedZipCodes = affectedZipCodes;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
     }
     
     
-    public HurricaneEvent(UUID hurricanID, String name, int category, HurricaneStatus status, ArrayList<String> affectedZipCodes, LocalDateTime startDate, LocalDateTime endDate, String description) {
+    public void endHurricantEvent(HurricaneEvent hurricaneEvent, LocalDateTime endDate) {
+        hurricaneEvent.endDate = endDate;
     }
 
     public void addAffectedZipCode(String zipCode) {
-}
+    
+    }
+
     public void removeAffectedZipCode(String zipCode) {
         affectedZipCodes.remove(zipCode);
     }
