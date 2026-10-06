@@ -12,7 +12,7 @@ public abstract class AppConstants {
     public static final String USER_FIRST_NAME = "firstName";
     public static final String USER_LAST_NAME = "lastName";
     public static final String USER_EMAIL = "email";
-    public static final String USER_ADDRESS = "address";
+    public static final String USER_LOCATION = "location";
     public static final String USER_BIRTHDATE = "birthDate";
     public static final String USER_USERNAME = "username";
     public static final String USER_PASSWORD = "password";

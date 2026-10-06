@@ -131,6 +131,7 @@ public class DataLoader extends AppConstants {
         return hurricaneEvents;
     }
 
+    /* TODO: shelter loader */
 
     
     /**
@@ -231,7 +232,7 @@ public class DataLoader extends AppConstants {
                 double volunteerHours = ((Number) volunteerJSON.get(USER_VOLUNTEER_HOURS)).doubleValue();
 
                 users.add(new Volunteer(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
-                    data.userName, data.password, data.notificationPreference, data.emergencyContacts, availability, 
+                    data.userName, data.password, data.notificationPreference, data.emergencyContacts, availability, travelDistance,
                     userSkills, userCredentials, userSupplies, isVerified, isDispached, volunteerHours));
 
             }
