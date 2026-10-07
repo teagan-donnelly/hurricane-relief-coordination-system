@@ -7,6 +7,10 @@ public abstract class AppConstants {
     public static final String REQUESTER_JSON = "hurricane_relief_system_app\\src\\main\\resources\\com\\hurricane_relief_system\\json\\aid-requestors.json";
     public static final String REQUEST_JSON = "hurricane_relief_system_app\\src\\main\\resources\\com\\hurricane_relief_system\\json\\aid-request.json";
     public static final String HURICANE_JSON = "hurricane_relief_system_app\\src\\main\\resources\\com\\hurricane_relief_system\\json\\hurricane-event.json";
+<<<<<<< HEAD
+=======
+    public static final String SHELTER_JSON = "hurricane_relief_system_app\\src\\main\\resources\\com\\hurricane_relief_system\\json\\shelter.json";
+>>>>>>> Aden-workspace
     
     public static final String USER_ID = "userID";
     public static final String USER_FIRST_NAME = "firstName";
@@ -43,13 +47,15 @@ public abstract class AppConstants {
     public static final String REQUEST_URGENCY = "urgency";
     public static final String REQUEST_STATUS = "status";
     public static final String REQUEST_LOCATION = "location";
-    public static final String REQUEST_LOCATION_LATITUDE = "latitude";
-    public static final String REQUEST_LOCATION_LONGITUDE = "longitude";
-    public static final String REQUEST_LOCATION_STREET_ADDRESS = "streetAddress";
-    public static final String REQUEST_LOCATION_APPARTMENT_NUMBER ="apartmentNum";
-    public static final String REQUEST_LOCATION_CITY = "city";
-    public static final String REQUEST_LOCATION_STATE = "state";
-    public static final String REQUEST_LOCATION_ZIP = "zipcode";
+
+    public static final String LOCATION_LATITUDE = "latitude";
+    public static final String LOCATION_LONGITUDE = "longitude";
+    public static final String LOCATION_STREET_ADDRESS = "streetAddress";
+    public static final String LOCATION_APPARTMENT_NUMBER ="apartmentNum";
+    public static final String LOCATION_CITY = "city";
+    public static final String LOCATION_STATE = "state";
+    public static final String LOCATION_ZIP = "zipcode";
+
     public static final String REQUETS_PHOTO = "photo";
     
     public static final String REQUEST_HOUSEHOLD_SIZE = "householdSize";
@@ -67,5 +73,16 @@ public abstract class AppConstants {
     public static final String HURRICANE_START_DATE = "startDate";
     public static final String HURRICANE_END_DATE = "endDate";
     public static final String HURRICANE_DESCRIPTION = "description";
+
+
+    public static final String SHELTER_NAME = "name";
+    public static final String SHELTER_ID = "id";
+    public static final String SHELTER_LOCATION = "location";
+    public static final String SHELTER_CURRENT_OCCUPANCY = "currentOccupancy";
+    public static final String SHELTER_CAPACITY = "capacity";
+    public static final String SHELTER_PET_FRIENDLY = "petFriendly";
+    public static final String SHELTER_ACCESSIBILITY_INFO = "accessibilityInfo";
+    public static final String SHELTER_HAS_POWER = "hasPower";
+    public static final String SHELTER_STATUS = "status";
     
 }
