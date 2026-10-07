@@ -153,7 +153,7 @@ public class DataLoader extends AppConstants {
                 int capacity = ((Number) shelterJSON.get(SHELTER_CAPACITY)).intValue();
                 boolean petFriendly = (Boolean) shelterJSON.get(SHELTER_PET_FRIENDLY);
                 ArrayList<String> accessibilityInfo = getJSONList(shelterJSON, SHELTER_ACCESSIBILITY_INFO);
-                boolean hasPower = (Boolean) shelterJSON.get(SHELTER_POWER);
+                boolean hasPower = (Boolean) shelterJSON.get(SHELTER_HAS_POWER);
                 ShelterStatus status = ShelterStatus.valueOf(((String) shelterJSON.get(SHELTER_STATUS)).toUpperCase());
                 
                 shelters.add(new Shelter(name, shelterID, location, currentOccupancy, capacity, petFriendly, accessibilityInfo, hasPower, status));
@@ -362,13 +362,13 @@ public class DataLoader extends AppConstants {
     private static Location getLocation(JSONObject object) {
         JSONObject locationObject = (JSONObject) object.get(REQUEST_LOCATION);
         if (locationObject != null) {
-            double latitude = ((Number) locationObject.get(REQUEST_LOCATION_LATITUDE)).doubleValue();
-            double longitude = ((Number) locationObject.get(REQUEST_LOCATION_LONGITUDE)).doubleValue();
-            String streetAddress = (String) locationObject.get(REQUEST_LOCATION_STREET_ADDRESS);
-            int apartmanentNumber = ((Number) locationObject.get(REQUEST_LOCATION_APPARTMENT_NUMBER)).intValue();
-            String city = (String) locationObject.get(REQUEST_LOCATION_CITY);
-            String state = (String) locationObject.get(REQUEST_LOCATION_STATE);
-            String zipcode = (String) locationObject.get(REQUEST_LOCATION_ZIP);
+            double latitude = ((Number) locationObject.get(LOCATION_LATITUDE)).doubleValue();
+            double longitude = ((Number) locationObject.get(LOCATION_LONGITUDE)).doubleValue();
+            String streetAddress = (String) locationObject.get(LOCATION_STREET_ADDRESS);
+            int apartmanentNumber = ((Number) locationObject.get(LOCATION_APPARTMENT_NUMBER)).intValue();
+            String city = (String) locationObject.get(LOCATION_CITY);
+            String state = (String) locationObject.get(LOCATION_STATE);
+            String zipcode = (String) locationObject.get(LOCATION_ZIP);
 
             return new Location(latitude, longitude, streetAddress, apartmanentNumber, city, state, zipcode);
         }
@@ -377,10 +377,11 @@ public class DataLoader extends AppConstants {
 
     public static void main(String[] args) {
         ArrayList<HurricaneEvent> requests = getHurricaneEvents();
-
+        
 		for(HurricaneEvent request : requests){
 			System.out.println(request);
 		}
+    
     }
 
 }
