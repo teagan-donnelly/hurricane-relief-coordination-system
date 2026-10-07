@@ -7,10 +7,7 @@ public abstract class AppConstants {
     public static final String REQUESTER_JSON = "hurricane_relief_system_app\\src\\main\\resources\\com\\hurricane_relief_system\\json\\aid-requestors.json";
     public static final String REQUEST_JSON = "hurricane_relief_system_app\\src\\main\\resources\\com\\hurricane_relief_system\\json\\aid-request.json";
     public static final String HURICANE_JSON = "hurricane_relief_system_app\\src\\main\\resources\\com\\hurricane_relief_system\\json\\hurricane-event.json";
-<<<<<<< HEAD
-=======
     public static final String SHELTER_JSON = "hurricane_relief_system_app\\src\\main\\resources\\com\\hurricane_relief_system\\json\\shelter.json";
->>>>>>> Aden-workspace
     
     public static final String USER_ID = "userID";
     public static final String USER_FIRST_NAME = "firstName";
