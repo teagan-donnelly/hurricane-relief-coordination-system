@@ -170,13 +170,13 @@ public class DataWriter extends AppConstants {
     private static JSONObject getLocationJSON(Location loc) {
         if (loc == null) return null;
         JSONObject obj = new JSONObject();
-        obj.put(REQUEST_LOCATION_LATITUDE, loc.getLatitude());
-        obj.put(REQUEST_LOCATION_LONGITUDE, loc.getLongitude());
-        obj.put(REQUEST_LOCATION_STREET_ADDRESS, loc.getStreetAddress());
-        obj.put(REQUEST_LOCATION_APPARTMENT_NUMBER, loc.getApartmentNum());
-        obj.put(REQUEST_LOCATION_CITY, loc.getCity());
-        obj.put(REQUEST_LOCATION_STATE, loc.getState());
-        obj.put(REQUEST_LOCATION_ZIP, loc.getZipcode());
+        obj.put(LOCATION_LATITUDE, loc.getLatitude());
+        obj.put(LOCATION_LONGITUDE, loc.getLongitude());
+        obj.put(LOCATION_STREET_ADDRESS, loc.getStreetAddress());
+        obj.put(LOCATION_APPARTMENT_NUMBER, loc.getApartmentNum());
+        obj.put(LOCATION_CITY, loc.getCity());
+        obj.put(LOCATION_STATE, loc.getState());
+        obj.put(LOCATION_ZIP, loc.getZipcode());
         return obj;
     }
 

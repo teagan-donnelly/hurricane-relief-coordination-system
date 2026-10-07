@@ -27,12 +27,12 @@ public class HurricaneEvent {
     }
     
     
-    public void endHurricantEvent(HurricaneEvent hurricaneEvent, LocalDateTime endDate) {
-        hurricaneEvent.endDate = endDate;
+    public void endHurricantEvent(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public void addAffectedZipCode(String zipCode) {
-    
+        affectedZipCodes.add(zipCode);
     }
 
     public void removeAffectedZipCode(String zipCode) {
