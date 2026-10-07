@@ -131,7 +131,41 @@ public class DataLoader extends AppConstants {
         return hurricaneEvents;
     }
 
-    /* TODO: shelter loader */
+    /**
+     * A method to get shelters from json
+     * @return returns an arrayList of shelters
+     */
+    public static ArrayList<Shelter> getShelters() {
+        ArrayList<Shelter> shelters = new ArrayList<Shelter>();
+
+        try {
+            FileReader reader = new FileReader(SHELTER_JSON);
+            JSONArray sheltersJSON = (JSONArray)new JSONParser().parse(reader);
+
+            for(int i = 0; i < sheltersJSON.size(); i++) {
+                JSONObject shelterJSON = (JSONObject) sheltersJSON.get(i);
+                
+                UUID shelterID = UUID.fromString((String) shelterJSON.get(SHELTER_ID));
+                String name = (String) shelterJSON.get(SHELTER_NAME);
+                Location location = getLocation(shelterJSON);
+
+                int currentOccupancy = ((Number) shelterJSON.get(SHELTER_CURRENT_OCCUPANCY)).intValue();
+                int capacity = ((Number) shelterJSON.get(SHELTER_CAPACITY)).intValue();
+                boolean petFriendly = (Boolean) shelterJSON.get(SHELTER_PET_FRIENDLY);
+                ArrayList<String> accessibilityInfo = getJSONList(shelterJSON, SHELTER_ACCESSIBILITY_INFO);
+                boolean hasPower = (Boolean) shelterJSON.get(SHELTER_POWER);
+                ShelterStatus status = ShelterStatus.valueOf(((String) shelterJSON.get(SHELTER_STATUS)).toUpperCase());
+                
+                shelters.add(new Shelter(name, shelterID, location, currentOccupancy, capacity, petFriendly, accessibilityInfo, hasPower, status));
+                        
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return shelters;
+    }
 
     
     /**
