@@ -21,7 +21,7 @@ public class Shelter {
         this.name = name;
         this.id = id;
         this.location = location;
-        this,currentOccupancy = currentOccupancy;
+        this.currentOccupancy = currentOccupancy;
         this.capacity = capacity;
         this.petFriendly = petFriendly;
         this.accessibilityInfo = accessibilityInfo;
