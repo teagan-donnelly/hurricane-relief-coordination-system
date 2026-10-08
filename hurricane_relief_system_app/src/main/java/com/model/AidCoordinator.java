@@ -12,15 +12,17 @@ public class AidCoordinator extends User {
 
     private VolunteerManager volunteers;
 
-    public AidCoordinator(String firstName, String lastName, UUID userID, String email, Location location,
-                          LocalDate birthDate, String userName, String password, NotificationType notificationPreference,
-                          ArrayList emergencyContacts, VolunteerManager volunteers) {
-        super(firstName, lastName, userID, email, location, birthDate, userName, password, notificationPreference, emergencyContacts);
+    public AidCoordinator(String firstName, String lastName, String email, String userName, String password, Location location, LocalDate birthDate,
+                        NotificationType notificationPreference, ArrayList<String> emergencyContacts, VolunteerManager volunteers) {
+
+        super(firstName, lastName, email, userName, password, location, birthDate, notificationPreference, emergencyContacts);
+
         this.volunteers = volunteers;
     }
 
-    public AidCoordinator(VolunteerManager volunteers) {
-        super("", "", null, "");
+    public AidCoordinator(String firstName, String lastName, String email, String userName, String password, VolunteerManager volunteers) {
+
+        super(firstName, lastName, email, userName, password);
         this.volunteers = volunteers;
     }
 
@@ -36,7 +38,7 @@ public class AidCoordinator extends User {
         return true;
     }
 
-    public void setUrgency(HelpRequest request, int urgency) {
+    public void setUrgency(HelpRequest request, Urgency urgency) {
 
     }
 
