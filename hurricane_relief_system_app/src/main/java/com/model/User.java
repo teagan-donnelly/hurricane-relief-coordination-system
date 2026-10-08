@@ -20,31 +20,29 @@ public abstract class User {
     private NotificationType notificationPreference;
     private ArrayList<String> emergencyContacts = new ArrayList<>();
 
-    public User(String firstName, String lastName, UUID userID,
-                String email, Location location, LocalDate birthDate,
-                String userName, String password,
-                NotificationType notificationPreference,
-                ArrayList<String> emergencyContacts) {
+    public User(String firstName, String lastName,
+                String email, String userName, String password) {
 
+        this.userID = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userID = userID;
         this.email = email;
-        this.location = location;
-        this.birthDate = birthDate;
         this.userName = userName;
         this.password = password;
-        this.notificationPreference = notificationPreference;
-        this.emergencyContacts = emergencyContacts;
     }
 
     public User(String firstName, String lastName,
-                UUID userID, String password) {
+                String email, String userName, String password,
+                Location location, LocalDate birthDate,
+                NotificationType notificationPreference,
+                ArrayList<String> emergencyContacts) {
 
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userID = userID;
-        this.password = password;
+        this(firstName, lastName, email, userName, password);
+
+        this.location = location;
+        this.birthDate = birthDate;
+        this.notificationPreference = notificationPreference;
+        this.emergencyContacts = emergencyContacts;
     }
 
     public void makeAccount(User type, String firstName, String lastName,
