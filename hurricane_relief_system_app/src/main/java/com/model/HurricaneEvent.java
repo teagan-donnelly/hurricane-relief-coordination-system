@@ -3,7 +3,9 @@ package com.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
-
+/*
+* @author Jorge Naranjo
+*/
 public class HurricaneEvent {
 
     private UUID hurricaneID;
