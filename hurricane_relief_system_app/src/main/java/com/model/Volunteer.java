@@ -60,11 +60,27 @@ public class Volunteer extends User {
         this.credentials = credentials;
     }
 
-    public void acceptRequest(HelpRequest request) {
+    public boolean acceptRequest(HelpRequest request) {
+        if (request == null || !isVerified || !availability || currentRequest != null) {
+            return false;
+        }
 
+        return true;
     }
 
     public void declineRequest(HelpRequest request) {
+        if (request == null) {
+            return;
+        }
+
+        if (isCurrentRequest(request)) {
+            currentRequest = null;
+            availability = true;
+            isDispatched = false;
+            request.setRequestStatus(RequestStatus.AWAITING_ASSIGNMENT);
+        } else if (request.getRequestStatus() == RequestStatus.AWAITING_ASSIGNMENT) {
+            request.setRequestStatus(RequestStatus.AWAITING_ASSIGNMENT);
+        }
 
     }
 
