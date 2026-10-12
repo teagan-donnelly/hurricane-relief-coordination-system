@@ -38,20 +38,44 @@ public class HelpRequest {
         this.location = location;
     }
 
+    /**
+     * Checks if the help request is urgent based on its urgency level.
+     * @param urgency the urgency level of the help request assigned by the aid coordinator
+     * @return true if the urgency level is HIGH_PRIORITY or URGENT_PRIORITY, false otherwise
+     */
     public boolean isUrgent(Urgency urgency) {
-        return true;
+        return urgency == Urgency.HIGH_PRIORITY || urgency == Urgency.URGENT_PRIORITY;
     }
 
-    public void updateRequest() {
+    public void updateRequest(String comment, AssistanceType assistanceType,
+                            Location location, String photo) {
 
+        if (requestStatus == RequestStatus.CANCELED ||
+            requestStatus == RequestStatus.COMPLETED) {
+            throw new IllegalStateException(
+                "Cannot edit a canceled or completed request."
+            );
+        }
+
+        this.comment = comment;
+        this.assistanceType = assistanceType;
+        this.location = location;
+        this.photo = photo;
     }
 
     public void cancelRequest() {
 
+        if (requestStatus == RequestStatus.COMPLETED) {
+            throw new IllegalStateException(
+                "Cannot cancel a completed request."
+            );
+        }
+
+        this.requestStatus = RequestStatus.CANCELED;
     }
 
-    public void trackRequestStatus() {
-
+    public RequestStatus trackRequestStatus() {
+        return requestStatus;
     }
 
     public UUID getRequestID() {
