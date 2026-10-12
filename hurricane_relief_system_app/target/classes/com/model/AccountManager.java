@@ -1,21 +1,27 @@
 package com.model;
 
 import java.util.HashMap;
-import java.util.UUID;
 
-public class AccountManager{
-    private HashMap<UUID, User> users;
+public class AccountManager {
+   private HashMap<Integer, User> users;
 
-    public AccountManager(HashMap<UUID, User> users){
-        this.users = users;
-    }
-    public void AddUser(User user){
+   public AccountManager(HashMap<Integer, User> users) {
+      this.users = users;
+   }
 
-    }
-    public void deleteUser(User user){
+   public void addUser(User user) {
+    users.put(user.getId(), user);
+   }
 
-    }
-    public void updateUser(User user){
+   public void deleteUser(User user) {
+    users.remove(user.getId());
+   }
 
-    }
+   public void updateUser(User user) {
+    users.put(user.getId(), user);
+   }
+
+   public HashMap<Integer, User> getUsers() {
+      return this.users;
+   }
 }
