@@ -8,16 +8,20 @@ public class HurricaneReliefApplication {
 
     private static HurricaneReliefApplication instance;
 
-    private static RequestManager requestManager;
-    private static VolunteerManager volunteerManager;
-    private static ShelterManager shelterManager;
+    //private RequestManager requestManager;
+    private VolunteerManager volunteerManager;
+    private ShelterManager shelterManager;
     private AccountManager accountManager;
 
     private HurricaneReliefApplication() {
+        
+        /*
         requestManager = new RequestManager(); //need to pass paarameters to the constructor
         volunteerManager = new VolunteerManager(); //need to pass parameters to the constructor
         shelterManager = new ShelterManager(); //need to pass parameters to the constructor
-        accountManager = new AccountManager(); //need to pass parameters to the constructor
+        */
+        accountManager = new AccountManager(DataLoader.getAllUsers());
+        
     }
 
     public static HurricaneReliefApplication getInstance() {
@@ -29,11 +33,11 @@ public class HurricaneReliefApplication {
     }
 
     public List<Volunteer> findAvailableVolunteers() {
-        
+        return new ArrayList<>(); // Placeholder for actual implementation
     }
 
     public List<Shelter> findShelters() {
-        
+        return new ArrayList<>(); // Placeholder for actual implementation
     }
 
     public void registerUser() {
@@ -52,11 +56,28 @@ public class HurricaneReliefApplication {
     }
 
     public boolean login(String username, String password) {
-        accountManager.login(username, password);
+        if (accountManager.login(username, password)) {
+            System.out.println("Login successful.");
+            return true;
+        }
+        System.out.println("Login failed. Invalid username or password.");
+        return false;
     }
 
     public void logout() {
-        accountManager.logout();
+        if (accountManager.logout()) {
+            System.out.println("Logout successful.");
+        } else {
+            System.out.println("No user is currently logged in.");
+        }
+    }
+
+    public static void main(String[] args) {
+        HurricaneReliefApplication app = HurricaneReliefApplication.getInstance();
+        // Example usage of the application
+        app.login("jdoe88", "hashed_password_123");
+        // Other operations...
+        app.logout();
     }
 
 
