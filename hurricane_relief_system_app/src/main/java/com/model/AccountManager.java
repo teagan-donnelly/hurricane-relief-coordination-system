@@ -2,7 +2,6 @@ package com.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -10,10 +9,10 @@ import java.util.UUID;
  */
 public class AccountManager {
 
-    private HashMap<Integer, User> users;
+    private ArrayList<User> users;
     private User currentUser;
 
-    public AccountManager(HashMap<Integer, User> users) {
+    public AccountManager(ArrayList<User> users) {
         this.users = users;
     }
 
@@ -42,16 +41,13 @@ public class AccountManager {
 
     }
 
-    public HashMap<Integer, User> getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 
     public boolean login(String username, String password) {
-        ArrayList<User> users = DataLoader.getAllUsers();
-
         for (User user : users) {
             if(user.getUserName().equals(username) && user.getPassword().equals(password)) {
-                System.out.println("Login successful.");
                 currentUser = user;
                 return true;
             }
@@ -60,8 +56,13 @@ public class AccountManager {
 
     }
 
-    public void logout() {
-        this.currentUser = null;
+    public boolean logout() {
+        if (currentUser != null) {
+            this.currentUser = null;
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
