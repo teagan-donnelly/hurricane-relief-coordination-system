@@ -113,4 +113,6 @@ public class Volunteer extends User {
     public double getVolunteerHours() {
         return volunteerHours;
     }
+
+    public void setDispatched(boolean isDispatched) { this.isDispatched = isDispatched; }
 }

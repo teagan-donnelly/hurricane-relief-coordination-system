@@ -113,4 +113,8 @@ public class HelpRequest {
     public String getPhoto() {
         return photo;
     }
+
+    public void setRequestStatus(RequestStatus status) {
+        this.requestStatus = status;
+    }
 }
