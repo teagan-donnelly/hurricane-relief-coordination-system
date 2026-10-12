@@ -27,23 +27,37 @@ public class AidCoordinator extends User {
     }
 
     public void setPriority() {
-
+        //TODO: Implement automatic priority calculation algorithm
     }
 
-    public boolean verifyCertification() {
-        return true;
+    public boolean verifyCertification(Volunteer volunteer, boolean approved) {
+        if (volunteer == null) {
+            return false;
+        }
+
+        //aid coordinator would verify the certification of the volunteer manually on UI
+        return approved;
     }
 
-    public boolean runBackgroundCheck() {
-        return true;
+    public boolean runBackgroundCheck(Volunteer volunteer, boolean passed) {
+        if (volunteer == null) {
+            return false;
+        }
+
+        //aid coordinator would review the background check manually on UI
+        return passed;
     }
 
     public void setUrgency(HelpRequest request, Urgency urgency) {
-
+        if (request == null || urgency == null) {
+            throw new IllegalArgumentException("Request and urgency cannot be null.");
+        }
+        //urgency is manually set by the aid coordinator on their end of the UI
+        request.setUrgency(urgency);
     }
 
     public void assignVolunteer(Volunteer volunteer, HelpRequest request) {
-
+        //TODO: Implement volunteer assignment logic
     }
 
     public VolunteerManager getVolunteers() {
