@@ -6,18 +6,22 @@ import java.util.UUID;
 
 public class HurricaneReliefApplication {
 
-    private instance ApplicationFacade;
-    private requestManager RequestManager;
-    private volunteerManager VolunteerManager;
-    private shelterManager ShelterManager;
-    private accountManager AccountManager;
+    private static HurricaneReliefApplication instance;
 
-    private ApplicationFacade() {
-        return true;
+    private static RequestManager requestManager;
+    private static VolunteerManager volunteerManager;
+    private static ShelterManager shelterManager;
+    private AccountManager accountManager;
+
+    private HurricaneReliefApplication() {
+        requestManager = new RequestManager(); //need to pass paarameters to the constructor
+        volunteerManager = new VolunteerManager(); //need to pass parameters to the constructor
+        shelterManager = new ShelterManager(); //need to pass parameters to the constructor
+        accountManager = new AccountManager(); //need to pass parameters to the constructor
     }
 
-    public ApplicationFacade getInstance() {
-        return true;
+    public static HurricaneReliefApplication getInstance() {
+        return instance != null ? instance : (instance = new HurricaneReliefApplication());
     }
 
     public void submitHelpRequest() {
@@ -25,11 +29,11 @@ public class HurricaneReliefApplication {
     }
 
     public List<Volunteer> findAvailableVolunteers() {
-        return true;
+        
     }
 
     public List<Shelter> findShelters() {
-        return true;
+        
     }
 
     public void registerUser() {
@@ -47,12 +51,12 @@ public class HurricaneReliefApplication {
         return null;
     }
 
-    public void login() {
-
+    public boolean login(String username, String password) {
+        accountManager.login(username, password);
     }
 
     public void logout() {
-        
+        accountManager.logout();
     }
 
 

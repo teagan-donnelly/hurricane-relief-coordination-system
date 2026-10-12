@@ -38,6 +38,20 @@ public class DataLoader extends AppConstants {
     }
 
     /**
+     * A method to get all users
+     * @return returns an ArrayList of all users
+     */
+    public static ArrayList<User> getAllUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        
+        users.addAll(getUsers(VOLUNTEER_JSON));
+        users.addAll(getUsers(COORDINATOR_JSON));
+        users.addAll(getUsers(REQUESTER_JSON));
+        
+        return users;
+    }
+
+    /**
      * A method to get helpRequests from json
      * @return returns an arrayList of help requests
      */
