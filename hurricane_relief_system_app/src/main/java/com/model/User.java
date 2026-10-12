@@ -45,7 +45,7 @@ public abstract class User {
         this.emergencyContacts = emergencyContacts;
     }
 
-    public void makeAccount(User type, String firstName, String lastName,
+    public static void makeAccount(User type, String firstName, String lastName,
                         UUID userID, String email, String address,
                         LocalDate birthDate) {
 

@@ -7,15 +7,16 @@ public class Assignment {
 
     private int assignmentId;
     private Volunteer volunteer;
-    private boolean status;
+    private AssignmentStatus status;
     private HelpRequest request;
     private double assignedTime;
     private double arrivalTime;
     private boolean saftey;
     private boolean terrain;
 
-    public Assignment(int assignmnetID, Volunteer volunteer, Boolean status, Double assignedTime, 
+    public Assignment(int assignmnetID, Volunteer volunteer, AssignmentStatus status, Double assignedTime, 
                       Double arrivalTime, Boolean saftey, Boolean terrian) {
+
         this.assignmentId = assignmnetID;
         this.volunteer = volunteer;
         this.status = status;
@@ -25,16 +26,21 @@ public class Assignment {
         this.terrain = terrian;
     }
 
-    public void isAccepted(Boolean status, int assignmentID, Double assignmentTime, double arrivalTime) {
+    public void isAccepted(AssignmentStatus status, Double assignmentTime) {
+        this.status = status;
+        this.assignedTime = assignmentTime;
+    }
 
+    public void hasArrived(double arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public void isSafe(Boolean saftey) {
-
+        this.saftey = saftey;
     }
 
     public void traverseDifficulty(Boolean terrain) {
-
+        this.terrain = terrain;
     }
 
     public int getAssignmentId() {
@@ -45,7 +51,7 @@ public class Assignment {
         return volunteer;
     }
 
-    public boolean isStatus() {
+    public AssignmentStatus getStatus() {
         return status;
     }
 

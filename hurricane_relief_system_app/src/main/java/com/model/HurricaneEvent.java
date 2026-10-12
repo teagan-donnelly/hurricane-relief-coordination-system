@@ -26,7 +26,6 @@ public class HurricaneEvent {
         this.description = description;
     }
     
-    
     public void endHurricantEvent(LocalDateTime endDate) {
         this.endDate = endDate;
     }
@@ -40,13 +39,38 @@ public class HurricaneEvent {
     }
 
     public void updateCategory(int newCategory) {
+        notifyUsers("The Category of the Hurricane has changed from " + this.category + " to " + newCategory);
         this.category = newCategory;
     }
 
     public void updateStatus(HurricaneStatus newStatus) {
+        notifyUsers("The Status of the Hurricane has changed from " + this.status + " to " + newStatus);
+        this.status = newStatus;
     }
 
-    public void notifyUser() {
-        
+    public void notifyUsers(String message) {
+        ArrayList<User> users = DataLoader.getAllUsers();
+
+        for (User user : users) {
+            NotificationType notification = user.getNotificationPreference();
+
+            switch (notification) {
+                case SMS:
+                    System.out.println("A SMS message was sent to: "+ user.getUserName());
+                    break;
+
+                case EMAIL:
+                    System.out.println("An EMAIL message was sent to: "+ user.getUserName());
+                    break;
+
+                case APP_PUSH:
+                    System.out.println("An APP PUSH message was sent to: "+ user.getUserName());
+                    break;
+            
+                default:
+                    System.out.println("Could not notify user: "+ user.getUserName());
+                    break;
+            }
+        }
     }
 }
