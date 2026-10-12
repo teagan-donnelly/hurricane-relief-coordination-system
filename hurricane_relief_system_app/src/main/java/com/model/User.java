@@ -47,7 +47,7 @@ public abstract class User {
         this.password = password;
     }
 
-    public void makeAccount(User type, String firstName, String lastName,
+    public static void makeAccount(User type, String firstName, String lastName,
                         UUID userID, String email, String address,
                         LocalDate birthDate) {
 
