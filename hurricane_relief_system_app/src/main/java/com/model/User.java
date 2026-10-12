@@ -48,9 +48,29 @@ public abstract class User {
     }
 
     public static void makeAccount(User type, String firstName, String lastName,
-                        UUID userID, String email, String address,
-                        LocalDate birthDate) {
+                        UUID userID, String email, Location location,
+                        LocalDate birthDate, boolean availability, double travelDistance,
+                        ArrayList<String> skills, ArrayList<Credential> credentials, ArrayList<String> supplies,
+                        boolean isVerified, boolean isDispached, double volunteerHours,
+                        int householdSize, AssistanceType assistanceType, ArrayList<String> pastRequests) {
 
+        switch (type.getClass().getSimpleName()) {
+            case "Volunteer":
+                new Volunteer(firstName, lastName, userID, email, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
+                    availability, travelDistance, skills, credentials, supplies, isVerified, isDispached, volunteerHours);
+                break;
+            case "AidReqester":
+                new AidRequester(firstName, lastName, userID, email, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
+                    householdSize, assistanceType, pastRequests);
+                break;
+            case "AidCoordinator":
+                System.out.println("Can not create an AidCoordinator account at this time.");
+                //new AidCoordinator(firstName, lastName, userID, email, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>());
+                break;
+            default:
+                System.out.println("Invalid user type. Account creation failed.");
+                break;
+        }
     }
 
     public UUID getUserId() {

@@ -17,11 +17,17 @@ public class AccountManager {
         this.users = users;
     }
 
-    public void createUser(User type, String firstName, String lastName,
-                        UUID userID, String email, String address,
-                        LocalDate birthDate) {
+    public void createUser(User type, String firstName, String lastName, String email, Location location, LocalDate birthDate,
 
-        User.makeAccount(type, firstName, lastName, userID, email, address, birthDate);
+        boolean availability, double travelDistance, ArrayList<String> skills, ArrayList<Credential> credentials,  
+        ArrayList<String> supplies, boolean isVerified, boolean isDispached, double volunteerHours,
+
+        int householdSize, AssistanceType assistanceType, ArrayList<String> pastRequests) {
+
+        UUID userID = UUID.randomUUID();
+        User.makeAccount(type, firstName, lastName, userID, email, location, birthDate, 
+            availability, travelDistance, skills, credentials, supplies, isVerified, isDispached, volunteerHours,
+            householdSize, assistanceType, pastRequests);
     }
 
     public void addUser(User user) {
