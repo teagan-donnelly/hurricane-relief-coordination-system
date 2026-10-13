@@ -117,4 +117,8 @@ public class HelpRequest {
     public void setRequestStatus(RequestStatus status) {
         this.requestStatus = status;
     }
+
+    public void setUrgency(Urgency urgency) {
+        this.urgency = urgency;
+    }
 }
