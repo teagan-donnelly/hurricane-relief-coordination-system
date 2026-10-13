@@ -11,22 +11,17 @@ public class VolunteerManager {
     private ArrayList<Volunteer> volunteers;
 
     /**
-     * Constructor initializing with an existing list of volunteers.
-     * @param volunteers List of initial volunteers
+     * Private constructor that loads the volunteers from the json file.
      */
-    public VolunteerManager(ArrayList<Volunteer> volunteers) {
-        if (volunteers != null) {
-            this.volunteers = volunteers;
-        } else {
-            this.volunteers = new ArrayList<>();
-        }
-    }
+    private VolunteerManager() {
+        volunteers = new ArrayList<>();
+        ArrayList<User> users = DataLoader.getUsers(AppConstants.VOLUNTEER_JSON);
 
-    /**
-     * Default constructor initializing an empty volunteer list.
-     */
-    public VolunteerManager() {
-        this.volunteers = new ArrayList<>();
+        for (User user : users) {
+            if (user instanceof Volunteer) {
+                volunteers.add((Volunteer) user);
+            }
+        }
     }
 
     /**
@@ -45,8 +40,8 @@ public class VolunteerManager {
      * @param volunteer Volunteer to add
      */
     public void addVolunteer(Volunteer volunteer) {
-        if (volunteer != null) {
-            this.volunteers.add(volunteer);
+        if (volunteer != null && !volunteers.contains(volunteer)) {
+            volunteers.add(volunteer);
         }
     }
 
@@ -56,7 +51,7 @@ public class VolunteerManager {
      */
     public void removeVolunteer(Volunteer volunteer) {
         if (volunteer != null) {
-            this.volunteers.remove(volunteer);
+            volunteers.remove(volunteer);
         }
     }
 
@@ -66,7 +61,25 @@ public class VolunteerManager {
      * @param request Help request to assign them to
      */
     public void assignVolunteer(Volunteer volunteer, HelpRequest request) {
+        if (volunteer == null || request == null) {
+            System.out.println("Volunteer and request cannot be null.");
+            return;
+        }
 
+        if (!volunteer.isAvailability() || volunteer.isDispatched()) {
+            System.out.println("Volunteer is not available for this request.");
+            return;
+        }
+
+        if (request.getRequestStatus() == RequestStatus.CANCELED ||
+            request.getRequestStatus() == RequestStatus.COMPLETED) {
+            System.out.println("Cannot assign a volunteer to a canceled or completed request.");
+            return;
+        }
+
+        volunteer.setDispatched(true);
+        request.setRequestStatus(RequestStatus.ASSIGNED);
+        System.out.println("Volunteer " + volunteer.getFirstName() + " was assigned to the request.");
     }
 
     /**
