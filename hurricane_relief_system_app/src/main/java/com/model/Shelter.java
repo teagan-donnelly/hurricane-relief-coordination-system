@@ -55,4 +55,17 @@ public class Shelter {
         this.capacity = capacity;
     }
 
+    //getters
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getCurrentOccupancy() {
+        return currentOccupancy;
+    }
+
+    public ShelterStatus getStatus() {
+        return status;
+    }
+
 }

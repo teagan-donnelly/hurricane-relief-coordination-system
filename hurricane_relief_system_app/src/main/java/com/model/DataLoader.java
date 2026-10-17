@@ -26,14 +26,13 @@ public class DataLoader extends AppConstants {
     public static ArrayList<User> getUsers(String fileName) {
         switch (fileName) {
             case AppConstants.COORDINATOR_JSON:
-                return getCoordinators();
+                return new ArrayList<>(getCoordinators());
             case AppConstants.REQUESTER_JSON:
-                return getRequesters();
+                return new ArrayList<>(getRequesters());
             case AppConstants.VOLUNTEER_JSON:
-                return getVolunteers();
+                return new ArrayList<>(getVolunteers());
             default:
-                System.out.println("File could not be loaded");
-        }
+                System.out.println("File could not be loaded");        }
         return new ArrayList<>();
     }
 
@@ -186,8 +185,8 @@ public class DataLoader extends AppConstants {
      * A helper method for getUser to return coordinators
      * @return returns an arrayList of coordinators
      */
-    private static ArrayList<User> getCoordinators() {
-        ArrayList<User> users = new ArrayList<User>();
+    public static ArrayList<AidCoordinator> getCoordinators() {
+        ArrayList<AidCoordinator> coordinators = new ArrayList<AidCoordinator>();
 
         try {
             FileReader reader = new FileReader(COORDINATOR_JSON);
@@ -197,7 +196,7 @@ public class DataLoader extends AppConstants {
                 JSONObject coordinatorJSON = (JSONObject)coordinatorsJSON.get(i);
                 UserData data = getUserData(coordinatorJSON);
 
-                users.add(new AidCoordinator(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
+                coordinators.add(new AidCoordinator(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
                     data.userName, data.password, data.notificationPreference, data.emergencyContacts, null));
             }
 
@@ -205,15 +204,15 @@ public class DataLoader extends AppConstants {
             e.printStackTrace();
         }
 
-        return users;
+        return coordinators;
     }
 
     /**
      * A helper method for getUuser to return aid requesters
      * @return returns an arrayList of coordinators
      */
-    private static ArrayList<User> getRequesters() {
-        ArrayList<User> users = new ArrayList<User>();
+    public static ArrayList<AidRequester> getRequesters() {
+        ArrayList<AidRequester> requesters = new ArrayList<AidRequester>();
 
         try {
             FileReader reader = new FileReader(REQUESTER_JSON);
@@ -228,7 +227,7 @@ public class DataLoader extends AppConstants {
 
                 ArrayList<String> pastRequests = getJSONList(requesterJSON, USER_PAST_REQUESTS);
 
-                users.add(new AidRequester(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
+                requesters.add(new AidRequester(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
                     data.userName, data.password, data.notificationPreference, data.emergencyContacts, householdSize, assistanceType, pastRequests));
 
             }
@@ -237,15 +236,15 @@ public class DataLoader extends AppConstants {
             e.printStackTrace();
         }
 
-        return users;
+        return requesters;
     }
 
     /**
      * A helper method for getUser to return volunteers
      * @return returns an arrayList of coordinators
      */
-    private static ArrayList<User> getVolunteers() {
-        ArrayList<User> users = new ArrayList<User>();
+    public static ArrayList<Volunteer> getVolunteers() {
+        ArrayList<Volunteer> volunteers = new ArrayList<Volunteer>();
 
         try {
             FileReader reader = new FileReader(VOLUNTEER_JSON);
@@ -279,7 +278,7 @@ public class DataLoader extends AppConstants {
                 boolean isDispached = (boolean)volunteerJSON.get(USER_DISPACHED);
                 double volunteerHours = ((Number) volunteerJSON.get(USER_VOLUNTEER_HOURS)).doubleValue();
 
-                users.add(new Volunteer(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
+                volunteers.add(new Volunteer(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
                     data.userName, data.password, data.notificationPreference, data.emergencyContacts, availability, travelDistance,
                     userSkills, userCredentials, userSupplies, isVerified, isDispached, volunteerHours));
 
@@ -289,7 +288,7 @@ public class DataLoader extends AppConstants {
             e.printStackTrace();
         }
 
-        return users;
+        return volunteers;
     }
 
     //helpers to cut down repetitive code
