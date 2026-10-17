@@ -16,7 +16,7 @@ public class AccountManager {
         this.users = users;
     }
 
-    public void createUser(User type, String firstName, String lastName, String email, Location location, LocalDate birthDate,
+    public static void createUser(User type, String firstName, String lastName, String email, Location location, LocalDate birthDate,
 
         boolean availability, double travelDistance, ArrayList<String> skills, ArrayList<Credential> credentials,  
         ArrayList<String> supplies, boolean isVerified, boolean isDispached, double volunteerHours,

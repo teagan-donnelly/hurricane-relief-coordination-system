@@ -1,5 +1,6 @@
 package com.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -8,40 +9,64 @@ public class HurricaneReliefApplication {
 
     private static HurricaneReliefApplication instance;
 
-    //private RequestManager requestManager;
+    private RequestManager requestManager;
     private VolunteerManager volunteerManager;
     private ShelterManager shelterManager;
     private AccountManager accountManager;
 
     private HurricaneReliefApplication() {
-        
-        /*
-        requestManager = new RequestManager(); //need to pass paarameters to the constructor
-        volunteerManager = new VolunteerManager(); //need to pass parameters to the constructor
-        shelterManager = new ShelterManager(); //need to pass parameters to the constructor
-        */
-        accountManager = new AccountManager(DataLoader.getAllUsers());
-        
+        requestManager = new RequestManager();   
+        volunteerManager = new VolunteerManager();
+        shelterManager = new ShelterManager(DataLoader.getShelters());
+        accountManager = new AccountManager(DataLoader.getAllUsers()); 
     }
 
     public static HurricaneReliefApplication getInstance() {
         return instance != null ? instance : (instance = new HurricaneReliefApplication());
     }
 
-    public void submitHelpRequest() {
+    public void submitHelpRequest(UUID requestID, RequestType requestType, User user, String comment, 
+        AssistanceType assistanceType, Urgency urgency, RequestStatus requestStatus, 
+        Location location, String photo) {
 
+        HelpRequest helpRequest = new HelpRequest(requestID, requestType, user, comment, 
+            assistanceType, urgency, requestStatus, location, photo);
+        RequestManager.addRequest(helpRequest);
+        
     }
 
     public List<Volunteer> findAvailableVolunteers() {
-        return new ArrayList<>(); // Placeholder for actual implementation
+        ArrayList<Volunteer> volunteers = DataLoader.getVolunteers();
+        ArrayList<Volunteer> availableVolunteers = new ArrayList<>();
+        for (Volunteer volunteer : volunteers) {
+            if (volunteer.isAvailability()) {
+                availableVolunteers.add(volunteer);
+            }
+        }
+        return availableVolunteers;
     }
 
     public List<Shelter> findShelters() {
-        return new ArrayList<>(); // Placeholder for actual implementation
+        ArrayList<Shelter> shelters = DataLoader.getShelters();
+        ArrayList<Shelter> availableShelters = new ArrayList<>();
+        for (Shelter shelter : shelters) {
+            if (shelter.getStatus() == ShelterStatus.OPEN) {
+                availableShelters.add(shelter);
+            }
+        }
+        return availableShelters;
     }
 
-    public void registerUser() {
+    public void registerUser(User type, String firstName, String lastName, String email, Location location, LocalDate birthDate,
 
+        boolean availability, double travelDistance, ArrayList<String> skills, ArrayList<Credential> credentials,  
+        ArrayList<String> supplies, boolean isVerified, boolean isDispached, double volunteerHours,
+
+        int householdSize, AssistanceType assistanceType, ArrayList<String> pastRequests) {
+            
+        AccountManager.createUser(type, firstName, lastName, email, location, birthDate,
+            availability, travelDistance, skills, credentials, supplies, isVerified, isDispached, volunteerHours,
+            householdSize, assistanceType, pastRequests);
     }
 
     public RequestStatus getRequestStatus(UUID requestID) {

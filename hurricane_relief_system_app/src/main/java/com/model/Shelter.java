@@ -21,7 +21,7 @@ public class Shelter {
         this.name = name;
         this.id = id;
         this.location = location;
-        this,currentOccupancy = currentOccupancy;
+        this.currentOccupancy = currentOccupancy;
         this.capacity = capacity;
         this.petFriendly = petFriendly;
         this.accessibilityInfo = accessibilityInfo;
@@ -53,6 +53,19 @@ public class Shelter {
 
     public void updateCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    //getters
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getCurrentOccupancy() {
+        return currentOccupancy;
+    }
+
+    public ShelterStatus getStatus() {
+        return status;
     }
 
 }
