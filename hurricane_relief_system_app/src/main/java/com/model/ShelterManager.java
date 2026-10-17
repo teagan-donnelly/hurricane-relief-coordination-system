@@ -2,12 +2,6 @@ package com.model;
 
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.UUID;
-=======
->>>>>>> Aden-workspace
 
 public class ShelterManager{
     private ArrayList<Shelter> shelters;
@@ -23,16 +17,11 @@ public class ShelterManager{
     }
     
     public Shelter findShelter(int id){
-<<<<<<< HEAD
         for(Shelter shelter : shelters.values()){
             if(shelter.getId() == id){
                 return shelter;
             }
         }
         return null;
-=======
-        
-
->>>>>>> Aden-workspace
     }
 }

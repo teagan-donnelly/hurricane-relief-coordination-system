@@ -12,18 +12,10 @@ public class AidCoordinator extends User {
 
     private VolunteerManager volunteers;
 
-<<<<<<< HEAD
-    public AidCoordinator(String firstName, String lastName, String email, String userName, String password, Location location, LocalDate birthDate,
-                        NotificationType notificationPreference, ArrayList<String> emergencyContacts, VolunteerManager volunteers) {
-
-        super(firstName, lastName, email, userName, password, location, birthDate, notificationPreference, emergencyContacts);
-
-=======
     public AidCoordinator(String firstName, String lastName, UUID userID, String email, Location location,
                           LocalDate birthDate, String userName, String password, NotificationType notificationPreference,
                           ArrayList<String> emergencyContacts, VolunteerManager volunteers) {
         super(firstName, lastName, userID, email, location, birthDate, userName, password, notificationPreference, emergencyContacts);
->>>>>>> Aden-workspace
         this.volunteers = volunteers;
     }
 
