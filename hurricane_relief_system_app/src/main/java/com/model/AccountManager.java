@@ -30,14 +30,17 @@ public class AccountManager {
     }
 
     public void addUser(User user) {
+        users.add(user.getUserID(), user);
     
     }
 
     public void deleteUser(User user) {
+        users.remove(user.getUserID());
 
     }
 
     public void updateUser(User user) {
+        users.put(users.getUserID(), user);
 
     }
 
