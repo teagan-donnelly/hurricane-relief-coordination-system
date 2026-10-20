@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "type": "java",
+        "name": "UI",
+        "request": "launch",
+        "mainClass": "com.hurricane_relief_system/com.model.UI",
+        "projectName": "hurricane_relief_system_app",
+        "envFile": "${workspaceFolder}/.env"
+    },
+    {
+        "type": "java",
+        "name": "Run Map App",
+        "request": "launch",
+        "mainClass": "com.hurricane_relief_system/com.hurricane_relief_system.App",
+        "projectName": "hurricane_relief_system_app",
+        "envFile": "${workspaceFolder}/.env"
+    }
+]
+}
