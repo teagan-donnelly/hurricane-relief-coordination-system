@@ -15,7 +15,7 @@ public class AidCoordinator extends User {
     public AidCoordinator(String firstName, String lastName, UUID userID, String email, Location location,
                           LocalDate birthDate, String userName, String password, NotificationType notificationPreference,
                           ArrayList<String> emergencyContacts, VolunteerManager volunteers) {
-        super(firstName, lastName, userID, email, location, birthDate, userName, password, notificationPreference, emergencyContacts);
+        super(firstName, lastName, userID, email, userName, password, location, birthDate, notificationPreference, emergencyContacts);
         this.volunteers = volunteers;
     }
 

@@ -15,8 +15,7 @@ public class AidRequester extends User {
                 NotificationType notificationPreference, ArrayList<String> emergencyContacts, 
             int householdSize, AssistanceType assistanceType, ArrayList<String> pastRequests) {
 
-        super(firstName, lastName, userID, email, location, birthDate, userName, password, 
-            notificationPreference, emergencyContacts);
+        super(firstName, lastName, userID, email, userName, password, location, birthDate, notificationPreference, emergencyContacts);
 
         this.householdSize = householdSize;
         this.assistanceType = assistanceType;

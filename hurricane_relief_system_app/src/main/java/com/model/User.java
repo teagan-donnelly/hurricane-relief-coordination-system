@@ -31,7 +31,7 @@ public abstract class User {
         this.password = password;
     }
 
-    public User(String firstName, String lastName,
+    public User(String firstName, String lastName, UUID userID,
                 String email, String userName, String password,
                 Location location, LocalDate birthDate,
                 NotificationType notificationPreference,

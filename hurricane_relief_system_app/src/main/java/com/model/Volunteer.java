@@ -24,7 +24,7 @@ public class Volunteer extends User {
                      ArrayList<Credential> credentials, ArrayList<String> supplies, boolean isVerified,
                      boolean isDispatched, double volunteerHours) {
         
-        super(firstName, lastName, userID, email, location, birthDate, userName, password, notificationPreference, emergencyContacts);
+        super(firstName, lastName, userID, email, userName, password, location, birthDate, notificationPreference, emergencyContacts);
         
         this.availability = availability;
         this.skills = skills;
