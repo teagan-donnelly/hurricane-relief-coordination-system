@@ -18,13 +18,13 @@ public class Volunteer extends User {
     private boolean isDispatched;
     private double volunteerHours;
 
-    public Volunteer(String firstName, String lastName, UUID userID, String email, Location location,
+    public Volunteer(String firstName, String lastName, UUID userID, String email, String phone, Location location,
                      LocalDate birthDate, String userName, String password, NotificationType notificationPreference,
                      ArrayList<String> emergencyContacts, boolean availability, ArrayList<String> skills,
                      ArrayList<Credential> credentials, ArrayList<String> supplies, boolean isVerified,
                      boolean isDispatched, double volunteerHours) {
         
-        super(firstName, lastName, userID, email, userName, password, location, birthDate, notificationPreference, emergencyContacts);
+        super(firstName, lastName, userID, email, phone, userName, password, location, birthDate, notificationPreference, emergencyContacts);
         
         this.availability = availability;
         this.skills = skills;
@@ -35,13 +35,13 @@ public class Volunteer extends User {
         this.volunteerHours = volunteerHours;
     }
 
-    public Volunteer(String firstName, String lastName, UUID userID, String email, Location location,
+    public Volunteer(String firstName, String lastName, UUID userID, String email, String phone, Location location,
                      LocalDate birthDate, String userName, String password, NotificationType notificationPreference,
                      ArrayList<String> emergencyContacts, boolean availability, double travelDistance,
                      ArrayList<String> skills, ArrayList<Credential> credentials, ArrayList<String> supplies,
                      boolean isVerified, boolean isDispatched, double volunteerHours) {
         
-        super(firstName, lastName, userID, email, location, birthDate, userName, password, notificationPreference, emergencyContacts);
+        super(firstName, lastName, userID, email, phone, userName, password, location, birthDate, notificationPreference, emergencyContacts);
         
         this.availability = availability;
         this.travelDistance = travelDistance;
@@ -54,7 +54,7 @@ public class Volunteer extends User {
     }
 
     public Volunteer(boolean availability, ArrayList<String> skills, ArrayList<Credential> credentials) {
-        super("", "", null, "");
+        super("", "", "", "", "", "");
         this.availability = availability;
         this.skills = skills;
         this.credentials = credentials;

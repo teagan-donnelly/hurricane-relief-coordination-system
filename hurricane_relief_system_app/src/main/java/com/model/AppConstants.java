@@ -13,11 +13,12 @@ public abstract class AppConstants {
     public static final String USER_FIRST_NAME = "firstName";
     public static final String USER_LAST_NAME = "lastName";
     public static final String USER_EMAIL = "email";
+    public static final String USER_PHONE = "phoneNumber";
     public static final String USER_LOCATION = "location";
     public static final String USER_BIRTHDATE = "birthDate";
     public static final String USER_USERNAME = "username";
     public static final String USER_PASSWORD = "password";
-    public static final String USER_NOIFICATION_PREFEREMCE = "notificationPreference";
+    public static final String USER_NOTIFICATION_PREFERENCE = "notificationPreference";
     public static final String USER_EMERGENCY_CONTACTS = "emergencyContacts";
 
     public static final String USER_HOUSEHOLDSIZE = "householdSize";
@@ -57,6 +58,8 @@ public abstract class AppConstants {
     
     public static final String REQUEST_HOUSEHOLD_SIZE = "householdSize";
     public static final String REQUEST_ACCESS_INTRUCTIONS = "accessInstructions";
+    public static final String REQUEST_PETS = "pets";
+    public static final String REQUEST_CHILDREN = "children";
 
     public static final String REQUEST_HAZARD_TYPE = "hazardType";
     public static final String REQUEST_REPORT_TIME = "reportTime";

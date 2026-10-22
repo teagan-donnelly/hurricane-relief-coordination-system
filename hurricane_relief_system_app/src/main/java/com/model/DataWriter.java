@@ -72,7 +72,7 @@ public class DataWriter extends AppConstants {
         obj.put(USER_BIRTHDATE, user.getBirthDate() != null ? user.getBirthDate().toString() : "");
         obj.put(USER_USERNAME, user.getUserName());
         obj.put(USER_PASSWORD, user.getPassword());
-        obj.put(USER_NOIFICATION_PREFEREMCE, user.getNotificationPreference() != null ? user.getNotificationPreference().name() : "");
+        obj.put(USER_NOTIFICATION_PREFERENCE, user.getNotificationPreference() != null ? user.getNotificationPreference().name() : "");
 
         JSONArray contacts = new JSONArray();
         if (user.getEmergencyContacts() != null) {

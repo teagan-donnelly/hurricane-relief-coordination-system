@@ -18,7 +18,9 @@
     },
     "photo": "photos/139a95f0-roof.jpg",
     "householdSize": 4,
-    "accessInstructions": "Front door blocked, use side gate. Code 4417"
+    "accessInstructions": "Front door blocked, use side gate. Code 4417",
+    "pets": 2,
+    "children": 2
   },
   {
     "requestID": "c09d80ea-6594-4a46-90c1-7fc9e8b43728",
@@ -39,7 +41,9 @@
     },
     "photo": "",
     "householdSize": 2,
-    "accessInstructions": ""
+    "accessInstructions": "",
+    "pets": 0,
+    "children": 1
   },
   {
     "requestID": "0f48612a-ff38-4cb3-a2d4-7770890c31d8",
@@ -61,5 +65,229 @@
     "photo": "",
     "hazardType": "ELECTRICAL_HAZARD",
     "reportTime": "2026-09-24T14:30:00"
+  },
+  {
+    "requestID": "4b72c9f1-8d35-4e60-a192-6f0c83b5d247",
+    "requestType": "PERSONAL",
+    "userID": "d4e72a19-85c3-4b60-a927-13f8c6d05e42",
+    "comment": "Floodwater entered the first floor, family needs temporary shelter",
+    "assistanceType": "SHELTER",
+    "urgency": "HIGH_PRIORITY",
+    "status": "AWAITING_ASSIGNMENT",
+    "location": {
+      "latitude": 32.8546,
+      "longitude": -79.9748,
+      "streetAddress": "245 Riverbend Drive",
+      "apartmentNum": 0,
+      "city": "North Charleston",
+      "state": "SC",
+      "zipcode": "29405"
+    },
+    "photo": "photos/4b72c9f1-flooding.jpg",
+    "householdSize": 5,
+    "accessInstructions": "Use the driveway on the left side of the house",
+    "pets": 1,
+    "children": 3
+  },
+  {
+    "requestID": "7e93a6d2-1c84-4b57-9f30-2d6a81c5e490",
+    "requestType": "PERSONAL",
+    "userID": "b6a913f0-2e74-49c8-8d51-70a3f5e6249b",
+    "comment": "Backup battery for oxygen concentrator is almost depleted",
+    "assistanceType": "MEDICAL",
+    "urgency": "URGENT_PRIORITY",
+    "status": "PENDING_REVIEW",
+    "location": {
+      "latitude": 32.2163,
+      "longitude": -80.7526,
+      "streetAddress": "68 Palmetto Lane",
+      "apartmentNum": 3,
+      "city": "Hilton Head Island",
+      "state": "SC",
+      "zipcode": "29928"
+    },
+    "photo": "",
+    "householdSize": 2,
+    "accessInstructions": "Ground-floor apartment, entrance faces the parking lot",
+    "pets": 0,
+    "children": 0
+  },
+  {
+    "requestID": "9c15b8e4-6a72-43d0-b589-0e2f74a6c831",
+    "requestType": "INFRASTRUCTURE",
+    "userID": "d4e72a19-85c3-4b60-a927-13f8c6d05e42",
+    "comment": "Fallen tree pulled electrical wires onto the sidewalk",
+    "assistanceType": "PROPERTY_DAMAGE",
+    "urgency": "URGENT_PRIORITY",
+    "status": "PENDING_REVIEW",
+    "location": {
+      "latitude": 32.8323,
+      "longitude": -79.8284,
+      "streetAddress": "410 Marshview Road",
+      "apartmentNum": 0,
+      "city": "Mount Pleasant",
+      "state": "SC",
+      "zipcode": "29464"
+    },
+    "photo": "photos/9c15b8e4-downed-wires.jpg",
+    "hazardType": "ELECTRICAL_HAZARD",
+    "reportTime": "2026-09-24T15:10:00"
+  },
+  {
+    "requestID": "2a68d0c7-5f91-4e23-8b46-9c3d17a5f802",
+    "requestType": "PERSONAL",
+    "userID": "83c5d1a7-604e-4f92-b368-e2a79d105fc4",
+    "comment": "Apartment building was evacuated because of storm damage",
+    "assistanceType": "SHELTER",
+    "urgency": "HIGH_PRIORITY",
+    "status": "AWAITING_ASSIGNMENT",
+    "location": {
+      "latitude": 32.4488,
+      "longitude": -80.6706,
+      "streetAddress": "932 Bayview Court",
+      "apartmentNum": 12,
+      "city": "Beaufort",
+      "state": "SC",
+      "zipcode": "29902"
+    },
+    "photo": "",
+    "householdSize": 3,
+    "accessInstructions": "Family is waiting at the main parking lot entrance",
+    "pets": 2,
+    "children": 1
+  },
+  {
+    "requestID": "6d40f2a9-3b87-45c1-a068-7e9d52b4c613",
+    "requestType": "PERSONAL",
+    "userID": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "comment": "Resident injured their ankle while evacuating and needs medical assistance",
+    "assistanceType": "MEDICAL",
+    "urgency": "HIGH_PRIORITY",
+    "status": "PENDING_REVIEW",
+    "location": {
+      "latitude": 33.0185,
+      "longitude": -80.1756,
+      "streetAddress": "157 Oak Hollow Drive",
+      "apartmentNum": 0,
+      "city": "Summerville",
+      "state": "SC",
+      "zipcode": "29483"
+    },
+    "photo": "",
+    "householdSize": 4,
+    "accessInstructions": "Resident is on the covered front porch",
+    "pets": 1,
+    "children": 2
+  },
+  {
+    "requestID": "8f21c5b3-0d69-47a2-951e-4a7c83d6b920",
+    "requestType": "INFRASTRUCTURE",
+    "userID": "f9e8d7c6-b5a4-3210-9876-543210fedcba",
+    "comment": "Damaged utility pole is leaning over the road with exposed wires",
+    "assistanceType": "PROPERTY_DAMAGE",
+    "urgency": "URGENT_PRIORITY",
+    "status": "AWAITING_ASSIGNMENT",
+    "location": {
+      "latitude": 32.0835,
+      "longitude": -81.0998,
+      "streetAddress": "620 West Bay Street",
+      "apartmentNum": 0,
+      "city": "Savannah",
+      "state": "GA",
+      "zipcode": "31401"
+    },
+    "photo": "photos/8f21c5b3-utility-pole.jpg",
+    "hazardType": "ELECTRICAL_HAZARD",
+    "reportTime": "2026-09-24T16:05:00"
+  },
+  {
+    "requestID": "3e79a1d6-4c28-4f95-b760-1d8a52e9c034",
+    "requestType": "PERSONAL",
+    "userID": "83c5d1a7-604e-4f92-b368-e2a79d105fc4",
+    "comment": "Tree fell onto the home and damaged two bedrooms, need a safe place for the night",
+    "assistanceType": "SHELTER",
+    "urgency": "HIGH_PRIORITY",
+    "status": "PENDING_REVIEW",
+    "location": {
+      "latitude": 32.7932,
+      "longitude": -80.0387,
+      "streetAddress": "804 Magnolia Creek Road",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29407"
+    },
+    "photo": "photos/3e79a1d6-tree-damage.jpg",
+    "householdSize": 6,
+    "accessInstructions": "Use the rear driveway off the adjacent street",
+    "pets": 2,
+    "children": 4
+  },
+  {
+    "requestID": "5a06e9c2-7b34-48d1-826f-c9e51a3d7048",
+    "requestType": "PERSONAL",
+    "userID": "83c5d1a7-604e-4f92-b368-e2a79d105fc4",
+    "comment": "Asthma medication was lost during evacuation and resident needs medical assistance",
+    "assistanceType": "MEDICAL",
+    "urgency": "HIGH_PRIORITY",
+    "status": "AWAITING_ASSIGNMENT",
+    "location": {
+      "latitude": 32.9991,
+      "longitude": -80.0384,
+      "streetAddress": "319 Pine Ridge Avenue",
+      "apartmentNum": 7,
+      "city": "Goose Creek",
+      "state": "SC",
+      "zipcode": "29445"
+    },
+    "photo": "",
+    "householdSize": 3,
+    "accessInstructions": "Second-floor apartment, stairs beside the leasing office",
+    "pets": 0,
+    "children": 1
+  },
+  {
+    "requestID": "1b84d7f0-9e63-42a5-a718-6c0f35d2b894",
+    "requestType": "INFRASTRUCTURE",
+    "userID": "d4e72a19-85c3-4b60-a927-13f8c6d05e42",
+    "comment": "Electrical transformer is sparking near the entrance to a residential neighborhood",
+    "assistanceType": "PROPERTY_DAMAGE",
+    "urgency": "URGENT_PRIORITY",
+    "status": "PENDING_REVIEW",
+    "location": {
+      "latitude": 33.196,
+      "longitude": -80.0131,
+      "streetAddress": "75 Cypress Landing Road",
+      "apartmentNum": 0,
+      "city": "Moncks Corner",
+      "state": "SC",
+      "zipcode": "29461"
+    },
+    "photo": "photos/1b84d7f0-transformer.jpg",
+    "hazardType": "ELECTRICAL_HAZARD",
+    "reportTime": "2026-09-24T17:20:00"
+  },
+  {
+    "requestID": "0c57a3e8-2f90-46b4-9d61-e8a72c5f1039",
+    "requestType": "PERSONAL",
+    "userID": "b6a913f0-2e74-49c8-8d51-70a3f5e6249b",
+    "comment": "Mobile home sustained severe wind damage and is no longer safe to occupy",
+    "assistanceType": "SHELTER",
+    "urgency": "HIGH_PRIORITY",
+    "status": "AWAITING_ASSIGNMENT",
+    "location": {
+      "latitude": 32.4699,
+      "longitude": -80.9751,
+      "streetAddress": "526 Cedar Grove Lane",
+      "apartmentNum": 0,
+      "city": "Ridgeland",
+      "state": "SC",
+      "zipcode": "29936"
+    },
+    "photo": "photos/0c57a3e8-wind-damage.jpg",
+    "householdSize": 2,
+    "accessInstructions": "Residents are waiting beside the mailbox at the driveway entrance",
+    "pets": 1,
+    "children": 0
   }
 ]

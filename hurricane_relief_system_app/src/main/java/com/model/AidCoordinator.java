@@ -15,16 +15,16 @@ public class AidCoordinator extends User {
 
     private VolunteerManager volunteers;
 
-    public AidCoordinator(String firstName, String lastName, UUID userID, String email, Location location,
-                          LocalDate birthDate, String userName, String password, NotificationType notificationPreference,
-                          ArrayList<String> emergencyContacts, VolunteerManager volunteers) {
-        super(firstName, lastName, userID, email, userName, password, location, birthDate, notificationPreference, emergencyContacts);
+    public AidCoordinator(String firstName, String lastName, UUID userID, String email, String phone, String userName, String password,
+                          Location location, LocalDate birthDate, NotificationType notificationPreference, ArrayList<String> emergencyContacts,
+                          NotificationType notificationType, ArrayList<String> volunteers) {
+        super(firstName, lastName, userID, email, phone, userName, password, location, birthDate, notificationPreference, emergencyContacts);
         this.volunteers = volunteers;
     }
 
-    public AidCoordinator(String firstName, String lastName, String email, String userName, String password, VolunteerManager volunteers) {
+    public AidCoordinator(String firstName, String lastName, String email, String phone, String userName, String password, VolunteerManager volunteers) {
 
-        super(firstName, lastName, email, userName, password);
+        super(firstName, lastName, email, phone, userName, password);
         this.volunteers = volunteers;
     }
 

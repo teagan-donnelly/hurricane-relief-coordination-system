@@ -4,7 +4,16 @@
     "firstName": "Jane",
     "lastName": "Doe",
     "email": "jane.doe@example.com",
-    "address": "123 Coastal Way, Charleston, SC 29401",
+    "phoneNumber": "843-555-0101",
+    "location": {
+      "latitude": 32.7765,
+      "longitude": -79.9311,
+      "streetAddress": "123 Coastal Way",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29401"
+    },
     "birthDate": "1988-04-12",
     "username": "jdoe88",
     "password": "hashed_password_123",
@@ -16,16 +25,26 @@
     "householdSize": 4,
     "assistanceType": "SHELTER",
     "pastRequests": [
-      "REQ-2024-001: Temporary Housing",
-      "REQ-2024-089: Emergency Rations"
+      "139a95f0-c8a5-4d66-a8c8-b737f99ad142",
+      "0f48612a-ff38-4cb3-a2d4-7770890c31d8",
+      "6d40f2a9-3b87-45c1-a068-7e9d52b4c613"
     ]
   },
   {
     "userID": "f9e8d7c6-b5a4-3210-9876-543210fedcba",
     "firstName": "Carlos",
     "lastName": "Mendoza",
-    "email": "carlos.m@example.com",
-    "address": "789 Ocean Blvd, Savannah, GA 31401",
+    "email": "carlosm@example.com",
+    "phoneNumber": "912-555-0102",
+    "location": {
+      "latitude": 32.0809,
+      "longitude": -81.0912,
+      "streetAddress": "789 Ocean Blvd",
+      "apartmentNum": 0,
+      "city": "Savannah",
+      "state": "GA",
+      "zipcode": "31401"
+    },
     "birthDate": "1995-11-23",
     "username": "cmendoza",
     "password": "hashed_password_456",
@@ -34,9 +53,101 @@
       "Elena Mendoza - 555-0188"
     ],
     "householdSize": 2,
-    "assistanceType": "MEDICAL_SUPPLIES",
+    "assistanceType": "MEDICAL",
     "pastRequests": [
-      "REQ-2025-012: First Aid Kit & Insulin"
+      "c09d80ea-6594-4a46-90c1-7fc9e8b43728",
+      "8f21c5b3-0d69-47a2-951e-4a7c83d6b920"
+    ]
+  },
+  {
+    "userID": "d4e72a19-85c3-4b60-a927-13f8c6d05e42",
+    "firstName": "Monica",
+    "lastName": "Brooks",
+    "email": "monica.brooks@example.com",
+    "phoneNumber": "843-555-0104",
+    "location": {
+      "latitude": 32.8546,
+      "longitude": -79.9748,
+      "streetAddress": "245 Riverbend Drive",
+      "apartmentNum": 0,
+      "city": "North Charleston",
+      "state": "SC",
+      "zipcode": "29405"
+    },
+    "birthDate": "1982-07-09",
+    "username": "mbrooks82",
+    "password": "hashed_password_789",
+    "notificationPreference": "SMS",
+    "emergencyContacts": [
+      "Daniel Brooks - 555-0126",
+      "Renee Carter - 555-0164"
+    ],
+    "householdSize": 5,
+    "assistanceType": "SHELTER",
+    "pastRequests": [
+      "4b72c9f1-8d35-4e60-a192-6f0c83b5d247",
+      "9c15b8e4-6a72-43d0-b589-0e2f74a6c831",
+      "1b84d7f0-9e63-42a5-a718-6c0f35d2b894"
+    ]
+  },
+  {
+    "userID": "b6a913f0-2e74-49c8-8d51-70a3f5e6249b",
+    "firstName": "Walter",
+    "lastName": "Chen",
+    "email": "walter.chen@example.com",
+    "phoneNumber": "843-555-0105",
+    "location": {
+      "latitude": 32.2163,
+      "longitude": -80.7526,
+      "streetAddress": "68 Palmetto Lane",
+      "apartmentNum": 3,
+      "city": "Hilton Head Island",
+      "state": "SC",
+      "zipcode": "29928"
+    },
+    "birthDate": "1954-02-18",
+    "username": "wchen54",
+    "password": "hashed_password_101",
+    "notificationPreference": "EMAIL",
+    "emergencyContacts": [
+      "Grace Chen - 555-0172"
+    ],
+    "householdSize": 2,
+    "assistanceType": "MEDICAL",
+    "pastRequests": [
+      "7e93a6d2-1c84-4b57-9f30-2d6a81c5e490",
+      "0c57a3e8-2f90-46b4-9d61-e8a72c5f1039"
+    ]
+  },
+  {
+    "userID": "83c5d1a7-604e-4f92-b368-e2a79d105fc4",
+    "firstName": "Aisha",
+    "lastName": "Patel",
+    "email": "aisha.patel@example.com",
+    "phoneNumber": "843-555-0106",
+    "location": {
+      "latitude": 32.4488,
+      "longitude": -80.6706,
+      "streetAddress": "932 Bayview Court",
+      "apartmentNum": 12,
+      "city": "Beaufort",
+      "state": "SC",
+      "zipcode": "29902"
+    },
+    "birthDate": "1991-10-03",
+    "username": "apatel91",
+    "password": "hashed_password_202",
+    "notificationPreference": "SMS",
+    "emergencyContacts": [
+      "Ravi Patel - 555-0139",
+      "Nina Shah - 555-0151"
+    ],
+    "householdSize": 3,
+    "assistanceType": "SHELTER",
+    "pastRequests": [
+      "2a68d0c7-5f91-4e23-8b46-9c3d17a5f802",
+      "3e79a1d6-4c28-4f95-b760-1d8a52e9c034",
+      "5a06e9c2-7b34-48d1-826f-c9e51a3d7048"
     ]
   }
 ]

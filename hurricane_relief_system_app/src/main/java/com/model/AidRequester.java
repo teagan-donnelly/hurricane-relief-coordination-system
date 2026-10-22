@@ -10,13 +10,12 @@ public class AidRequester extends User {
     private AssistanceType assistanceType;
     private ArrayList<String> pastRequests;
 
-    public AidRequester (String firstName, String lastName, UUID userID, String email, 
+    public AidRequester (String firstName, String lastName, UUID userID, String email, String phone,
                 Location location, LocalDate birthDate, String userName, String password,
                 NotificationType notificationPreference, ArrayList<String> emergencyContacts, 
             int householdSize, AssistanceType assistanceType, ArrayList<String> pastRequests) {
 
-        super(firstName, lastName, userID, email, userName, password, location, birthDate, notificationPreference, emergencyContacts);
-
+        super(firstName, lastName, userID, email, phone, userName, password, location, birthDate, notificationPreference, emergencyContacts);
         this.householdSize = householdSize;
         this.assistanceType = assistanceType;
         this.pastRequests = pastRequests;

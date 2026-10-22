@@ -13,6 +13,7 @@ public abstract class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String phone;
     private Location location;
     private LocalDate birthDate;
     private String userName;
@@ -20,24 +21,25 @@ public abstract class User {
     private NotificationType notificationPreference;
     private ArrayList<String> emergencyContacts = new ArrayList<>();
 
-    public User(String firstName, String lastName,
-                String email, String userName, String password) {
+    public User(String firstName, String lastName, 
+                String email, String phone, String userName, String password) {
 
         this.userID = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
         this.userName = userName;
         this.password = password;
     }
 
     public User(String firstName, String lastName, UUID userID,
-                String email, String userName, String password,
+                String email, String phone, String userName, String password,
                 Location location, LocalDate birthDate,
                 NotificationType notificationPreference,
                 ArrayList<String> emergencyContacts) {
 
-        this(firstName, lastName, email, userName, password);
+        this(firstName, lastName, email, phone, userName, password);
 
         this.location = location;
         this.birthDate = birthDate;
@@ -46,7 +48,7 @@ public abstract class User {
     }
 
     public static void makeAccount(User type, String firstName, String lastName,
-                        UUID userID, String email, Location location,
+                        UUID userID, String email, String phone, Location location,
                         LocalDate birthDate, boolean availability, double travelDistance,
                         ArrayList<String> skills, ArrayList<Credential> credentials, ArrayList<String> supplies,
                         boolean isVerified, boolean isDispached, double volunteerHours,
@@ -54,16 +56,16 @@ public abstract class User {
 
         switch (type.getClass().getSimpleName()) {
             case "Volunteer":
-                new Volunteer(firstName, lastName, userID, email, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
+                new Volunteer(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
                     availability, travelDistance, skills, credentials, supplies, isVerified, isDispached, volunteerHours);
                 break;
             case "AidReqester":
-                new AidRequester(firstName, lastName, userID, email, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
+                new AidRequester(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
                     householdSize, assistanceType, pastRequests);
                 break;
             case "AidCoordinator":
                 System.out.println("Can not create an AidCoordinator account at this time.");
-                //new AidCoordinator(firstName, lastName, userID, email, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>());
+                //new AidCoordinator(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>());
                 break;
             default:
                 System.out.println("Invalid user type. Account creation failed.");

@@ -83,8 +83,10 @@ public class DataLoader extends AppConstants {
                     case PERSONAL:
                         int householdSize = ((Number) requestJSON.get(REQUEST_HOUSEHOLD_SIZE)).intValue();
                         String accessInstructions = (String) requestJSON.get(REQUEST_ACCESS_INTRUCTIONS);
+                        int pets = ((Number) requestJSON.get(REQUEST_PETS)).intValue();
+                        int children = ((Number) requestJSON.get(REQUEST_CHILDREN)).intValue();
 
-                        requests.add(new PersonalRequest(requestID, requestType, user, comment, assistanceType, urgency, requestStatus, location, photo, householdSize, accessInstructions));
+                        requests.add(new PersonalRequest(requestID, requestType, user, comment, assistanceType, urgency, requestStatus, location, photo, householdSize, accessInstructions, pets, children));
                         break;
 
                     case INFRASTRUCTURE:
@@ -196,8 +198,10 @@ public class DataLoader extends AppConstants {
                 JSONObject coordinatorJSON = (JSONObject)coordinatorsJSON.get(i);
                 UserData data = getUserData(coordinatorJSON);
 
-                coordinators.add(new AidCoordinator(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
-                    data.userName, data.password, data.notificationPreference, data.emergencyContacts, null));
+                /* */
+
+                coordinators.add(new AidCoordinator(data.firstName, data.lastName, data.id, data.email, data.phone, data.userName, data.password,
+                          data.location, data.birthDate, data.notificationPreference, data.emergencyContacts, data.notificationPreference, data.emergencyContacts));
             }
 
         } catch (Exception e) {
@@ -227,8 +231,8 @@ public class DataLoader extends AppConstants {
 
                 ArrayList<String> pastRequests = getJSONList(requesterJSON, USER_PAST_REQUESTS);
 
-                requesters.add(new AidRequester(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
-                    data.userName, data.password, data.notificationPreference, data.emergencyContacts, householdSize, assistanceType, pastRequests));
+                requesters.add(new AidRequester(data.firstName, data.lastName, data.id, data.email, data.phone, data.location, data.birthDate, 
+                    data.userName, data.password, data.notificationPreference, data.emergencyContacts, householdSize, assistanceType, pastRequests));              
 
             }
 
@@ -278,7 +282,7 @@ public class DataLoader extends AppConstants {
                 boolean isDispached = (boolean)volunteerJSON.get(USER_DISPACHED);
                 double volunteerHours = ((Number) volunteerJSON.get(USER_VOLUNTEER_HOURS)).doubleValue();
 
-                volunteers.add(new Volunteer(data.firstName, data.lastName, data.id, data.email, data.location, data.birthDate, 
+                volunteers.add(new Volunteer(data.firstName, data.lastName, data.id, data.email, data.phone, data.location, data.birthDate, 
                     data.userName, data.password, data.notificationPreference, data.emergencyContacts, availability, travelDistance,
                     userSkills, userCredentials, userSupplies, isVerified, isDispached, volunteerHours));
 
@@ -300,6 +304,7 @@ public class DataLoader extends AppConstants {
         String firstName;
         String lastName;
         String email;
+        String phone;
         Location location;
         String userName;
         String password;
@@ -320,13 +325,14 @@ public class DataLoader extends AppConstants {
         data.firstName = (String) userJSON.get(USER_FIRST_NAME);
         data.lastName = (String) userJSON.get(USER_LAST_NAME);
         data.email = (String) userJSON.get(USER_EMAIL);
+        data.phone = (String) userJSON.get(USER_PHONE);
         data.location = getLocation(userJSON);
         data.userName = (String) userJSON.get(USER_USERNAME);
         data.password = (String) userJSON.get(USER_PASSWORD);
 
         data.birthDate = LocalDate.parse((String) userJSON.get(USER_BIRTHDATE));
 
-        data.notificationPreference = NotificationType.valueOf(((String) userJSON.get(USER_NOIFICATION_PREFEREMCE)).toUpperCase());
+        data.notificationPreference = NotificationType.valueOf(((String) userJSON.get(USER_NOTIFICATION_PREFERENCE)).toUpperCase());
                 
         data.emergencyContacts = getJSONList(userJSON, USER_EMERGENCY_CONTACTS);
 
@@ -386,15 +392,6 @@ public class DataLoader extends AppConstants {
             return new Location(latitude, longitude, streetAddress, apartmanentNumber, city, state, zipcode);
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        ArrayList<HurricaneEvent> requests = getHurricaneEvents();
-        
-		for(HurricaneEvent request : requests){
-			System.out.println(request);
-		}
-    
     }
 
 }
