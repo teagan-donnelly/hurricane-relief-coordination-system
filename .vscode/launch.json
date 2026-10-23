@@ -4,6 +4,7 @@
     {
         "type": "java",
         "name": "Driver",
+        "envFile": "${workspaceFolder}/.env",
         "request": "launch",
         "cwd": "${workspaceFolder}",
         "console": "integratedTerminal",

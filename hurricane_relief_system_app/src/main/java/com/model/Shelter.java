@@ -15,6 +15,20 @@ public class Shelter {
     private boolean hasPower;
     private ShelterStatus status;
     private boolean hasMedicalStaff;
+    private int petCapacity;
+    private int currentPetOccupancy;
+
+    public void setPetSpace(int petCapacity, int currentPetOccupancy) {
+        if (petCapacity < 0 || currentPetOccupancy < 0 || currentPetOccupancy > petCapacity) {
+            throw new IllegalArgumentException("Invalid shelter pet capacity or occupancy.");
+        }
+        this.petCapacity = petCapacity;
+        this.currentPetOccupancy = currentPetOccupancy;
+    }
+
+    public int getAvailablePetSpace() {
+        return petCapacity - currentPetOccupancy;
+    }
 
     public Shelter (String name, UUID id, Location location, int currentOccupancy, int capacity, 
         boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,

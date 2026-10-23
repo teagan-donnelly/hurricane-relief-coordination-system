@@ -102,6 +102,10 @@ public class DataLoader extends AppConstants {
                 }
 
                 String assignedVolunteer = (String) requestJSON.get(REQUEST_ASSIGNED_VOLUNTEER);
+                String selectedShelter = (String) requestJSON.get(REQUEST_SELECTED_SHELTER);
+                if (selectedShelter != null && !selectedShelter.isEmpty()) {
+                    requests.get(requests.size() - 1).setSelectedShelterID(UUID.fromString(selectedShelter));
+                }
                 if (assignedVolunteer != null && !assignedVolunteer.isEmpty()) {
                     requests.get(requests.size() - 1).setAssignedVolunteerID(UUID.fromString(assignedVolunteer));
                 }
@@ -178,6 +182,11 @@ public class DataLoader extends AppConstants {
                 boolean hasMedicalStaff = Boolean.TRUE.equals(shelterJSON.get(SHELTER_MEDICAL_STAFF));
                 
                 shelters.add(new Shelter(name, shelterID, location, currentOccupancy, capacity, petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff));
+                Number petCapacity = (Number) shelterJSON.get("petCapacity");
+                Number petOccupancy = (Number) shelterJSON.get("currentPetOccupancy");
+                shelters.get(shelters.size() - 1).setPetSpace(
+                    petCapacity == null ? 0 : petCapacity.intValue(),
+                    petOccupancy == null ? 0 : petOccupancy.intValue());
                         
             }
 

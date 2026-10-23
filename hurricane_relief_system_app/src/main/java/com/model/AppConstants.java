@@ -66,6 +66,7 @@ public abstract class AppConstants {
     public static final String REQUEST_PETS = "pets";
     public static final String REQUEST_CHILDREN = "children";
     public static final String REQUEST_ASSIGNED_VOLUNTEER = "assignedVolunteerID";
+    public static final String REQUEST_SELECTED_SHELTER = "selectedShelterID";
 
     public static final String REQUEST_HAZARD_TYPE = "hazardType";
     public static final String REQUEST_REPORT_TIME = "reportTime";

@@ -18,6 +18,15 @@ public class HelpRequest {
     private Location location;
     private String photo;
     private UUID assignedVolunteerID;
+    private UUID selectedShelterID;
+
+    public UUID getSelectedShelterID() {
+        return selectedShelterID;
+    }
+
+    public void setSelectedShelterID(UUID selectedShelterID) {
+        this.selectedShelterID = selectedShelterID;
+    }
 
     /**
      * Constructor for the HelpRequest class.

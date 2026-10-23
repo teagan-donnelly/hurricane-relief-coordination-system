@@ -188,6 +188,8 @@ public class DataWriter extends AppConstants {
         obj.put(REQUETS_PHOTO, request.getPhoto());
         obj.put(REQUEST_ASSIGNED_VOLUNTEER, request.getAssignedVolunteerID() != null
                 ? request.getAssignedVolunteerID().toString() : "");
+        obj.put(REQUEST_SELECTED_SHELTER, request.getSelectedShelterID() != null
+                ? request.getSelectedShelterID().toString() : "");
 
         if (request instanceof PersonalRequest) {
             PersonalRequest pr = (PersonalRequest) request;

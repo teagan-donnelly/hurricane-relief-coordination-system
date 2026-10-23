@@ -49,6 +49,12 @@ public class Driver {
             "Rising floodwater surrounds the home; the family cannot safely use their car.",
             1, 1);
 
+        for (HelpRequest saved : DataLoader.getRequests()) {
+            if (saved.getRequestID().equals(requestID) && saved instanceof PersonalRequest) {
+                request = (PersonalRequest) saved;
+            }
+        }
+
         if (DataWriter.saveRequest(request)) {
             System.out.println("Michael Carter's account and relief request were saved.");
             System.out.println("Location: 123 Palmetto Lane, Charleston, SC 29401");
@@ -72,6 +78,13 @@ public class Driver {
         }
 
         System.out.println("\nRosa Delgado logged in.");
+        if (request.getAssignedVolunteerID() != null ||
+            request.getRequestStatus() == RequestStatus.COMPLETED ||
+            request.getRequestStatus() == RequestStatus.CANCELED) {
+            showRequestDetails(request);
+            findShelterAndAssign(rosa, request);
+            return;
+        }
         ArrayList<HelpRequest> requests = createScenarioRequests(request);
         if (requests == null) {
             return;
@@ -82,6 +95,13 @@ public class Driver {
     }
 
     public static Volunteer registerRosa() {
+        UUID rosaID = UUID.fromString("c6f2e935-8a04-4157-9e39-35adb3645303");
+        for (Volunteer saved : DataLoader.getVolunteers()) {
+            if (saved.getUserId().equals(rosaID)) {
+                System.out.println("Loaded Rosa Delgado's saved volunteer account.");
+                return saved;
+            }
+        }
         Location rosaHome = new Location(32.7843, -79.9389,
             "58 Rutledge Avenue", 0, "Charleston", "SC", "29401");
 
@@ -238,6 +258,22 @@ public class Driver {
 
     public static void findShelterAndAssign(Volunteer rosa, PersonalRequest request) {
         ShelterManager shelterManager = new ShelterManager(DataLoader.getShelters());
+        if (request.getAssignedVolunteerID() != null) {
+            Shelter savedShelter = shelterManager.findShelter(request.getSelectedShelterID());
+            System.out.println("Saved request status: " + request.getRequestStatus());
+            System.out.println("Assigned volunteer ID: " + request.getAssignedVolunteerID());
+            if (savedShelter != null) {
+                System.out.println("Saved shelter: " + savedShelter.getName() + ", " +
+                    savedShelter.getLocation().getStreetAddress());
+            }
+            return;
+        }
+        if (request.getRequestStatus() == RequestStatus.COMPLETED ||
+            request.getRequestStatus() == RequestStatus.CANCELED ||
+            request.getRequestStatus() == RequestStatus.DENIED || rosa.isDispatched()) {
+            System.out.println("This request or volunteer is not available for assignment.");
+            return;
+        }
         System.out.println("\nRosa searches " + shelterManager.getShelters().size() +
             " shelters for the Carter family (" + request.getHouseholdSize() + " people, " +
             request.getPets() + " dog, needs medical staff):");
@@ -248,16 +284,33 @@ public class Driver {
                 (problem == null ? "suitable" : problem));
         }
 
-        Shelter shelter = shelterManager.findClosestSuitableShelter(request, true);
+        Shelter shelter;
+        try {
+            shelter = shelterManager.findClosestSuitableShelter(request, true);
+        } catch (java.io.IOException e) {
+            System.out.println("Shelter selection stopped: " + e.getMessage());
+            System.out.println("No assignment was made. Check MAP_API_KEY and try again.");
+            return;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Shelter selection was interrupted. No assignment was made.");
+            return;
+        }
         if (shelter == null) {
             System.out.println("No shelter meets the family's needs.");
             return;
         }
         System.out.println("Closest suitable shelter: " + shelter.getName() + ", " +
             shelter.getLocation().getStreetAddress() + " (accepts dogs, has medical staff, " +
-            shelter.getAvailableSpace() + " spaces open)");
+            shelter.getAvailableSpace() + " human spaces and " + shelter.getAvailablePetSpace() +
+            " pet spaces open)");
 
         VolunteerManager.getInstance().assignVolunteer(rosa, request);
+        if (!rosa.getUserId().equals(request.getAssignedVolunteerID())) {
+            System.out.println("Assignment was not made.");
+            return;
+        }
+        request.setSelectedShelterID(shelter.getId());
 
         if (!DataWriter.saveRequest(request) || !DataWriter.saveVolunteer(rosa)) {
             System.out.println("Could not save the assignment.");
@@ -265,7 +318,6 @@ public class Driver {
         }
         System.out.println("Request status: " + request.getRequestStatus());
 
-        // Load the saved request the way another volunteer would see it
         for (HelpRequest saved : DataLoader.getRequests()) {
             if (saved.getRequestID().equals(request.getRequestID())) {
                 for (Volunteer volunteer : DataLoader.getVolunteers()) {

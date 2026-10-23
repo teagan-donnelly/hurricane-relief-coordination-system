@@ -19,7 +19,9 @@
       "Wheelchair accessible"
     ],
     "hasPower": true,
-    "status": "OPEN"
+    "status": "OPEN",
+    "petCapacity": 0,
+    "currentPetOccupancy": 0
   },
   {
     "name": "Buist Academy Shelter",
@@ -42,7 +44,9 @@
       "Backup generator"
     ],
     "hasPower": true,
-    "status": "OPEN"
+    "status": "OPEN",
+    "petCapacity": 20,
+    "currentPetOccupancy": 0
   },
   {
     "name": "James Simons Elementary Shelter",
@@ -64,7 +68,9 @@
       "Wheelchair accessible"
     ],
     "hasPower": true,
-    "status": "OPEN"
+    "status": "OPEN",
+    "petCapacity": 20,
+    "currentPetOccupancy": 0
   },
   {
     "name": "Burke High School Shelter",
@@ -88,7 +94,9 @@
       "Nurse station"
     ],
     "hasPower": true,
-    "status": "OPEN"
+    "status": "OPEN",
+    "petCapacity": 20,
+    "currentPetOccupancy": 0
   },
   {
     "name": "James Island Charter High School Shelter",
@@ -111,7 +119,9 @@
       "Pet area"
     ],
     "hasPower": true,
-    "status": "OPEN"
+    "status": "OPEN",
+    "petCapacity": 20,
+    "currentPetOccupancy": 0
   },
   {
     "name": "West Ashley High School Shelter",
@@ -134,7 +144,9 @@
       "Pet area"
     ],
     "hasPower": true,
-    "status": "OPEN"
+    "status": "OPEN",
+    "petCapacity": 20,
+    "currentPetOccupancy": 0
   },
   {
     "name": "School of the Arts Shelter",
@@ -156,7 +168,9 @@
       "Wheelchair accessible"
     ],
     "hasPower": true,
-    "status": "OPEN"
+    "status": "OPEN",
+    "petCapacity": 20,
+    "currentPetOccupancy": 0
   },
   {
     "name": "North Charleston High School Shelter",
@@ -178,7 +192,9 @@
       "Wheelchair accessible"
     ],
     "hasPower": true,
-    "status": "OPEN"
+    "status": "OPEN",
+    "petCapacity": 0,
+    "currentPetOccupancy": 0
   },
   {
     "name": "Wando High School Shelter",
@@ -201,7 +217,9 @@
       "Pet area"
     ],
     "hasPower": true,
-    "status": "CLOSED"
+    "status": "CLOSED",
+    "petCapacity": 20,
+    "currentPetOccupancy": 0
   },
   {
     "name": "Stall High School Shelter",
@@ -223,6 +241,8 @@
       "Wheelchair accessible"
     ],
     "hasPower": true,
-    "status": "FULL"
+    "status": "FULL",
+    "petCapacity": 20,
+    "currentPetOccupancy": 0
   }
 ]
