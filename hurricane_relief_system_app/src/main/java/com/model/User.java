@@ -41,6 +41,7 @@ public abstract class User {
 
         this(firstName, lastName, email, phone, userName, password);
 
+        this.userID = userID;
         this.location = location;
         this.birthDate = birthDate;
         this.notificationPreference = notificationPreference;
@@ -87,6 +88,10 @@ public abstract class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public Location getLocation() {
