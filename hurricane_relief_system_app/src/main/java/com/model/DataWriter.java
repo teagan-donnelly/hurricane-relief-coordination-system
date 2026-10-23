@@ -1,17 +1,50 @@
 package com.model;
 
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 /**
  * @author Nicolas Gauvin
  * Class responsible for writing system data out to JSON files.
  */
 public class DataWriter extends AppConstants {
+
+    public static boolean saveRequester(AidRequester requester) {
+        return saveRecord(REQUESTER_JSON, getRequesterJSON(requester), USER_ID);
+    }
+
+    public static boolean saveRequest(HelpRequest request) {
+        return saveRecord(REQUEST_JSON, getRequestJSON(request), REQUEST_ID);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static boolean saveRecord(String filename, JSONObject record, String idKey) {
+        JSONArray records;
+
+        try (FileReader reader = new FileReader(filename)) {
+            records = (JSONArray) new JSONParser().parse(reader);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        for (int i = 0; i < records.size(); i++) {
+            JSONObject savedRecord = (JSONObject) records.get(i);
+            if (record.get(idKey).equals(savedRecord.get(idKey))) {
+                records.set(i, record);
+                return writeToFile(filename, records);
+            }
+        }
+
+        records.add(record);
+        return writeToFile(filename, records);
+    }
 
     /**
      * Saves all users (AidCoordinators, AidRequesters, Volunteers) to their respective JSON files.

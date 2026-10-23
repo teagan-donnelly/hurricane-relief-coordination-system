@@ -41,6 +41,7 @@ public abstract class User {
 
         this(firstName, lastName, email, phone, userName, password);
 
+        this.userID = userID;
         this.location = location;
         this.birthDate = birthDate;
         this.notificationPreference = notificationPreference;
