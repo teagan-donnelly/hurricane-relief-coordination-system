@@ -226,4 +226,8 @@ public class DataWriter extends AppConstants {
             return false;
         }
     }
+
+    public static boolean saveVolunteer(Volunteer volunteer) {
+        return saveRecord(VOLUNTEER_JSON, getVolunteerJSON(volunteer), USER_ID);
+    }
 }

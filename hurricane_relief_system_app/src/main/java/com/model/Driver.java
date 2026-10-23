@@ -56,5 +56,26 @@ public class Driver {
         } else {
             System.out.println("Account saved, but the relief request could not be saved.");
         }
+
+        registerRosa();
+
+
+    }
+
+
+    public static void registerRosa() {
+        Location rosaHome = new Location(32.7843, -79.9389,
+            "58 Rutledge Avenue", 0, "Charleston", "SC", "29401");
+
+        ArrayList<String> emergencyContacts = new ArrayList<>();
+        emergencyContacts.add("Luis Delgado: 843-555-0172");
+
+        ArrayList<String> skills = new ArrayList<>();
+        skills.add("Transportation");
+
+
+
+
     }
 }
+
