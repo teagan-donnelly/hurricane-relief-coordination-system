@@ -78,6 +78,7 @@ public class Driver {
         }
         showRecommendedRequests(rosa, requests);
         showRequestDetails(request);
+        findShelterAndAssign(rosa, request);
     }
 
     public static Volunteer registerRosa() {
@@ -233,6 +234,48 @@ public class Driver {
         System.out.println("Email: " + request.getUser().getEmail());
         System.out.println(request.getComment());
         System.out.println("Status: " + request.getRequestStatus());
+    }
+
+    public static void findShelterAndAssign(Volunteer rosa, PersonalRequest request) {
+        ShelterManager shelterManager = new ShelterManager(DataLoader.getShelters());
+        System.out.println("\nRosa searches " + shelterManager.getShelters().size() +
+            " shelters for the Carter family (" + request.getHouseholdSize() + " people, " +
+            request.getPets() + " dog, needs medical staff):");
+
+        for (Shelter shelter : shelterManager.getShelters()) {
+            String problem = shelterManager.getProblem(shelter, request, true);
+            System.out.println("  " + shelter.getName() + ": " +
+                (problem == null ? "suitable" : problem));
+        }
+
+        Shelter shelter = shelterManager.findClosestSuitableShelter(request, true);
+        if (shelter == null) {
+            System.out.println("No shelter meets the family's needs.");
+            return;
+        }
+        System.out.println("Closest suitable shelter: " + shelter.getName() + ", " +
+            shelter.getLocation().getStreetAddress() + " (accepts dogs, has medical staff, " +
+            shelter.getAvailableSpace() + " spaces open)");
+
+        VolunteerManager.getInstance().assignVolunteer(rosa, request);
+
+        if (!DataWriter.saveRequest(request) || !DataWriter.saveVolunteer(rosa)) {
+            System.out.println("Could not save the assignment.");
+            return;
+        }
+        System.out.println("Request status: " + request.getRequestStatus());
+
+        // Load the saved request the way another volunteer would see it
+        for (HelpRequest saved : DataLoader.getRequests()) {
+            if (saved.getRequestID().equals(request.getRequestID())) {
+                for (Volunteer volunteer : DataLoader.getVolunteers()) {
+                    if (volunteer.getUserId().equals(saved.getAssignedVolunteerID())) {
+                        System.out.println("Other volunteers see: " + saved.getRequestStatus() +
+                            ", handled by " + volunteer.getFirstName() + " " + volunteer.getLastName());
+                    }
+                }
+            }
+        }
     }
 }
 

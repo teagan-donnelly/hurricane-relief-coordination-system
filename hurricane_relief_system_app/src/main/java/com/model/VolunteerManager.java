@@ -79,6 +79,7 @@ public class VolunteerManager {
 
         volunteer.setDispatched(true);
         request.setRequestStatus(RequestStatus.ASSIGNED);
+        request.setAssignedVolunteerID(volunteer.getUserId());
         System.out.println("Volunteer " + volunteer.getFirstName() + " was assigned to the request.");
     }
 

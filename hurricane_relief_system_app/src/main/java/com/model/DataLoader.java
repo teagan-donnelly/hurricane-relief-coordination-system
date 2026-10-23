@@ -83,8 +83,8 @@ public class DataLoader extends AppConstants {
                     case PERSONAL:
                         int householdSize = ((Number) requestJSON.get(REQUEST_HOUSEHOLD_SIZE)).intValue();
                         String accessInstructions = (String) requestJSON.get(REQUEST_ACCESS_INTRUCTIONS);
-                        int pets = ((Number) requestJSON.get(REQUEST_PETS)).intValue();
-                        int children = ((Number) requestJSON.get(REQUEST_CHILDREN)).intValue();
+                        int pets = requestJSON.get(REQUEST_PETS) != null ? ((Number) requestJSON.get(REQUEST_PETS)).intValue() : 0;
+                        int children = requestJSON.get(REQUEST_CHILDREN) != null ? ((Number) requestJSON.get(REQUEST_CHILDREN)).intValue() : 0;
 
                         requests.add(new PersonalRequest(requestID, requestType, user, comment, assistanceType, urgency, requestStatus, location, photo, householdSize, accessInstructions, pets, children));
                         break;
@@ -99,6 +99,11 @@ public class DataLoader extends AppConstants {
                     default:
                         requests.add(new HelpRequest(requestID, requestType, user, comment, assistanceType, urgency, requestStatus, location, photo));
                         break;
+                }
+
+                String assignedVolunteer = (String) requestJSON.get(REQUEST_ASSIGNED_VOLUNTEER);
+                if (assignedVolunteer != null && !assignedVolunteer.isEmpty()) {
+                    requests.get(requests.size() - 1).setAssignedVolunteerID(UUID.fromString(assignedVolunteer));
                 }
             }
 
@@ -170,8 +175,9 @@ public class DataLoader extends AppConstants {
                 ArrayList<String> accessibilityInfo = getJSONList(shelterJSON, SHELTER_ACCESSIBILITY_INFO);
                 boolean hasPower = (Boolean) shelterJSON.get(SHELTER_HAS_POWER);
                 ShelterStatus status = ShelterStatus.valueOf(((String) shelterJSON.get(SHELTER_STATUS)).toUpperCase());
+                boolean hasMedicalStaff = Boolean.TRUE.equals(shelterJSON.get(SHELTER_MEDICAL_STAFF));
                 
-                shelters.add(new Shelter(name, shelterID, location, currentOccupancy, capacity, petFriendly, accessibilityInfo, hasPower, status));
+                shelters.add(new Shelter(name, shelterID, location, currentOccupancy, capacity, petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff));
                         
             }
 

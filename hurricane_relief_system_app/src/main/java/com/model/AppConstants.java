@@ -65,6 +65,7 @@ public abstract class AppConstants {
     public static final String REQUEST_ACCESS_INTRUCTIONS = "accessInstructions";
     public static final String REQUEST_PETS = "pets";
     public static final String REQUEST_CHILDREN = "children";
+    public static final String REQUEST_ASSIGNED_VOLUNTEER = "assignedVolunteerID";
 
     public static final String REQUEST_HAZARD_TYPE = "hazardType";
     public static final String REQUEST_REPORT_TIME = "reportTime";
@@ -89,5 +90,6 @@ public abstract class AppConstants {
     public static final String SHELTER_ACCESSIBILITY_INFO = "accessibilityInfo";
     public static final String SHELTER_HAS_POWER = "hasPower";
     public static final String SHELTER_STATUS = "status";
+    public static final String SHELTER_MEDICAL_STAFF = "hasMedicalStaff";
     
 }

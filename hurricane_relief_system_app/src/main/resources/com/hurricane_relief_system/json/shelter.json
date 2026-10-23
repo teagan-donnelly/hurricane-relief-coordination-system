@@ -1,44 +1,228 @@
 [
-    {
-        "name": "Helping hands",
-        "id": "f95ca0de-005d-4258-a5ba-ad82f2fc78ca",
-        "location": {
-            "latitude": "106.32",
-            "longitude": "45.89",
-            "streetAddress": "1234 somthington rd",
-            "city": "Riverdale",
-            "state": "sc",
-            "zipcode": "29229" 
-        },
-        "currentOccupancy": "32",
-        "capacity": "50",
-        "petFriendly": "true",
-        "accessibilityInfo": [
-            "handicap accessible",
-            "able to serve vegitarian diet freindly meals"
-        ],
-        "hasPower": "true",
-        "status:": "OPEN"
+  {
+    "name": "Memminger Elementary Shelter",
+    "id": "49640a3c-5c92-57d6-8987-8b315683bfa5",
+    "location": {
+      "latitude": 32.7797,
+      "longitude": -79.937,
+      "streetAddress": "20 Beaufain Street",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29401"
     },
-    {
-        "name": "trying times",
-        "id": "40928a02-c346-4627-98a7-6a414c76f2be",
-        "location": {
-            "latitude": "156.48",
-            "longitude": "20.15",
-            "streetAddress": "1589 sumsville dr",
-            "city": "oakhurst",
-            "state": "sc",
-            "zipcode": "29235" 
-        },
-        "currentOccupancy": "5",
-        "capacity": "20",
-        "petFriendly": "false",
-        "accessibilityInfo": [
-            "handicap accessible"
-        ],
-        "hasPower": "true",
-        "status:": "OPEN"
-    }
-
+    "currentOccupancy": 40,
+    "capacity": 120,
+    "petFriendly": false,
+    "hasMedicalStaff": true,
+    "accessibilityInfo": [
+      "Wheelchair accessible"
+    ],
+    "hasPower": true,
+    "status": "OPEN"
+  },
+  {
+    "name": "Buist Academy Shelter",
+    "id": "7900c7bb-85cc-541a-8ed0-86fdd109d887",
+    "location": {
+      "latitude": 32.7837,
+      "longitude": -79.9358,
+      "streetAddress": "103 Calhoun Street",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29401"
+    },
+    "currentOccupancy": 149,
+    "capacity": 150,
+    "petFriendly": true,
+    "hasMedicalStaff": true,
+    "accessibilityInfo": [
+      "Wheelchair accessible",
+      "Backup generator"
+    ],
+    "hasPower": true,
+    "status": "OPEN"
+  },
+  {
+    "name": "James Simons Elementary Shelter",
+    "id": "141d27bf-9d6b-580a-aa8f-ba010687f058",
+    "location": {
+      "latitude": 32.7993,
+      "longitude": -79.9468,
+      "streetAddress": "741 King Street",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29403"
+    },
+    "currentOccupancy": 60,
+    "capacity": 140,
+    "petFriendly": true,
+    "hasMedicalStaff": false,
+    "accessibilityInfo": [
+      "Wheelchair accessible"
+    ],
+    "hasPower": true,
+    "status": "OPEN"
+  },
+  {
+    "name": "Burke High School Shelter",
+    "id": "929ccc88-b6fe-5e18-ad08-c01631aedddd",
+    "location": {
+      "latitude": 32.792,
+      "longitude": -79.9512,
+      "streetAddress": "244 President Street",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29403"
+    },
+    "currentOccupancy": 85,
+    "capacity": 220,
+    "petFriendly": true,
+    "hasMedicalStaff": true,
+    "accessibilityInfo": [
+      "Wheelchair accessible",
+      "Pet area",
+      "Nurse station"
+    ],
+    "hasPower": true,
+    "status": "OPEN"
+  },
+  {
+    "name": "James Island Charter High School Shelter",
+    "id": "0b55dee5-3ed0-59d3-8465-edaf2b81e029",
+    "location": {
+      "latitude": 32.736,
+      "longitude": -79.91,
+      "streetAddress": "1000 Fort Johnson Road",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29412"
+    },
+    "currentOccupancy": 120,
+    "capacity": 300,
+    "petFriendly": true,
+    "hasMedicalStaff": true,
+    "accessibilityInfo": [
+      "Wheelchair accessible",
+      "Pet area"
+    ],
+    "hasPower": true,
+    "status": "OPEN"
+  },
+  {
+    "name": "West Ashley High School Shelter",
+    "id": "34a7647a-d626-579b-8fc1-2975b3fd4e51",
+    "location": {
+      "latitude": 32.818,
+      "longitude": -80.07,
+      "streetAddress": "4060 West Wildcat Boulevard",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29414"
+    },
+    "currentOccupancy": 150,
+    "capacity": 350,
+    "petFriendly": true,
+    "hasMedicalStaff": true,
+    "accessibilityInfo": [
+      "Wheelchair accessible",
+      "Pet area"
+    ],
+    "hasPower": true,
+    "status": "OPEN"
+  },
+  {
+    "name": "School of the Arts Shelter",
+    "id": "7d7cd638-5972-5ef5-a46c-51e470507f07",
+    "location": {
+      "latitude": 32.877,
+      "longitude": -79.994,
+      "streetAddress": "5109 West Enterprise Street",
+      "apartmentNum": 0,
+      "city": "North Charleston",
+      "state": "SC",
+      "zipcode": "29405"
+    },
+    "currentOccupancy": 90,
+    "capacity": 250,
+    "petFriendly": true,
+    "hasMedicalStaff": true,
+    "accessibilityInfo": [
+      "Wheelchair accessible"
+    ],
+    "hasPower": true,
+    "status": "OPEN"
+  },
+  {
+    "name": "North Charleston High School Shelter",
+    "id": "b3fd5902-f90b-5d93-9d48-8f036535e96a",
+    "location": {
+      "latitude": 32.8836,
+      "longitude": -79.98,
+      "streetAddress": "1087 East Montague Avenue",
+      "apartmentNum": 0,
+      "city": "North Charleston",
+      "state": "SC",
+      "zipcode": "29405"
+    },
+    "currentOccupancy": 200,
+    "capacity": 280,
+    "petFriendly": false,
+    "hasMedicalStaff": true,
+    "accessibilityInfo": [
+      "Wheelchair accessible"
+    ],
+    "hasPower": true,
+    "status": "OPEN"
+  },
+  {
+    "name": "Wando High School Shelter",
+    "id": "da592a1c-b6a8-5288-84c9-b9856d7bde2d",
+    "location": {
+      "latitude": 32.856,
+      "longitude": -79.824,
+      "streetAddress": "1000 Warrior Way",
+      "apartmentNum": 0,
+      "city": "Mount Pleasant",
+      "state": "SC",
+      "zipcode": "29466"
+    },
+    "currentOccupancy": 0,
+    "capacity": 400,
+    "petFriendly": true,
+    "hasMedicalStaff": true,
+    "accessibilityInfo": [
+      "Wheelchair accessible",
+      "Pet area"
+    ],
+    "hasPower": true,
+    "status": "CLOSED"
+  },
+  {
+    "name": "Stall High School Shelter",
+    "id": "c1bd41d4-1817-5dbc-8b12-db11e30bed5a",
+    "location": {
+      "latitude": 32.922,
+      "longitude": -80.048,
+      "streetAddress": "3625 Ashley Phosphate Road",
+      "apartmentNum": 0,
+      "city": "North Charleston",
+      "state": "SC",
+      "zipcode": "29418"
+    },
+    "currentOccupancy": 300,
+    "capacity": 300,
+    "petFriendly": true,
+    "hasMedicalStaff": true,
+    "accessibilityInfo": [
+      "Wheelchair accessible"
+    ],
+    "hasPower": true,
+    "status": "FULL"
+  }
 ]

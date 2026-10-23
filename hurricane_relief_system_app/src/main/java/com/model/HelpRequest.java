@@ -17,6 +17,7 @@ public class HelpRequest {
     private RequestStatus requestStatus;
     private Location location;
     private String photo;
+    private UUID assignedVolunteerID;
 
     /**
      * Constructor for the HelpRequest class.
@@ -203,5 +204,21 @@ public class HelpRequest {
      */
     public void setUrgency(Urgency urgency) {
         this.urgency = urgency;
+    }
+
+    /**
+     * Gets the ID of the volunteer handling this request.
+     * @return the volunteer's ID, or null if no one is assigned
+     */
+    public UUID getAssignedVolunteerID() {
+        return assignedVolunteerID;
+    }
+
+    /**
+     * Sets the volunteer handling this request.
+     * @param assignedVolunteerID the volunteer's ID
+     */
+    public void setAssignedVolunteerID(UUID assignedVolunteerID) {
+        this.assignedVolunteerID = assignedVolunteerID;
     }
 }
