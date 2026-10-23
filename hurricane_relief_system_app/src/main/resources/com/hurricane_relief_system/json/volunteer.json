@@ -1,16 +1,38 @@
 [
   {
+    "userID": "42d971a6-f83b-4c15-9e60-7a203bd584fc",
+    "firstName": "Natalie",
+    "lastName": "Bennett",
+    "email": "natalie.bennett@example.com",
+    "phoneNumber": "843-555-0113",
+    "location": {
+      "latitude": 32.7335,
+      "longitude": -79.9726,
+      "streetAddress": "614 Pinewood Drive",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29412"
+    },
+    "birthDate": "1992-02-17",
+    "username": "nbennett92",
+    "password": "volunteer_password_301",
+    "notificationPreference": "SMS",
+    "emergencyContacts": [
+      "Eric Bennett - 555-0103",
+      "Diana Foster - 555-0146"
+    ],
     "availability": true,
     "travelDistance": 25.0,
     "skills": [
-      "First Aid", 
-      "Emergency Response", 
+      "First Aid",
+      "Emergency Response",
       "Search and Rescue"
     ],
     "credentials": [
       {
-      "type": "First Aid Certification",
-      "status": "Valid"
+        "type": "FIRST_AID_CERTIFIED",
+        "status": "Valid"
       }
     ],
     "supplies": [
@@ -19,65 +41,120 @@
       "Bottled Water",
       "Emergency Radio"
     ],
-    "isVerified": true,
-    "isDispatched": false,
+    "isVerifed": true,
+    "isDispached": false,
     "volunteerHours": 12.5
   },
   {
+    "userID": "b0317ac9-6d82-45fe-a410-9c57e2b3680d",
+    "firstName": "Omar",
+    "lastName": "Hassan",
+    "email": "omar.hassan@example.com",
+    "phoneNumber": "843-555-0114",
+    "location": {
+      "latitude": 32.8651,
+      "longitude": -79.9824,
+      "streetAddress": "287 Willow Court",
+      "apartmentNum": 0,
+      "city": "North Charleston",
+      "state": "SC",
+      "zipcode": "29405"
+    },
+    "birthDate": "1984-11-06",
+    "username": "ohassan84",
+    "password": "volunteer_password_302",
+    "notificationPreference": "EMAIL",
+    "emergencyContacts": [
+      "Layla Hassan - 555-0112"
+    ],
     "availability": true,
     "travelDistance": 15.0,
     "skills": [
-      "Food Distribution", 
+      "Food Distribution",
       "Shelter Assistance"
     ],
-    "credentials": [
-      {
-      "type": "Food Safety Certification",
-      "status": "Valid"
-      }
-    ],
+    "credentials": [],
     "supplies": [
       "Bottled Water",
       "Non-Perishable Food",
       "Blankets"
     ],
-    "isVerified": true,
-    "isDispatched": true,
+    "isVerifed": true,
+    "isDispached": true,
     "volunteerHours": 28.0
   },
   {
+    "userID": "7e56c218-0a93-4d67-b825-f1396c04a7de",
+    "firstName": "Victor",
+    "lastName": "Ramirez",
+    "email": "victor.ramirez@example.com",
+    "phoneNumber": "843-555-0115",
+    "location": {
+      "latitude": 32.9957,
+      "longitude": -80.0289,
+      "streetAddress": "839 Maple Ridge Road",
+      "apartmentNum": 0,
+      "city": "Goose Creek",
+      "state": "SC",
+      "zipcode": "29445"
+    },
+    "birthDate": "1975-05-24",
+    "username": "vramirez75",
+    "password": "volunteer_password_303",
+    "notificationPreference": "SMS",
+    "emergencyContacts": [
+      "Sofia Ramirez - 555-0156",
+      "Luis Ortega - 555-0181"
+    ],
     "availability": false,
     "travelDistance": 40.0,
     "skills": [
-      "Electrical Repair", 
+      "Electrical Repair",
       "Generator Maintenance"
     ],
-    "credentials": [
-      {
-      "type": "Licensed Electrician",
-      "status": "Valid"
-      }
-    ],
+    "credentials": [],
     "supplies": [
       "Tool Kit",
       "Portable Generator",
       "Extension Cords"
     ],
-    "isVerified": true,
-    "isDispatched": false,
+    "isVerifed": true,
+    "isDispached": false,
     "volunteerHours": 35.5
   },
   {
+    "userID": "d9640bf3-27e5-48a1-93c6-50a7e182bd49",
+    "firstName": "Hannah",
+    "lastName": "Sullivan",
+    "email": "hannah.sullivan@example.com",
+    "phoneNumber": "843-555-0116",
+    "location": {
+      "latitude": 32.9868,
+      "longitude": -80.1823,
+      "streetAddress": "392 Azalea Terrace",
+      "apartmentNum": 0,
+      "city": "Summerville",
+      "state": "SC",
+      "zipcode": "29485"
+    },
+    "birthDate": "1998-07-13",
+    "username": "hsullivan98",
+    "password": "volunteer_password_304",
+    "notificationPreference": "EMAIL",
+    "emergencyContacts": [
+      "Claire Sullivan - 555-0121",
+      "Peter Walsh - 555-0169"
+    ],
     "availability": true,
     "travelDistance": 10.0,
     "skills": [
-      "Childcare", 
+      "Childcare",
       "Elderly Assistance"
     ],
     "credentials": [
       {
-      "type": "CPR Certification",
-      "status": "Valid"
+        "type": "CPR_CERTIFIED",
+        "status": "Valid"
       }
     ],
     "supplies": [
@@ -85,30 +162,47 @@
       "Bottled Water",
       "Hygiene Kits"
     ],
-    "isVerified": true,
-    "isDispatched": false,
+    "isVerifed": true,
+    "isDispached": false,
     "volunteerHours": 8.0
   },
   {
+    "userID": "5c82a703-e149-46bd-8f20-a674d93b015e",
+    "firstName": "Derek",
+    "lastName": "Washington",
+    "email": "derek.washington@example.com",
+    "phoneNumber": "843-555-0118",
+    "location": {
+      "latitude": 33.1904,
+      "longitude": -80.0217,
+      "streetAddress": "751 Cedar Bluff Lane",
+      "apartmentNum": 0,
+      "city": "Moncks Corner",
+      "state": "SC",
+      "zipcode": "29461"
+    },
+    "birthDate": "1989-09-30",
+    "username": "dwashington89",
+    "password": "volunteer_password_305",
+    "notificationPreference": "SMS",
+    "emergencyContacts": [
+      "Denise Washington - 555-0134"
+    ],
     "availability": false,
     "travelDistance": 50.0,
     "skills": [
-      "Construction", 
+      "Construction",
       "Debris Removal"
     ],
-    "credentials": [{
-      "type": "Construction Safety Certification",
-      "status": "Valid"
-      }
-    ],
+    "credentials": [],
     "supplies": [
       "Work Gloves",
       "Safety Helmet",
       "Safety Goggles",
       "Hand Tools"
     ],
-    "isVerified": false,
-    "isDispatched": false,
+    "isVerifed": false,
+    "isDispached": false,
     "volunteerHours": 5.5
   }
 ]

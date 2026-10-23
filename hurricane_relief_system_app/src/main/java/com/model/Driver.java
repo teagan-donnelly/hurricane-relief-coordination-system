@@ -58,10 +58,7 @@ public class Driver {
         }
 
         registerRosa();
-
-
     }
-
 
     public static void registerRosa() {
         Location rosaHome = new Location(32.7843, -79.9389,
@@ -73,9 +70,23 @@ public class Driver {
         ArrayList<String> skills = new ArrayList<>();
         skills.add("Transportation");
 
+        ArrayList<String> supplies = new ArrayList<>();
+        supplies.add("Ford F-350 truck");
 
+        Volunteer rosa = new Volunteer("Rosa", "Delgado",
+            UUID.fromString("c6f2e935-8a04-4157-9e39-35adb3645303"),
+            "rosa.delgado@example.com", "843-555-0171", rosaHome,
+            LocalDate.of(1984, 6, 3), "rosadelgado", "RosaDemo123",
+            NotificationType.SMS, emergencyContacts,
+            true, 25.0, skills, new ArrayList<Credential>(), supplies,
+            true, false, 0.0);
 
-
+        if (DataWriter.saveVolunteer(rosa)) {
+            System.out.println("Rosa Delgado was registered as a volunteer.");
+            System.out.println("Specialty: Transportation (Ford F-350 truck)");
+        } else {
+            System.out.println("Could not save Rosa Delgado's volunteer account.");
+        }
     }
 }
 
