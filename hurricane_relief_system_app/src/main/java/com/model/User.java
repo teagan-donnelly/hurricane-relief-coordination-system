@@ -89,6 +89,10 @@ public abstract class User {
         return email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
     public Location getLocation() {
         return location;
     }

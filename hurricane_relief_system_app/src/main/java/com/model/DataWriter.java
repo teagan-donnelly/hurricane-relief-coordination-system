@@ -68,6 +68,7 @@ public class DataWriter extends AppConstants {
         obj.put(USER_FIRST_NAME, user.getFirstName());
         obj.put(USER_LAST_NAME, user.getLastName());
         obj.put(USER_EMAIL, user.getEmail());
+        obj.put(USER_PHONE, user.getPhone());
         obj.put(REQUEST_LOCATION, getLocationJSON(user.getLocation()));
         obj.put(USER_BIRTHDATE, user.getBirthDate() != null ? user.getBirthDate().toString() : "");
         obj.put(USER_USERNAME, user.getUserName());
@@ -157,6 +158,8 @@ public class DataWriter extends AppConstants {
             PersonalRequest pr = (PersonalRequest) request;
             obj.put(REQUEST_HOUSEHOLD_SIZE, pr.getHouseholdSize());
             obj.put(REQUEST_ACCESS_INTRUCTIONS, pr.getAccessInstructions());
+            obj.put(REQUEST_PETS, pr.getPets());
+            obj.put(REQUEST_CHILDREN, pr.getChildren());
         } else if (request instanceof InfrustructureRequest) {
             InfrustructureRequest ir = (InfrustructureRequest) request;
             obj.put(REQUEST_HAZARD_TYPE, ir.getHazardType() != null ? ir.getHazardType().name() : "");
