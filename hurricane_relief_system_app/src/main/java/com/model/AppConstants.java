@@ -1,5 +1,10 @@
 package com.model;
 
+/**
+ * A class containing constants used throughout the application.
+ * @author APR
+ */
+
 public abstract class AppConstants {
     
     public static final String VOLUNTEER_JSON = "hurricane_relief_system_app\\src\\main\\resources\\com\\hurricane_relief_system\\json\\volunteer.json";
