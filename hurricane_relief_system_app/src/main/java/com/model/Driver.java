@@ -57,10 +57,30 @@ public class Driver {
             System.out.println("Account saved, but the relief request could not be saved.");
         }
 
-        registerRosa();
+        Volunteer rosa = registerRosa();
+        if (rosa == null) {
+            return;
+        }
+
+        ArrayList<User> users = new ArrayList<>();
+        users.add(rosa);
+        AccountManager accounts = new AccountManager(users);
+
+        if (!accounts.login("rosadelgado", "RosaDemo123")) {
+            System.out.println("Rosa could not log in.");
+            return;
+        }
+
+        System.out.println("\nRosa Delgado logged in.");
+        ArrayList<HelpRequest> requests = createScenarioRequests(request);
+        if (requests == null) {
+            return;
+        }
+        showRecommendedRequests(rosa, requests);
+        showRequestDetails(request);
     }
 
-    public static void registerRosa() {
+    public static Volunteer registerRosa() {
         Location rosaHome = new Location(32.7843, -79.9389,
             "58 Rutledge Avenue", 0, "Charleston", "SC", "29401");
 
@@ -84,9 +104,135 @@ public class Driver {
         if (DataWriter.saveVolunteer(rosa)) {
             System.out.println("Rosa Delgado was registered as a volunteer.");
             System.out.println("Specialty: Transportation (Ford F-350 truck)");
+            return rosa;
         } else {
             System.out.println("Could not save Rosa Delgado's volunteer account.");
+            return null;
         }
+    }
+
+    public static ArrayList<HelpRequest> createScenarioRequests(HelpRequest carterRequest) {
+        ArrayList<HelpRequest> requests = new ArrayList<>();
+        requests.add(carterRequest);
+
+        String[] firstNames = {"James", "Olivia", "Henry", "Ava", "Noah", "Mia"};
+        String[] lastNames = {"Wilson", "Brown", "Davis", "Green", "Hall", "King"};
+        String[] streets = {"100 Meeting Street", "200 King Street", "300 East Bay Street",
+                            "400 Savannah Highway", "500 Folly Road", "600 Sam Rittenberg Boulevard"};
+        double[] latitudes = {32.7770, 32.7820, 32.7890, 32.7950, 32.7500, 32.8200};
+        double[] longitudes = {-79.9310, -79.9340, -79.9250, -79.9800, -79.9800, -80.0200};
+        AssistanceType[] types = {AssistanceType.FOOD_SUPPLY, AssistanceType.SHELTER,
+            AssistanceType.MEDICAL_SUPPLIES, AssistanceType.TRANSPORT,
+            AssistanceType.TRANSPORT, AssistanceType.TRANSPORT};
+        String[] comments = {"Need food and bottled water.", "Need temporary shelter.",
+            "Need medical supplies delivered.", "Need transportation to a shelter.",
+            "Cannot use my car and need transportation.", "Need a ride to a shelter."};
+
+        for (int i = 0; i < firstNames.length; i++) {
+            Location location = new Location(latitudes[i], longitudes[i], streets[i],
+                0, "Charleston", "SC", "29401");
+            UUID userID = UUID.fromString("d7000000-0000-4000-8000-00000000000" + i);
+            UUID requestID = UUID.fromString("e8000000-0000-4000-8000-00000000000" + i);
+
+            AidRequester requester = new AidRequester(firstNames[i], lastNames[i], userID,
+                firstNames[i].toLowerCase() + "@example.com", "843-555-012" + i,
+                location, LocalDate.of(1990, 1, 1), firstNames[i].toLowerCase() + "demo",
+                "ScenarioDemo123", NotificationType.EMAIL, new ArrayList<String>(),
+                1, types[i], new ArrayList<String>());
+
+            PersonalRequest request = new PersonalRequest(requestID, RequestType.PERSONAL,
+                requester, comments[i], types[i], Urgency.HIGH_PRIORITY,
+                RequestStatus.AWAITING_ASSIGNMENT, location, "", 1, "", 0, 0);
+
+            if (!DataWriter.saveRequester(requester) || !DataWriter.saveRequest(request)) {
+                System.out.println("Could not save the other scenario requests.");
+                return null;
+            }
+            requests.add(request);
+        }
+
+        return requests;
+    }
+
+    public static boolean matchesSpecialty(Volunteer volunteer, HelpRequest request) {
+        if (request.getAssistanceType() == AssistanceType.TRANSPORT) {
+            for (String skill : volunteer.getSkills()) {
+                if ("Transportation".equalsIgnoreCase(skill)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static double getDistance(Location start, Location end) {
+        double latitude = Math.toRadians(end.getLatitude() - start.getLatitude());
+        double longitude = Math.toRadians(end.getLongitude() - start.getLongitude());
+        double value = Math.sin(latitude / 2) * Math.sin(latitude / 2) +
+            Math.cos(Math.toRadians(start.getLatitude())) *
+            Math.cos(Math.toRadians(end.getLatitude())) *
+            Math.sin(longitude / 2) * Math.sin(longitude / 2);
+        value = Math.max(0, Math.min(1, value));
+        return 6371 * 2 * Math.atan2(Math.sqrt(value), Math.sqrt(1 - value));
+    }
+
+    public static void showRecommendedRequests(Volunteer rosa, ArrayList<HelpRequest> requests) {
+        ArrayList<HelpRequest> openRequests = new ArrayList<>();
+        for (HelpRequest request : requests) {
+            if (request.getRequestStatus() == RequestStatus.PENDING_REVIEW ||
+                request.getRequestStatus() == RequestStatus.APPROVED ||
+                request.getRequestStatus() == RequestStatus.AWAITING_ASSIGNMENT) {
+                openRequests.add(request);
+            }
+        }
+
+        for (int i = 0; i < openRequests.size() - 1; i++) {
+            for (int j = 0; j < openRequests.size() - 1 - i; j++) {
+                HelpRequest first = openRequests.get(j);
+                HelpRequest second = openRequests.get(j + 1);
+                boolean firstMatches = matchesSpecialty(rosa, first);
+                boolean secondMatches = matchesSpecialty(rosa, second);
+                double firstDistance = getDistance(rosa.getLocation(), first.getLocation());
+                double secondDistance = getDistance(rosa.getLocation(), second.getLocation());
+
+                if ((!firstMatches && secondMatches) ||
+                    (firstMatches == secondMatches && firstDistance > secondDistance)) {
+                    openRequests.set(j, second);
+                    openRequests.set(j + 1, first);
+                }
+            }
+        }
+
+        System.out.println("\nOpen scenario requests: " + openRequests.size());
+        System.out.println("Sorted by transportation specialty, then straight-line distance.");
+
+        for (int i = 0; i < openRequests.size(); i++) {
+            HelpRequest request = openRequests.get(i);
+            double distance = getDistance(rosa.getLocation(), request.getLocation());
+            System.out.printf("%d. %s %s - %s - %.2f km away%n", i + 1,
+                request.getUser().getFirstName(), request.getUser().getLastName(),
+                request.getAssistanceType(), distance);
+
+            if (i == 0 && matchesSpecialty(rosa, request)) {
+                System.out.println("RECOMMENDED: Matches your transportation specialty " +
+                    "and is the closest request with that specialty.");
+            }
+        }
+    }
+
+    public static void showRequestDetails(PersonalRequest request) {
+        System.out.println("\nRosa opens the Carter family request:");
+        System.out.println("People needing transportation: " + request.getHouseholdSize());
+        System.out.println("Adults: " + (request.getHouseholdSize() - request.getChildren()));
+        System.out.println("Children: " + request.getChildren());
+        System.out.println("Pets: " + request.getPets() + " (Buddy, a dog)");
+        System.out.println("Pickup: " + request.getLocation().getStreetAddress() + ", " +
+            request.getLocation().getCity() + ", " + request.getLocation().getState() + " " +
+            request.getLocation().getZipcode());
+        System.out.println("Phone: " + request.getUser().getPhone());
+        System.out.println("Email: " + request.getUser().getEmail());
+        System.out.println(request.getComment());
+        System.out.println("Status: " + request.getRequestStatus());
     }
 }
 

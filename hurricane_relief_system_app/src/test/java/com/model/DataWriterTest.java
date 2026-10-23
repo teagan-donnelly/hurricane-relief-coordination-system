@@ -26,19 +26,18 @@ public class DataWriterTest {
         ArrayList<String> contacts = new ArrayList<String>();
         contacts.add("803-555-0199");
 
-        ArrayList<Volunteer> volunteerList = new ArrayList<Volunteer>();
-        VolunteerManager volunteerManager = new VolunteerManager(volunteerList);
+        VolunteerManager volunteerManager = null;
 
         ArrayList<User> testUsers = new ArrayList<User>();
 
         AidCoordinator testCoordinator = new AidCoordinator(
             "Alice", "Smith", UUID.randomUUID(), "alice@example.com",
-            mockLocation, LocalDate.of(1990, 5, 12), "asmith", "pass123",
+            "803-555-0101", "asmith", "pass123", mockLocation, LocalDate.of(1990, 5, 12),
             NotificationType.EMAIL, contacts, volunteerManager
         );
 
         AidRequester testRequester = new AidRequester(
-            "Bob", "Jones", UUID.randomUUID(), "bob@example.com",
+            "Bob", "Jones", UUID.randomUUID(), "bob@example.com", "803-555-0102",
             mockLocation, LocalDate.of(1985, 10, 20), "bjones", "pass456",
             NotificationType.SMS, contacts, 4, AssistanceType.FOOD_SUPPLY, new ArrayList<String>()
         );
@@ -55,7 +54,7 @@ public class DataWriterTest {
         PersonalRequest personalReq = new PersonalRequest(
             UUID.randomUUID(), RequestType.PERSONAL, testRequester, "Need fresh water",
             AssistanceType.FOOD_SUPPLY, Urgency.HIGH_PRIORITY, RequestStatus.PENDING_REVIEW, mockLocation,
-            "photo_water.jpg", 4, "Knock on side door"
+            "photo_water.jpg", 4, "Knock on side door", 0, 0
         );
 
         InfrustructureRequest infraReq = new InfrustructureRequest(
