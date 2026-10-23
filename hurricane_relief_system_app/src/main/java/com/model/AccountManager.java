@@ -24,23 +24,28 @@ public class AccountManager {
         int householdSize, AssistanceType assistanceType, ArrayList<String> pastRequests) {
 
         UUID userID = UUID.randomUUID();
-        User.makeAccount(type, firstName, lastName, userID, email, location, birthDate, 
+        User.makeAccount(type, firstName, lastName, userID, email, type.getPhone(), location, birthDate,
             availability, travelDistance, skills, credentials, supplies, isVerified, isDispached, volunteerHours,
             householdSize, assistanceType, pastRequests);
     }
 
     public void addUser(User user) {
-        users.add(user.getUserID(), user);
+        users.add(user);
     
     }
 
     public void deleteUser(User user) {
-        users.remove(user.getUserID());
+        users.remove(user);
 
     }
 
     public void updateUser(User user) {
-        users.put(users.getUserID(), user);
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserId().equals(user.getUserId())) {
+                users.set(i, user);
+                return;
+            }
+        }
 
     }
 

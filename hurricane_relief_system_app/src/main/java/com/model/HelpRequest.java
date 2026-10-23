@@ -177,14 +177,6 @@ public class HelpRequest {
      * Gets the location where help is needed for the request.
      * @return the location where help is needed
      */
-    public Urgency getUrgency() {
-        return urgency;
-    }
-
-    /**
-     * Gets the location where help is needed for the request.
-     * @return the location where help is needed
-     */
     public Location getLocation() {
         return location;
     }

@@ -24,8 +24,8 @@ public class HurricaneReliefApplication {
      */
 
     private HurricaneReliefApplication() {
-        requestManager = new RequestManager();   
-        volunteerManager = new VolunteerManager();
+        requestManager = RequestManager.getInstance();
+        volunteerManager = VolunteerManager.getInstance();
         shelterManager = new ShelterManager(DataLoader.getShelters());
         accountManager = new AccountManager(DataLoader.getAllUsers()); 
     }
@@ -58,7 +58,7 @@ public class HurricaneReliefApplication {
 
         HelpRequest helpRequest = new HelpRequest(requestID, requestType, user, comment, 
             assistanceType, urgency, requestStatus, location, photo);
-        RequestManager.addRequest(helpRequest);
+        requestManager.addRequest(helpRequest);
         
     }
 

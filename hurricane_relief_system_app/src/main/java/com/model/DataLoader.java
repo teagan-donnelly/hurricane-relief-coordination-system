@@ -201,7 +201,7 @@ public class DataLoader extends AppConstants {
                 /* */
 
                 coordinators.add(new AidCoordinator(data.firstName, data.lastName, data.id, data.email, data.phone, data.userName, data.password,
-                          data.location, data.birthDate, data.notificationPreference, data.emergencyContacts, data.notificationPreference, data.emergencyContacts));
+                          data.location, data.birthDate, data.notificationPreference, data.emergencyContacts, VolunteerManager.getInstance()));
             }
 
         } catch (Exception e) {

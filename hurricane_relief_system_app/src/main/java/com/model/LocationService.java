@@ -4,7 +4,7 @@ public class LocationService{
     private String API_KEY;
     
     public double[] getCoordinates(String addressText){
-        return new double[];
+        throw new UnsupportedOperationException("Use com.location.MapTools for location lookups.");
     }
 
 }

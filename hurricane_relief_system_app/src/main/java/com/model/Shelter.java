@@ -56,6 +56,14 @@ public class Shelter {
     }
 
     //getters
+    public UUID getId() {
+        return id;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
     public int getCapacity() {
         return capacity;
     }
