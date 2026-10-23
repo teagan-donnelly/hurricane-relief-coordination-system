@@ -2,6 +2,10 @@ package com.model;
 
 import java.util.UUID;
 
+/**
+ * Represents a help request made by a user in the hurricane relief system.
+ * @author APR & Teagan Donnelly
+ */
 public class HelpRequest {
 
     private UUID requestID;
@@ -14,6 +18,18 @@ public class HelpRequest {
     private Location location;
     private String photo;
 
+    /**
+     * Constructor for the HelpRequest class.
+     * @param requestID the unique identifier for the help request
+     * @param requestType the type of the help request
+     * @param user the user who submitted the request
+     * @param comment a comment describing the help needed
+     * @param assistanceType the type of assistance required
+     * @param urgency the urgency level of the request
+     * @param requestStatus the current status of the request
+     * @param location the location where help is needed
+     * @param photo an optional photo related to the request
+     */
     public HelpRequest(UUID requestID, RequestType requestType, User user, String comment, 
         AssistanceType assistanceType, Urgency urgency, RequestStatus requestStatus, 
         Location location, String photo) {
@@ -29,6 +45,15 @@ public class HelpRequest {
         this.photo = photo;
     }
 
+    /**
+     * Constructor for the HelpRequest class without requestType and photo parameters.
+     * @param requestID the unique identifier for the help request
+     * @param user the user who submitted the request
+     * @param assistanceType the type of assistance required
+     * @param urgency the urgency level of the request
+     * @param requestStatus the current status of the request
+     * @param location the location where help is needed
+     */
     public HelpRequest(UUID requestID, User user, AssistanceType assistanceType, Urgency urgency, RequestStatus requestStatus, Location location) {
         this.requestID = requestID; 
         this.user = user; 
@@ -47,6 +72,13 @@ public class HelpRequest {
         return urgency == Urgency.HIGH_PRIORITY || urgency == Urgency.URGENT_PRIORITY;
     }
 
+    /**
+     * Updates the details of the help request.
+     * @param comment a comment describing the help needed
+     * @param assistanceType the type of assistance required
+     * @param location the location where help is needed
+     * @param photo an optional photo related to the request
+     */
     public void updateRequest(String comment, AssistanceType assistanceType,
                             Location location, String photo) {
 
@@ -63,6 +95,9 @@ public class HelpRequest {
         this.photo = photo;
     }
 
+    /**
+     * Cancels the help request.
+     */
     public void cancelRequest() {
 
         if (requestStatus == RequestStatus.COMPLETED) {
@@ -74,50 +109,106 @@ public class HelpRequest {
         this.requestStatus = RequestStatus.CANCELED;
     }
 
+    /**
+     * Tracks the status of the help request.
+     * @return the current status of the request
+     */
     public RequestStatus trackRequestStatus() {
         return requestStatus;
     }
 
+    /**
+     * Gets the unique identifier of the help request.
+     * @return the unique identifier of the request
+     */
     public UUID getRequestID() {
         return requestID;
     }
 
+    /**
+     * Gets the status of the help request.
+     * @return the status of the request
+     */
     public RequestStatus getRequestStatus() {
         return requestStatus;
     }
 
-    public RequestType getRequestType() {
-        return requestType;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public AssistanceType getAssistanceType() {
-        return assistanceType;
-    }
-
+    /**
+     * Gets the urgency level of the help request.
+     * @return the urgency level of the request
+     */
     public Urgency getUrgency() {
         return urgency;
     }
 
+    /**
+     * Gets the type of the help request.
+     * @return the type of the help request
+     */
+    public RequestType getRequestType() {
+        return requestType;
+    }
+
+    /**
+     * Gets the user who submitted the help request.
+     * @return the user who submitted the request
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * Gets the comment describing the help needed for the request.
+     * @return the comment describing the help needed
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * Gets the location where help is needed for the request.
+     * @return the location where help is needed
+     */
+    public AssistanceType getAssistanceType() {
+        return assistanceType;
+    }
+
+    /**
+     * Gets the location where help is needed for the request.
+     * @return the location where help is needed
+     */
+    public Urgency getUrgency() {
+        return urgency;
+    }
+
+    /**
+     * Gets the location where help is needed for the request.
+     * @return the location where help is needed
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     * Gets the photo related to the help request.
+     * @return the photo related to the request
+     */
     public String getPhoto() {
         return photo;
     }
 
+    /**
+     * Sets the photo related to the help request.
+     * @param photo the photo related to the request
+     */
     public void setRequestStatus(RequestStatus status) {
         this.requestStatus = status;
     }
 
+    /**
+     * Sets the urgency level of the help request.
+     * @param urgency the urgency level of the request
+     */
     public void setUrgency(Urgency urgency) {
         this.urgency = urgency;
     }
