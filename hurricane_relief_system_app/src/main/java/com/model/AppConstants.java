@@ -6,14 +6,14 @@ package com.model;
  */
 
 public abstract class AppConstants {
-    
+
     public static final String VOLUNTEER_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/volunteer.json";
     public static final String COORDINATOR_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/aid-coordinators.json";
     public static final String REQUESTER_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/aid-requestors.json";
     public static final String REQUEST_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/aid-request.json";
     public static final String HURICANE_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/hurricane-event.json";
     public static final String SHELTER_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/shelter.json";
-    
+
     public static final String USER_ID = "userID";
     public static final String USER_FIRST_NAME = "firstName";
     public static final String USER_LAST_NAME = "lastName";
@@ -40,7 +40,9 @@ public abstract class AppConstants {
     public static final String USER_VERIFIED = "isVerifed";
     public static final String USER_DISPACHED = "isDispached";
     public static final String USER_VOLUNTEER_HOURS = "volunteerHours";
+
     public static final String USER_ROLE = "role";
+
 
     public static final String REQUEST_ID = "requestID";
     public static final String REQUEST_TYPE = "requestType";
@@ -60,7 +62,7 @@ public abstract class AppConstants {
     public static final String LOCATION_ZIP = "zipcode";
 
     public static final String REQUETS_PHOTO = "photo";
-    
+
     public static final String REQUEST_HOUSEHOLD_SIZE = "householdSize";
     public static final String REQUEST_ACCESS_INTRUCTIONS = "accessInstructions";
     public static final String REQUEST_PETS = "pets";
@@ -95,5 +97,10 @@ public abstract class AppConstants {
     public static final String SHELTER_HAS_POWER = "hasPower";
     public static final String SHELTER_STATUS = "status";
     public static final String SHELTER_MEDICAL_STAFF = "hasMedicalStaff";
-    
+    public static final String SHELTER_PET_CAPACITY = "petCapacity";
+    public static final String SHELTER_CURRENT_PET_OCCUPANCY = "currentPetOccupancy";
+    public static final String SHELTER_ADMIN = "adminID";
+    public static final String SHELTER_OCCUPANTS = "occupants";
+    public static final String SHELTER_PETS = "pets";
+
 }

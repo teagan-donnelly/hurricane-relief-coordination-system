@@ -250,4 +250,42 @@ public class DataWriter extends AppConstants {
     public static boolean saveCoordinator(AidCoordinator coordinator) {
         return saveRecord(COORDINATOR_JSON, getCoordinatorJSON(coordinator), USER_ID);
     }
+
+    public static boolean saveShelter(Shelter shelter) {
+        return saveRecord(SHELTER_JSON, getShelterJSON(shelter), SHELTER_ID);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static JSONObject getShelterJSON(Shelter shelter) {
+        JSONObject obj = new JSONObject();
+        obj.put(SHELTER_NAME, shelter.getName());
+        obj.put(SHELTER_ID, shelter.getId().toString());
+        obj.put(SHELTER_LOCATION, getLocationJSON(shelter.getLocation()));
+        obj.put(SHELTER_CURRENT_OCCUPANCY, shelter.getCurrentOccupancy());
+        obj.put(SHELTER_CAPACITY, shelter.getCapacity());
+        obj.put(SHELTER_PET_FRIENDLY, shelter.isPetFriendly());
+        obj.put(SHELTER_MEDICAL_STAFF, shelter.hasMedicalStaff());
+
+        JSONArray accessibility = new JSONArray();
+        if (shelter.getAccessibilityInfo() != null) {
+            accessibility.addAll(shelter.getAccessibilityInfo());
+        }
+        obj.put(SHELTER_ACCESSIBILITY_INFO, accessibility);
+
+        obj.put(SHELTER_HAS_POWER, shelter.hasPower());
+        obj.put(SHELTER_STATUS, shelter.getStatus() != null ? shelter.getStatus().name() : "");
+        obj.put(SHELTER_PET_CAPACITY, shelter.getPetCapacity());
+        obj.put(SHELTER_CURRENT_PET_OCCUPANCY, shelter.getCurrentPetOccupancy());
+        obj.put(SHELTER_ADMIN, shelter.getAdmin() != null ? shelter.getAdmin().getUserId().toString() : "");
+
+        JSONArray occupants = new JSONArray();
+        occupants.addAll(shelter.getOccupants());
+        obj.put(SHELTER_OCCUPANTS, occupants);
+
+        JSONArray pets = new JSONArray();
+        pets.addAll(shelter.getPets());
+        obj.put(SHELTER_PETS, pets);
+
+        return obj;
+    }
 }

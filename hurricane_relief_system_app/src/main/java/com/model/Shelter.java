@@ -17,6 +17,9 @@ public class Shelter {
     private boolean hasMedicalStaff;
     private int petCapacity;
     private int currentPetOccupancy;
+    private User admin;
+    private ArrayList<String> occupants = new ArrayList<>();
+    private ArrayList<String> pets = new ArrayList<>();
 
     public void setPetSpace(int petCapacity, int currentPetOccupancy) {
         if (petCapacity < 0 || currentPetOccupancy < 0 || currentPetOccupancy > petCapacity) {
@@ -30,10 +33,10 @@ public class Shelter {
         return petCapacity - currentPetOccupancy;
     }
 
-    public Shelter (String name, UUID id, Location location, int currentOccupancy, int capacity, 
+    public Shelter (String name, UUID id, Location location, int currentOccupancy, int capacity,
         boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
         boolean hasMedicalStaff) {
-       
+
         this.name = name;
         this.id = id;
         this.location = location;
@@ -46,9 +49,9 @@ public class Shelter {
         this.status = status;
     }
 
-    public Shelter (String name, UUID id, Location location, int capacity, 
+    public Shelter (String name, UUID id, Location location, int capacity,
         boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status) {
-       
+
         this.name = name;
         this.id = id;
         this.location = location;
@@ -60,16 +63,71 @@ public class Shelter {
     }
 
     public Shelter (String name, UUID id, Location location, int capacity) {
-       
+
         this.name = name;
         this.id = id;
         this.location = location;
         this.capacity = capacity;
-    
+
     }
 
     public void updateCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    /**
+     * Checks a household into the shelter.
+     * @param request the request for the household arriving
+     * @return true if they were checked in, false otherwise
+     */
+    public boolean checkIn(PersonalRequest request) {
+        if (request == null) {
+            return false;
+        }
+        if (status != ShelterStatus.OPEN) {
+            System.out.println(name + " is not open.");
+            return false;
+        }
+        if (!request.getHouseholdMembers().isEmpty() &&
+            occupants.contains(request.getHouseholdMembers().get(0))) {
+            System.out.println("This household is already checked in.");
+            return false;
+        }
+        if (getAvailableSpace() < request.getHouseholdSize()) {
+            System.out.println("Not enough space for this household.");
+            return false;
+        }
+        if (request.getPets() > 0 && (!petFriendly || getAvailablePetSpace() < request.getPets())) {
+            System.out.println("This shelter cannot take the household's pets.");
+            return false;
+        }
+
+        for (String member : request.getHouseholdMembers()) {
+            occupants.add(member);
+        }
+        currentOccupancy += request.getHouseholdSize();
+
+        for (String pet : request.getPetNames()) {
+            pets.add(pet);
+        }
+        currentPetOccupancy += request.getPets();
+
+        if (currentOccupancy >= capacity) {
+            status = ShelterStatus.FULL;
+        }
+        return true;
+    }
+
+    public void addOccupant(String occupant) {
+        occupants.add(occupant);
+    }
+
+    public void addPet(String pet) {
+        pets.add(pet);
+    }
+
+    public void setAdmin(User admin) {
+        this.admin = admin;
     }
 
     //getters
@@ -107,6 +165,34 @@ public class Shelter {
 
     public ShelterStatus getStatus() {
         return status;
+    }
+
+    public User getAdmin() {
+        return admin;
+    }
+
+    public ArrayList<String> getOccupants() {
+        return occupants;
+    }
+
+    public ArrayList<String> getPets() {
+        return pets;
+    }
+
+    public ArrayList<String> getAccessibilityInfo() {
+        return accessibilityInfo;
+    }
+
+    public boolean hasPower() {
+        return hasPower;
+    }
+
+    public int getPetCapacity() {
+        return petCapacity;
+    }
+
+    public int getCurrentPetOccupancy() {
+        return currentPetOccupancy;
     }
 
 }

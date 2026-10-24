@@ -96,6 +96,7 @@ public class Driver {
 
         exportTrip(rosa, request);
         showRolePermissions(rosa, request);
+        checkInAtShelter(rosa, request);
     }
 
     public static void addFamilyDetails(PersonalRequest request) {
@@ -361,5 +362,110 @@ public class Driver {
         System.out.println("\nRosa drops the family off and tries to mark the request complete:");
         request.markComplete(rosa);
         System.out.println("Request status is still: " + request.getRequestStatus());
+    }
+
+    public static AidCoordinator registerFelix() {
+        UUID felixID = UUID.fromString("f9a3b046-1c25-4a68-8f4a-46bec4756404");
+        for (AidCoordinator saved : DataLoader.getCoordinators()) {
+            if (saved.getUserId().equals(felixID)) {
+                return saved;
+            }
+        }
+
+        Location felixLocation = new Location(32.792, -79.9512,
+            "244 President Street", 0, "Charleston", "SC", "29403");
+        ArrayList<String> emergencyContacts = new ArrayList<>();
+        emergencyContacts.add("Ana Moreno: 843-555-0190");
+
+        AidCoordinator felix = new AidCoordinator(CoordinatorRole.SHELTER, "Felix", "Moreno",
+            felixID, "felix.moreno@example.com", "843-555-0189", "felixmoreno", "FelixDemo123",
+            felixLocation, LocalDate.of(1979, 9, 15), NotificationType.APP_PUSH,
+            emergencyContacts, VolunteerManager.getInstance());
+
+        if (!DataWriter.saveCoordinator(felix)) {
+            System.out.println("Could not save Felix's account.");
+            return null;
+        }
+        return felix;
+    }
+
+    public static void showShelter(Shelter shelter) {
+        Location location = shelter.getLocation();
+        System.out.println("Shelter: " + shelter.getName());
+        System.out.println("Location: " + location.getStreetAddress() + ", " + location.getCity() +
+            ", " + location.getState() + " " + location.getZipcode());
+        System.out.println("Total capacity: " + shelter.getCapacity());
+        System.out.println("Current occupancy: " + shelter.getCurrentOccupancy());
+        System.out.println("Available spaces: " + shelter.getAvailableSpace());
+        System.out.println("Occupants on record:" + (shelter.getOccupants().isEmpty() ? " none listed" : ""));
+        for (String occupant : shelter.getOccupants()) {
+            System.out.println("  - " + occupant);
+        }
+        System.out.println("Accompanying pets:" + (shelter.getPets().isEmpty() ? " none" : ""));
+        for (String pet : shelter.getPets()) {
+            System.out.println("  - " + pet);
+        }
+    }
+
+    public static void checkInAtShelter(Volunteer rosa, PersonalRequest request) {
+        AidCoordinator felix = registerFelix();
+        if (felix == null) {
+            return;
+        }
+
+        ArrayList<User> users = new ArrayList<>();
+        users.add(felix);
+        AccountManager accounts = new AccountManager(users);
+        if (!accounts.login("felixmoreno", "FelixDemo123")) {
+            System.out.println("Felix could not log in.");
+            return;
+        }
+        System.out.println("\nFelix " + felix.getLastName() + " (shelter manager) logged in.");
+
+        ShelterManager shelterManager = new ShelterManager(DataLoader.getShelters());
+        Shelter shelter = null;
+        for (Shelter current : shelterManager.getShelters()) {
+            if (current.getAdmin() != null && current.getAdmin().getUserId().equals(felix.getUserId())) {
+                shelter = current;
+            }
+        }
+        if (shelter == null) {
+            shelter = shelterManager.findShelter(request.getSelectedShelterID());
+            if (shelter == null) {
+                System.out.println("Felix does not manage a shelter yet.");
+                return;
+            }
+            shelter.setAdmin(felix);
+        }
+        showShelter(shelter);
+
+        if (request.getRequestStatus() == RequestStatus.COMPLETED) {
+            System.out.println("\nThe Carter family is already checked in and the request is complete.");
+            return;
+        }
+        if (!shelter.getId().equals(request.getSelectedShelterID())) {
+            System.out.println("\nThe Carter family is not headed to Felix's shelter.");
+            return;
+        }
+
+        System.out.println("\nFelix checks the Carter family and Buddy into the shelter.");
+        if (!shelter.checkIn(request)) {
+            return;
+        }
+        showShelter(shelter);
+
+        System.out.println("\nFelix marks the relief request complete:");
+        if (!request.markComplete(felix)) {
+            return;
+        }
+        rosa.completeAssignment();
+
+        if (!DataWriter.saveShelter(shelter) || !DataWriter.saveRequest(request) ||
+            !DataWriter.saveVolunteer(rosa)) {
+            System.out.println("Could not save the check-in.");
+            return;
+        }
+        System.out.println("Request status: " + request.getRequestStatus());
+        System.out.println("Rosa is free for new requests (dispatched: " + rosa.isDispatched() + ")");
     }
 }

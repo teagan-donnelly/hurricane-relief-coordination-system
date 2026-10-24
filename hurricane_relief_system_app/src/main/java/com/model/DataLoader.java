@@ -200,7 +200,19 @@ public class DataLoader extends AppConstants {
                 shelters.get(shelters.size() - 1).setPetSpace(
                     petCapacity == null ? 0 : petCapacity.intValue(),
                     petOccupancy == null ? 0 : petOccupancy.intValue());
-                        
+
+                Shelter shelter = shelters.get(shelters.size() - 1);
+                for (String occupant : getJSONList(shelterJSON, SHELTER_OCCUPANTS)) {
+                    shelter.addOccupant(occupant);
+                }
+                for (String pet : getJSONList(shelterJSON, SHELTER_PETS)) {
+                    shelter.addPet(pet);
+                }
+                String adminID = (String) shelterJSON.get(SHELTER_ADMIN);
+                if (adminID != null && !adminID.isEmpty()) {
+                    shelter.setAdmin(getUserbyID(UUID.fromString(adminID), COORDINATOR_JSON));
+                }
+
             }
 
         } catch (Exception e) {
