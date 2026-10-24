@@ -64,6 +64,33 @@ public class DataWriter extends AppConstants {
     }
 
     /**
+     * Removes the record with the given ID from a JSON file. Nothing happens if it isn't there.
+     * @param filename JSON file to remove from
+     * @param idKey Key used to find the ID of the record
+     * @param id ID of the record to remove
+     * @return true if successful, false otherwise
+     */
+    public static boolean removeRecord(String filename, String idKey, String id) {
+        JSONArray records;
+
+        try (FileReader reader = new FileReader(filename)) {
+            records = (JSONArray) new JSONParser().parse(reader);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        for (int i = 0; i < records.size(); i++) {
+            JSONObject savedRecord = (JSONObject) records.get(i);
+            if (id.equals(savedRecord.get(idKey))) {
+                records.remove(i);
+                return writeToFile(filename, records);
+            }
+        }
+        return true;
+    }
+
+    /**
      * Saves all users (AidCoordinators, AidRequesters, Volunteers) to their respective JSON files.
      * @param users List of users to write
      * @return true if successful, false otherwise

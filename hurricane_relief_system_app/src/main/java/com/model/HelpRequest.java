@@ -136,7 +136,16 @@ public class HelpRequest {
     public boolean markComplete(User user) {
         if (!(user instanceof Coordinator) ||
             ((Coordinator) user).getRole() != CoordinatorRole.SHELTER) {
-            System.out.println("Permission denied: only a shelter manager can mark a request as complete.");
+            String role = "this";
+            if (user instanceof Volunteer) {
+                role = "the volunteer";
+            } else if (user instanceof AidRequester) {
+                role = "the aid requester";
+            } else if (user instanceof Coordinator && ((Coordinator) user).getRole() != null) {
+                role = "the " + ((Coordinator) user).getRole().name().toLowerCase() + " coordinator";
+            }
+            System.out.println("Permission denied: " + role + " role does not have permission to " +
+                "complete relief requests. Only the shelter manager can mark a request as complete.");
             return false;
         }
 

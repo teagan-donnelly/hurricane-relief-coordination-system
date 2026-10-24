@@ -1,8 +1,14 @@
 package com.model;
 
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
 
 /**
  * Driver that runs through the Carter family hurricane relief scenario.
@@ -13,6 +19,14 @@ public class Driver {
     private static final int WIDTH = 64;
     private static final String LINE = "=".repeat(WIDTH);
 
+    private static final String CARTER_REQUEST_ID = "b5e1d824-7f93-4046-8d28-249ca2534202";
+    private static final String FATHER_ID = "a4f0c713-6e82-4f35-9c17-138b91423101";
+    private static final String ROSA_ID = "c6f2e935-8a04-4157-9e39-35adb3645303";
+    private static final String FELIX_ID = "f9a3b046-1c25-4a68-8f4a-46bec4756404";
+    private static final String[] CARTER_FAMILY = {"Michael Carter, age 39", "Emily Carter, age 37",
+        "Sophie Carter, age 8"};
+    private static final String[] CARTER_PETS = {"Buddy (dog)"};
+
     /**
      * Runs the scenario.
      * @param args Command line arguments
@@ -21,9 +35,13 @@ public class Driver {
         System.out.println(LINE);
         System.out.println("  HURRICANE RELIEF SYSTEM: CARTER FAMILY SCENARIO");
         System.out.println(LINE);
-        showSavedRecords("Saved data before this run");
+        showSavedRecords("Saved by the last run (loaded after restarting)");
+        resetScenario();
+        showSavedRecords("JSON files before the scenario");
         runScenario();
-        showSavedRecords("Saved data after this run");
+        showSavedRecords("JSON files after the scenario");
+        System.out.println("\nRun the Driver again: its first section loads these same records");
+        System.out.println("from the JSON files, showing the changes remain after a restart.");
         System.out.println("\n" + LINE);
     }
 
@@ -80,47 +98,112 @@ public class Driver {
     }
 
     /**
-     * Prints the Carter request and its shelter exactly as they are saved in the JSON files,
-     * so a restart can be checked against what was saved.
+     * Prints the scenario's records exactly as they are saved in the JSON files,
+     * along with the file each one is saved in.
      * @param label when this snapshot was taken
      */
     public static void showSavedRecords(String label) {
-        UUID requestID = UUID.fromString("b5e1d824-7f93-4046-8d28-249ca2534202");
         printSection(label);
+        printRecord(AppConstants.REQUESTER_JSON, AppConstants.USER_ID, FATHER_ID,
+            "Michael Carter's new account", AppConstants.USER_FIRST_NAME, AppConstants.USER_LAST_NAME,
+            AppConstants.USER_PHONE, AppConstants.USER_EMAIL);
+        printRecord(AppConstants.REQUEST_JSON, AppConstants.REQUEST_ID, CARTER_REQUEST_ID,
+            "relief request, assignment, and status", AppConstants.REQUEST_STATUS,
+            AppConstants.REQUEST_ASSIGNED_VOLUNTEER, AppConstants.REQUEST_SELECTED_SHELTER,
+            AppConstants.REQUEST_HOUSEHOLD_SIZE, AppConstants.REQUEST_HOUSEHOLD_MEMBERS,
+            AppConstants.REQUEST_PETS, AppConstants.REQUEST_PET_NAMES);
+        printRecord(AppConstants.SHELTER_JSON, AppConstants.SHELTER_ADMIN, FELIX_ID,
+            "Felix's shelter check-in and pets", AppConstants.SHELTER_NAME,
+            AppConstants.SHELTER_CAPACITY, AppConstants.SHELTER_CURRENT_OCCUPANCY,
+            AppConstants.SHELTER_OCCUPANTS, AppConstants.SHELTER_CURRENT_PET_OCCUPANCY,
+            AppConstants.SHELTER_PETS);
+        printRecord(AppConstants.VOLUNTEER_JSON, AppConstants.USER_ID, ROSA_ID,
+            "Rosa Delgado's volunteer account", AppConstants.USER_FIRST_NAME,
+            AppConstants.USER_LAST_NAME, AppConstants.USER_DISPACHED);
+    }
 
-        PersonalRequest saved = null;
-        for (HelpRequest current : DataLoader.getRequests()) {
-            if (current.getRequestID().equals(requestID) && current instanceof PersonalRequest) {
-                saved = (PersonalRequest) current;
-            }
-        }
-        if (saved == null) {
-            System.out.println("The Carter request has not been saved yet.");
+    /**
+     * Prints some fields of one saved record as they appear in its JSON file.
+     * @param fileName JSON file the record is saved in
+     * @param idKey Key used to find the record
+     * @param id Value of the key for the record
+     * @param description What the record holds
+     * @param keys Fields to print
+     */
+    public static void printRecord(String fileName, String idKey, String id, String description,
+            String... keys) {
+        System.out.println(fileName.substring(fileName.lastIndexOf('/') + 1) + " - " + description);
+        JSONObject record = findRecord(fileName, idKey, id);
+        if (record == null) {
+            System.out.println("  (not saved yet)");
             return;
         }
+        for (String key : keys) {
+            System.out.printf("  %-22s %s%n", "\"" + key + "\":", JSONValue.toJSONString(record.get(key)));
+        }
+    }
 
-        String volunteerName = "none";
-        for (Volunteer volunteer : DataLoader.getVolunteers()) {
-            if (volunteer.getUserId().equals(saved.getAssignedVolunteerID())) {
-                volunteerName = volunteer.getFirstName() + " " + volunteer.getLastName();
+    /**
+     * Finds a record in a JSON file.
+     * @param fileName JSON file to look in
+     * @param idKey Key used to find the record
+     * @param id Value of the key for the record
+     * @return The record, or null if it is not in the file
+     */
+    public static JSONObject findRecord(String fileName, String idKey, String id) {
+        try (FileReader reader = new FileReader(fileName)) {
+            JSONArray records = (JSONArray) new JSONParser().parse(reader);
+            for (Object record : records) {
+                JSONObject json = (JSONObject) record;
+                if (id.equals(json.get(idKey))) {
+                    return json;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Could not read " + fileName);
+        }
+        return null;
+    }
+
+    /**
+     * Puts the saved data back to how it was before the scenario, so every run
+     * goes through the whole scenario from the start.
+     */
+    public static void resetScenario() {
+        printSection("Resetting the scenario");
+        DataWriter.removeRecord(AppConstants.REQUEST_JSON, AppConstants.REQUEST_ID, CARTER_REQUEST_ID);
+        DataWriter.removeRecord(AppConstants.REQUESTER_JSON, AppConstants.USER_ID, FATHER_ID);
+        System.out.println("Removed Michael Carter's account and relief request.");
+
+        for (Shelter shelter : new ShelterManager().getShelters()) {
+            int people = 0;
+            for (String member : CARTER_FAMILY) {
+                if (shelter.getOccupants().remove(member)) {
+                    people++;
+                }
+            }
+            int pets = 0;
+            for (String pet : CARTER_PETS) {
+                if (shelter.getPets().remove(pet)) {
+                    pets++;
+                }
+            }
+            if (people > 0 || pets > 0) {
+                shelter.setCurrentoccupancy(shelter.getCurrentOccupancy() - people);
+                shelter.setCurrentPetOccupancy(shelter.getCurrentPetOccupancy() - pets);
+                DataWriter.saveShelter(shelter);
+                System.out.println("Checked the Carter family out of " + shelter.getName() +
+                    " (occupancy back to " + shelter.getCurrentOccupancy() + ").");
             }
         }
-        printField("Request status", saved.getRequestStatus());
-        printField("Assigned volunteer", volunteerName);
-        printList("Household", saved.getHouseholdMembers());
-        printList("Pets", saved.getPetNames());
 
-        Shelter shelter = new ShelterManager().findShelter(saved.getSelectedShelterID());
-        if (shelter == null) {
-            printField("Selected shelter", "none");
-        } else {
-            printField("Selected shelter", shelter.getName());
-            printField("Shelter occupancy", shelter.getCurrentOccupancy() + "/" +
-                shelter.getCapacity() + " people, " + shelter.getCurrentPetOccupancy() + "/" +
-                shelter.getPetCapacity() + " pets");
-            printList("Shelter occupants", shelter.getOccupants());
-            printList("Shelter pets", shelter.getPets());
+        for (Volunteer volunteer : DataLoader.getVolunteers()) {
+            if (volunteer.getUserId().toString().equals(ROSA_ID) && volunteer.isDispatched()) {
+                volunteer.setDispatched(false);
+                DataWriter.saveVolunteer(volunteer);
+            }
         }
+        System.out.println("Rosa Delgado is free for new requests.");
     }
 
     public static void runScenario() {
@@ -131,8 +214,8 @@ public class Driver {
         emergencyContacts.add("Emily Carter: 843-555-0148");
         ArrayList<String> pastRequests = new ArrayList<>();
 
-        UUID fatherID = UUID.fromString("a4f0c713-6e82-4f35-9c17-138b91423101");
-        UUID requestID = UUID.fromString("b5e1d824-7f93-4046-8d28-249ca2534202");
+        UUID fatherID = UUID.fromString(FATHER_ID);
+        UUID requestID = UUID.fromString(CARTER_REQUEST_ID);
 
         AidRequester father = new AidRequester("Michael", "Carter", fatherID,
             "michael.carter@example.com", "843-555-0147", home,
@@ -163,12 +246,6 @@ public class Driver {
             "Rising floodwater surrounds the home; the family cannot safely use their car.",
             1, 1);
 
-        for (HelpRequest saved : DataLoader.getRequests()) {
-            if (saved.getRequestID().equals(requestID) && saved instanceof PersonalRequest) {
-                request = (PersonalRequest) saved;
-            }
-        }
-
         addFamilyDetails(request);
 
         if (DataWriter.saveRequest(request)) {
@@ -198,17 +275,12 @@ public class Driver {
         }
 
         System.out.println("Rosa Delgado logged in.");
-        boolean alreadyHandled = request.getAssignedVolunteerID() != null ||
-            request.getRequestStatus() == RequestStatus.COMPLETED ||
-            request.getRequestStatus() == RequestStatus.CANCELED;
 
-        if (!alreadyHandled) {
-            ArrayList<HelpRequest> requests = createScenarioRequests(request);
-            if (requests == null) {
-                return;
-            }
-            showRecommendedRequests(rosa, requests);
+        ArrayList<HelpRequest> requests = createScenarioRequests(request);
+        if (requests == null) {
+            return;
         }
+        showRecommendedRequests(rosa, requests);
         showRequestDetails(request);
         findShelterAndAssign(rosa, request);
 
@@ -225,10 +297,12 @@ public class Driver {
         if (!request.getHouseholdMembers().isEmpty()) {
             return;
         }
-        request.addHouseholdMember("Michael Carter, age 39");
-        request.addHouseholdMember("Emily Carter, age 37");
-        request.addHouseholdMember("Sophie Carter, age 8");
-        request.addPet("Buddy (dog)");
+        for (String member : CARTER_FAMILY) {
+            request.addHouseholdMember(member);
+        }
+        for (String pet : CARTER_PETS) {
+            request.addPet(pet);
+        }
         request.setMedicalNote("Sophie Carter (age 8) has worsening asthma symptoms and needs " +
             "medical assistance. Take the family to a shelter with medical staff.");
     }
@@ -238,7 +312,7 @@ public class Driver {
      * @return Rosa's volunteer account, or null if it could not be saved
      */
     public static Volunteer registerRosa() {
-        UUID rosaID = UUID.fromString("c6f2e935-8a04-4157-9e39-35adb3645303");
+        UUID rosaID = UUID.fromString(ROSA_ID);
         for (Volunteer saved : DataLoader.getVolunteers()) {
             if (saved.getUserId().equals(rosaID)) {
                 System.out.println("Loaded Rosa Delgado's saved volunteer account.");
@@ -258,7 +332,7 @@ public class Driver {
         supplies.add("Ford F-350 truck");
 
         Volunteer rosa = new Volunteer("Rosa", "Delgado",
-            UUID.fromString("c6f2e935-8a04-4157-9e39-35adb3645303"),
+            rosaID,
             "rosa.delgado@example.com", "843-555-0171", rosaHome,
             LocalDate.of(1984, 6, 3), "rosadelgado", "RosaDemo123",
             NotificationType.SMS, emergencyContacts,
@@ -546,6 +620,8 @@ public class Driver {
         request.setRequestStatus(RequestStatus.COMPLETED);
         System.out.println();
         printField("Request status", request.getRequestStatus() + " (unchanged)");
+        printField("Assigned volunteer", rosa.getUserId().equals(request.getAssignedVolunteerID())
+            ? rosa.getFirstName() + " " + rosa.getLastName() + " (still assigned to her)" : "none");
     }
 
     /**
@@ -553,7 +629,7 @@ public class Driver {
      * @return Felix's coordinator account, or null if it could not be saved
      */
     public static Coordinator registerFelix() {
-        UUID felixID = UUID.fromString("f9a3b046-1c25-4a68-8f4a-46bec4756404");
+        UUID felixID = UUID.fromString(FELIX_ID);
         for (Coordinator saved : DataLoader.getCoordinators()) {
             if (saved.getUserId().equals(felixID)) {
                 return saved;
@@ -586,8 +662,9 @@ public class Driver {
         printField("Shelter", shelter.getName());
         printField("Location", location.getStreetAddress() + ", " + location.getCity() +
             ", " + location.getState() + " " + location.getZipcode());
-        printField("Occupancy", shelter.getCurrentOccupancy() + "/" + shelter.getCapacity() +
-            " (" + shelter.getAvailableSpace() + " spaces open)");
+        printField("Total capacity", shelter.getCapacity());
+        printField("Current occupancy", shelter.getCurrentOccupancy());
+        printField("Available spaces", shelter.getAvailableSpace());
         printList("Occupants", shelter.getOccupants());
         printList("Pets", shelter.getPets());
     }
