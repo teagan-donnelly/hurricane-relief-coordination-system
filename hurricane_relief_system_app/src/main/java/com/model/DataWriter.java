@@ -47,7 +47,7 @@ public class DataWriter extends AppConstants {
     }
 
     /**
-     * Saves all users (AidCoordinators, AidRequesters, Volunteers) to their respective JSON files.
+     * Saves all users (Coordinators, AidRequesters, Volunteers) to their respective JSON files.
      * @param users List of users to write
      * @return true if successful, false otherwise
      */
@@ -118,9 +118,9 @@ public class DataWriter extends AppConstants {
     }
 
     @SuppressWarnings("unchecked")
-    private static JSONObject getCoordinatorJSON(Coordinator coordinator) {
+    static JSONObject getCoordinatorJSON(Coordinator coordinator) {
         JSONObject obj = getUserBaseJSON(coordinator);
-        obj.put(COORDINATOR_ROLE, coordinator.getRole());
+        obj.put(COORDINATOR_ROLE, coordinator.getRole() != null ? coordinator.getRole().name() : "");
         return obj;
     }
 
@@ -247,7 +247,7 @@ public class DataWriter extends AppConstants {
         return saveRecord(VOLUNTEER_JSON, getVolunteerJSON(volunteer), USER_ID);
     }
 
-    public static boolean saveCoordinator(AidCoordinator coordinator) {
+    public static boolean saveCoordinator(Coordinator coordinator) {
         return saveRecord(COORDINATOR_JSON, getCoordinatorJSON(coordinator), USER_ID);
     }
 
@@ -256,7 +256,7 @@ public class DataWriter extends AppConstants {
     }
 
     @SuppressWarnings("unchecked")
-    private static JSONObject getShelterJSON(Shelter shelter) {
+    static JSONObject getShelterJSON(Shelter shelter) {
         JSONObject obj = new JSONObject();
         obj.put(SHELTER_NAME, shelter.getName());
         obj.put(SHELTER_ID, shelter.getId().toString());
@@ -276,7 +276,7 @@ public class DataWriter extends AppConstants {
         obj.put(SHELTER_STATUS, shelter.getStatus() != null ? shelter.getStatus().name() : "");
         obj.put(SHELTER_PET_CAPACITY, shelter.getPetCapacity());
         obj.put(SHELTER_CURRENT_PET_OCCUPANCY, shelter.getCurrentPetOccupancy());
-        obj.put(SHELTER_ADMIN, shelter.getAdmin() != null ? shelter.getAdmin().getUserId().toString() : "");
+        obj.put(SHELTER_ADMIN, shelter.getAdmin() != null ? shelter.getAdmin().toString() : "");
 
         JSONArray occupants = new JSONArray();
         occupants.addAll(shelter.getOccupants());

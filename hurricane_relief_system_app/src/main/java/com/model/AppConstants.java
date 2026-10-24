@@ -98,6 +98,10 @@ public abstract class AppConstants {
     public static final String SHELTER_STATUS = "status";
     public static final String SHELTER_MEDICAL_STAFF = "hasMedicalStaff";
     public static final String SHELTER_ADMIN = "admin";
+    public static final String SHELTER_PET_CAPACITY = "petCapacity";
+    public static final String SHELTER_CURRENT_PET_OCCUPANCY = "currentPetOccupancy";
+    public static final String SHELTER_OCCUPANTS = "occupants";
+    public static final String SHELTER_PETS = "pets";
 
     
 }

@@ -173,10 +173,13 @@ public class DataLoader extends AppConstants {
      * @return returns an arrayList of shelters
      */
     public static ArrayList<Shelter> getShelters() {
+        return getShelters(SHELTER_JSON);
+    }
+
+    public static ArrayList<Shelter> getShelters(String filename) {
         ArrayList<Shelter> shelters = new ArrayList<Shelter>();
 
-        try {
-            FileReader reader = new FileReader(SHELTER_JSON);
+        try (FileReader reader = new FileReader(filename)) {
             JSONArray sheltersJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < sheltersJSON.size(); i++) {
@@ -193,15 +196,26 @@ public class DataLoader extends AppConstants {
                 boolean hasPower = (Boolean) shelterJSON.get(SHELTER_HAS_POWER);
                 ShelterStatus status = ShelterStatus.valueOf(((String) shelterJSON.get(SHELTER_STATUS)).toUpperCase());
                 boolean hasMedicalStaff = Boolean.TRUE.equals(shelterJSON.get(SHELTER_MEDICAL_STAFF));
-                UUID adminID = UUID.fromString((String) shelterJSON.get(SHELTER_ADMIN));
+                String admin = (String) shelterJSON.get(SHELTER_ADMIN);
+                UUID adminID = null;
+                if (admin != null && !admin.isBlank()) {
+                    adminID = UUID.fromString(admin);
+                }
                 
                 shelters.add(new Shelter(name, shelterID, location, currentOccupancy, capacity, petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, adminID));
                 
-                Number petCapacity = (Number) shelterJSON.get("petCapacity");
-                Number petOccupancy = (Number) shelterJSON.get("currentPetOccupancy");
+                Number petCapacity = (Number) shelterJSON.get(SHELTER_PET_CAPACITY);
+                Number petOccupancy = (Number) shelterJSON.get(SHELTER_CURRENT_PET_OCCUPANCY);
                 shelters.get(shelters.size() - 1).setPetSpace(
                     petCapacity == null ? 0 : petCapacity.intValue(),
                     petOccupancy == null ? 0 : petOccupancy.intValue());
+                Shelter shelter = shelters.get(shelters.size() - 1);
+                for (String occupant : getJSONList(shelterJSON, SHELTER_OCCUPANTS)) {
+                    shelter.addOccupant(occupant);
+                }
+                for (String pet : getJSONList(shelterJSON, SHELTER_PETS)) {
+                    shelter.addPet(pet);
+                }
                 
                         
             }
@@ -228,7 +242,11 @@ public class DataLoader extends AppConstants {
             for(int i = 0; i < coordinatorsJSON.size(); i++) {
                 JSONObject coordinatorJSON = (JSONObject)coordinatorsJSON.get(i);
                 UserData data = getUserData(coordinatorJSON);
-                CoordinatorRole role = CoordinatorRole.valueOf(((String) coordinatorJSON.get(COORDINATOR_ROLE)).toUpperCase());
+                String savedRole = (String) coordinatorJSON.get(COORDINATOR_ROLE);
+                CoordinatorRole role = null;
+                if (savedRole != null && !savedRole.isBlank()) {
+                    role = CoordinatorRole.valueOf(savedRole.toUpperCase());
+                }
 
                 coordinators.add(new Coordinator(role, data.firstName, data.lastName, data.id, data.email, data.phone, data.userName, data.password,
                           data.location, data.birthDate, data.notificationPreference, data.emergencyContacts, VolunteerManager.getInstance()));

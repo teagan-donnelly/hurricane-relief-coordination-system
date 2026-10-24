@@ -64,9 +64,9 @@ public abstract class User {
                 new AidRequester(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
                     householdSize, assistanceType, pastRequests);
                 break;
-            case "AidCoordinator":
-                System.out.println("Can not create an AidCoordinator account at this time.");
-                //new AidCoordinator(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>());
+            case "Coordinator":
+                System.out.println("Cannot create a Coordinator account at this time.");
+                //new Coordinator(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>());
                 break;
             default:
                 System.out.println("Invalid user type. Account creation failed.");

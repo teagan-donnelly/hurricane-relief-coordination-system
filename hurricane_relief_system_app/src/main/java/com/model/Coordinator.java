@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * @author Nicolas Gauvin
- * AidCoordinator
+ * Coordinator
  */
 public class Coordinator extends User {
 

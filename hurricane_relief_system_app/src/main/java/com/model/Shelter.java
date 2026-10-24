@@ -18,7 +18,8 @@ public class Shelter {
     private int petCapacity;
     private int currentPetOccupancy;
     private UUID admin;
-    private ArrayList<AidRequester> occupants;
+    private ArrayList<String> occupants = new ArrayList<>();
+    private ArrayList<String> pets = new ArrayList<>();
 
     public void setPetSpace(int petCapacity, int currentPetOccupancy) {
         if (petCapacity < 0 || currentPetOccupancy < 0 || currentPetOccupancy > petCapacity) {
@@ -128,8 +129,32 @@ public class Shelter {
         pets.add(pet);
     }
 
-    public void setAdmin(User admin) {
+    public void setAdmin(UUID admin) {
         this.admin = admin;
+    }
+
+    public ArrayList<String> getOccupants() {
+        return occupants;
+    }
+
+    public ArrayList<String> getPets() {
+        return pets;
+    }
+
+    public int getPetCapacity() {
+        return petCapacity;
+    }
+
+    public int getCurrentPetOccupancy() {
+        return currentPetOccupancy;
+    }
+
+    public ArrayList<String> getAccessibilityInfo() {
+        return accessibilityInfo;
+    }
+
+    public boolean hasPower() {
+        return hasPower;
     }
 
     //getters

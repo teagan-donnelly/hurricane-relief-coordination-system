@@ -14,6 +14,10 @@ public class ShelterManager{
         this.shelters = DataLoader.getShelters();
     }
 
+    public ShelterManager(ArrayList<Shelter> shelters){
+        this.shelters = shelters;
+    }
+
     public List<Shelter> sortShelters(Location target){
     List<Shelter> sortedShelters = new ArrayList<>(shelters);
     sortedShelters.sort(Comparator.comparingDouble(shelter -> shelter.getLocation().calculateDistance(target)));
@@ -29,13 +33,12 @@ public class ShelterManager{
         return null;
     }
 
-    public static void registerShelter(String name, Location location, int currentOccupancy, int capacity, 
+    public static void registerShelter(String name, UUID id, Location location, int currentOccupancy, int capacity,
         boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
         boolean hasMedicalStaff, UUID admin) {
 
         ShelterManager manager = new ShelterManager();
         ArrayList<Shelter> shelters = manager.getShelters();
-        UUID id = UUID.randomUUID(); 
 
         shelters.add(new Shelter(name, id, location, currentOccupancy, capacity, 
                     petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, admin));
@@ -47,21 +50,15 @@ public class ShelterManager{
         ArrayList<Shelter> shelters = manager.getShelters();
 
         for (Shelter shelter : shelters) {
-            if (shelter.getId() == id) {
+            if (shelter.getId().equals(id)) {
                 String report = "Shelter name" + shelter.getName() + "\n" +
                     "Shelter location" + shelter.getLocation() + "\n" +
                     "Shelter capacity" + shelter.getCapacity() + "\n" +
                     "Shelter occupancy" + shelter.getCurrentOccupancy() + "\n" +
                     "Shelter space" + shelter.getAvailableSpace() + "\n" +
-                    "Shelter occupants" + shelter.get() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +;
-
-                    
+                    "Shelter occupants: " + shelter.getOccupants() + "\n" +
+                    "Shelter pets: " + shelter.getPets();
+                System.out.println(report);
             }
         }
 

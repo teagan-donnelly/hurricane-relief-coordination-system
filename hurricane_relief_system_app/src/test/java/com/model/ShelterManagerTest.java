@@ -21,7 +21,7 @@ public class ShelterManagerTest {
     private Shelter shelter(String name, double longitude, int occupancy,
                             boolean pets, boolean medical) {
         Shelter shelter = new Shelter(name, UUID.randomUUID(), location(longitude), occupancy,
-            10, pets, new ArrayList<String>(), true, ShelterStatus.OPEN, medical);
+            10, pets, new ArrayList<String>(), true, ShelterStatus.OPEN, medical, null);
         shelter.setPetSpace(pets ? 2 : 0, 0);
         return shelter;
     }
