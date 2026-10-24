@@ -18,8 +18,8 @@ public class Shelter {
     private int petCapacity;
     private int currentPetOccupancy;
     private UUID admin;
-    private ArrayList<String> occupants;
-    private ArrayList<String> pets;
+    private ArrayList<String> occupants = new ArrayList<>();
+    private ArrayList<String> pets = new ArrayList<>();
 
     public void setPetSpace(int petCapacity, int currentPetOccupancy) {
         if (petCapacity < 0 || currentPetOccupancy < 0 || currentPetOccupancy > petCapacity) {
@@ -48,6 +48,14 @@ public class Shelter {
         this.hasPower = hasPower;
         this.status = status;
         this.admin = admin;
+    }
+
+    public Shelter (String name, UUID id, Location location, int currentOccupancy, int capacity,
+        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
+        boolean hasMedicalStaff) {
+
+        this(name, id, location, currentOccupancy, capacity, petFriendly, accessibilityInfo,
+            hasPower, status, hasMedicalStaff, null);
     }
 
     public Shelter (String name, UUID id, Location location, int capacity, 
@@ -91,10 +99,11 @@ public class Shelter {
             System.out.println(name + " is not open.");
             return false;
         }
-        if (!request.getHouseholdMembers().isEmpty() &&
-            occupants.contains(request.getHouseholdMembers().get(0))) {
-            System.out.println("This household is already checked in.");
-            return false;
+        for (String member : request.getHouseholdMembers()) {
+            if (occupants.contains(member)) {
+                System.out.println("This household is already checked in.");
+                return false;
+            }
         }
         if (getAvailableSpace() < request.getHouseholdSize()) {
             System.out.println("Not enough space for this household.");
@@ -131,6 +140,15 @@ public class Shelter {
 
     public void setAdmin(UUID admin) {
         this.admin = admin;
+    }
+
+    /**
+     * Checks if a user is the manager of this shelter.
+     * @param user the user to check
+     * @return true if the user manages this shelter, false otherwise
+     */
+    public boolean isManagedBy(User user) {
+        return user != null && admin != null && admin.equals(user.getUserId());
     }
 
     //getters
@@ -222,16 +240,16 @@ public class Shelter {
         this.hasMedicalStaff = hasMedicalStaff;
     }
     public void setPetCapacity(int petCapacity){
-        this.petCapacity = capacity;
+        this.petCapacity = petCapacity;
     }
     public void setCurrentPetOccupancy(int currentPetOccupancy){
-        this.currentPetOccupancy = currentPetOccupancyl
+        this.currentPetOccupancy = currentPetOccupancy;
     }
     public void setOccupants(ArrayList<String> occupants){
-        this.occupants = occupants;
+        this.occupants = occupants != null ? occupants : new ArrayList<>();
     }
     public void setPets(ArrayList<String> pets){
-        this.pets = pets;
+        this.pets = pets != null ? pets : new ArrayList<>();
     }
 
 }

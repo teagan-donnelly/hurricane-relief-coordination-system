@@ -14,6 +14,10 @@ public class ShelterManager{
         this.shelters = DataLoader.getShelters();
     }
 
+    public ShelterManager(ArrayList<Shelter> shelters){
+        this.shelters = shelters != null ? shelters : new ArrayList<>();
+    }
+
     public List<Shelter> sortShelters(Location target){
     List<Shelter> sortedShelters = new ArrayList<>(shelters);
     sortedShelters.sort(Comparator.comparingDouble(shelter -> shelter.getLocation().calculateDistance(target)));
@@ -37,8 +41,10 @@ public class ShelterManager{
         ArrayList<Shelter> shelters = manager.getShelters();
         UUID id = UUID.randomUUID(); 
 
-        shelters.add(new Shelter(name, id, location, currentOccupancy, capacity, 
-                    petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, admin));
+        Shelter shelter = new Shelter(name, id, location, currentOccupancy, capacity, 
+                    petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, admin);
+        shelters.add(shelter);
+        DataWriter.saveShelter(shelter);
 
     }
 
@@ -47,7 +53,7 @@ public class ShelterManager{
         ArrayList<Shelter> shelters = manager.getShelters();
 
         for (Shelter shelter : shelters) {
-            if (shelter.getId() == id) {
+            if (shelter.getId().equals(id)) {
                 String report = "Shelter name" + shelter.getName() + "\n" +
                     "Shelter location" + shelter.getLocation() + "\n" +
                     "Shelter capacity" + shelter.getCapacity() + "\n" +
@@ -70,15 +76,16 @@ public class ShelterManager{
         ArrayList<Shelter> shelters = manager.getShelters();
 
         for (Shelter shelter : shelters) {
-            if (shelter.getId() == id) {
+            if (shelter.getId().equals(id)) {
                 int currentoccupancy = shelter.getCurrentOccupancy();
                 int currentPetOccupancy = shelter.getCurrentPetOccupancy();
                 shelter.setCurrentoccupancy(currentoccupancy + occupancyChange);
                 shelter.setPetFriendly(petFriendly);
-                shelter.setPetCapacity(currentPetOccupancy + PetOccupancyChange);
+                shelter.setCurrentPetOccupancy(currentPetOccupancy + PetOccupancyChange);
                 shelter.setPower(hasPower);
                 shelter.setStatus(status);
                 shelter.setMedicalStaff(hasMedicalStaff);
+                DataWriter.saveShelter(shelter);
             }
         }
 

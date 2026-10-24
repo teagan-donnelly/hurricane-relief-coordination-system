@@ -86,18 +86,22 @@ public class Assignment {
     }
 
     /**
-     * Marks the assignment as resolved and frees up the volunteer.
+     * Marks the assignment as resolved and frees up the volunteer. The request
+     * is only completed if the user is allowed to complete it.
+     * @param user the user completing the request
+     * @return true if the assignment was resolved, false otherwise
      */
-    public void resolve() {
+    public boolean resolve(User user) {
+        if (request != null && !request.markComplete(user)) {
+            return false;
+        }
+
         status = AssignmentStatus.RESOLVED;
 
         if (volunteer != null) {
             volunteer.setDispatched(false);
         }
-
-        if (request != null) {
-            request.setRequestStatus(RequestStatus.COMPLETED);
-        }
+        return true;
     }
 
     /**

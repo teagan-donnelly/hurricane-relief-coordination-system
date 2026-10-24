@@ -26,7 +26,7 @@ public class HurricaneReliefApplication {
     private HurricaneReliefApplication() {
         requestManager = RequestManager.getInstance();
         volunteerManager = VolunteerManager.getInstance();
-        shelterManager = new ShelterManager(DataLoader.getShelters());
+        shelterManager = new ShelterManager();
         accountManager = new AccountManager(DataLoader.getAllUsers()); 
     }
 
@@ -131,10 +131,10 @@ public class HurricaneReliefApplication {
         boolean hasMedicalStaff, UUID admin) {
 
         User user = accountManager.getCurrentUser();
-        if(user.getClass().getSimpleName() == "Coordinator") {
+        if(user instanceof Coordinator) {
             Coordinator coordinator = (Coordinator) user;
             if(coordinator.getRole() == CoordinatorRole.SHELTER){
-                ShelterManager.registerShelter(name, id, location, currentOccupancy, capacity, 
+                ShelterManager.registerShelter(name, location, currentOccupancy, capacity, 
                     petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, admin);
             } else {
                 System.out.println("Current user does not have access to register a shelter");
@@ -146,7 +146,7 @@ public class HurricaneReliefApplication {
     public void viewShelter(UUID id) {
 
         User user = accountManager.getCurrentUser();
-        if(user.getClass().getSimpleName() == "Coordinator") {
+        if(user instanceof Coordinator) {
             Coordinator coordinator = (Coordinator) user;
             if(coordinator.getRole() == CoordinatorRole.SHELTER){
                 ShelterManager.viewShelter(id);
@@ -161,7 +161,7 @@ public class HurricaneReliefApplication {
         boolean hasPower, ShelterStatus status, boolean hasMedicalStaff) {
 
         User user = accountManager.getCurrentUser();
-        if(user.getClass().getSimpleName() == "Coordinator") {
+        if(user instanceof Coordinator) {
             Coordinator coordinator = (Coordinator) user;
             if(coordinator.getRole() == CoordinatorRole.SHELTER){
                 ShelterManager.editShelter(id, currentOccupancy, petFriendly, currentPetOccupancy,

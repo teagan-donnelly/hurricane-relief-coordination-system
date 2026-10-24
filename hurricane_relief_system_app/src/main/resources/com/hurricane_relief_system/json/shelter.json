@@ -21,7 +21,10 @@
     "hasPower": true,
     "status": "OPEN",
     "petCapacity": 0,
-    "currentPetOccupancy": 0
+    "admin": "0b7e4c21-9d3a-4f6e-b8c5-2a1d7e9f4c13",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   },
   {
     "name": "Buist Academy Shelter",
@@ -46,7 +49,10 @@
     "hasPower": true,
     "status": "OPEN",
     "petCapacity": 20,
-    "currentPetOccupancy": 0
+    "admin": "0b7e4c21-9d3a-4f6e-b8c5-2a1d7e9f4c13",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   },
   {
     "name": "James Simons Elementary Shelter",
@@ -70,7 +76,10 @@
     "hasPower": true,
     "status": "OPEN",
     "petCapacity": 20,
-    "currentPetOccupancy": 0
+    "admin": "0b7e4c21-9d3a-4f6e-b8c5-2a1d7e9f4c13",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   },
   {
     "name": "Burke High School Shelter",
@@ -96,7 +105,10 @@
     "hasPower": true,
     "status": "OPEN",
     "petCapacity": 20,
-    "currentPetOccupancy": 0
+    "admin": "f9a3b046-1c25-4a68-8f4a-46bec4756404",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   },
   {
     "name": "James Island Charter High School Shelter",
@@ -121,7 +133,10 @@
     "hasPower": true,
     "status": "OPEN",
     "petCapacity": 20,
-    "currentPetOccupancy": 0
+    "admin": "0b7e4c21-9d3a-4f6e-b8c5-2a1d7e9f4c13",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   },
   {
     "name": "West Ashley High School Shelter",
@@ -146,7 +161,10 @@
     "hasPower": true,
     "status": "OPEN",
     "petCapacity": 20,
-    "currentPetOccupancy": 0
+    "admin": "0b7e4c21-9d3a-4f6e-b8c5-2a1d7e9f4c13",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   },
   {
     "name": "School of the Arts Shelter",
@@ -170,7 +188,10 @@
     "hasPower": true,
     "status": "OPEN",
     "petCapacity": 20,
-    "currentPetOccupancy": 0
+    "admin": "0b7e4c21-9d3a-4f6e-b8c5-2a1d7e9f4c13",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   },
   {
     "name": "North Charleston High School Shelter",
@@ -194,7 +215,10 @@
     "hasPower": true,
     "status": "OPEN",
     "petCapacity": 0,
-    "currentPetOccupancy": 0
+    "admin": "0b7e4c21-9d3a-4f6e-b8c5-2a1d7e9f4c13",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   },
   {
     "name": "Wando High School Shelter",
@@ -219,7 +243,10 @@
     "hasPower": true,
     "status": "CLOSED",
     "petCapacity": 20,
-    "currentPetOccupancy": 0
+    "admin": "0b7e4c21-9d3a-4f6e-b8c5-2a1d7e9f4c13",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   },
   {
     "name": "Stall High School Shelter",
@@ -243,6 +270,9 @@
     "hasPower": true,
     "status": "FULL",
     "petCapacity": 20,
-    "currentPetOccupancy": 0
+    "admin": "0b7e4c21-9d3a-4f6e-b8c5-2a1d7e9f4c13",
+    "petOccupancy": 0,
+    "occupants": [],
+    "pets": []
   }
 ]

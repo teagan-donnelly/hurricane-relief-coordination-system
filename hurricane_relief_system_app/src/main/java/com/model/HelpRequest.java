@@ -120,19 +120,32 @@ public class HelpRequest {
     }
 
     /**
-     * Marks the request as completed. Only a shelter manager is allowed to do this.
+     * Marks the request as completed. Only the manager of the shelter the
+     * household was taken to is allowed to do this.
      * @param user the user trying to complete the request
      * @return true if the request was completed, false otherwise
      */
     public boolean markComplete(User user) {
-        if (!(user instanceof AidCoordinator) ||
-            ((AidCoordinator) user).getRole() != CoordinatorRole.SHELTER) {
+        if (!(user instanceof Coordinator) ||
+            ((Coordinator) user).getRole() != CoordinatorRole.SHELTER) {
             System.out.println("Permission denied: only a shelter manager can mark a request as complete.");
             return false;
         }
 
         if (requestStatus == RequestStatus.CANCELED || requestStatus == RequestStatus.COMPLETED) {
             System.out.println("This request is already " + requestStatus + ".");
+            return false;
+        }
+
+        if (selectedShelterID == null) {
+            System.out.println("Permission denied: no shelter has been selected for this request.");
+            return false;
+        }
+
+        Shelter shelter = new ShelterManager().findShelter(selectedShelterID);
+        if (shelter == null || !shelter.isManagedBy(user)) {
+            System.out.println("Permission denied: " + user.getFirstName() + " " + user.getLastName() +
+                " does not manage the shelter for this request.");
             return false;
         }
 
@@ -225,6 +238,10 @@ public class HelpRequest {
      * @param status the new status of the request
      */
     public void setRequestStatus(RequestStatus status) {
+        if (status == RequestStatus.COMPLETED) {
+            System.out.println("Requests can only be completed by their shelter manager using markComplete.");
+            return;
+        }
         this.requestStatus = status;
     }
 

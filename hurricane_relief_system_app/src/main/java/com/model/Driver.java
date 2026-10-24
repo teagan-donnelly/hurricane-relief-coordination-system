@@ -11,6 +11,58 @@ import java.util.UUID;
 public class Driver {
 
     public static void main(String[] args) {
+        showSavedRecords("BEFORE this run");
+        runScenario();
+        showSavedRecords("AFTER this run");
+    }
+
+    /**
+     * Prints the Carter request and its shelter exactly as they are saved in the JSON files,
+     * so a restart can be checked against what was saved.
+     * @param label when this snapshot was taken
+     */
+    public static void showSavedRecords(String label) {
+        UUID requestID = UUID.fromString("b5e1d824-7f93-4046-8d28-249ca2534202");
+        System.out.println("\n===== Saved data " + label + " =====");
+
+        PersonalRequest saved = null;
+        for (HelpRequest current : DataLoader.getRequests()) {
+            if (current.getRequestID().equals(requestID) && current instanceof PersonalRequest) {
+                saved = (PersonalRequest) current;
+            }
+        }
+        if (saved == null) {
+            System.out.println("The Carter request has not been saved yet.");
+            System.out.println("==========================================\n");
+            return;
+        }
+
+        String volunteerName = "none";
+        for (Volunteer volunteer : DataLoader.getVolunteers()) {
+            if (volunteer.getUserId().equals(saved.getAssignedVolunteerID())) {
+                volunteerName = volunteer.getFirstName() + " " + volunteer.getLastName();
+            }
+        }
+        System.out.println("Carter request status: " + saved.getRequestStatus());
+        System.out.println("Assigned volunteer: " + volunteerName);
+        System.out.println("Household: " + saved.getHouseholdMembers());
+        System.out.println("Pets: " + saved.getPetNames());
+
+        Shelter shelter = new ShelterManager().findShelter(saved.getSelectedShelterID());
+        if (shelter == null) {
+            System.out.println("Selected shelter: none");
+        } else {
+            System.out.println("Selected shelter: " + shelter.getName());
+            System.out.println("Shelter occupancy: " + shelter.getCurrentOccupancy() + "/" +
+                shelter.getCapacity() + ", pets: " + shelter.getCurrentPetOccupancy() + "/" +
+                shelter.getPetCapacity());
+            System.out.println("Shelter occupants: " + shelter.getOccupants());
+            System.out.println("Shelter pets: " + shelter.getPets());
+        }
+        System.out.println("==========================================\n");
+    }
+
+    public static void runScenario() {
         Location home = new Location(32.7765, -79.9311,
             "123 Palmetto Lane", 0, "Charleston", "SC", "29401");
 
@@ -361,6 +413,8 @@ public class Driver {
     public static void showRolePermissions(Volunteer rosa, PersonalRequest request) {
         System.out.println("\nRosa drops the family off and tries to mark the request complete:");
         request.markComplete(rosa);
+        System.out.println("Rosa tries to set the status to COMPLETED directly:");
+        request.setRequestStatus(RequestStatus.COMPLETED);
         System.out.println("Request status is still: " + request.getRequestStatus());
     }
 
@@ -425,7 +479,7 @@ public class Driver {
         ShelterManager shelterManager = new ShelterManager();
         Shelter shelter = null;
         for (Shelter current : shelterManager.getShelters()) {
-            if (current.getAdmin() != null && current.getAdmin().getUserId().equals(felix.getUserId())) {
+            if (current.isManagedBy(felix)) {
                 shelter = current;
             }
         }
@@ -435,7 +489,7 @@ public class Driver {
                 System.out.println("Felix does not manage a shelter yet.");
                 return;
             }
-            shelter.setAdmin(felix);
+            shelter.setAdmin(felix.getUserId());
         }
         showShelter(shelter);
 
@@ -449,10 +503,19 @@ public class Driver {
         }
 
         System.out.println("\nFelix checks the Carter family and Buddy into the shelter.");
+        int occupancyBefore = shelter.getCurrentOccupancy();
         if (!shelter.checkIn(request)) {
             return;
         }
         showShelter(shelter);
+        System.out.println("Human occupancy went from " + occupancyBefore + " to " +
+            shelter.getCurrentOccupancy() + " (+" + (shelter.getCurrentOccupancy() - occupancyBefore) + ")");
+
+        System.out.println("\nFelix accidentally tries to check the family in again:");
+        shelter.checkIn(request);
+        System.out.println("Occupancy is still " + shelter.getCurrentOccupancy() + " with " +
+            shelter.getOccupants().size() + " occupants and " + shelter.getPets().size() +
+            (shelter.getPets().size() == 1 ? " pet" : " pets") + " on record.");
 
         System.out.println("\nFelix marks the relief request complete:");
         if (!request.markComplete(felix)) {

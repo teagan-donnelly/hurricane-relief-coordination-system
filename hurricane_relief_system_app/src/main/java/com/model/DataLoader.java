@@ -193,15 +193,19 @@ public class DataLoader extends AppConstants {
                 boolean hasPower = (Boolean) shelterJSON.get(SHELTER_HAS_POWER);
                 ShelterStatus status = ShelterStatus.valueOf(((String) shelterJSON.get(SHELTER_STATUS)).toUpperCase());
                 boolean hasMedicalStaff = Boolean.TRUE.equals(shelterJSON.get(SHELTER_MEDICAL_STAFF));
-                UUID adminID = UUID.fromString((String) shelterJSON.get(SHELTER_ADMIN));
+                String admin = (String) shelterJSON.get(SHELTER_ADMIN);
+                UUID adminID = admin != null && !admin.isEmpty() ? UUID.fromString(admin) : null;
                 
                 shelters.add(new Shelter(name, shelterID, location, currentOccupancy, capacity, petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, adminID));
                 
-                Number petCapacity = (Number) shelterJSON.get("petCapacity");
-                Number petOccupancy = (Number) shelterJSON.get("currentPetOccupancy");
-                shelters.get(shelters.size() - 1).setPetSpace(
+                Shelter shelter = shelters.get(shelters.size() - 1);
+                Number petCapacity = (Number) shelterJSON.get(SHELTER_PET_CAPACITY);
+                Number petOccupancy = (Number) shelterJSON.get(SHELTER_CURRENT_PET_OCCUPANCY);
+                shelter.setPetSpace(
                     petCapacity == null ? 0 : petCapacity.intValue(),
                     petOccupancy == null ? 0 : petOccupancy.intValue());
+                shelter.setOccupants(getJSONList(shelterJSON, SHELTER_OCCUPANTS));
+                shelter.setPets(getJSONList(shelterJSON, SHELTER_PETS));
                 
                         
             }
