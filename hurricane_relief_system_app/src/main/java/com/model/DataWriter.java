@@ -15,14 +15,31 @@ import org.json.simple.parser.JSONParser;
  */
 public class DataWriter extends AppConstants {
 
+    /**
+     * Saves one aid requester to the requester JSON file.
+     * @param requester Aid requester to save
+     * @return true if successful, false otherwise
+     */
     public static boolean saveRequester(AidRequester requester) {
         return saveRecord(REQUESTER_JSON, getRequesterJSON(requester), USER_ID);
     }
 
+    /**
+     * Saves one help request to the help request JSON file.
+     * @param request Help request to save
+     * @return true if successful, false otherwise
+     */
     public static boolean saveRequest(HelpRequest request) {
         return saveRecord(REQUEST_JSON, getRequestJSON(request), REQUEST_ID);
     }
 
+    /**
+     * Adds a record to a JSON file, or replaces it if one with the same ID already exists.
+     * @param filename JSON file to save to
+     * @param record Record to save
+     * @param idKey Key used to find the ID of the record
+     * @return true if successful, false otherwise
+     */
     @SuppressWarnings("unchecked")
     private static boolean saveRecord(String filename, JSONObject record, String idKey) {
         JSONArray records;
@@ -94,6 +111,11 @@ public class DataWriter extends AppConstants {
 
     // --- Helper Methods ---
 
+    /**
+     * Converts the fields every user has into a JSON object.
+     * @param user User to convert
+     * @return JSON object of the user
+     */
     @SuppressWarnings("unchecked")
     private static JSONObject getUserBaseJSON(User user) {
         JSONObject obj = new JSONObject();
@@ -117,6 +139,11 @@ public class DataWriter extends AppConstants {
         return obj;
     }
 
+    /**
+     * Converts a coordinator into a JSON object.
+     * @param coordinator Coordinator to convert
+     * @return JSON object of the coordinator
+     */
     @SuppressWarnings("unchecked")
     private static JSONObject getCoordinatorJSON(Coordinator coordinator) {
         JSONObject obj = getUserBaseJSON(coordinator);
@@ -124,6 +151,11 @@ public class DataWriter extends AppConstants {
         return obj;
     }
 
+    /**
+     * Converts an aid requester into a JSON object.
+     * @param requester Aid requester to convert
+     * @return JSON object of the aid requester
+     */
     @SuppressWarnings("unchecked")
     private static JSONObject getRequesterJSON(AidRequester requester) {
         JSONObject obj = getUserBaseJSON(requester);
@@ -139,6 +171,11 @@ public class DataWriter extends AppConstants {
         return obj;
     }
 
+    /**
+     * Converts a volunteer into a JSON object.
+     * @param volunteer Volunteer to convert
+     * @return JSON object of the volunteer
+     */
     @SuppressWarnings("unchecked")
     private static JSONObject getVolunteerJSON(Volunteer volunteer) {
         JSONObject obj = getUserBaseJSON(volunteer);
@@ -175,6 +212,11 @@ public class DataWriter extends AppConstants {
         return obj;
     }
 
+    /**
+     * Converts a help request into a JSON object.
+     * @param request Help request to convert
+     * @return JSON object of the help request
+     */
     @SuppressWarnings("unchecked")
     private static JSONObject getRequestJSON(HelpRequest request) {
         JSONObject obj = new JSONObject();
@@ -218,6 +260,11 @@ public class DataWriter extends AppConstants {
         return obj;
     }
 
+    /**
+     * Converts a location into a JSON object.
+     * @param loc Location to convert
+     * @return JSON object of the location, or null if the location is null
+     */
     @SuppressWarnings("unchecked")
     private static JSONObject getLocationJSON(Location loc) {
         if (loc == null) return null;
@@ -232,6 +279,12 @@ public class DataWriter extends AppConstants {
         return obj;
     }
 
+    /**
+     * Writes a JSON array to a file.
+     * @param filename File to write to
+     * @param jsonArray JSON array to write
+     * @return true if successful, false otherwise
+     */
     private static boolean writeToFile(String filename, JSONArray jsonArray) {
         try (FileWriter file = new FileWriter(filename)) {
             file.write(jsonArray.toJSONString());
@@ -243,18 +296,38 @@ public class DataWriter extends AppConstants {
         }
     }
 
+    /**
+     * Saves one volunteer to the volunteer JSON file.
+     * @param volunteer Volunteer to save
+     * @return true if successful, false otherwise
+     */
     public static boolean saveVolunteer(Volunteer volunteer) {
         return saveRecord(VOLUNTEER_JSON, getVolunteerJSON(volunteer), USER_ID);
     }
 
+    /**
+     * Saves one coordinator to the coordinator JSON file.
+     * @param coordinator Coordinator to save
+     * @return true if successful, false otherwise
+     */
     public static boolean saveCoordinator(Coordinator coordinator) {
         return saveRecord(COORDINATOR_JSON, getCoordinatorJSON(coordinator), USER_ID);
     }
 
+    /**
+     * Saves one shelter to the shelter JSON file.
+     * @param shelter Shelter to save
+     * @return true if successful, false otherwise
+     */
     public static boolean saveShelter(Shelter shelter) {
         return saveRecord(SHELTER_JSON, getShelterJSON(shelter), SHELTER_ID);
     }
 
+    /**
+     * Converts a shelter into a JSON object.
+     * @param shelter Shelter to convert
+     * @return JSON object of the shelter
+     */
     @SuppressWarnings("unchecked")
     private static JSONObject getShelterJSON(Shelter shelter) {
         JSONObject obj = new JSONObject();

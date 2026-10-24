@@ -1,7 +1,7 @@
 package com.model;
 
 /**
- * 
+ * Enumeration of how urgent a help request is.
  * @author Teagan Donnelly
  */
 public enum Urgency {

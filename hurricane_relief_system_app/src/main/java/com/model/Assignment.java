@@ -122,34 +122,66 @@ public class Assignment {
 
     // Getters
 
+    /**
+     * Gets the assignment's ID.
+     * @return the assignment ID
+     */
     public int getAssignmentId() {
         return assignmentId;
     }
 
+    /**
+     * Gets the volunteer on this assignment.
+     * @return the volunteer
+     */
     public Volunteer getVolunteer() {
         return volunteer;
     }
 
+    /**
+     * Gets the assignment's status.
+     * @return the status
+     */
     public AssignmentStatus getStatus() {
         return status;
     }
 
+    /**
+     * Gets the help request for this assignment.
+     * @return the help request
+     */
     public HelpRequest getRequest() {
         return request;
     }
 
+    /**
+     * Gets when the assignment was accepted.
+     * @return the assigned time, or null if not accepted yet
+     */
     public LocalDateTime getAssignedTime() {
         return assignedTime;
     }
 
+    /**
+     * Gets when the volunteer arrived.
+     * @return the arrival time, or null if they haven't arrived
+     */
     public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
+    /**
+     * Gets whether the area is safe.
+     * @return true if safe, false otherwise
+     */
     public boolean isSaftey() {
         return saftey;
     }
 
+    /**
+     * Gets whether the terrain is difficult.
+     * @return true if difficult, false otherwise
+     */
     public boolean isTerrain() {
         return terrain;
     }

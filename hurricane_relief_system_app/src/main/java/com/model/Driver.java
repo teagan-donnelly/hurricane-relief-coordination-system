@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * 
+ * Driver that runs through the Carter family hurricane relief scenario.
  * @author Teagan Donnelly
  */
 public class Driver {
 
+    /**
+     * Runs the scenario.
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         showSavedRecords("BEFORE this run");
         runScenario();
@@ -151,6 +155,10 @@ public class Driver {
         checkInAtShelter(rosa, request);
     }
 
+    /**
+     * Adds the Carter family's household members, pet, and medical note to the request.
+     * @param request Carter family's help request
+     */
     public static void addFamilyDetails(PersonalRequest request) {
         if (!request.getHouseholdMembers().isEmpty()) {
             return;
@@ -163,6 +171,10 @@ public class Driver {
             "medical assistance. Take the family to a shelter with medical staff.");
     }
 
+    /**
+     * Loads Rosa Delgado's volunteer account, or creates and saves it if it doesn't exist.
+     * @return Rosa's volunteer account, or null if it could not be saved
+     */
     public static Volunteer registerRosa() {
         UUID rosaID = UUID.fromString("c6f2e935-8a04-4157-9e39-35adb3645303");
         for (Volunteer saved : DataLoader.getVolunteers()) {
@@ -201,6 +213,11 @@ public class Driver {
         }
     }
 
+    /**
+     * Creates a list of help requests for the scenario, including the Carter request.
+     * @param carterRequest Carter family's help request
+     * @return List of help requests
+     */
     public static ArrayList<HelpRequest> createScenarioRequests(HelpRequest carterRequest) {
         ArrayList<HelpRequest> requests = new ArrayList<>();
         requests.add(carterRequest);
@@ -244,6 +261,12 @@ public class Driver {
         return requests;
     }
 
+    /**
+     * Checks if a volunteer's skills match what a request needs.
+     * @param volunteer Volunteer being checked
+     * @param request Help request being checked
+     * @return true if the volunteer matches the request, false otherwise
+     */
     public static boolean matchesSpecialty(Volunteer volunteer, HelpRequest request) {
         if (request.getAssistanceType() == AssistanceType.TRANSPORT) {
             for (String skill : volunteer.getSkills()) {
@@ -255,6 +278,12 @@ public class Driver {
         return false;
     }
 
+    /**
+     * Gets the straight line distance between two locations.
+     * @param start Starting location
+     * @param end Ending location
+     * @return Distance in kilometers
+     */
     public static double getDistance(Location start, Location end) {
         double latitude = Math.toRadians(end.getLatitude() - start.getLatitude());
         double longitude = Math.toRadians(end.getLongitude() - start.getLongitude());
@@ -266,6 +295,11 @@ public class Driver {
         return 6371 * 2 * Math.atan2(Math.sqrt(value), Math.sqrt(1 - value));
     }
 
+    /**
+     * Prints the open requests and recommends the best one for the volunteer.
+     * @param rosa Volunteer looking at requests
+     * @param requests List of help requests
+     */
     public static void showRecommendedRequests(Volunteer rosa, ArrayList<HelpRequest> requests) {
         ArrayList<HelpRequest> openRequests = new ArrayList<>();
         for (HelpRequest request : requests) {
@@ -310,6 +344,10 @@ public class Driver {
         }
     }
 
+    /**
+     * Prints the details of a request.
+     * @param request Help request to print
+     */
     public static void showRequestDetails(PersonalRequest request) {
         System.out.println("\nRosa opens the Carter family request:");
         System.out.println("People needing transportation: " + request.getHouseholdSize());
@@ -325,6 +363,11 @@ public class Driver {
         System.out.println("Status: " + request.getRequestStatus());
     }
 
+    /**
+     * Finds a shelter for the family and assigns the volunteer to the request.
+     * @param rosa Volunteer being assigned
+     * @param request Help request being assigned
+     */
     public static void findShelterAndAssign(Volunteer rosa, PersonalRequest request) {
         ShelterManager shelterManager = new ShelterManager();
         if (request.getAssignedVolunteerID() != null) {
@@ -399,6 +442,11 @@ public class Driver {
         }
     }
 
+    /**
+     * Exports the volunteer's trip info to a file.
+     * @param rosa Volunteer exporting the trip
+     * @param request Help request for the trip
+     */
     public static void exportTrip(Volunteer rosa, PersonalRequest request) {
         ShelterManager shelterManager = new ShelterManager();
         Shelter shelter = shelterManager.findShelter(request.getSelectedShelterID());
@@ -410,6 +458,11 @@ public class Driver {
         rosa.exportTripInfo(request, shelter, "carter-trip.txt");
     }
 
+    /**
+     * Shows that a volunteer cannot mark a request complete.
+     * @param rosa Volunteer trying to complete the request
+     * @param request Help request being completed
+     */
     public static void showRolePermissions(Volunteer rosa, PersonalRequest request) {
         System.out.println("\nRosa drops the family off and tries to mark the request complete:");
         request.markComplete(rosa);
@@ -418,6 +471,10 @@ public class Driver {
         System.out.println("Request status is still: " + request.getRequestStatus());
     }
 
+    /**
+     * Loads Felix's coordinator account, or creates and saves it if it doesn't exist.
+     * @return Felix's coordinator account, or null if it could not be saved
+     */
     public static Coordinator registerFelix() {
         UUID felixID = UUID.fromString("f9a3b046-1c25-4a68-8f4a-46bec4756404");
         for (Coordinator saved : DataLoader.getCoordinators()) {
@@ -443,6 +500,10 @@ public class Driver {
         return felix;
     }
 
+    /**
+     * Prints the details of a shelter.
+     * @param shelter Shelter to print
+     */
     public static void showShelter(Shelter shelter) {
         Location location = shelter.getLocation();
         System.out.println("Shelter: " + shelter.getName());
@@ -461,6 +522,11 @@ public class Driver {
         }
     }
 
+    /**
+     * Has Felix check the family into the shelter and mark the request complete.
+     * @param rosa Volunteer who brought the family
+     * @param request Help request being completed
+     */
     public static void checkInAtShelter(Volunteer rosa, PersonalRequest request) {
         Coordinator felix = registerFelix();
         if (felix == null) {
@@ -479,7 +545,7 @@ public class Driver {
         ShelterManager shelterManager = new ShelterManager();
         Shelter shelter = null;
         for (Shelter current : shelterManager.getShelters()) {
-            if (current.isManagedBy(felix)) {
+            if (current.getAdmin() != null && current.getAdmin().equals(felix.getUserId())) {
                 shelter = current;
             }
         }

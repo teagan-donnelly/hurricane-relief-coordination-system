@@ -122,10 +122,18 @@ public class HurricaneEvent {
     }
 
     //getters
+    /**
+     * Gets the unique identifier of the hurricane event.
+     * @return the unique identifier of the hurricane event
+     */
     public UUID getHuricaneID() {
         return hurricaneID;
     }
 
+    /**
+     * Gets the name of the hurricane event.
+     * @return the name of the hurricane event
+     */
     public String getName() {
         return name;
     }

@@ -7,23 +7,35 @@ import java.util.UUID;
 import com.location.DrivingDistanceService;
 import java.io.IOException;
 
+/**
+ * Manages the list of shelters in the system.
+ */
 public class ShelterManager{
     private ArrayList<Shelter> shelters;
 
+    /**
+     * Constructor that loads the shelters from the JSON file.
+     */
     public ShelterManager(){
         this.shelters = DataLoader.getShelters();
     }
 
-    public ShelterManager(ArrayList<Shelter> shelters){
-        this.shelters = shelters != null ? shelters : new ArrayList<>();
-    }
-
+    /**
+     * Sorts the shelters from closest to farthest from a location.
+     * @param target Location to compare the shelters to
+     * @return Sorted list of shelters
+     */
     public List<Shelter> sortShelters(Location target){
     List<Shelter> sortedShelters = new ArrayList<>(shelters);
     sortedShelters.sort(Comparator.comparingDouble(shelter -> shelter.getLocation().calculateDistance(target)));
     return sortedShelters;
     }
 
+    /**
+     * Finds a shelter by its ID.
+     * @param id ID of the shelter
+     * @return The shelter, or null if it was not found
+     */
     public Shelter findShelter(UUID id){
         for(Shelter shelter : shelters){
             if(shelter.getId().equals(id)){
@@ -33,6 +45,19 @@ public class ShelterManager{
         return null;
     }
 
+    /**
+     * Creates a new shelter and adds it to the list.
+     * @param name Name of the shelter
+     * @param location Location of the shelter
+     * @param currentOccupancy Number of people in the shelter now
+     * @param capacity Max number of people
+     * @param petFriendly true if pets are allowed
+     * @param accessibilityInfo List of accessibility info
+     * @param hasPower true if the shelter has power
+     * @param status Current status of the shelter
+     * @param hasMedicalStaff true if the shelter has medical staff
+     * @param admin ID of the shelter admin
+     */
     public static void registerShelter(String name, Location location, int currentOccupancy, int capacity, 
         boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
         boolean hasMedicalStaff, UUID admin) {
@@ -48,6 +73,11 @@ public class ShelterManager{
 
     }
 
+    /**
+     * Gets a report of a shelter's info.
+     * @param id ID of the shelter
+     * @return Report of the shelter, or a message if it was not found
+     */
     public static String viewShelter(UUID id) {
         ShelterManager manager = new ShelterManager();
         ArrayList<Shelter> shelters = manager.getShelters();
@@ -69,6 +99,16 @@ public class ShelterManager{
 
     }
 
+    /**
+     * Edits the info of a shelter.
+     * @param id ID of the shelter
+     * @param occupancyChange Change in the number of people
+     * @param petFriendly true if pets are allowed
+     * @param PetOccupancyChange Change in the number of pets
+     * @param hasPower true if the shelter has power
+     * @param status New status of the shelter
+     * @param hasMedicalStaff true if the shelter has medical staff
+     */
     public static void editShelter(UUID id, int occupancyChange, boolean petFriendly, int PetOccupancyChange,
         boolean hasPower, ShelterStatus status, boolean hasMedicalStaff) {
 
@@ -141,12 +181,24 @@ public class ShelterManager{
         return closest;
     }
 
+    /**
+     * Gets the driving distance between two locations.
+     * @param start Starting location
+     * @param end Ending location
+     * @return Driving distance in meters
+     * @throws IOException if the lookup fails
+     * @throws InterruptedException if the lookup is interrupted
+     */
     protected double getDrivingDistance(Location start, Location end)
             throws IOException, InterruptedException {
         return new DrivingDistanceService().getDistance(start.getLatitude(), start.getLongitude(),
             end.getLatitude(), end.getLongitude());
     }
 
+    /**
+     * Gets the list of shelters.
+     * @return List of shelters
+     */
     public ArrayList<Shelter> getShelters() {
         return shelters;
     }
