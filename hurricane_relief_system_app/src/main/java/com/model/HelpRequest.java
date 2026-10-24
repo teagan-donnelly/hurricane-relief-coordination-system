@@ -125,8 +125,8 @@ public class HelpRequest {
      * @return true if the request was completed, false otherwise
      */
     public boolean markComplete(User user) {
-        if (!(user instanceof AidCoordinator) ||
-            ((AidCoordinator) user).getRole() != CoordinatorRole.SHELTER) {
+        if (!(user instanceof Coordinator) ||
+            ((Coordinator) user).getRole() != CoordinatorRole.SHELTER) {
             System.out.println("Permission denied: only a shelter manager can mark a request as complete.");
             return false;
         }

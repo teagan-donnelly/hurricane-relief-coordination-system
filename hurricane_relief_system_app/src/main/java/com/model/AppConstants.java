@@ -101,6 +101,7 @@ public abstract class AppConstants {
     public static final String SHELTER_PET_CAPACITY = "petCapacity";
     public static final String SHELTER_CURRENT_PET_OCCUPANCY = "petOccupancy";
     public static final String SHELTER_PETS = "pets";
+    public static final String SHELTER_OCCUPANTS = "occupants";
 
     
 }
