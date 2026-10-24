@@ -64,24 +64,87 @@ public class Volunteer extends User {
         this.credentials = credentials;
     }
 
+    /**
+     * Accepts a help request and marks this volunteer as the one handling it.
+     * @param request the request to accept
+     */
     public void acceptRequest(HelpRequest request) {
+        if (request == null) {
+            System.out.println("Request cannot be null.");
+            return;
+        }
 
+        if (!availability || isDispatched) {
+            System.out.println(getFirstName() + " is not available to accept a request right now.");
+            return;
+        }
+
+        if (request.getRequestStatus() == RequestStatus.CANCELED ||
+            request.getRequestStatus() == RequestStatus.COMPLETED) {
+            System.out.println("This request is already " + request.getRequestStatus() + ".");
+            return;
+        }
+
+        isDispatched = true;
+        request.setRequestStatus(RequestStatus.ASSIGNED);
+        request.setAssignedVolunteerID(getUserId());
+        System.out.println(getFirstName() + " accepted the request.");
     }
 
+    /**
+     * Declines a help request. If this volunteer was handling it, the request
+     * goes back to waiting for another volunteer.
+     * @param request the request to decline
+     */
     public void declineRequest(HelpRequest request) {
+        if (request == null) {
+            System.out.println("Request cannot be null.");
+            return;
+        }
 
+        if (getUserId().equals(request.getAssignedVolunteerID())) {
+            isDispatched = false;
+            request.setAssignedVolunteerID(null);
+            request.setRequestStatus(RequestStatus.AWAITING_ASSIGNMENT);
+        }
+        System.out.println(getFirstName() + " declined the request.");
     }
 
+    /**
+     * Asks another available volunteer for help with a request this volunteer is handling.
+     * @param request the request that needs more help
+     */
     public void requestAdditionalHelp(HelpRequest request) {
+        if (request == null || !getUserId().equals(request.getAssignedVolunteerID())) {
+            System.out.println("You can only ask for help on a request you are handling.");
+            return;
+        }
 
+        for (Volunteer volunteer : VolunteerManager.getInstance().getVolunteers()) {
+            if (!volunteer.getUserId().equals(getUserId()) && volunteer.isAvailability() &&
+                volunteer.isVerified() && !volunteer.isDispatched()) {
+                System.out.println(getFirstName() + " asked for help. " + volunteer.getFirstName() +
+                    " " + volunteer.getLastName() + " was notified.");
+                return;
+            }
+        }
+        System.out.println("No other volunteers are available to help right now.");
     }
 
     public void completeAssignment() {
         isDispatched = false;
     }
 
-    public void logHours() {
-
+    /**
+     * Adds hours to this volunteer's total.
+     * @param hours the number of hours worked
+     */
+    public void logHours(double hours) {
+        if (hours <= 0) {
+            System.out.println("Hours must be greater than 0.");
+            return;
+        }
+        volunteerHours += hours;
     }
 
     /**

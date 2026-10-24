@@ -1,0 +1,51 @@
+============================================================
+               HURRICANE RELIEF TRIP SHEET
+============================================================
+Volunteer: Rosa Delgado (843-555-0171)
+Vehicle/Supplies: Ford F-350 truck
+Request status: ASSIGNED
+
+PASSENGERS (3 people)
+------------------------------------------------------------
+  - Michael Carter, age 39
+  - Emily Carter, age 37
+  - Sophie Carter, age 8
+
+PETS (1)
+------------------------------------------------------------
+  - Buddy (dog)
+
+CONTACT INFORMATION
+------------------------------------------------------------
+  Name:  Michael Carter
+  Phone: 843-555-0147
+  Email: michael.carter@example.com
+  Also:  Emily Carter: 843-555-0148
+
+PICKUP ADDRESS
+------------------------------------------------------------
+  123 Palmetto Lane, Charleston, SC 29401
+  Note: Rising floodwater surrounds the home; the family cannot safely use their car.
+
+*** MEDICAL NOTE ***
+------------------------------------------------------------
+  Sophie Carter (age 8) has worsening asthma symptoms and needs medical assistance. Take the family to a shelter with medical staff.
+
+DIRECTIONS: YOUR LOCATION TO PICKUP
+------------------------------------------------------------
+  1. Head northeast on Beaufain Street, S-393
+  2. Turn left onto Coming Street, S-553
+  3. Turn left onto Fishburne Street, L-658
+  4. Turn right onto Perry Street
+  5. Arrive at Perry Street, on the right
+
+DIRECTIONS: PICKUP TO SHELTER
+------------------------------------------------------------
+  1. Head southeast on Perry Street
+  2. Turn right onto Fishburne Street, L-658
+  3. Arrive at Fishburne Street, L-658, on the right
+
+DESTINATION SHELTER
+------------------------------------------------------------
+  Burke High School Shelter
+  244 President Street, Charleston, SC 29403
