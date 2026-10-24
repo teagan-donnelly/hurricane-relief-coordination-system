@@ -50,18 +50,19 @@ public class Shelter {
         this.admin = admin;
     }
 
-    public Shelter (String name, UUID id, Location location, int capacity, 
-        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status, UUID admin) {
+    public Shelter (String name, UUID id, Location location, int occupancy, int capacity, 
+        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status, boolean hasMedicalStaff) {
        
         this.name = name;
         this.id = id;
         this.location = location;
+        this.currentOccupancy = occupancy;
         this.capacity = capacity;
         this.petFriendly = petFriendly;
         this.accessibilityInfo = accessibilityInfo;
         this.hasPower = hasPower;
         this.status = status;
-        this.admin = admin;
+        this.hasMedicalStaff = hasMedicalStaff;
     }
 
     public Shelter (String name, UUID id, Location location, int capacity, UUID admin) {
@@ -225,7 +226,7 @@ public class Shelter {
         this.petCapacity = capacity;
     }
     public void setCurrentPetOccupancy(int currentPetOccupancy){
-        this.currentPetOccupancy = currentPetOccupancyl
+        this.currentPetOccupancy = currentPetOccupancy;
     }
     public void setOccupants(ArrayList<String> occupants){
         this.occupants = occupants;

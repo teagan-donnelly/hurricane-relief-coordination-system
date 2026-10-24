@@ -28,7 +28,7 @@ public class ShelterManagerTest {
 
     @Test
     public void excludesSheltersThatCannotMeetFamilyNeeds() {
-        ShelterManager manager = new ShelterManager(new ArrayList<Shelter>());
+        ShelterManager manager = new ShelterManager();
         assertNotNull(manager.getProblem(shelter("No dogs", -79.94, 0, false, true), request(), true));
         assertNotNull(manager.getProblem(shelter("No medical", -79.94, 0, true, false), request(), true));
         assertNotNull(manager.getProblem(shelter("Two seats", -79.94, 8, true, true), request(), true));
@@ -45,7 +45,7 @@ public class ShelterManagerTest {
         Shelter shorterRoad = shelter("Shorter road", -79.96, 0, true, true);
         shelters.add(nearby);
         shelters.add(shorterRoad);
-        ShelterManager manager = new ShelterManager(shelters) {
+        ShelterManager manager = new ShelterManager() {
             protected double getDrivingDistance(Location start, Location end) {
                 return end.getLongitude() == -79.931 ? 6000 : 3000;
             }
@@ -57,7 +57,7 @@ public class ShelterManagerTest {
     public void doesNotGuessWhenRoadLookupFails() throws Exception {
         ArrayList<Shelter> shelters = new ArrayList<>();
         shelters.add(shelter("Suitable", -79.94, 0, true, true));
-        ShelterManager manager = new ShelterManager(shelters) {
+        ShelterManager manager = new ShelterManager() {
             protected double getDrivingDistance(Location start, Location end) throws IOException {
                 throw new IOException("Unavailable");
             }

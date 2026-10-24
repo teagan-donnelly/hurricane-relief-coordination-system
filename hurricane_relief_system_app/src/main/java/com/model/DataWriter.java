@@ -276,7 +276,7 @@ public class DataWriter extends AppConstants {
         obj.put(SHELTER_STATUS, shelter.getStatus() != null ? shelter.getStatus().name() : "");
         obj.put(SHELTER_PET_CAPACITY, shelter.getPetCapacity());
         obj.put(SHELTER_CURRENT_PET_OCCUPANCY, shelter.getCurrentPetOccupancy());
-        obj.put(SHELTER_ADMIN, shelter.getAdmin() != null ? shelter.getAdmin().getUserId().toString() : "");
+        obj.put(SHELTER_ADMIN, shelter.getAdmin() != null ? shelter.getAdmin().toString() : "");
 
         JSONArray occupants = new JSONArray();
         occupants.addAll(shelter.getOccupants());

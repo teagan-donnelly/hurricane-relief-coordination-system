@@ -26,7 +26,7 @@ public class HurricaneReliefApplication {
     private HurricaneReliefApplication() {
         requestManager = RequestManager.getInstance();
         volunteerManager = VolunteerManager.getInstance();
-        shelterManager = new ShelterManager(DataLoader.getShelters());
+        shelterManager = new ShelterManager();
         accountManager = new AccountManager(DataLoader.getAllUsers()); 
     }
 
@@ -134,7 +134,7 @@ public class HurricaneReliefApplication {
         if(user.getClass().getSimpleName() == "Coordinator") {
             Coordinator coordinator = (Coordinator) user;
             if(coordinator.getRole() == CoordinatorRole.SHELTER){
-                ShelterManager.registerShelter(name, id, location, currentOccupancy, capacity, 
+                ShelterManager.registerShelter(name, location, currentOccupancy, capacity, 
                     petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, admin);
             } else {
                 System.out.println("Current user does not have access to register a shelter");

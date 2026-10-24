@@ -425,7 +425,7 @@ public class Driver {
         ShelterManager shelterManager = new ShelterManager();
         Shelter shelter = null;
         for (Shelter current : shelterManager.getShelters()) {
-            if (current.getAdmin() != null && current.getAdmin().getUserId().equals(felix.getUserId())) {
+            if (current.getAdmin() != null && current.getAdmin().equals(felix.getUserId())) {
                 shelter = current;
             }
         }
@@ -435,7 +435,7 @@ public class Driver {
                 System.out.println("Felix does not manage a shelter yet.");
                 return;
             }
-            shelter.setAdmin(felix);
+            shelter.setAdmin(felix.getUserId());
         }
         showShelter(shelter);
 
