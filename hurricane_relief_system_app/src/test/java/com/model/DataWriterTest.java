@@ -30,7 +30,7 @@ public class DataWriterTest {
 
         ArrayList<User> testUsers = new ArrayList<User>();
 
-        Coordinator testCoordinator = new Coordinator(
+        Coordinator testCoordinator = new Coordinator(CoordinatorRole.AID,
             "Alice", "Smith", UUID.randomUUID(), "alice@example.com",
             "803-555-0101", "asmith", "pass123", mockLocation, LocalDate.of(1990, 5, 12),
             NotificationType.EMAIL, contacts, volunteerManager
