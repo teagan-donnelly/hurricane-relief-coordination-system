@@ -11,20 +11,23 @@ import java.io.IOException;
  * @author Nicolas Gauvin
  * AidCoordinator
  */
-public class AidCoordinator extends User {
+public class Coordinator extends User {
 
     private VolunteerManager volunteers;
+    private CoordinatorRole role;
 
-    public AidCoordinator(String firstName, String lastName, UUID userID, String email, String phone, String userName, String password,
+    public Coordinator(CoordinatorRole role, String firstName, String lastName, UUID userID, String email, String phone, String userName, String password,
                           Location location, LocalDate birthDate, NotificationType notificationPreference, ArrayList<String> emergencyContacts,
                           VolunteerManager volunteers) {
         super(firstName, lastName, userID, email, phone, userName, password, location, birthDate, notificationPreference, emergencyContacts);
+        this.role = role;
         this.volunteers = volunteers;
     }
 
-    public AidCoordinator(String firstName, String lastName, String email, String phone, String userName, String password, VolunteerManager volunteers) {
+    public Coordinator(CoordinatorRole role, String firstName, String lastName, String email, String phone, String userName, String password, VolunteerManager volunteers) {
 
         super(firstName, lastName, email, phone, userName, password);
+        this.role = role;
         this.volunteers = volunteers;
     }
 
@@ -231,5 +234,9 @@ public class AidCoordinator extends User {
 
     public VolunteerManager getVolunteers() {
         return volunteers;
+    }
+
+    public CoordinatorRole getRole() {
+        return role;
     }
 }

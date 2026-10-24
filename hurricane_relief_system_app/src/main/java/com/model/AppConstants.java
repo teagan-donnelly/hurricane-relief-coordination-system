@@ -8,7 +8,7 @@ package com.model;
 public abstract class AppConstants {
     
     public static final String VOLUNTEER_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/volunteer.json";
-    public static final String COORDINATOR_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/aid-coordinators.json";
+    public static final String COORDINATOR_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/coordinators.json";
     public static final String REQUESTER_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/aid-requestors.json";
     public static final String REQUEST_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/aid-request.json";
     public static final String HURICANE_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/hurricane-event.json";
@@ -40,6 +40,8 @@ public abstract class AppConstants {
     public static final String USER_VERIFIED = "isVerifed";
     public static final String USER_DISPACHED = "isDispached";
     public static final String USER_VOLUNTEER_HOURS = "volunteerHours";
+
+    public static final String COORDINATOR_ROLE = "role";
 
 
     public static final String REQUEST_ID = "requestID";
@@ -92,5 +94,7 @@ public abstract class AppConstants {
     public static final String SHELTER_HAS_POWER = "hasPower";
     public static final String SHELTER_STATUS = "status";
     public static final String SHELTER_MEDICAL_STAFF = "hasMedicalStaff";
+    public static final String SHELTER_ADMIN = "admin";
+
     
 }

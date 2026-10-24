@@ -10,8 +10,8 @@ import java.io.IOException;
 public class ShelterManager{
     private ArrayList<Shelter> shelters;
 
-    public ShelterManager(ArrayList<Shelter> shelters){
-        this.shelters = shelters;
+    public ShelterManager(){
+        this.shelters = DataLoader.getShelters();
     }
 
     public List<Shelter> sortShelters(Location target){
@@ -27,6 +27,53 @@ public class ShelterManager{
             }
         }
         return null;
+    }
+
+    public static void registerShelter(String name, Location location, int currentOccupancy, int capacity, 
+        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
+        boolean hasMedicalStaff, UUID admin) {
+
+        ShelterManager manager = new ShelterManager();
+        ArrayList<Shelter> shelters = manager.getShelters();
+        UUID id = UUID.randomUUID(); 
+
+        shelters.add(new Shelter(name, id, location, currentOccupancy, capacity, 
+                    petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, admin));
+
+    }
+
+    public static void viewShelter(UUID id) {
+        ShelterManager manager = new ShelterManager();
+        ArrayList<Shelter> shelters = manager.getShelters();
+
+        for (Shelter shelter : shelters) {
+            if (shelter.getId() == id) {
+                String report = "Shelter name" + shelter.getName() + "\n" +
+                    "Shelter location" + shelter.getLocation() + "\n" +
+                    "Shelter capacity" + shelter.getCapacity() + "\n" +
+                    "Shelter occupancy" + shelter.getCurrentOccupancy() + "\n" +
+                    "Shelter space" + shelter.getAvailableSpace() + "\n" +
+                    "Shelter name" + shelter.getName() + "\n" +
+                    "Shelter name" + shelter.getName() + "\n" +
+                    "Shelter name" + shelter.getName() + "\n" +
+                    "Shelter name" + shelter.getName() + "\n" +
+                    "Shelter name" + shelter.getName() + "\n" +
+                    "Shelter name" + shelter.getName() + "\n" +
+                    "Shelter name" + shelter.getName() + "\n" +;
+
+                    
+            }
+        }
+
+    }
+
+    public static void editShelter(String name, Location location, int currentOccupancy, int capacity, 
+        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
+        boolean hasMedicalStaff, UUID admin) {
+
+        ShelterManager manager = new ShelterManager();
+        ArrayList<Shelter> shelters = manager.getShelters();
+
     }
 
     /**

@@ -17,6 +17,8 @@ public class Shelter {
     private boolean hasMedicalStaff;
     private int petCapacity;
     private int currentPetOccupancy;
+    private UUID admin;
+    private ArrayList<AidRequester> occupants;
 
     public void setPetSpace(int petCapacity, int currentPetOccupancy) {
         if (petCapacity < 0 || currentPetOccupancy < 0 || currentPetOccupancy > petCapacity) {
@@ -32,7 +34,7 @@ public class Shelter {
 
     public Shelter (String name, UUID id, Location location, int currentOccupancy, int capacity, 
         boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
-        boolean hasMedicalStaff) {
+        boolean hasMedicalStaff, UUID admin) {
        
         this.name = name;
         this.id = id;
@@ -44,10 +46,11 @@ public class Shelter {
         this.accessibilityInfo = accessibilityInfo;
         this.hasPower = hasPower;
         this.status = status;
+        this.admin = admin;
     }
 
     public Shelter (String name, UUID id, Location location, int capacity, 
-        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status) {
+        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status, UUID admin) {
        
         this.name = name;
         this.id = id;
@@ -57,14 +60,16 @@ public class Shelter {
         this.accessibilityInfo = accessibilityInfo;
         this.hasPower = hasPower;
         this.status = status;
+        this.admin = admin;
     }
 
-    public Shelter (String name, UUID id, Location location, int capacity) {
+    public Shelter (String name, UUID id, Location location, int capacity, UUID admin) {
        
         this.name = name;
         this.id = id;
         this.location = location;
         this.capacity = capacity;
+        this.admin = admin;
     
     }
 
@@ -107,6 +112,10 @@ public class Shelter {
 
     public ShelterStatus getStatus() {
         return status;
+    }
+
+    public UUID getAdmin() {
+        return admin;
     }
 
 }

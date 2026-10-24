@@ -59,8 +59,8 @@ public class DataWriter extends AppConstants {
         JSONArray volunteerList = new JSONArray();
 
         for (User user : users) {
-            if (user instanceof AidCoordinator) {
-                coordinatorList.add(getCoordinatorJSON((AidCoordinator) user));
+            if (user instanceof Coordinator) {
+                coordinatorList.add(getCoordinatorJSON((Coordinator) user));
             } else if (user instanceof AidRequester) {
                 requesterList.add(getRequesterJSON((AidRequester) user));
             } else if (user instanceof Volunteer) {
@@ -118,8 +118,10 @@ public class DataWriter extends AppConstants {
     }
 
     @SuppressWarnings("unchecked")
-    private static JSONObject getCoordinatorJSON(AidCoordinator coordinator) {
-        return getUserBaseJSON(coordinator);
+    private static JSONObject getCoordinatorJSON(Coordinator coordinator) {
+        JSONObject obj = getUserBaseJSON(coordinator);
+        obj.put(COORDINATOR_ROLE, coordinator.getRole());
+        return obj;
     }
 
     @SuppressWarnings("unchecked")

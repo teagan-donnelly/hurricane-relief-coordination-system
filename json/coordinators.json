@@ -1,9 +1,10 @@
 [
   {
     "userID": "e749d25b-831a-4c60-a219-75b3f9d08642",
-    "firstName": "Marcus",
+    "firstName": "Felix",
     "lastName": "Reed",
-    "email": "marcus.reed@example.com",
+    "role": "SHELTER",
+    "email": "felix.reed@example.com",
     "phoneNumber": "843-555-0107",
     "location": {
       "latitude": 32.8005,
@@ -15,7 +16,7 @@
       "zipcode": "29403"
     },
     "birthDate": "1987-06-15",
-    "username": "mreed87",
+    "username": "freed87",
     "password": "password",
     "notificationPreference": "SMS",
     "emergencyContacts": [
@@ -27,6 +28,7 @@
     "userID": "6a392f81-d407-4b5e-93c6-f0812e74a9bd",
     "firstName": "Elena",
     "lastName": "Torres",
+    "role": "AID",
     "email": "elena.torres@example.com",
     "phoneNumber": "843-555-0108",
     "location": {
@@ -50,6 +52,7 @@
     "userID": "c8207e94-56b1-49af-b372-8d6e1035a2fc",
     "firstName": "David",
     "lastName": "Nguyen",
+    "role": "VOLUNTEER",
     "email": "david.nguyen@example.com",
     "phoneNumber": "843-555-0109",
     "location": {
@@ -74,6 +77,7 @@
     "userID": "15f6a8c3-9e24-47d0-85b1-a7326c90e4fd",
     "firstName": "Rebecca",
     "lastName": "Collins",
+    "role": "AID",
     "email": "rebecca.collins@example.com",
     "phoneNumber": "912-555-0110",
     "location": {
@@ -98,6 +102,7 @@
     "userID": "9b473d60-a815-42e9-967c-3f04b2d18a75",
     "firstName": "Samuel",
     "lastName": "Jackson",
+    "role": "SHELTER",
     "email": "samuel.jackson@example.com",
     "phoneNumber": "843-555-0111",
     "location": {
