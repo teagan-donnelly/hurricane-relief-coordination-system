@@ -10,14 +10,73 @@ import java.util.UUID;
  */
 public class Driver {
 
+    private static final int WIDTH = 64;
+    private static final String LINE = "=".repeat(WIDTH);
+
     /**
      * Runs the scenario.
      * @param args Command line arguments
      */
     public static void main(String[] args) {
-        showSavedRecords("BEFORE this run");
+        System.out.println(LINE);
+        System.out.println("  HURRICANE RELIEF SYSTEM: CARTER FAMILY SCENARIO");
+        System.out.println(LINE);
+        showSavedRecords("Saved data before this run");
         runScenario();
-        showSavedRecords("AFTER this run");
+        showSavedRecords("Saved data after this run");
+        System.out.println("\n" + LINE);
+    }
+
+    /**
+     * Prints a heading for a section of the scenario.
+     * @param title Heading text
+     */
+    public static void printSection(String title) {
+        String heading = "--- " + title + " ";
+        System.out.println("\n" + heading + "-".repeat(Math.max(3, WIDTH - heading.length())));
+    }
+
+    /**
+     * Prints a label and value so the values line up.
+     * @param label Label to print
+     * @param value Value to print
+     */
+    public static void printField(String label, Object value) {
+        System.out.printf("%-20s %s%n", label + ":", value);
+    }
+
+    /**
+     * Prints a label followed by each item on its own line.
+     * @param label Label to print
+     * @param items Items to print
+     */
+    public static void printList(String label, ArrayList<String> items) {
+        if (items.isEmpty()) {
+            printField(label, "none");
+            return;
+        }
+        System.out.println(label + ":");
+        for (String item : items) {
+            System.out.println("  - " + item);
+        }
+    }
+
+    /**
+     * Prints long text wrapped so it fits on the screen.
+     * @param text Text to print
+     */
+    public static void printWrapped(String text) {
+        String line = "";
+        for (String word : text.split(" ")) {
+            if (!line.isEmpty() && line.length() + word.length() + 1 > WIDTH - 2) {
+                System.out.println("  " + line);
+                line = "";
+            }
+            line += (line.isEmpty() ? "" : " ") + word;
+        }
+        if (!line.isEmpty()) {
+            System.out.println("  " + line);
+        }
     }
 
     /**
@@ -27,7 +86,7 @@ public class Driver {
      */
     public static void showSavedRecords(String label) {
         UUID requestID = UUID.fromString("b5e1d824-7f93-4046-8d28-249ca2534202");
-        System.out.println("\n===== Saved data " + label + " =====");
+        printSection(label);
 
         PersonalRequest saved = null;
         for (HelpRequest current : DataLoader.getRequests()) {
@@ -37,7 +96,6 @@ public class Driver {
         }
         if (saved == null) {
             System.out.println("The Carter request has not been saved yet.");
-            System.out.println("==========================================\n");
             return;
         }
 
@@ -47,23 +105,22 @@ public class Driver {
                 volunteerName = volunteer.getFirstName() + " " + volunteer.getLastName();
             }
         }
-        System.out.println("Carter request status: " + saved.getRequestStatus());
-        System.out.println("Assigned volunteer: " + volunteerName);
-        System.out.println("Household: " + saved.getHouseholdMembers());
-        System.out.println("Pets: " + saved.getPetNames());
+        printField("Request status", saved.getRequestStatus());
+        printField("Assigned volunteer", volunteerName);
+        printList("Household", saved.getHouseholdMembers());
+        printList("Pets", saved.getPetNames());
 
         Shelter shelter = new ShelterManager().findShelter(saved.getSelectedShelterID());
         if (shelter == null) {
-            System.out.println("Selected shelter: none");
+            printField("Selected shelter", "none");
         } else {
-            System.out.println("Selected shelter: " + shelter.getName());
-            System.out.println("Shelter occupancy: " + shelter.getCurrentOccupancy() + "/" +
-                shelter.getCapacity() + ", pets: " + shelter.getCurrentPetOccupancy() + "/" +
-                shelter.getPetCapacity());
-            System.out.println("Shelter occupants: " + shelter.getOccupants());
-            System.out.println("Shelter pets: " + shelter.getPets());
+            printField("Selected shelter", shelter.getName());
+            printField("Shelter occupancy", shelter.getCurrentOccupancy() + "/" +
+                shelter.getCapacity() + " people, " + shelter.getCurrentPetOccupancy() + "/" +
+                shelter.getPetCapacity() + " pets");
+            printList("Shelter occupants", shelter.getOccupants());
+            printList("Shelter pets", shelter.getPets());
         }
-        System.out.println("==========================================\n");
     }
 
     public static void runScenario() {
@@ -83,6 +140,7 @@ public class Driver {
             NotificationType.EMAIL, emergencyContacts, 3,
             AssistanceType.TRANSPORT, pastRequests);
 
+        printSection("Michael Carter submits a relief request");
         if (!DataWriter.saveRequester(father)) {
             System.out.println("Could not save Michael Carter's account.");
             return;
@@ -115,12 +173,16 @@ public class Driver {
 
         if (DataWriter.saveRequest(request)) {
             System.out.println("Michael Carter's account and relief request were saved.");
-            System.out.println("Location: 123 Palmetto Lane, Charleston, SC 29401");
-            System.out.println(comment);
+            printField("Location", "123 Palmetto Lane, Charleston, SC 29401");
+            printField("Assistance needed", request.getAssistanceType());
+            printField("Urgency", request.getUrgency());
+            System.out.println("Comment:");
+            printWrapped(comment);
         } else {
             System.out.println("Account saved, but the relief request could not be saved.");
         }
 
+        printSection("Rosa Delgado logs in as a volunteer");
         Volunteer rosa = registerRosa();
         if (rosa == null) {
             return;
@@ -135,7 +197,7 @@ public class Driver {
             return;
         }
 
-        System.out.println("\nRosa Delgado logged in.");
+        System.out.println("Rosa Delgado logged in.");
         boolean alreadyHandled = request.getAssignedVolunteerID() != null ||
             request.getRequestStatus() == RequestStatus.COMPLETED ||
             request.getRequestStatus() == RequestStatus.CANCELED;
@@ -205,7 +267,7 @@ public class Driver {
 
         if (DataWriter.saveVolunteer(rosa)) {
             System.out.println("Rosa Delgado was registered as a volunteer.");
-            System.out.println("Specialty: Transportation (Ford F-350 truck)");
+            printField("Specialty", "Transportation (Ford F-350 truck)");
             return rosa;
         } else {
             System.out.println("Could not save Rosa Delgado's volunteer account.");
@@ -327,20 +389,23 @@ public class Driver {
             }
         }
 
-        System.out.println("\nOpen scenario requests: " + openRequests.size());
-        System.out.println("Sorted by transportation specialty, then straight-line distance.");
+        printSection("Open requests (" + openRequests.size() + ")");
+        System.out.println("Sorted by transportation specialty, then straight-line distance.\n");
+        System.out.printf("%-3s %-16s %-18s %s%n", "#", "Requester", "Assistance", "Distance");
 
+        boolean recommended = false;
         for (int i = 0; i < openRequests.size(); i++) {
             HelpRequest request = openRequests.get(i);
             double distance = getDistance(rosa.getLocation(), request.getLocation());
-            System.out.printf("%d. %s %s - %s - %.2f km away%n", i + 1,
-                request.getUser().getFirstName(), request.getUser().getLastName(),
-                request.getAssistanceType(), distance);
-
-            if (i == 0 && matchesSpecialty(rosa, request)) {
-                System.out.println("RECOMMENDED: Matches your transportation specialty " +
-                    "and is the closest request with that specialty.");
-            }
+            boolean isRecommended = i == 0 && matchesSpecialty(rosa, request);
+            System.out.printf("%-3d %-16s %-18s %5.2f km%s%n", i + 1,
+                request.getUser().getFirstName() + " " + request.getUser().getLastName(),
+                request.getAssistanceType(), distance, isRecommended ? "  <- RECOMMENDED" : "");
+            recommended = recommended || isRecommended;
+        }
+        if (recommended) {
+            System.out.println("\nRecommended because it matches Rosa's transportation specialty");
+            System.out.println("and is the closest request with that specialty.");
         }
     }
 
@@ -349,18 +414,22 @@ public class Driver {
      * @param request Help request to print
      */
     public static void showRequestDetails(PersonalRequest request) {
-        System.out.println("\nRosa opens the Carter family request:");
-        System.out.println("People needing transportation: " + request.getHouseholdSize());
-        System.out.println("Adults: " + (request.getHouseholdSize() - request.getChildren()));
-        System.out.println("Children: " + request.getChildren());
-        System.out.println("Pets: " + request.getPets() + " (Buddy, a dog)");
-        System.out.println("Pickup: " + request.getLocation().getStreetAddress() + ", " +
+        printSection("Rosa opens the Carter family request");
+        printField("People", request.getHouseholdSize() + " (" +
+            (request.getHouseholdSize() - request.getChildren()) + " adults, " +
+            request.getChildren() + (request.getChildren() == 1 ? " child)" : " children)"));
+        printField("Pets", request.getPetNames().isEmpty() ? request.getPets()
+            : String.join(", ", request.getPetNames()));
+        printField("Pickup", request.getLocation().getStreetAddress() + ", " +
             request.getLocation().getCity() + ", " + request.getLocation().getState() + " " +
             request.getLocation().getZipcode());
-        System.out.println("Phone: " + request.getUser().getPhone());
-        System.out.println("Email: " + request.getUser().getEmail());
-        System.out.println(request.getComment());
-        System.out.println("Status: " + request.getRequestStatus());
+        printField("Phone", request.getUser().getPhone());
+        printField("Email", request.getUser().getEmail());
+        printField("Status", request.getRequestStatus());
+        System.out.println("Access notes:");
+        printWrapped(request.getAccessInstructions());
+        System.out.println("Medical note:");
+        printWrapped(request.getMedicalNote());
     }
 
     /**
@@ -370,12 +439,15 @@ public class Driver {
      */
     public static void findShelterAndAssign(Volunteer rosa, PersonalRequest request) {
         ShelterManager shelterManager = new ShelterManager();
+        printSection("Rosa finds a shelter and takes the request");
         if (request.getAssignedVolunteerID() != null) {
             Shelter savedShelter = shelterManager.findShelter(request.getSelectedShelterID());
-            System.out.println("Saved request status: " + request.getRequestStatus());
-            System.out.println("Assigned volunteer ID: " + request.getAssignedVolunteerID());
+            System.out.println("This request was already assigned in an earlier run.");
+            printField("Request status", request.getRequestStatus());
+            printField("Assigned volunteer", rosa.getUserId().equals(request.getAssignedVolunteerID())
+                ? rosa.getFirstName() + " " + rosa.getLastName() : request.getAssignedVolunteerID());
             if (savedShelter != null) {
-                System.out.println("Saved shelter: " + savedShelter.getName() + ", " +
+                printField("Selected shelter", savedShelter.getName() + ", " +
                     savedShelter.getLocation().getStreetAddress());
             }
             return;
@@ -386,15 +458,16 @@ public class Driver {
             System.out.println("This request or volunteer is not available for assignment.");
             return;
         }
-        System.out.println("\nRosa searches " + shelterManager.getShelters().size() +
-            " shelters for the Carter family (" + request.getHouseholdSize() + " people, " +
-            request.getPets() + " dog, needs medical staff):");
+        System.out.println("The family needs room for " + request.getHouseholdSize() + " people and " +
+            request.getPets() + " dog, plus medical staff.");
+        System.out.println("Checking " + shelterManager.getShelters().size() + " shelters:\n");
 
         for (Shelter shelter : shelterManager.getShelters()) {
             String problem = shelterManager.getProblem(shelter, request, true);
-            System.out.println("  " + shelter.getName() + ": " +
-                (problem == null ? "suitable" : problem));
+            System.out.printf("  %-42s %s%n", shelter.getName(), problem == null ? "suitable" : problem);
         }
+
+        System.out.println("\nDriving distance to each suitable shelter:");
 
         Shelter shelter;
         try {
@@ -412,10 +485,12 @@ public class Driver {
             System.out.println("No shelter meets the family's needs.");
             return;
         }
-        System.out.println("Closest suitable shelter: " + shelter.getName() + ", " +
-            shelter.getLocation().getStreetAddress() + " (accepts dogs, has medical staff, " +
-            shelter.getAvailableSpace() + " human spaces and " + shelter.getAvailablePetSpace() +
-            " pet spaces open)");
+        System.out.println();
+        printField("Closest shelter", shelter.getName());
+        printField("Address", shelter.getLocation().getStreetAddress());
+        printField("Open spaces", shelter.getAvailableSpace() + " people, " +
+            shelter.getAvailablePetSpace() + " pets (accepts dogs, has medical staff)");
+        System.out.println();
 
         VolunteerManager.getInstance().assignVolunteer(rosa, request);
         if (!rosa.getUserId().equals(request.getAssignedVolunteerID())) {
@@ -428,13 +503,13 @@ public class Driver {
             System.out.println("Could not save the assignment.");
             return;
         }
-        System.out.println("Request status: " + request.getRequestStatus());
+        printField("Request status", request.getRequestStatus());
 
         for (HelpRequest saved : DataLoader.getRequests()) {
             if (saved.getRequestID().equals(request.getRequestID())) {
                 for (Volunteer volunteer : DataLoader.getVolunteers()) {
                     if (volunteer.getUserId().equals(saved.getAssignedVolunteerID())) {
-                        System.out.println("Other volunteers see: " + saved.getRequestStatus() +
+                        printField("Others see", saved.getRequestStatus() +
                             ", handled by " + volunteer.getFirstName() + " " + volunteer.getLastName());
                     }
                 }
@@ -450,11 +525,11 @@ public class Driver {
     public static void exportTrip(Volunteer rosa, PersonalRequest request) {
         ShelterManager shelterManager = new ShelterManager();
         Shelter shelter = shelterManager.findShelter(request.getSelectedShelterID());
+        printSection("Rosa exports her trip sheet");
         if (shelter == null) {
-            System.out.println("\nNo shelter has been selected, so the trip cannot be exported.");
+            System.out.println("No shelter has been selected, so the trip cannot be exported.");
             return;
         }
-        System.out.println("\nRosa exports her trip sheet:");
         rosa.exportTripInfo(request, shelter, "carter-trip.txt");
     }
 
@@ -464,11 +539,13 @@ public class Driver {
      * @param request Help request being completed
      */
     public static void showRolePermissions(Volunteer rosa, PersonalRequest request) {
-        System.out.println("\nRosa drops the family off and tries to mark the request complete:");
+        printSection("Rosa tries to close the request");
+        System.out.println("Rosa drops the family off and tries to mark the request complete:");
         request.markComplete(rosa);
-        System.out.println("Rosa tries to set the status to COMPLETED directly:");
+        System.out.println("\nRosa tries to set the status to COMPLETED directly:");
         request.setRequestStatus(RequestStatus.COMPLETED);
-        System.out.println("Request status is still: " + request.getRequestStatus());
+        System.out.println();
+        printField("Request status", request.getRequestStatus() + " (unchanged)");
     }
 
     /**
@@ -506,20 +583,13 @@ public class Driver {
      */
     public static void showShelter(Shelter shelter) {
         Location location = shelter.getLocation();
-        System.out.println("Shelter: " + shelter.getName());
-        System.out.println("Location: " + location.getStreetAddress() + ", " + location.getCity() +
+        printField("Shelter", shelter.getName());
+        printField("Location", location.getStreetAddress() + ", " + location.getCity() +
             ", " + location.getState() + " " + location.getZipcode());
-        System.out.println("Total capacity: " + shelter.getCapacity());
-        System.out.println("Current occupancy: " + shelter.getCurrentOccupancy());
-        System.out.println("Available spaces: " + shelter.getAvailableSpace());
-        System.out.println("Occupants on record:" + (shelter.getOccupants().isEmpty() ? " none listed" : ""));
-        for (String occupant : shelter.getOccupants()) {
-            System.out.println("  - " + occupant);
-        }
-        System.out.println("Accompanying pets:" + (shelter.getPets().isEmpty() ? " none" : ""));
-        for (String pet : shelter.getPets()) {
-            System.out.println("  - " + pet);
-        }
+        printField("Occupancy", shelter.getCurrentOccupancy() + "/" + shelter.getCapacity() +
+            " (" + shelter.getAvailableSpace() + " spaces open)");
+        printList("Occupants", shelter.getOccupants());
+        printList("Pets", shelter.getPets());
     }
 
     /**
@@ -540,7 +610,8 @@ public class Driver {
             System.out.println("Felix could not log in.");
             return;
         }
-        System.out.println("\nFelix " + felix.getLastName() + " (shelter manager) logged in.");
+        printSection("Felix Moreno checks the family in");
+        System.out.println("Felix " + felix.getLastName() + " (shelter manager) logged in.\n");
 
         ShelterManager shelterManager = new ShelterManager();
         Shelter shelter = null;
@@ -568,22 +639,22 @@ public class Driver {
             return;
         }
 
-        System.out.println("\nFelix checks the Carter family and Buddy into the shelter.");
+        System.out.println("\nFelix checks the Carter family and Buddy into the shelter.\n");
         int occupancyBefore = shelter.getCurrentOccupancy();
         if (!shelter.checkIn(request)) {
             return;
         }
         showShelter(shelter);
-        System.out.println("Human occupancy went from " + occupancyBefore + " to " +
-            shelter.getCurrentOccupancy() + " (+" + (shelter.getCurrentOccupancy() - occupancyBefore) + ")");
+        printField("Occupancy change", occupancyBefore + " -> " + shelter.getCurrentOccupancy() +
+            " (+" + (shelter.getCurrentOccupancy() - occupancyBefore) + ")");
 
         System.out.println("\nFelix accidentally tries to check the family in again:");
         shelter.checkIn(request);
-        System.out.println("Occupancy is still " + shelter.getCurrentOccupancy() + " with " +
+        printField("Occupancy", shelter.getCurrentOccupancy() + " (unchanged), " +
             shelter.getOccupants().size() + " occupants and " + shelter.getPets().size() +
-            (shelter.getPets().size() == 1 ? " pet" : " pets") + " on record.");
+            (shelter.getPets().size() == 1 ? " pet" : " pets") + " on record");
 
-        System.out.println("\nFelix marks the relief request complete:");
+        System.out.println("\nFelix marks the relief request complete.");
         if (!request.markComplete(felix)) {
             return;
         }
@@ -594,7 +665,7 @@ public class Driver {
             System.out.println("Could not save the check-in.");
             return;
         }
-        System.out.println("Request status: " + request.getRequestStatus());
-        System.out.println("Rosa is free for new requests (dispatched: " + rosa.isDispatched() + ")");
+        printField("Request status", request.getRequestStatus());
+        printField("Rosa dispatched", rosa.isDispatched() + " (free for new requests)");
     }
 }
