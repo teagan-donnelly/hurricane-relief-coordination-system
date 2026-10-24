@@ -173,13 +173,9 @@ public class DataLoader extends AppConstants {
      * @return returns an arrayList of shelters
      */
     public static ArrayList<Shelter> getShelters() {
-        return getShelters(SHELTER_JSON);
-    }
-
-    public static ArrayList<Shelter> getShelters(String filename) {
         ArrayList<Shelter> shelters = new ArrayList<Shelter>();
 
-        try (FileReader reader = new FileReader(filename)) {
+        try (FileReader reader = new FileReader(SHELTER_JSON)) {
             JSONArray sheltersJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < sheltersJSON.size(); i++) {

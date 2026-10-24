@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Comparator;
 import java.util.UUID;
-import com.location.DrivingDistanceService;
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ShelterManager{
     private ArrayList<Shelter> shelters;
@@ -123,10 +129,35 @@ public class ShelterManager{
         return closest;
     }
 
-    protected double getDrivingDistance(Location start, Location end)
+    private double getDrivingDistance(Location start, Location end)
             throws IOException, InterruptedException {
-        return new DrivingDistanceService().getDistance(start.getLatitude(), start.getLongitude(),
-            end.getLatitude(), end.getLongitude());
+        String apiKey = System.getenv("MAP_API_KEY");
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new IOException("MAP_API_KEY must be set to compare driving distances.");
+        }
+
+        String body = "{\"coordinates\":[[" + start.getLongitude() + "," + start.getLatitude() +
+            "],[" + end.getLongitude() + "," + end.getLatitude() + "]],\"units\":\"m\"}";
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://api.heigit.org/openrouteservice/v2/directions/driving-car"))
+            .header("Authorization", apiKey)
+            .header("Content-Type", "application/json")
+            .timeout(Duration.ofSeconds(20))
+            .POST(HttpRequest.BodyPublishers.ofString(body))
+            .build();
+
+        HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() != 200) {
+            throw new IOException("Driving distance lookup failed (HTTP " + response.statusCode() + ").");
+        }
+
+        JsonNode distance = new ObjectMapper().readTree(response.body())
+            .path("routes").path(0).path("summary").path("distance");
+        if (!distance.isNumber() || !Double.isFinite(distance.asDouble()) || distance.asDouble() < 0) {
+            throw new IOException("Map service did not return a valid driving distance.");
+        }
+        return distance.asDouble();
     }
 
     public ArrayList<Shelter> getShelters() {

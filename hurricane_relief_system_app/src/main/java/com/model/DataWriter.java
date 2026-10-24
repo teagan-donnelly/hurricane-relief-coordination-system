@@ -118,7 +118,7 @@ public class DataWriter extends AppConstants {
     }
 
     @SuppressWarnings("unchecked")
-    static JSONObject getCoordinatorJSON(Coordinator coordinator) {
+    private static JSONObject getCoordinatorJSON(Coordinator coordinator) {
         JSONObject obj = getUserBaseJSON(coordinator);
         obj.put(COORDINATOR_ROLE, coordinator.getRole() != null ? coordinator.getRole().name() : "");
         return obj;
@@ -256,7 +256,7 @@ public class DataWriter extends AppConstants {
     }
 
     @SuppressWarnings("unchecked")
-    static JSONObject getShelterJSON(Shelter shelter) {
+    private static JSONObject getShelterJSON(Shelter shelter) {
         JSONObject obj = new JSONObject();
         obj.put(SHELTER_NAME, shelter.getName());
         obj.put(SHELTER_ID, shelter.getId().toString());
