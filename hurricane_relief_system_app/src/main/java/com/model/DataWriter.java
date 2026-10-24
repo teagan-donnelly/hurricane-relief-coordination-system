@@ -119,7 +119,9 @@ public class DataWriter extends AppConstants {
 
     @SuppressWarnings("unchecked")
     private static JSONObject getCoordinatorJSON(AidCoordinator coordinator) {
-        return getUserBaseJSON(coordinator);
+        JSONObject obj = getUserBaseJSON(coordinator);
+        obj.put(USER_ROLE, coordinator.getRole() != null ? coordinator.getRole().name() : "");
+        return obj;
     }
 
     @SuppressWarnings("unchecked")
@@ -243,5 +245,9 @@ public class DataWriter extends AppConstants {
 
     public static boolean saveVolunteer(Volunteer volunteer) {
         return saveRecord(VOLUNTEER_JSON, getVolunteerJSON(volunteer), USER_ID);
+    }
+
+    public static boolean saveCoordinator(AidCoordinator coordinator) {
+        return saveRecord(COORDINATOR_JSON, getCoordinatorJSON(coordinator), USER_ID);
     }
 }

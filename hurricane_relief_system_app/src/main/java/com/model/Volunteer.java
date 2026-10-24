@@ -1,11 +1,10 @@
 package com.model;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
-
+import java.io.FileWriter;
+import java.io.IOException;
 import com.location.Address;
 import com.location.MapTools;
 
@@ -78,7 +77,7 @@ public class Volunteer extends User {
     }
 
     public void completeAssignment() {
-
+        isDispatched = false;
     }
 
     public void logHours() {
@@ -102,7 +101,9 @@ public class Volunteer extends User {
         User requester = request.getUser();
         StringBuilder text = new StringBuilder();
 
+        text.append("============================================================\n");
         text.append("               HURRICANE RELIEF TRIP SHEET\n");
+        text.append("============================================================\n");
         text.append("Volunteer: " + getFirstName() + " " + getLastName() + " (" + getPhone() + ")\n");
         if (getSupplies() != null && !getSupplies().isEmpty()) {
             text.append("Vehicle/Supplies: " + String.join(", ", getSupplies()) + "\n");
@@ -196,7 +197,7 @@ public class Volunteer extends User {
             location.getState(), location.getZipcode());
     }
 
-    // Getters
+    // --- Getters ---
 
     public boolean isAvailability() {
         return availability;

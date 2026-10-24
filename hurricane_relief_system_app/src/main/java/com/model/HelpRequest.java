@@ -120,6 +120,27 @@ public class HelpRequest {
     }
 
     /**
+     * Marks the request as completed. Only a shelter manager is allowed to do this.
+     * @param user the user trying to complete the request
+     * @return true if the request was completed, false otherwise
+     */
+    public boolean markComplete(User user) {
+        if (!(user instanceof AidCoordinator) ||
+            ((AidCoordinator) user).getRole() != CoordinatorRole.SHELTER) {
+            System.out.println("Permission denied: only a shelter manager can mark a request as complete.");
+            return false;
+        }
+
+        if (requestStatus == RequestStatus.CANCELED || requestStatus == RequestStatus.COMPLETED) {
+            System.out.println("This request is already " + requestStatus + ".");
+            return false;
+        }
+
+        requestStatus = RequestStatus.COMPLETED;
+        return true;
+    }
+
+    /**
      * Tracks the status of the help request.
      * @return the current status of the request
      */
@@ -200,8 +221,8 @@ public class HelpRequest {
     }
 
     /**
-     * Sets the photo related to the help request.
-     * @param photo the photo related to the request
+     * Sets the status of the help request.
+     * @param status the new status of the request
      */
     public void setRequestStatus(RequestStatus status) {
         this.requestStatus = status;

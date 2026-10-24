@@ -228,7 +228,13 @@ public class DataLoader extends AppConstants {
 
                 /* */
 
-                coordinators.add(new AidCoordinator(data.firstName, data.lastName, data.id, data.email, data.phone, data.userName, data.password,
+                String roleText = (String) coordinatorJSON.get(USER_ROLE);
+                CoordinatorRole role = CoordinatorRole.AID;
+                if (roleText != null && !roleText.isEmpty()) {
+                    role = CoordinatorRole.valueOf(roleText.toUpperCase());
+                }
+
+                coordinators.add(new AidCoordinator(role, data.firstName, data.lastName, data.id, data.email, data.phone, data.userName, data.password,
                           data.location, data.birthDate, data.notificationPreference, data.emergencyContacts, VolunteerManager.getInstance()));
             }
 
@@ -423,4 +429,3 @@ public class DataLoader extends AppConstants {
     }
 
 }
-

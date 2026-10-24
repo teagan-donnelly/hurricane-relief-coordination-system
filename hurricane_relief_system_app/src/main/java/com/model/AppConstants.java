@@ -40,7 +40,7 @@ public abstract class AppConstants {
     public static final String USER_VERIFIED = "isVerifed";
     public static final String USER_DISPACHED = "isDispached";
     public static final String USER_VOLUNTEER_HOURS = "volunteerHours";
-
+    public static final String USER_ROLE = "role";
 
     public static final String REQUEST_ID = "requestID";
     public static final String REQUEST_TYPE = "requestType";

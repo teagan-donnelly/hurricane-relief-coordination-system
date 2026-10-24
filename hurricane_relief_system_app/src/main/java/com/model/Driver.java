@@ -95,6 +95,19 @@ public class Driver {
         findShelterAndAssign(rosa, request);
 
         exportTrip(rosa, request);
+        showRolePermissions(rosa, request);
+    }
+
+    public static void addFamilyDetails(PersonalRequest request) {
+        if (!request.getHouseholdMembers().isEmpty()) {
+            return;
+        }
+        request.addHouseholdMember("Michael Carter, age 39");
+        request.addHouseholdMember("Emily Carter, age 37");
+        request.addHouseholdMember("Sophie Carter, age 8");
+        request.addPet("Buddy (dog)");
+        request.setMedicalNote("Sophie Carter (age 8) has worsening asthma symptoms and needs " +
+            "medical assistance. Take the family to a shelter with medical staff.");
     }
 
     public static Volunteer registerRosa() {
@@ -333,18 +346,6 @@ public class Driver {
         }
     }
 
-    public static void addFamilyDetails(PersonalRequest request) {
-        if (!request.getHouseholdMembers().isEmpty()) {
-            return;
-        }
-        request.addHouseholdMember("Michael Carter, age 39");
-        request.addHouseholdMember("Emily Carter, age 37");
-        request.addHouseholdMember("Sophie Carter, age 8");
-        request.addPet("Buddy (dog)");
-        request.setMedicalNote("Sophie Carter (age 8) has worsening asthma symptoms and needs " +
-            "medical assistance. Take the family to a shelter with medical staff.");
-    }
-
     public static void exportTrip(Volunteer rosa, PersonalRequest request) {
         ShelterManager shelterManager = new ShelterManager(DataLoader.getShelters());
         Shelter shelter = shelterManager.findShelter(request.getSelectedShelterID());
@@ -355,5 +356,10 @@ public class Driver {
         System.out.println("\nRosa exports her trip sheet:");
         rosa.exportTripInfo(request, shelter, "carter-trip.txt");
     }
-}
 
+    public static void showRolePermissions(Volunteer rosa, PersonalRequest request) {
+        System.out.println("\nRosa drops the family off and tries to mark the request complete:");
+        request.markComplete(rosa);
+        System.out.println("Request status is still: " + request.getRequestStatus());
+    }
+}
