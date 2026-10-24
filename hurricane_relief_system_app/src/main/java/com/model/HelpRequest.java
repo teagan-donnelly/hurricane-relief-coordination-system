@@ -20,10 +20,18 @@ public class HelpRequest {
     private UUID assignedVolunteerID;
     private UUID selectedShelterID;
 
+    /**
+     * Gets the ID of the shelter selected for the request.
+     * @return the ID of the selected shelter
+     */
     public UUID getSelectedShelterID() {
         return selectedShelterID;
     }
 
+    /**
+     * Sets the ID of the shelter selected for the request.
+     * @param selectedShelterID the ID of the selected shelter
+     */
     public void setSelectedShelterID(UUID selectedShelterID) {
         this.selectedShelterID = selectedShelterID;
     }

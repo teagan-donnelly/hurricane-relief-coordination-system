@@ -126,6 +126,20 @@ public class HurricaneReliefApplication {
             householdSize, assistanceType, pastRequests);
     }
 
+    /**
+     * Registers a new shelter if the current user is a shelter coordinator.
+     * @param name the name of the shelter
+     * @param id the unique identifier for the shelter
+     * @param location the location of the shelter
+     * @param currentOccupancy the number of people currently in the shelter
+     * @param capacity the max number of people the shelter can hold
+     * @param petFriendly true if the shelter allows pets
+     * @param accessibilityInfo a list of accessibility info for the shelter
+     * @param hasPower true if the shelter has power
+     * @param status the current status of the shelter
+     * @param hasMedicalStaff true if the shelter has medical staff
+     * @param admin the unique identifier of the shelter admin
+     */
     public void registerShelter(String name, UUID id, Location location, int currentOccupancy, int capacity, 
         boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
         boolean hasMedicalStaff, UUID admin) {
@@ -143,6 +157,10 @@ public class HurricaneReliefApplication {
 
     }
 
+    /**
+     * Shows a shelter's info if the current user is a shelter coordinator.
+     * @param id the unique identifier of the shelter
+     */
     public void viewShelter(UUID id) {
 
         User user = accountManager.getCurrentUser();
@@ -157,6 +175,16 @@ public class HurricaneReliefApplication {
 
     }
 
+    /**
+     * Edits a shelter's info if the current user is a shelter coordinator.
+     * @param id the unique identifier of the shelter
+     * @param currentOccupancy the change in the number of people in the shelter
+     * @param petFriendly true if the shelter allows pets
+     * @param currentPetOccupancy the change in the number of pets in the shelter
+     * @param hasPower true if the shelter has power
+     * @param status the current status of the shelter
+     * @param hasMedicalStaff true if the shelter has medical staff
+     */
     public void editShelter(UUID id, int currentOccupancy, boolean petFriendly, int currentPetOccupancy,
         boolean hasPower, ShelterStatus status, boolean hasMedicalStaff) {
 

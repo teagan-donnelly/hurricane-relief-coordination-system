@@ -9,8 +9,14 @@ package com.model;
 import com.location.Address;
 import com.location.MapTools;
 
+/**
+ * Simple text UI for testing the map tools.
+ */
 public class UI {
 
+    /**
+     * Finds the closest shelter to an example address and prints the driving directions.
+     */
     public void run() {
         // A Charleston address near the waterfront
         Address userAddress = new Address(
@@ -76,6 +82,10 @@ public class UI {
         }
     }
 
+    /**
+     * Runs the UI.
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         new UI().run();
     }

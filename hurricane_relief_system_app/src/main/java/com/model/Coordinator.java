@@ -16,6 +16,22 @@ public class Coordinator extends User {
     private VolunteerManager volunteers;
     private CoordinatorRole role;
 
+    /**
+     * Constructor for a coordinator loaded from saved data.
+     * @param role Role of the coordinator
+     * @param firstName First name
+     * @param lastName Last name
+     * @param userID ID of the user
+     * @param email Email address
+     * @param phone Phone number
+     * @param userName Username
+     * @param password Password
+     * @param location Location of the coordinator
+     * @param birthDate Birth date
+     * @param notificationPreference How the coordinator wants to be notified
+     * @param emergencyContacts List of emergency contacts
+     * @param volunteers Volunteer manager the coordinator uses
+     */
     public Coordinator(CoordinatorRole role, String firstName, String lastName, UUID userID, String email, String phone, String userName, String password,
                           Location location, LocalDate birthDate, NotificationType notificationPreference, ArrayList<String> emergencyContacts,
                           VolunteerManager volunteers) {
@@ -24,6 +40,17 @@ public class Coordinator extends User {
         this.volunteers = volunteers;
     }
 
+    /**
+     * Constructor for a brand new coordinator.
+     * @param role Role of the coordinator
+     * @param firstName First name
+     * @param lastName Last name
+     * @param email Email address
+     * @param phone Phone number
+     * @param userName Username
+     * @param password Password
+     * @param volunteers Volunteer manager the coordinator uses
+     */
     public Coordinator(CoordinatorRole role, String firstName, String lastName, String email, String phone, String userName, String password, VolunteerManager volunteers) {
 
         super(firstName, lastName, email, phone, userName, password);
@@ -32,6 +59,12 @@ public class Coordinator extends User {
     }
 
 
+    /**
+     * Verifies a volunteer's certification.
+     * @param volunteer Volunteer being verified
+     * @param approved true if the coordinator approved the certification
+     * @return true if the certification is approved, false otherwise
+     */
     public boolean verifyCertification(Volunteer volunteer, boolean approved) {
         if (volunteer == null) {
             return false;
@@ -41,6 +74,12 @@ public class Coordinator extends User {
         return approved;
     }
 
+    /**
+     * Runs a background check on a volunteer.
+     * @param volunteer Volunteer being checked
+     * @param passed true if the volunteer passed the background check
+     * @return true if the volunteer passed, false otherwise
+     */
     public boolean runBackgroundCheck(Volunteer volunteer, boolean passed) {
         if (volunteer == null) {
             return false;
@@ -50,6 +89,11 @@ public class Coordinator extends User {
         return passed;
     }
 
+    /**
+     * Sets the urgency of a help request.
+     * @param request Help request to update
+     * @param urgency New urgency of the request
+     */
     public void setUrgency(HelpRequest request, Urgency urgency) {
         if (request == null || urgency == null) {
             throw new IllegalArgumentException("Request and urgency cannot be null.");
@@ -58,6 +102,11 @@ public class Coordinator extends User {
         request.setUrgency(urgency);
     }
 
+    /**
+     * Assigns a volunteer to a help request if they are available and qualified.
+     * @param volunteer Volunteer being assigned
+     * @param request Help request the volunteer is assigned to
+     */
     public void assignVolunteer(Volunteer volunteer, HelpRequest request) {
         if (volunteer == null || request == null || volunteers == null) {
             System.out.println("Volunteer, request, and manager are required.");
@@ -84,6 +133,13 @@ public class Coordinator extends User {
         volunteers.assignVolunteer(volunteer, request);
     }
 
+    /**
+     * Finds the closest qualified volunteer and assigns them to the request.
+     * @param request Help request that needs a volunteer
+     * @return Volunteer that was assigned, or null if none was found
+     * @throws IOException if the map lookup fails
+     * @throws InterruptedException if the map lookup is interrupted
+     */
     public Volunteer autoAssignVolunteer(HelpRequest request)
             throws IOException, InterruptedException {
 
@@ -147,6 +203,11 @@ public class Coordinator extends User {
         return null;
     }
 
+    /**
+     * Converts a location into an address for the map tools.
+     * @param location Location to convert
+     * @return Address of the location
+     */
     private Address toAddress(Location location) {
         Address address = new Address(
             location.getStreetAddress(),
@@ -158,6 +219,12 @@ public class Coordinator extends User {
         return address;
     }
 
+    /**
+     * Checks if a volunteer is qualified for a type of assistance.
+     * @param volunteer Volunteer being checked
+     * @param type Type of assistance needed
+     * @return true if the volunteer is qualified, false otherwise
+     */
     private boolean isQualified(Volunteer volunteer, AssistanceType type) {
         if (type == AssistanceType.MEDICAL || type == AssistanceType.CHILD_INJURY) {
             return hasCredential(volunteer, CredentialType.EMT) ||
@@ -199,6 +266,12 @@ public class Coordinator extends User {
         return false;
     }
 
+    /**
+     * Checks if a volunteer has a valid credential of the given type.
+     * @param volunteer Volunteer being checked
+     * @param type Type of credential needed
+     * @return true if the volunteer has the credential, false otherwise
+     */
     private boolean hasCredential(Volunteer volunteer, CredentialType type) {
         if (volunteer.getCredentials() == null) {
             return false;
@@ -216,6 +289,12 @@ public class Coordinator extends User {
         return false;
     }
 
+    /**
+     * Checks if a volunteer has a skill.
+     * @param volunteer Volunteer being checked
+     * @param requiredSkill Skill needed
+     * @return true if the volunteer has the skill, false otherwise
+     */
     private boolean hasSkill(Volunteer volunteer, String requiredSkill) {
         if (volunteer.getSkills() == null) {
             return false;
@@ -232,10 +311,18 @@ public class Coordinator extends User {
         return false;
     }
 
+    /**
+     * Gets the volunteer manager.
+     * @return Volunteer manager
+     */
     public VolunteerManager getVolunteers() {
         return volunteers;
     }
 
+    /**
+     * Gets the role of the coordinator.
+     * @return Role of the coordinator
+     */
     public CoordinatorRole getRole() {
         return role;
     }

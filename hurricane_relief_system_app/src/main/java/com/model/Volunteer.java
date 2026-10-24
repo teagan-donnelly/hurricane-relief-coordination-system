@@ -10,6 +10,7 @@ import com.location.MapTools;
 
 /**
  * @author Nicolas Gauvin
+ * Represents a volunteer who can be assigned to help requests.
  */
 public class Volunteer extends User {
 
@@ -22,6 +23,27 @@ public class Volunteer extends User {
     private boolean isDispatched;
     private double volunteerHours;
 
+    /**
+     * Constructor for a volunteer without a travel distance.
+     * @param firstName First name
+     * @param lastName Last name
+     * @param userID ID of the user
+     * @param email Email address
+     * @param phone Phone number
+     * @param location Location of the volunteer
+     * @param birthDate Birth date
+     * @param userName Username
+     * @param password Password
+     * @param notificationPreference How the volunteer wants to be notified
+     * @param emergencyContacts List of emergency contacts
+     * @param availability true if the volunteer is available
+     * @param skills List of skills
+     * @param credentials List of credentials
+     * @param supplies List of supplies
+     * @param isVerified true if the volunteer is verified
+     * @param isDispatched true if the volunteer is dispatched
+     * @param volunteerHours Number of volunteer hours
+     */
     public Volunteer(String firstName, String lastName, UUID userID, String email, String phone, Location location,
                      LocalDate birthDate, String userName, String password, NotificationType notificationPreference,
                      ArrayList<String> emergencyContacts, boolean availability, ArrayList<String> skills,
@@ -39,6 +61,28 @@ public class Volunteer extends User {
         this.volunteerHours = volunteerHours;
     }
 
+    /**
+     * Constructor for a volunteer with a travel distance.
+     * @param firstName First name
+     * @param lastName Last name
+     * @param userID ID of the user
+     * @param email Email address
+     * @param phone Phone number
+     * @param location Location of the volunteer
+     * @param birthDate Birth date
+     * @param userName Username
+     * @param password Password
+     * @param notificationPreference How the volunteer wants to be notified
+     * @param emergencyContacts List of emergency contacts
+     * @param availability true if the volunteer is available
+     * @param travelDistance How far the volunteer can travel
+     * @param skills List of skills
+     * @param credentials List of credentials
+     * @param supplies List of supplies
+     * @param isVerified true if the volunteer is verified
+     * @param isDispatched true if the volunteer is dispatched
+     * @param volunteerHours Number of volunteer hours
+     */
     public Volunteer(String firstName, String lastName, UUID userID, String email, String phone, Location location,
                      LocalDate birthDate, String userName, String password, NotificationType notificationPreference,
                      ArrayList<String> emergencyContacts, boolean availability, double travelDistance,
@@ -57,6 +101,12 @@ public class Volunteer extends User {
         this.volunteerHours = volunteerHours;
     }
 
+    /**
+     * Constructor for a volunteer with only availability, skills, and credentials.
+     * @param availability true if the volunteer is available
+     * @param skills List of skills
+     * @param credentials List of credentials
+     */
     public Volunteer(boolean availability, ArrayList<String> skills, ArrayList<Credential> credentials) {
         super("", "", "", "", "", "");
         this.availability = availability;
@@ -131,6 +181,9 @@ public class Volunteer extends User {
         System.out.println("No other volunteers are available to help right now.");
     }
 
+    /**
+     * Marks the volunteer as done with their assignment so they can take new ones.
+     */
     public void completeAssignment() {
         isDispatched = false;
     }
@@ -262,37 +315,73 @@ public class Volunteer extends User {
 
     // --- Getters ---
 
+    /**
+     * Checks if the volunteer is available.
+     * @return true if available, false otherwise
+     */
     public boolean isAvailability() {
         return availability;
     }
 
+    /**
+     * Gets how far the volunteer can travel.
+     * @return Travel distance
+     */
     public double getTravelDistance() {
         return travelDistance;
     }
 
+    /**
+     * Gets the volunteer's skills.
+     * @return List of skills
+     */
     public ArrayList<String> getSkills() {
         return skills;
     }
 
+    /**
+     * Gets the volunteer's credentials.
+     * @return List of credentials
+     */
     public ArrayList<Credential> getCredentials() {
         return credentials;
     }
 
+    /**
+     * Gets the volunteer's supplies.
+     * @return List of supplies
+     */
     public ArrayList<String> getSupplies() {
         return supplies;
     }
 
+    /**
+     * Checks if the volunteer is verified.
+     * @return true if verified, false otherwise
+     */
     public boolean isVerified() {
         return isVerified;
     }
 
+    /**
+     * Checks if the volunteer is dispatched.
+     * @return true if dispatched, false otherwise
+     */
     public boolean isDispatched() {
         return isDispatched;
     }
 
+    /**
+     * Gets the volunteer's total hours.
+     * @return Number of volunteer hours
+     */
     public double getVolunteerHours() {
         return volunteerHours;
     }
 
+    /**
+     * Sets if the volunteer is dispatched.
+     * @param isDispatched true if the volunteer is dispatched
+     */
     public void setDispatched(boolean isDispatched) { this.isDispatched = isDispatched; }
 }

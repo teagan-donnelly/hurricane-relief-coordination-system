@@ -30,6 +30,9 @@ public class MapTools {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
+    /**
+     * Private constructor so only one MapTools is made.
+     */
     private MapTools() {
         httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(10))
@@ -38,6 +41,10 @@ public class MapTools {
         objectMapper = new ObjectMapper();
     }
 
+    /**
+     * Gets the single instance of MapTools.
+     * @return The MapTools instance
+     */
     public static MapTools getInstance() {
         if(mapTools == null){
             mapTools = new MapTools();

@@ -9,8 +9,21 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
+/**
+ * Uses the map api to find the driving distance between two points.
+ */
 public class DrivingDistanceService {
 
+    /**
+     * Gets the driving distance between two points.
+     * @param startLatitude Latitude of the starting point
+     * @param startLongitude Longitude of the starting point
+     * @param endLatitude Latitude of the ending point
+     * @param endLongitude Longitude of the ending point
+     * @return Driving distance in meters
+     * @throws IOException if the api key is missing or the lookup fails
+     * @throws InterruptedException if the request is interrupted
+     */
     public double getDistance(double startLatitude, double startLongitude,
                               double endLatitude, double endLongitude)
             throws IOException, InterruptedException {
