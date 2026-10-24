@@ -1,6 +1,7 @@
 package com.model;
 
 import java.util.UUID;
+import java.util.ArrayList;
 
 /**
  * Represents a request for personal assistance in the hurricane relief system.
@@ -13,6 +14,9 @@ public class PersonalRequest extends HelpRequest {
     private String accessInstructions;
     private int pets;
     private int children;
+    private ArrayList<String> householdMembers = new ArrayList<>();
+    private ArrayList<String> petNames = new ArrayList<>();
+    private String medicalNote = "";
 
     /**
      * Constructor for the PersonalRequest class.
@@ -97,4 +101,51 @@ public class PersonalRequest extends HelpRequest {
         return children;
     }
 
+        /**
+     * Adds a household member, e.g. "Sophie Carter, age 8".
+     * @param member the member's name and age
+     */
+    public void addHouseholdMember(String member) {
+        householdMembers.add(member);
+    }
+
+    /**
+     * Gets the household members on this request.
+     * @return list of household members
+     */
+    public ArrayList<String> getHouseholdMembers() {
+        return householdMembers;
+    }
+
+    /**
+     * Adds a pet, e.g. "Buddy (dog)".
+     * @param pet the pet's name and species
+     */
+    public void addPet(String pet) {
+        petNames.add(pet);
+    }
+
+    /**
+     * Gets the pets on this request.
+     * @return list of pets
+     */
+    public ArrayList<String> getPetNames() {
+        return petNames;
+    }
+
+    /**
+     * Gets the medical note for this request.
+     * @return the medical note, or an empty string if there is none
+     */
+    public String getMedicalNote() {
+        return medicalNote;
+    }
+
+    /**
+     * Sets the medical note for this request.
+     * @param medicalNote the medical note
+     */
+    public void setMedicalNote(String medicalNote) {
+        this.medicalNote = medicalNote;
+    }
 }

@@ -197,6 +197,16 @@ public class DataWriter extends AppConstants {
             obj.put(REQUEST_ACCESS_INTRUCTIONS, pr.getAccessInstructions());
             obj.put(REQUEST_PETS, pr.getPets());
             obj.put(REQUEST_CHILDREN, pr.getChildren());
+
+            JSONArray members = new JSONArray();
+            members.addAll(pr.getHouseholdMembers());
+            obj.put(REQUEST_HOUSEHOLD_MEMBERS, members);
+
+            JSONArray petNames = new JSONArray();
+            petNames.addAll(pr.getPetNames());
+            obj.put(REQUEST_PET_NAMES, petNames);
+
+            obj.put(REQUEST_MEDICAL_NOTE, pr.getMedicalNote());
         } else if (request instanceof InfrustructureRequest) {
             InfrustructureRequest ir = (InfrustructureRequest) request;
             obj.put(REQUEST_HAZARD_TYPE, ir.getHazardType() != null ? ir.getHazardType().name() : "");

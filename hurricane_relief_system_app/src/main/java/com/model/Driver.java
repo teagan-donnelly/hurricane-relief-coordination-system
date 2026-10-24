@@ -55,6 +55,8 @@ public class Driver {
             }
         }
 
+        addFamilyDetails(request);
+
         if (DataWriter.saveRequest(request)) {
             System.out.println("Michael Carter's account and relief request were saved.");
             System.out.println("Location: 123 Palmetto Lane, Charleston, SC 29401");
@@ -78,20 +80,21 @@ public class Driver {
         }
 
         System.out.println("\nRosa Delgado logged in.");
-        if (request.getAssignedVolunteerID() != null ||
+        boolean alreadyHandled = request.getAssignedVolunteerID() != null ||
             request.getRequestStatus() == RequestStatus.COMPLETED ||
-            request.getRequestStatus() == RequestStatus.CANCELED) {
-            showRequestDetails(request);
-            findShelterAndAssign(rosa, request);
-            return;
+            request.getRequestStatus() == RequestStatus.CANCELED;
+
+        if (!alreadyHandled) {
+            ArrayList<HelpRequest> requests = createScenarioRequests(request);
+            if (requests == null) {
+                return;
+            }
+            showRecommendedRequests(rosa, requests);
         }
-        ArrayList<HelpRequest> requests = createScenarioRequests(request);
-        if (requests == null) {
-            return;
-        }
-        showRecommendedRequests(rosa, requests);
         showRequestDetails(request);
         findShelterAndAssign(rosa, request);
+
+        exportTrip(rosa, request);
     }
 
     public static Volunteer registerRosa() {
@@ -328,6 +331,29 @@ public class Driver {
                 }
             }
         }
+    }
+
+    public static void addFamilyDetails(PersonalRequest request) {
+        if (!request.getHouseholdMembers().isEmpty()) {
+            return;
+        }
+        request.addHouseholdMember("Michael Carter, age 39");
+        request.addHouseholdMember("Emily Carter, age 37");
+        request.addHouseholdMember("Sophie Carter, age 8");
+        request.addPet("Buddy (dog)");
+        request.setMedicalNote("Sophie Carter (age 8) has worsening asthma symptoms and needs " +
+            "medical assistance. Take the family to a shelter with medical staff.");
+    }
+
+    public static void exportTrip(Volunteer rosa, PersonalRequest request) {
+        ShelterManager shelterManager = new ShelterManager(DataLoader.getShelters());
+        Shelter shelter = shelterManager.findShelter(request.getSelectedShelterID());
+        if (shelter == null) {
+            System.out.println("\nNo shelter has been selected, so the trip cannot be exported.");
+            return;
+        }
+        System.out.println("\nRosa exports her trip sheet:");
+        rosa.exportTripInfo(request, shelter, "carter-trip.txt");
     }
 }
 

@@ -60,7 +60,7 @@ public abstract class User {
                 new Volunteer(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
                     availability, travelDistance, skills, credentials, supplies, isVerified, isDispached, volunteerHours);
                 break;
-            case "AidReqester":
+            case "AidRequester":
                 new AidRequester(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
                     householdSize, assistanceType, pastRequests);
                 break;

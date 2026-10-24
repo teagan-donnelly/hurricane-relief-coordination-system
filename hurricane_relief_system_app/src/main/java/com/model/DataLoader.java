@@ -86,7 +86,20 @@ public class DataLoader extends AppConstants {
                         int pets = requestJSON.get(REQUEST_PETS) != null ? ((Number) requestJSON.get(REQUEST_PETS)).intValue() : 0;
                         int children = requestJSON.get(REQUEST_CHILDREN) != null ? ((Number) requestJSON.get(REQUEST_CHILDREN)).intValue() : 0;
 
-                        requests.add(new PersonalRequest(requestID, requestType, user, comment, assistanceType, urgency, requestStatus, location, photo, householdSize, accessInstructions, pets, children));
+                        PersonalRequest personalRequest = new PersonalRequest(requestID, requestType, user, comment, assistanceType, urgency, requestStatus, location, photo, householdSize, accessInstructions, pets, children);
+
+                        for (String member : getJSONList(requestJSON, REQUEST_HOUSEHOLD_MEMBERS)) {
+                            personalRequest.addHouseholdMember(member);
+                        }
+                        for (String pet : getJSONList(requestJSON, REQUEST_PET_NAMES)) {
+                            personalRequest.addPet(pet);
+                        }
+                        String medicalNote = (String) requestJSON.get(REQUEST_MEDICAL_NOTE);
+                        if (medicalNote != null) {
+                            personalRequest.setMedicalNote(medicalNote);
+                        }
+
+                        requests.add(personalRequest);
                         break;
 
                     case INFRASTRUCTURE:
