@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Helping hands",
+    "id": "f95ca0de-005d-4258-a5ba-ad82f2fc78ca",
+    "admin": "e749d25b-831a-4c60-a219-75b3f9d08642",
+    "location": {
+      "latitude": "106.32",
+      "longitude": "45.89",
+      "streetAddress": "1234 somthington rd",
+      "city": "Riverdale",
+      "state": "sc",
+      "zipcode": "29229"
+    },
+    "currentOccupancy": "32",
+    "capacity": "50",
+    "petFriendly": "true",
+    "accessibilityInfo": [
+      "handicap accessible",
+      "able to serve vegitarian diet freindly meals"
+    ],
+    "hasPower": "true",
+    "status:": "OPEN"
+  },
+  {
+    "name": "trying times",
+    "id": "40928a02-c346-4627-98a7-6a414c76f2be",
+    "admin": "9b473d60-a815-42e9-967c-3f04b2d18a75",
+    "location": {
+      "latitude": "156.48",
+      "longitude": "20.15",
+      "streetAddress": "1589 sumsville dr",
+      "city": "oakhurst",
+      "state": "sc",
+      "zipcode": "29235"
+    },
+    "currentOccupancy": "5",
+    "capacity": "20",
+    "petFriendly": "false",
+    "accessibilityInfo": [
+      "handicap accessible"
+    ],
+    "hasPower": "true",
+    "status:": "OPEN"
+  }
+]

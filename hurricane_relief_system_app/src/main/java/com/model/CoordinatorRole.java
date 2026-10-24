@@ -1,11 +1,10 @@
 package com.model;
-
 /**
- * @author Nicolas Gauvin
- * The kinds of coordinators in the system.
+ * An enum representing the roles that coordinators can have.
+ * @author APR
  */
 public enum CoordinatorRole {
     SHELTER,
-    VOLUNTEER,
-    AID
+    AID,
+    VOLUNTEER
 }

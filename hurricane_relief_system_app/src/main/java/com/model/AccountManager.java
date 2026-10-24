@@ -73,4 +73,8 @@ public class AccountManager {
         }
     }
 
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
 }

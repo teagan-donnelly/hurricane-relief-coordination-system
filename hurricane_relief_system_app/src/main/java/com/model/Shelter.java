@@ -17,9 +17,8 @@ public class Shelter {
     private boolean hasMedicalStaff;
     private int petCapacity;
     private int currentPetOccupancy;
-    private User admin;
-    private ArrayList<String> occupants = new ArrayList<>();
-    private ArrayList<String> pets = new ArrayList<>();
+    private UUID admin;
+    private ArrayList<AidRequester> occupants;
 
     public void setPetSpace(int petCapacity, int currentPetOccupancy) {
         if (petCapacity < 0 || currentPetOccupancy < 0 || currentPetOccupancy > petCapacity) {
@@ -35,8 +34,8 @@ public class Shelter {
 
     public Shelter (String name, UUID id, Location location, int currentOccupancy, int capacity,
         boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
-        boolean hasMedicalStaff) {
-
+        boolean hasMedicalStaff, UUID admin) {
+       
         this.name = name;
         this.id = id;
         this.location = location;
@@ -47,11 +46,12 @@ public class Shelter {
         this.accessibilityInfo = accessibilityInfo;
         this.hasPower = hasPower;
         this.status = status;
+        this.admin = admin;
     }
 
-    public Shelter (String name, UUID id, Location location, int capacity,
-        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status) {
-
+    public Shelter (String name, UUID id, Location location, int capacity, 
+        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status, UUID admin) {
+       
         this.name = name;
         this.id = id;
         this.location = location;
@@ -60,15 +60,17 @@ public class Shelter {
         this.accessibilityInfo = accessibilityInfo;
         this.hasPower = hasPower;
         this.status = status;
+        this.admin = admin;
     }
 
-    public Shelter (String name, UUID id, Location location, int capacity) {
-
+    public Shelter (String name, UUID id, Location location, int capacity, UUID admin) {
+       
         this.name = name;
         this.id = id;
         this.location = location;
         this.capacity = capacity;
-
+        this.admin = admin;
+    
     }
 
     public void updateCapacity(int capacity) {
@@ -167,32 +169,8 @@ public class Shelter {
         return status;
     }
 
-    public User getAdmin() {
+    public UUID getAdmin() {
         return admin;
-    }
-
-    public ArrayList<String> getOccupants() {
-        return occupants;
-    }
-
-    public ArrayList<String> getPets() {
-        return pets;
-    }
-
-    public ArrayList<String> getAccessibilityInfo() {
-        return accessibilityInfo;
-    }
-
-    public boolean hasPower() {
-        return hasPower;
-    }
-
-    public int getPetCapacity() {
-        return petCapacity;
-    }
-
-    public int getCurrentPetOccupancy() {
-        return currentPetOccupancy;
     }
 
 }

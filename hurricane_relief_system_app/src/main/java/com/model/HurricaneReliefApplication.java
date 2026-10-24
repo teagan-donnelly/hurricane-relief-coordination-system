@@ -126,6 +126,54 @@ public class HurricaneReliefApplication {
             householdSize, assistanceType, pastRequests);
     }
 
+    public void registerShelter(String name, UUID id, Location location, int currentOccupancy, int capacity, 
+        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
+        boolean hasMedicalStaff, UUID admin) {
+
+        User user = accountManager.getCurrentUser();
+        if(user.getClass().getSimpleName() == "Coordinator") {
+            Coordinator coordinator = (Coordinator) user;
+            if(coordinator.getRole() == CoordinatorRole.SHELTER){
+                ShelterManager.registerShelter(name, id, location, currentOccupancy, capacity, 
+                    petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, admin);
+            } else {
+                System.out.println("Current user does not have access to register a shelter");
+            }
+        }
+
+    }
+
+    public void viewShelter(UUID id) {
+
+        User user = accountManager.getCurrentUser();
+        if(user.getClass().getSimpleName() == "Coordinator") {
+            Coordinator coordinator = (Coordinator) user;
+            if(coordinator.getRole() == CoordinatorRole.SHELTER){
+                ShelterManager.viewShelter(id);
+            } else {
+                System.out.println("Current user does not have access to register a shelter");
+            }
+        }
+
+    }
+
+    public void editShelter(String name, Location location, int currentOccupancy, int capacity, 
+        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
+        boolean hasMedicalStaff, UUID admin) {
+
+        User user = accountManager.getCurrentUser();
+        if(user.getClass().getSimpleName() == "Coordinator") {
+            Coordinator coordinator = (Coordinator) user;
+            if(coordinator.getRole() == CoordinatorRole.SHELTER){
+                ShelterManager.editShelter(name, location, currentOccupancy, capacity, 
+                    petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, admin);
+            } else {
+                System.out.println("Current user does not have access to register a shelter");
+            }
+        }
+
+    }
+
     /**
      * Retrieves the status of a help request based on its unique identifier.
      * @param requestID the unique identifier of the help request

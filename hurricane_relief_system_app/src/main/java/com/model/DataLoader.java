@@ -193,26 +193,17 @@ public class DataLoader extends AppConstants {
                 boolean hasPower = (Boolean) shelterJSON.get(SHELTER_HAS_POWER);
                 ShelterStatus status = ShelterStatus.valueOf(((String) shelterJSON.get(SHELTER_STATUS)).toUpperCase());
                 boolean hasMedicalStaff = Boolean.TRUE.equals(shelterJSON.get(SHELTER_MEDICAL_STAFF));
+                UUID adminID = UUID.fromString((String) shelterJSON.get(SHELTER_ADMIN));
                 
-                shelters.add(new Shelter(name, shelterID, location, currentOccupancy, capacity, petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff));
+                shelters.add(new Shelter(name, shelterID, location, currentOccupancy, capacity, petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, adminID));
+                
                 Number petCapacity = (Number) shelterJSON.get("petCapacity");
                 Number petOccupancy = (Number) shelterJSON.get("currentPetOccupancy");
                 shelters.get(shelters.size() - 1).setPetSpace(
                     petCapacity == null ? 0 : petCapacity.intValue(),
                     petOccupancy == null ? 0 : petOccupancy.intValue());
-
-                Shelter shelter = shelters.get(shelters.size() - 1);
-                for (String occupant : getJSONList(shelterJSON, SHELTER_OCCUPANTS)) {
-                    shelter.addOccupant(occupant);
-                }
-                for (String pet : getJSONList(shelterJSON, SHELTER_PETS)) {
-                    shelter.addPet(pet);
-                }
-                String adminID = (String) shelterJSON.get(SHELTER_ADMIN);
-                if (adminID != null && !adminID.isEmpty()) {
-                    shelter.setAdmin(getUserbyID(UUID.fromString(adminID), COORDINATOR_JSON));
-                }
-
+                
+                        
             }
 
         } catch (Exception e) {
@@ -227,8 +218,8 @@ public class DataLoader extends AppConstants {
      * A helper method for getUser to return coordinators
      * @return returns an arrayList of coordinators
      */
-    public static ArrayList<AidCoordinator> getCoordinators() {
-        ArrayList<AidCoordinator> coordinators = new ArrayList<AidCoordinator>();
+    public static ArrayList<Coordinator> getCoordinators() {
+        ArrayList<Coordinator> coordinators = new ArrayList<Coordinator>();
 
         try {
             FileReader reader = new FileReader(COORDINATOR_JSON);
@@ -237,16 +228,9 @@ public class DataLoader extends AppConstants {
             for(int i = 0; i < coordinatorsJSON.size(); i++) {
                 JSONObject coordinatorJSON = (JSONObject)coordinatorsJSON.get(i);
                 UserData data = getUserData(coordinatorJSON);
+                CoordinatorRole role = CoordinatorRole.valueOf(((String) coordinatorJSON.get(COORDINATOR_ROLE)).toUpperCase());
 
-                /* */
-
-                String roleText = (String) coordinatorJSON.get(USER_ROLE);
-                CoordinatorRole role = CoordinatorRole.AID;
-                if (roleText != null && !roleText.isEmpty()) {
-                    role = CoordinatorRole.valueOf(roleText.toUpperCase());
-                }
-
-                coordinators.add(new AidCoordinator(role, data.firstName, data.lastName, data.id, data.email, data.phone, data.userName, data.password,
+                coordinators.add(new Coordinator(role, data.firstName, data.lastName, data.id, data.email, data.phone, data.userName, data.password,
                           data.location, data.birthDate, data.notificationPreference, data.emergencyContacts, VolunteerManager.getInstance()));
             }
 
