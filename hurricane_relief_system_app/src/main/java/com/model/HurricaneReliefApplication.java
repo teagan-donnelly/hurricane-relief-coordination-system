@@ -157,16 +157,15 @@ public class HurricaneReliefApplication {
 
     }
 
-    public void editShelter(String name, Location location, int currentOccupancy, int capacity, 
-        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
-        boolean hasMedicalStaff, UUID admin) {
+    public void editShelter(UUID id, int currentOccupancy, boolean petFriendly, int currentPetOccupancy,
+        boolean hasPower, ShelterStatus status, boolean hasMedicalStaff) {
 
         User user = accountManager.getCurrentUser();
         if(user.getClass().getSimpleName() == "Coordinator") {
             Coordinator coordinator = (Coordinator) user;
             if(coordinator.getRole() == CoordinatorRole.SHELTER){
-                ShelterManager.editShelter(name, location, currentOccupancy, capacity, 
-                    petFriendly, accessibilityInfo, hasPower, status, hasMedicalStaff, admin);
+                ShelterManager.editShelter(id, currentOccupancy, petFriendly, currentPetOccupancy,
+                    hasPower, status, hasMedicalStaff);
             } else {
                 System.out.println("Current user does not have access to register a shelter");
             }

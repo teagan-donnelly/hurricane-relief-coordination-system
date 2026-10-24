@@ -120,4 +120,13 @@ public class HurricaneEvent {
             }
         }
     }
+
+    //getters
+    public UUID getHuricaneID() {
+        return hurricaneID;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

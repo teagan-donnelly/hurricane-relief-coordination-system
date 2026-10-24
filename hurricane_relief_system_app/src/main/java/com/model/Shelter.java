@@ -18,7 +18,8 @@ public class Shelter {
     private int petCapacity;
     private int currentPetOccupancy;
     private UUID admin;
-    private ArrayList<AidRequester> occupants;
+    private ArrayList<String> occupants;
+    private ArrayList<String> pets;
 
     public void setPetSpace(int petCapacity, int currentPetOccupancy) {
         if (petCapacity < 0 || currentPetOccupancy < 0 || currentPetOccupancy > petCapacity) {
@@ -128,7 +129,7 @@ public class Shelter {
         pets.add(pet);
     }
 
-    public void setAdmin(User admin) {
+    public void setAdmin(UUID admin) {
         this.admin = admin;
     }
 
@@ -171,6 +172,66 @@ public class Shelter {
 
     public UUID getAdmin() {
         return admin;
+    }
+
+    public ArrayList<String> getAccessibilityInfo() {
+        return accessibilityInfo;
+    } 
+
+    public boolean hasPower() {
+        return hasPower;
+    }
+
+    public ArrayList<String> getOccupants() {
+        return occupants;
+    }
+
+    public int getPetCapacity() {
+        return petCapacity;
+    }
+
+    public int getCurrentPetOccupancy() {
+        return currentPetOccupancy;
+    }
+
+    public ArrayList<String> getPets() {
+        return pets;
+    }
+
+    //setters
+    public void setName(){
+
+    }
+
+    public void setCurrentoccupancy(int currentOccupancy) {
+        this.currentOccupancy = currentOccupancy;
+    }
+    public void setCapacity(int capacity){
+        this.capacity = capacity;
+    }
+    public void setPetFriendly(boolean petFriendly){
+        this.petFriendly = petFriendly;
+    }
+    public void setPower(boolean hasPower){
+        this.hasPower = hasPower;
+    }
+    public void setStatus(ShelterStatus status){
+        this.status = status;
+    }
+    public void setMedicalStaff(boolean hasMedicalStaff){
+        this.hasMedicalStaff = hasMedicalStaff;
+    }
+    public void setPetCapacity(int petCapacity){
+        this.petCapacity = capacity;
+    }
+    public void setCurrentPetOccupancy(int currentPetOccupancy){
+        this.currentPetOccupancy = currentPetOccupancyl
+    }
+    public void setOccupants(ArrayList<String> occupants){
+        this.occupants = occupants;
+    }
+    public void setPets(ArrayList<String> pets){
+        this.pets = pets;
     }
 
 }

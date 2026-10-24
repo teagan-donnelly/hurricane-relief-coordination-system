@@ -42,7 +42,7 @@ public class ShelterManager{
 
     }
 
-    public static void viewShelter(UUID id) {
+    public static String viewShelter(UUID id) {
         ShelterManager manager = new ShelterManager();
         ArrayList<Shelter> shelters = manager.getShelters();
 
@@ -53,26 +53,34 @@ public class ShelterManager{
                     "Shelter capacity" + shelter.getCapacity() + "\n" +
                     "Shelter occupancy" + shelter.getCurrentOccupancy() + "\n" +
                     "Shelter space" + shelter.getAvailableSpace() + "\n" +
-                    "Shelter occupants" + shelter.get() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +
-                    "Shelter name" + shelter.getName() + "\n" +;
+                    "Shelter occupants" + shelter.getOccupants();
 
-                    
+                return report;
+
             }
         }
+        return "Could not find shelter";
 
     }
 
-    public static void editShelter(String name, Location location, int currentOccupancy, int capacity, 
-        boolean petFriendly, ArrayList<String> accessibilityInfo, boolean hasPower, ShelterStatus status,
-        boolean hasMedicalStaff, UUID admin) {
+    public static void editShelter(UUID id, int occupancyChange, boolean petFriendly, int PetOccupancyChange,
+        boolean hasPower, ShelterStatus status, boolean hasMedicalStaff) {
 
         ShelterManager manager = new ShelterManager();
         ArrayList<Shelter> shelters = manager.getShelters();
+
+        for (Shelter shelter : shelters) {
+            if (shelter.getId() == id) {
+                int currentoccupancy = shelter.getCurrentOccupancy();
+                int currentPetOccupancy = shelter.getCurrentPetOccupancy();
+                shelter.setCurrentoccupancy(currentoccupancy + occupancyChange);
+                shelter.setPetFriendly(petFriendly);
+                shelter.setPetCapacity(currentPetOccupancy + PetOccupancyChange);
+                shelter.setPower(hasPower);
+                shelter.setStatus(status);
+                shelter.setMedicalStaff(hasMedicalStaff);
+            }
+        }
 
     }
 

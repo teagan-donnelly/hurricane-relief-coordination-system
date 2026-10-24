@@ -247,7 +247,7 @@ public class DataWriter extends AppConstants {
         return saveRecord(VOLUNTEER_JSON, getVolunteerJSON(volunteer), USER_ID);
     }
 
-    public static boolean saveCoordinator(AidCoordinator coordinator) {
+    public static boolean saveCoordinator(Coordinator coordinator) {
         return saveRecord(COORDINATOR_JSON, getCoordinatorJSON(coordinator), USER_ID);
     }
 

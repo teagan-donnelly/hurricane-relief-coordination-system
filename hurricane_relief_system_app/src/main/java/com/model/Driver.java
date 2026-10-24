@@ -274,7 +274,7 @@ public class Driver {
     }
 
     public static void findShelterAndAssign(Volunteer rosa, PersonalRequest request) {
-        ShelterManager shelterManager = new ShelterManager(DataLoader.getShelters());
+        ShelterManager shelterManager = new ShelterManager();
         if (request.getAssignedVolunteerID() != null) {
             Shelter savedShelter = shelterManager.findShelter(request.getSelectedShelterID());
             System.out.println("Saved request status: " + request.getRequestStatus());
@@ -348,7 +348,7 @@ public class Driver {
     }
 
     public static void exportTrip(Volunteer rosa, PersonalRequest request) {
-        ShelterManager shelterManager = new ShelterManager(DataLoader.getShelters());
+        ShelterManager shelterManager = new ShelterManager();
         Shelter shelter = shelterManager.findShelter(request.getSelectedShelterID());
         if (shelter == null) {
             System.out.println("\nNo shelter has been selected, so the trip cannot be exported.");
@@ -364,9 +364,9 @@ public class Driver {
         System.out.println("Request status is still: " + request.getRequestStatus());
     }
 
-    public static AidCoordinator registerFelix() {
+    public static Coordinator registerFelix() {
         UUID felixID = UUID.fromString("f9a3b046-1c25-4a68-8f4a-46bec4756404");
-        for (AidCoordinator saved : DataLoader.getCoordinators()) {
+        for (Coordinator saved : DataLoader.getCoordinators()) {
             if (saved.getUserId().equals(felixID)) {
                 return saved;
             }
@@ -377,7 +377,7 @@ public class Driver {
         ArrayList<String> emergencyContacts = new ArrayList<>();
         emergencyContacts.add("Ana Moreno: 843-555-0190");
 
-        AidCoordinator felix = new AidCoordinator(CoordinatorRole.SHELTER, "Felix", "Moreno",
+        Coordinator felix = new Coordinator(CoordinatorRole.SHELTER, "Felix", "Moreno",
             felixID, "felix.moreno@example.com", "843-555-0189", "felixmoreno", "FelixDemo123",
             felixLocation, LocalDate.of(1979, 9, 15), NotificationType.APP_PUSH,
             emergencyContacts, VolunteerManager.getInstance());
@@ -408,7 +408,7 @@ public class Driver {
     }
 
     public static void checkInAtShelter(Volunteer rosa, PersonalRequest request) {
-        AidCoordinator felix = registerFelix();
+        Coordinator felix = registerFelix();
         if (felix == null) {
             return;
         }
@@ -422,7 +422,7 @@ public class Driver {
         }
         System.out.println("\nFelix " + felix.getLastName() + " (shelter manager) logged in.");
 
-        ShelterManager shelterManager = new ShelterManager(DataLoader.getShelters());
+        ShelterManager shelterManager = new ShelterManager();
         Shelter shelter = null;
         for (Shelter current : shelterManager.getShelters()) {
             if (current.getAdmin() != null && current.getAdmin().getUserId().equals(felix.getUserId())) {
