@@ -4,6 +4,12 @@ The Hurricane Relief Coordination System is a Java-based project designed to hel
 
 This project is being developed by our five-person team, **Cache Money**, for CSCE 247: Software Engineering.
 
+## Project Demonstration
+
+Watch our Hurricane Relief Coordination System implementation and presentation:
+
+[Watch the Project Demonstration on YouTube](https://youtu.be/0ZK9ARfnwLI)
+
 ## Documents
 
 All project documentation can be found in the [`docs`](docs/) folder.
