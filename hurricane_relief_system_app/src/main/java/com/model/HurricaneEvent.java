@@ -137,4 +137,26 @@ public class HurricaneEvent {
     public String getName() {
         return name;
     }
+
+    /**
+     * Gets the start date of the hurricane event.
+     * @return returns the start date
+     */
+    public LocalDateTime getStartDate(){
+        return startDate;
+    }
+    /**
+     * Gets the end date of the hurricane event.
+     * @return returns the end date
+     */
+    public LocalDateTime getEndDate(){
+        return endDate;
+    }
+    /**
+     * Gets the description of the hurricane event.
+     * @return returns the descrition
+     */
+    public String getDescription(){
+        return description;
+    }
 }
