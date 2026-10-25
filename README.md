@@ -8,7 +8,7 @@ This project is being developed by our five-person team, **Cache Money**, for CS
 
 Watch our Hurricane Relief Coordination System implementation and presentation:
 
-[Watch the Project Demonstration on YouTube](https://youtu.be/0ZK9ARfnwLI)
+[Watch the Project Demonstration on YouTube](https://youtu.be/ivuxR6KIlJo?si=rRk5IZZUoj2yfiyx)
 
 ## Documents
 
