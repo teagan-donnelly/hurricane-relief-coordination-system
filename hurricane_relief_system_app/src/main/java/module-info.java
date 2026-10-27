@@ -2,6 +2,7 @@ module com.hurricane_relief_system {
     requires javafx.controls;
     requires javafx.fxml;
     requires json.simple;
+    requires junit;
 
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
