@@ -14,6 +14,13 @@ public abstract class AppConstants {
     public static final String HURICANE_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/hurricane-event.json";
     public static final String SHELTER_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/shelter.json";
 
+    public static final String VOLUNTEER_JUNIT = "hurricane_relief_system_app/src/test/java/com/model/resources/data/json/volunteer.json";
+    public static final String COORDINATOR_JUNIT = "hurricane_relief_system_app/src/test/java/com/model/resources/data/aid-coordinators.json";
+    public static final String REQUESTER_JUNIT = "hurricane_relief_system_app/src/test/java/com/model/resources/data/aid-request.json";
+    public static final String REQUEST_JUNIT = "hurricane_relief_system_app/src/test/java/com/model/resources/data/aid-request.json";
+    public static final String HURICANE_JUNIT = "hurricane_relief_system_app/src/test/java/com/model/resources/data/hurricane-event.json";
+    public static final String SHELTER_JUNIT = "hurricane_relief_system_app/src/test/java/com/model/resources/data/shelter.json";
+
     public static final String USER_ID = "userID";
     public static final String USER_FIRST_NAME = "firstName";
     public static final String USER_LAST_NAME = "lastName";
@@ -102,6 +109,16 @@ public abstract class AppConstants {
     public static final String SHELTER_CURRENT_PET_OCCUPANCY = "petOccupancy";
     public static final String SHELTER_PETS = "pets";
     public static final String SHELTER_OCCUPANTS = "occupants";
+
+
+    public static boolean isJUnitTest() {  
+		for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+		  if (element.getClassName().startsWith("org.junit.")) {
+			return true;
+		  }           
+		}
+	    return false;
+	}
 
     
 }

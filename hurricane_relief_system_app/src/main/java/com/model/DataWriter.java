@@ -3,6 +3,7 @@ package com.model;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
@@ -21,7 +22,7 @@ public class DataWriter extends AppConstants {
      * @return true if successful, false otherwise
      */
     public static boolean saveRequester(AidRequester requester) {
-        return saveRecord(REQUESTER_JSON, getRequesterJSON(requester), USER_ID);
+        return saveRecord(getFileWritingPath(REQUESTER_JSON, REQUESTER_JUNIT).toString(), getRequesterJSON(requester), USER_ID);
     }
 
     /**
@@ -30,7 +31,7 @@ public class DataWriter extends AppConstants {
      * @return true if successful, false otherwise
      */
     public static boolean saveRequest(HelpRequest request) {
-        return saveRecord(REQUEST_JSON, getRequestJSON(request), REQUEST_ID);
+        return saveRecord(getFileWritingPath(REQUEST_JSON, REQUEST_JUNIT).toString(), getRequestJSON(request), REQUEST_ID);
     }
 
     /**
@@ -112,9 +113,9 @@ public class DataWriter extends AppConstants {
             }
         }
 
-        boolean s1 = writeToFile(COORDINATOR_JSON, coordinatorList);
-        boolean s2 = writeToFile(REQUESTER_JSON, requesterList);
-        boolean s3 = writeToFile(VOLUNTEER_JSON, volunteerList);
+        boolean s1 = writeToFile(getFileWritingPath(COORDINATOR_JSON, COORDINATOR_JUNIT).toString(), coordinatorList);
+        boolean s2 = writeToFile(getFileWritingPath(REQUESTER_JSON, REQUESTER_JUNIT).toString(), requesterList);
+        boolean s3 = writeToFile(getFileWritingPath(VOLUNTEER_JSON, VOLUNTEER_JUNIT).toString(), volunteerList);
 
         return s1 && s2 && s3;
     }
@@ -133,7 +134,7 @@ public class DataWriter extends AppConstants {
             requestList.add(getRequestJSON(request));
         }
 
-        return writeToFile(REQUEST_JSON, requestList);
+        return writeToFile(getFileWritingPath(REQUEST_JSON, REQUEST_JUNIT).toString(), requestList);
     }
 
     // --- Helper Methods ---
@@ -329,7 +330,7 @@ public class DataWriter extends AppConstants {
      * @return true if successful, false otherwise
      */
     public static boolean saveVolunteer(Volunteer volunteer) {
-        return saveRecord(VOLUNTEER_JSON, getVolunteerJSON(volunteer), USER_ID);
+        return saveRecord(getFileWritingPath(VOLUNTEER_JSON, VOLUNTEER_JUNIT).toString(), getVolunteerJSON(volunteer), USER_ID);
     }
 
     /**
@@ -338,7 +339,7 @@ public class DataWriter extends AppConstants {
      * @return true if successful, false otherwise
      */
     public static boolean saveCoordinator(Coordinator coordinator) {
-        return saveRecord(COORDINATOR_JSON, getCoordinatorJSON(coordinator), USER_ID);
+        return saveRecord(getFileWritingPath(COORDINATOR_JSON, COORDINATOR_JUNIT).toString(), getCoordinatorJSON(coordinator), USER_ID);
     }
 
     /**
@@ -347,7 +348,7 @@ public class DataWriter extends AppConstants {
      * @return true if successful, false otherwise
      */
     public static boolean saveShelter(Shelter shelter) {
-        return saveRecord(SHELTER_JSON, getShelterJSON(shelter), SHELTER_ID);
+        return saveRecord(getFileWritingPath(SHELTER_JSON, SHELTER_JUNIT).toString(), getShelterJSON(shelter), SHELTER_ID);
     }
 
     /**
@@ -388,4 +389,21 @@ public class DataWriter extends AppConstants {
 
         return obj;
     }
+
+    private static String getFileWritingPath(String PATH_NAME, String JUNIT_PATH_NAME) {
+		try {
+			if(isJUnitTest()){
+				URI url = DataWriter.class.getResource(JUNIT_PATH_NAME).toURI();
+				return url.getPath();
+			} else {
+				return PATH_NAME;
+			}
+		} catch(Exception e){
+			System.out.println("Difficulty getting resource path");
+			return "";
+		}
+	}
+
+
+
 }
