@@ -1,0 +1,125 @@
+[
+  {
+    "userID": "e749d25b-831a-4c60-a219-75b3f9d08642",
+    "firstName": "Felix",
+    "lastName": "Reed",
+    "role": "SHELTER",
+    "email": "felix.reed@example.com",
+    "phoneNumber": "843-555-0107",
+    "location": {
+      "latitude": 32.8005,
+      "longitude": -79.9498,
+      "streetAddress": "425 Oak Street",
+      "apartmentNum": 0,
+      "city": "Charleston",
+      "state": "SC",
+      "zipcode": "29403"
+    },
+    "birthDate": "1987-06-15",
+    "username": "freed87",
+    "password": "password",
+    "notificationPreference": "SMS",
+    "emergencyContacts": [
+      "Angela Reed - 555-0142",
+      "Thomas Reed - 555-0186"
+    ]
+  },
+  {
+    "userID": "6a392f81-d407-4b5e-93c6-f0812e74a9bd",
+    "firstName": "Elena",
+    "lastName": "Torres",
+    "role": "AID",
+    "email": "elena.torres@example.com",
+    "phoneNumber": "843-555-0108",
+    "location": {
+      "latitude": 33.0185,
+      "longitude": -80.1756,
+      "streetAddress": "218 Cypress Lane",
+      "apartmentNum": 0,
+      "city": "Summerville",
+      "state": "SC",
+      "zipcode": "29483"
+    },
+    "birthDate": "1993-09-28",
+    "username": "etorres93",
+    "password": "password",
+    "notificationPreference": "EMAIL",
+    "emergencyContacts": [
+      "Miguel Torres - 555-0138"
+    ]
+  },
+  {
+    "userID": "c8207e94-56b1-49af-b372-8d6e1035a2fc",
+    "firstName": "David",
+    "lastName": "Nguyen",
+    "role": "VOLUNTEER",
+    "email": "david.nguyen@example.com",
+    "phoneNumber": "843-555-0109",
+    "location": {
+      "latitude": 32.8138,
+      "longitude": -79.8597,
+      "streetAddress": "73 Harbor View Drive",
+      "apartmentNum": 0,
+      "city": "Mount Pleasant",
+      "state": "SC",
+      "zipcode": "29464"
+    },
+    "birthDate": "1978-03-11",
+    "username": "dnguyen78",
+    "password": "password",
+    "notificationPreference": "SMS",
+    "emergencyContacts": [
+      "Linh Nguyen - 555-0163",
+      "Michael Tran - 555-0117"
+    ]
+  },
+  {
+    "userID": "15f6a8c3-9e24-47d0-85b1-a7326c90e4fd",
+    "firstName": "Rebecca",
+    "lastName": "Collins",
+    "role": "AID",
+    "email": "rebecca.collins@example.com",
+    "phoneNumber": "912-555-0110",
+    "location": {
+      "latitude": 32.0552,
+      "longitude": -81.0658,
+      "streetAddress": "906 Magnolia Avenue",
+      "apartmentNum": 0,
+      "city": "Savannah",
+      "state": "GA",
+      "zipcode": "31404"
+    },
+    "birthDate": "1990-12-04",
+    "username": "rcollins90",
+    "password": "password",
+    "notificationPreference": "EMAIL",
+    "emergencyContacts": [
+      "James Collins - 555-0195",
+      "Olivia Hayes - 555-0124"
+    ]
+  },
+  {
+    "userID": "9b473d60-a815-42e9-967c-3f04b2d18a75",
+    "firstName": "Samuel",
+    "lastName": "Jackson",
+    "role": "SHELTER",
+    "email": "samuel.jackson@example.com",
+    "phoneNumber": "843-555-0111",
+    "location": {
+      "latitude": 32.4316,
+      "longitude": -80.6887,
+      "streetAddress": "152 Palmetto Road",
+      "apartmentNum": 0,
+      "city": "Beaufort",
+      "state": "SC",
+      "zipcode": "29902"
+    },
+    "birthDate": "1969-08-20",
+    "username": "sjackson69",
+    "password": "password",
+    "notificationPreference": "SMS",
+    "emergencyContacts": [
+      "Patricia Jackson - 555-0178"
+    ]
+  }
+]
