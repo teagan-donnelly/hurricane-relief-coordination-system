@@ -27,7 +27,7 @@ public class DrivingDistanceService {
     public double getDistance(double startLatitude, double startLongitude,
                               double endLatitude, double endLongitude)
             throws IOException, InterruptedException {
-        String apiKey = System.getenv("MAP_API_KEY");
+        String apiKey = getApiKey();
         if (apiKey == null || apiKey.isBlank()) {
             throw new IOException("MAP_API_KEY must be set to compare driving distances.");
         }
@@ -42,8 +42,7 @@ public class DrivingDistanceService {
             .POST(HttpRequest.BodyPublishers.ofString(body))
             .build();
 
-        HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = send(request);
         if (response.statusCode() != 200) {
             throw new IOException("Driving distance lookup failed (HTTP " + response.statusCode() + ").");
         }
@@ -54,5 +53,25 @@ public class DrivingDistanceService {
             throw new IOException("Map service did not return a valid driving distance.");
         }
         return distance.asDouble();
+    }
+
+    /**
+     * Gets the map api key.
+     * @return The api key, or null if it is not set
+     */
+    protected String getApiKey() {
+        return System.getenv("MAP_API_KEY");
+    }
+
+    /**
+     * Sends a request to the map api.
+     * @param request Request to send
+     * @return Response from the map api
+     * @throws IOException if the request fails
+     * @throws InterruptedException if the request is interrupted
+     */
+    protected HttpResponse<String> send(HttpRequest request) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 }
