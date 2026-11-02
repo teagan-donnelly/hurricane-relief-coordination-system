@@ -24,12 +24,12 @@ import static org.junit.Assert.assertEquals;
  * | getInstanceTest_exists                         | A method to return a list of users Requester test                 |
  * | addVolunteerTest_null                          | A method to return a list of users Volunteer test                 |
  * | addVolunteerTest_valid                         | A method to return a list of users not null test                  |
- * | removeVolunteerTest_null                       |
- * | removeVolunteerTest_valid                      |
- * | assignVolunteerTest_null_null                  |
- * | assignVolunteerTest_valid_null                 |
- * | assignVolunteerTest_null_valid                 |
- * | assignVolunteerTest_valid_valid                |
+ * | removeVolunteerTest_null                       | test to remove a non-existant volunteer                           |
+ * | removeVolunteerTest_valid                      | test to remove an existing volunteer                              |
+ * | assignVolunteerTest_null_null                  | test to assign a null volunteer and null helpRequest              |
+ * | assignVolunteerTest_valid_null                 | test to assign an existing volunteer and null helpRequest         |
+ * | assignVolunteerTest_null_valid                 | test to assign a null volunteer and existing helpRequest          |
+ * | assignVolunteerTest_valid_valid                | test to assign an existing volunteer and existing helpRequest     |
  * +------------------------------------------------+-------------------------------------------------------------------+
  */
 
