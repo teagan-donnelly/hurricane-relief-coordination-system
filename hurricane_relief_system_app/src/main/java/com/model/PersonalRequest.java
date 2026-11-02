@@ -61,7 +61,8 @@ public class PersonalRequest extends HelpRequest {
      */
     public PersonalRequest(UUID requestID, User user, AssistanceType assistanceType, Urgency urgency, 
         RequestStatus requestStatus, Location location, int householdSize, String accessInstructions, int pets, int children) {
-        super(requestID, user, assistanceType, urgency, requestStatus, location);
+        super(requestID, RequestType.PERSONAL, user, null, assistanceType, urgency,
+            requestStatus, location, null);
 
         this.householdSize = householdSize;
         this.accessInstructions = accessInstructions;
