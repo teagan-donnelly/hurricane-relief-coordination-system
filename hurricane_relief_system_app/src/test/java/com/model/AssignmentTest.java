@@ -11,8 +11,7 @@ import org.junit.Test;
  * Tests for accepting, arriving at, and resolving an {@link Assignment}.
  * @author Jorge Naranjo Jr.
  *
- * AI disclosure: the test code and the reasoning table below were drafted with help from Claude (Anthropic).
- *
+ * 
  * +------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+
  * | Test                                                 | Reasoning                                                                                                            |
  * +------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+

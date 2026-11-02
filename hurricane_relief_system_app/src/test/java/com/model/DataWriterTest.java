@@ -24,7 +24,7 @@ import org.junit.rules.TemporaryFolder;
  * @author Jorge Naranjo Jr.
  * Test class to verify the functionality of saving users and requests via {@link DataWriter}.
  *
- * AI disclosure: the tests by Jorge Naranjo Jr. and the reasoning table below were drafted with help from Claude (Anthropic).
+ * 
  *
  * +-----------------------------------------------------+---------------------------------------------------------------------------------------------------------+
  * | Test                                                | Reasoning                                                                                               |

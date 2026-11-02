@@ -18,8 +18,7 @@ import org.junit.rules.TemporaryFolder;
  * Tests for how a {@link Volunteer} accepts, declines, and works on help requests.
  * @author Jorge Naranjo Jr.
  *
- * AI disclosure: the test code and the reasoning table below were drafted with help from Claude (Anthropic).
- *
+ * 
  * +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
  * | Test                                                  | Reasoning                                                                                                       |
  * +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+

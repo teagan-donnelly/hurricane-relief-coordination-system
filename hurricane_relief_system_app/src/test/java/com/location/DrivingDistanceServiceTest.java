@@ -20,7 +20,7 @@ import org.junit.Test;
  * responses so the tests don't need an api key or an internet connection.
  * @author Jorge Naranjo Jr.
  *
- * AI disclosure: the test code and the reasoning table below were drafted with help from Claude (Anthropic).
+ * 
  *
  * +---------------------------------------+------------------------------------------------------------------------------------------------------------------+
  * | Test                                  | Reasoning                                                                                                        |
