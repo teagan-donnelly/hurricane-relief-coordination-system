@@ -58,6 +58,7 @@ import org.junit.Test;
  * | automaticAssignmentSkipsUnverifiedVolunteer         | Unverified volunteers are excluded before a map lookup.                                 |
  * | automaticAssignmentSkipsDispatchedVolunteer         | Volunteers handling other assignments are excluded before a map lookup.                 |
  * | automaticAssignmentSkipsUnqualifiedVolunteer        | Only volunteers qualified for the requested assistance are eligible.                    |
+ * | loadingVolunteerFixtureReturnsAllFiveVolunteers      | The fixture must load completely instead of returning an empty or partial list.           |
  * +-----------------------------------------------------+-----------------------------------------------------------------------------------------+
  */
 public class CoordinatorTest {
@@ -136,6 +137,14 @@ public class CoordinatorTest {
     private HelpRequest request(AssistanceType type, RequestStatus status) {
         return new HelpRequest(UUID.randomUUID(), RequestType.PERSONAL, null,
             "Need transportation", type, Urgency.HIGH_PRIORITY, status, location, "");
+    }
+
+    /**
+     * Tests that all five volunteers are loaded from the test data file.
+     */
+    @Test
+    public void loadingVolunteerFixtureReturnsAllFiveVolunteers() {
+        assertEquals(5, DataLoader.getVolunteers().size());
     }
 
     /**

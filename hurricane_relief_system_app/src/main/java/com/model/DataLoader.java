@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,9 +47,9 @@ public class DataLoader extends AppConstants {
     public static ArrayList<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
         
-        users.addAll(getUsers(getReaderFromFile(VOLUNTEER_JSON, VOLUNTEER_JUNIT).toString()));
-        users.addAll(getUsers(getReaderFromFile(COORDINATOR_JSON, COORDINATOR_JUNIT).toString()));
-        users.addAll(getUsers(getReaderFromFile(REQUESTER_JSON, REQUESTER_JUNIT).toString()));
+        users.addAll(getUsers(VOLUNTEER_JSON));
+        users.addAll(getUsers(COORDINATOR_JSON));
+        users.addAll(getUsers(REQUESTER_JSON));
         
         return users;
     }
@@ -61,8 +62,7 @@ public class DataLoader extends AppConstants {
     public static ArrayList<HelpRequest> getRequests() {
         ArrayList<HelpRequest> requests = new ArrayList<HelpRequest>();
 
-        try {
-            FileReader reader = new FileReader(getReaderFromFile(REQUESTER_JSON, REQUESTER_JUNIT).toString());
+        try (BufferedReader reader = getReaderFromFile(REQUEST_JSON, REQUEST_JUNIT)) {
             JSONArray requestsJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < requestsJSON.size(); i++) {
@@ -72,7 +72,7 @@ public class DataLoader extends AppConstants {
                 RequestType requestType = RequestType.valueOf(((String) requestJSON.get(REQUEST_TYPE)).toUpperCase());
 
                 UUID requestUser = UUID.fromString((String) requestJSON.get(REQUEST_USER_ID));
-                User user = getUserbyID(requestUser, REQUESTER_JSON, REQUESTER_JUNIT);
+                User user = getUserbyID(requestUser, REQUESTER_JSON);
 
                 String comment = (String) requestJSON.get(REQUEST_COMMENT);
                 AssistanceType assistanceType = AssistanceType.valueOf(((String) requestJSON.get(REQUEST_ASSISTANCE_TYPE)).toUpperCase());
@@ -141,8 +141,7 @@ public class DataLoader extends AppConstants {
     public static ArrayList<HurricaneEvent> getHurricaneEvents() {
         ArrayList<HurricaneEvent> hurricaneEvents = new ArrayList<HurricaneEvent>();
 
-        try {
-            FileReader reader = new FileReader(getReaderFromFile(HURICANE_JSON, HURICANE_JUNIT).toString());
+        try (BufferedReader reader = getReaderFromFile(HURICANE_JSON, HURICANE_JUNIT)) {
             JSONArray hurricanesJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < hurricanesJSON.size(); i++) {
@@ -178,8 +177,7 @@ public class DataLoader extends AppConstants {
     public static ArrayList<Shelter> getShelters() {
         ArrayList<Shelter> shelters = new ArrayList<Shelter>();
 
-        try {
-            FileReader reader = new FileReader(getReaderFromFile(SHELTER_JSON, SHELTER_JUNIT).toString());
+        try (BufferedReader reader = getReaderFromFile(SHELTER_JSON, SHELTER_JUNIT)) {
             JSONArray sheltersJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < sheltersJSON.size(); i++) {
@@ -228,8 +226,7 @@ public class DataLoader extends AppConstants {
     public static ArrayList<Coordinator> getCoordinators() {
         ArrayList<Coordinator> coordinators = new ArrayList<Coordinator>();
 
-        try {
-            FileReader reader = new FileReader(getReaderFromFile(COORDINATOR_JSON, COORDINATOR_JUNIT).toString());
+        try (BufferedReader reader = getReaderFromFile(COORDINATOR_JSON, COORDINATOR_JUNIT)) {
             JSONArray coordinatorsJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < coordinatorsJSON.size(); i++) {
@@ -255,8 +252,7 @@ public class DataLoader extends AppConstants {
     public static ArrayList<AidRequester> getRequesters() {
         ArrayList<AidRequester> requesters = new ArrayList<AidRequester>();
 
-        try {
-            FileReader reader = new FileReader(getReaderFromFile(REQUESTER_JSON, REQUESTER_JUNIT).toString());
+        try (BufferedReader reader = getReaderFromFile(REQUESTER_JSON, REQUESTER_JUNIT)) {
             JSONArray requestersJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < requestersJSON.size(); i++) {
@@ -287,8 +283,7 @@ public class DataLoader extends AppConstants {
     public static ArrayList<Volunteer> getVolunteers() {
         ArrayList<Volunteer> volunteers = new ArrayList<Volunteer>();
 
-        try {
-            FileReader reader = new FileReader(getReaderFromFile(VOLUNTEER_JSON, VOLUNTEER_JUNIT).toString());
+        try (BufferedReader reader = getReaderFromFile(VOLUNTEER_JSON, VOLUNTEER_JUNIT)) {
             JSONArray volunteersJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < volunteersJSON.size(); i++) {
@@ -400,8 +395,8 @@ public class DataLoader extends AppConstants {
      * @param userFile the file to look through
      * @return returns the user found or null on failure to find
      */
-    private static User getUserbyID(UUID id, String userFile, String junitFile) {
-        ArrayList<User> users = getUsers(getReaderFromFile(userFile, junitFile).toString());
+    private static User getUserbyID(UUID id, String userFile) {
+        ArrayList<User> users = getUsers(userFile);
 
         for (User user : users) {
             if (user.getUserId().equals(id)) return user;
@@ -432,21 +427,16 @@ public class DataLoader extends AppConstants {
     }
 
 
-    private static BufferedReader getReaderFromFile(String fileName, String jsonFileName){
-		try {
-			if(isJUnitTest()){
-				InputStream inputStream = DataLoader.class.getResourceAsStream(jsonFileName);
-				InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-				return new BufferedReader(inputStreamReader);
-			} else {
-				FileReader reader = new FileReader(fileName);
-				return new BufferedReader(reader);
-			}
-		} catch(Exception e){
-			System.out.println("Can't load");
-			return null;
-		}
-			
-	}
+    private static BufferedReader getReaderFromFile(String fileName, String jsonFileName)
+            throws IOException {
+        if (isJUnitTest()) {
+            InputStream inputStream = DataLoader.class.getResourceAsStream(jsonFileName);
+            if (inputStream == null) {
+                throw new IOException("Test data file was not found: " + jsonFileName);
+            }
+            return new BufferedReader(new InputStreamReader(inputStream));
+        }
+        return new BufferedReader(new FileReader(fileName));
+    }
 
 }

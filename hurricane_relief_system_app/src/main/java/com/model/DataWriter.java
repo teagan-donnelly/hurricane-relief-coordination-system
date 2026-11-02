@@ -1,6 +1,7 @@
 package com.model;
 
 import java.io.FileWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
@@ -394,7 +395,7 @@ public class DataWriter extends AppConstants {
 		try {
 			if(isJUnitTest()){
 				URI url = DataWriter.class.getResource(JUNIT_PATH_NAME).toURI();
-				return url.getPath();
+				return new File(url).getPath();
 			} else {
 				return PATH_NAME;
 			}

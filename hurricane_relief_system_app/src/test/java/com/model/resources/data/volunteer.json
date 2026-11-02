@@ -31,7 +31,7 @@
     ],
     "credentials": [
       {
-        "type": "First Aid Certification",
+        "type": "FIRST_AID_CERTIFIED",
         "status": "Valid"
       }
     ],
@@ -41,9 +41,9 @@
       "Bottled Water",
       "Emergency Radio"
     ],
-    "isVerified": true,
-    "isDispatched": false,
-    "volunteerHours": 12.5
+    "volunteerHours": 12.5,
+    "isVerifed": true,
+    "isDispached": false
   },
   {
     "userID": "b0317ac9-6d82-45fe-a410-9c57e2b3680d",
@@ -73,20 +73,15 @@
       "Food Distribution",
       "Shelter Assistance"
     ],
-    "credentials": [
-      {
-        "type": "Food Safety Certification",
-        "status": "Valid"
-      }
-    ],
+    "credentials": [],
     "supplies": [
       "Bottled Water",
       "Non-Perishable Food",
       "Blankets"
     ],
-    "isVerified": true,
-    "isDispatched": true,
-    "volunteerHours": 28.0
+    "volunteerHours": 28.0,
+    "isVerifed": true,
+    "isDispached": true
   },
   {
     "userID": "7e56c218-0a93-4d67-b825-f1396c04a7de",
@@ -117,20 +112,15 @@
       "Electrical Repair",
       "Generator Maintenance"
     ],
-    "credentials": [
-      {
-        "type": "Licensed Electrician",
-        "status": "Valid"
-      }
-    ],
+    "credentials": [],
     "supplies": [
       "Tool Kit",
       "Portable Generator",
       "Extension Cords"
     ],
-    "isVerified": true,
-    "isDispatched": false,
-    "volunteerHours": 35.5
+    "volunteerHours": 35.5,
+    "isVerifed": true,
+    "isDispached": false
   },
   {
     "userID": "d9640bf3-27e5-48a1-93c6-50a7e182bd49",
@@ -163,7 +153,7 @@
     ],
     "credentials": [
       {
-        "type": "CPR Certification",
+        "type": "CPR_CERTIFIED",
         "status": "Valid"
       }
     ],
@@ -172,9 +162,9 @@
       "Bottled Water",
       "Hygiene Kits"
     ],
-    "isVerified": true,
-    "isDispatched": false,
-    "volunteerHours": 8.0
+    "volunteerHours": 8.0,
+    "isVerifed": true,
+    "isDispached": false
   },
   {
     "userID": "5c82a703-e149-46bd-8f20-a674d93b015e",
@@ -204,20 +194,15 @@
       "Construction",
       "Debris Removal"
     ],
-    "credentials": [
-      {
-        "type": "Construction Safety Certification",
-        "status": "Valid"
-      }
-    ],
+    "credentials": [],
     "supplies": [
       "Work Gloves",
       "Safety Helmet",
       "Safety Goggles",
       "Hand Tools"
     ],
-    "isVerified": false,
-    "isDispatched": false,
-    "volunteerHours": 5.5
+    "volunteerHours": 5.5,
+    "isVerifed": false,
+    "isDispached": false
   }
 ]
