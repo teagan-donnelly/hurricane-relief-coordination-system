@@ -7,19 +7,20 @@
       "latitude": "106.32",
       "longitude": "45.89",
       "streetAddress": "1234 somthington rd",
+      "apartmentNum": 0,
       "city": "Riverdale",
       "state": "sc",
       "zipcode": "29229"
     },
-    "currentOccupancy": "32",
-    "capacity": "50",
+    "currentOccupancy": 32,
+    "capacity": 50,
     "petFriendly": "true",
     "accessibilityInfo": [
       "handicap accessible",
       "able to serve vegitarian diet freindly meals"
     ],
     "hasPower": "true",
-    "status:": "OPEN"
+    "status": "OPEN"
   },
   {
     "name": "trying times",
@@ -29,17 +30,18 @@
       "latitude": "156.48",
       "longitude": "20.15",
       "streetAddress": "1589 sumsville dr",
+      "apartmentNum": 0,
       "city": "oakhurst",
       "state": "sc",
       "zipcode": "29235"
     },
-    "currentOccupancy": "5",
-    "capacity": "20",
+    "currentOccupancy": 5,
+    "capacity": 20,
     "petFriendly": "false",
     "accessibilityInfo": [
       "handicap accessible"
     ],
     "hasPower": "true",
-    "status:": "OPEN"
+    "status": "OPEN"
   }
 ]

@@ -3,7 +3,7 @@
     "hurricaneID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "name": "Hurricane Tortilla",
     "category": 5,
-    "status": "DISSIPATED",
+    "status": "PASSED",
     "affectedZipCodes": [
       "29401",
       "29402",
@@ -17,7 +17,7 @@
     "hurricaneID": "c9bf9e57-1685-4c89-bafb-ff5af830be8a",
     "name": "Hurricane Jorge",
     "category": 3,
-    "status": "DISSIPATED",
+    "status": "PASSED",
     "affectedZipCodes": [
       "31401",
       "31402"
@@ -47,7 +47,7 @@
     "hurricaneID": "a83f2d61-9c47-4be5-802a-6d1e93b7f054",
     "name": "Hurricane Jasper",
     "category": 2,
-    "status": "DISSIPATED",
+    "status": "PASSED",
     "affectedZipCodes": [
       "31401",
       "31404",
@@ -61,7 +61,7 @@
     "hurricaneID": "e26b7c90-3a54-48df-b612-9f0d5a83c741",
     "name": "Hurricane Marlow",
     "category": 3,
-    "status": "DISSIPATED",
+    "status": "PASSED",
     "affectedZipCodes": [
       "28401",
       "28403",

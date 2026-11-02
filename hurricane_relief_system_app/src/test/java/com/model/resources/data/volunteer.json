@@ -31,7 +31,7 @@
     ],
     "credentials": [
       {
-        "type": "FIRST_AID_CERTIFIED",
+        "type": "FIRST_AID_CERTIFICATION",
         "status": "Valid"
       }
     ],
@@ -73,7 +73,12 @@
       "Food Distribution",
       "Shelter Assistance"
     ],
-    "credentials": [],
+    "credentials": [
+      {
+        "type": "FOOD_SAFETY_CERTIFICATION",
+        "status": "Valid"
+      }
+    ],
     "supplies": [
       "Bottled Water",
       "Non-Perishable Food",
@@ -112,7 +117,12 @@
       "Electrical Repair",
       "Generator Maintenance"
     ],
-    "credentials": [],
+    "credentials": [
+      {
+        "type": "LICENSED_ELECTRICIAN",
+        "status": "Valid"
+      }
+    ],
     "supplies": [
       "Tool Kit",
       "Portable Generator",
@@ -153,7 +163,7 @@
     ],
     "credentials": [
       {
-        "type": "CPR_CERTIFIED",
+        "type": "CPR_CERTIFICATION",
         "status": "Valid"
       }
     ],
@@ -194,7 +204,12 @@
       "Construction",
       "Debris Removal"
     ],
-    "credentials": [],
+    "credentials": [
+      {
+        "type": "CONSTRUCTION_SAFETY_CERTIFICATION",
+        "status": "Valid"
+      }
+    ],
     "supplies": [
       "Work Gloves",
       "Safety Helmet",

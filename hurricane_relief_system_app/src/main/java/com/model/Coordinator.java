@@ -130,7 +130,7 @@ public class Coordinator extends User {
             return;
         }
 
-        volunteers.assignVolunteer(volunteer, request);
+        VolunteerManager.assignVolunteer(volunteer, request);
     }
 
     /**

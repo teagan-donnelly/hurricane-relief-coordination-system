@@ -15,7 +15,7 @@ public abstract class AppConstants {
     public static final String SHELTER_JSON = "hurricane_relief_system_app/src/main/resources/com/hurricane_relief_system/json/shelter.json";
 
     public static final String VOLUNTEER_JUNIT = "/com/model/resources/data/volunteer.json";
-    public static final String COORDINATOR_JUNIT = "/com/model/resources/data/coordinators.json";
+    public static final String COORDINATOR_JUNIT = "/com/model/resources/data/aid-coordinators.json";
     public static final String REQUESTER_JUNIT = "/com/model/resources/data/aid-requestors.json";
     public static final String REQUEST_JUNIT = "/com/model/resources/data/aid-request.json";
     public static final String HURICANE_JUNIT = "/com/model/resources/data/hurricane-event.json";
@@ -112,13 +112,13 @@ public abstract class AppConstants {
 
 
     public static boolean isJUnitTest() {  
-		for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-		  if (element.getClassName().startsWith("org.junit.")) {
-			return true;
-		  }           
-		}
-	    return false;
-	}
+      for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+        if (element.getClassName().startsWith("org.junit.")) {
+        return true;
+        }           
+      }
+        return false;
+    }
 
     
 }

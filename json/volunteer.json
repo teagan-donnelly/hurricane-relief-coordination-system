@@ -31,7 +31,7 @@
     ],
     "credentials": [
       {
-        "type": "First Aid Certification",
+        "type": "FIRST_AID_CERTIFICATION",
         "status": "Valid"
       }
     ],
@@ -75,7 +75,7 @@
     ],
     "credentials": [
       {
-        "type": "Food Safety Certification",
+        "type": "FOOD_SAFETY_CERTIFICATION",
         "status": "Valid"
       }
     ],
@@ -119,7 +119,7 @@
     ],
     "credentials": [
       {
-        "type": "Licensed Electrician",
+        "type": "LICENSED_ELECTRICIAN",
         "status": "Valid"
       }
     ],
@@ -163,7 +163,7 @@
     ],
     "credentials": [
       {
-        "type": "CPR Certification",
+        "type": "CPR_CERTIFICATION",
         "status": "Valid"
       }
     ],
@@ -206,7 +206,7 @@
     ],
     "credentials": [
       {
-        "type": "Construction Safety Certification",
+        "type": "CONSTRUCTION_SAFETY_CERTIFICATION",
         "status": "Valid"
       }
     ],

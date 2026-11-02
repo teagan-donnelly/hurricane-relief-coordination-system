@@ -566,7 +566,7 @@ public class Driver {
             shelter.getAvailablePetSpace() + " pets (accepts dogs, has medical staff)");
         System.out.println();
 
-        VolunteerManager.getInstance().assignVolunteer(rosa, request);
+        VolunteerManager.assignVolunteer(rosa, request);
         if (!rosa.getUserId().equals(request.getAssignedVolunteerID())) {
             System.out.println("Assignment was not made.");
             return;
