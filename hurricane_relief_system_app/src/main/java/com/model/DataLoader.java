@@ -72,7 +72,7 @@ public class DataLoader extends AppConstants {
                 RequestType requestType = RequestType.valueOf(((String) requestJSON.get(REQUEST_TYPE)).toUpperCase());
 
                 UUID requestUser = UUID.fromString((String) requestJSON.get(REQUEST_USER_ID));
-                User user = getUserbyID(requestUser, REQUESTER_JSON);
+                User user = getUserbyID(requestUser, REQUESTER_JSON, REQUESTER_JUNIT);
 
                 String comment = (String) requestJSON.get(REQUEST_COMMENT);
                 AssistanceType assistanceType = AssistanceType.valueOf(((String) requestJSON.get(REQUEST_ASSISTANCE_TYPE)).toUpperCase());
