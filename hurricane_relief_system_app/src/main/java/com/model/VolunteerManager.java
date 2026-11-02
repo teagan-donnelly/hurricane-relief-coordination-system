@@ -15,12 +15,10 @@ public class VolunteerManager {
      */
     private VolunteerManager() {
         volunteers = new ArrayList<>();
-        ArrayList<User> users = DataLoader.getUsers(AppConstants.VOLUNTEER_JSON);
+        ArrayList<Volunteer> users = DataLoader.getVolunteers();
 
-        for (User user : users) {
-            if (user instanceof Volunteer) {
-                volunteers.add((Volunteer) user);
-            }
+        for (Volunteer user : users) {
+            volunteers.add(user);
         }
     }
 
@@ -39,9 +37,9 @@ public class VolunteerManager {
      * Adds a volunteer to the manager.
      * @param volunteer Volunteer to add
      */
-    public void addVolunteer(Volunteer volunteer) {
-        if (volunteer != null && !volunteers.contains(volunteer)) {
-            volunteers.add(volunteer);
+    public static void addVolunteer(Volunteer volunteer) {
+        if (volunteer != null && !getInstance().volunteers.contains(volunteer)) {
+            getInstance().volunteers.add(volunteer);
         }
     }
 
@@ -49,9 +47,9 @@ public class VolunteerManager {
      * Removes a volunteer from the manager.
      * @param volunteer Volunteer to remove
      */
-    public void removeVolunteer(Volunteer volunteer) {
+    public static void removeVolunteer(Volunteer volunteer) {
         if (volunteer != null) {
-            volunteers.remove(volunteer);
+            getInstance().volunteers.remove(volunteer);
         }
     }
 
@@ -60,7 +58,7 @@ public class VolunteerManager {
      * @param volunteer Volunteer to assign
      * @param request Help request to assign them to
      */
-    public void assignVolunteer(Volunteer volunteer, HelpRequest request) {
+    public static void assignVolunteer(Volunteer volunteer, HelpRequest request) {
         if (volunteer == null || request == null) {
             System.out.println("Volunteer and request cannot be null.");
             return;

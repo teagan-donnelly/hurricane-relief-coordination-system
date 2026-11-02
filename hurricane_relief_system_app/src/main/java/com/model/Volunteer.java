@@ -384,4 +384,10 @@ public class Volunteer extends User {
      * @param isDispatched true if the volunteer is dispatched
      */
     public void setDispatched(boolean isDispatched) { this.isDispatched = isDispatched; }
+
+    /**
+     * sets fi the volunteer is availible
+     * @param isAvailability true if the volunteer is availible
+     */
+    public void setAvailibility(boolean isAvailability) { this.availability = isAvailability; }
 }

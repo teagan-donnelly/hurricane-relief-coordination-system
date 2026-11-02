@@ -21,34 +21,15 @@ import org.json.simple.parser.JSONParser;
 public class DataLoader extends AppConstants {
 
     /**
-     * A method to get users from json
-     * @param fileName the json file to get users from
-     * @return returns an arrayList of users
-     */
-
-    public static ArrayList<User> getUsers(String fileName) {
-        switch (fileName) {
-            case AppConstants.COORDINATOR_JSON:
-                return new ArrayList<>(getCoordinators());
-            case AppConstants.REQUESTER_JSON:
-                return new ArrayList<>(getRequesters());
-            case AppConstants.VOLUNTEER_JSON:
-                return new ArrayList<>(getVolunteers());
-            default:
-                System.out.println("File could not be loaded");        }
-        return new ArrayList<>();
-    }
-
-    /**
      * A method to get all users
      * @return returns an ArrayList of all users
      */
     public static ArrayList<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
         
-        users.addAll(getUsers(getReaderFromFile(VOLUNTEER_JSON, VOLUNTEER_JUNIT).toString()));
-        users.addAll(getUsers(getReaderFromFile(COORDINATOR_JSON, COORDINATOR_JUNIT).toString()));
-        users.addAll(getUsers(getReaderFromFile(REQUESTER_JSON, REQUESTER_JUNIT).toString()));
+        users.addAll(getVolunteers());
+        users.addAll(getCoordinators());
+        users.addAll(getRequesters());
         
         return users;
     }
@@ -62,7 +43,7 @@ public class DataLoader extends AppConstants {
         ArrayList<HelpRequest> requests = new ArrayList<HelpRequest>();
 
         try {
-            FileReader reader = new FileReader(getReaderFromFile(REQUESTER_JSON, REQUESTER_JUNIT).toString());
+            BufferedReader reader = getReaderFromFile(REQUEST_JSON, REQUEST_JUNIT);
             JSONArray requestsJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < requestsJSON.size(); i++) {
@@ -72,7 +53,7 @@ public class DataLoader extends AppConstants {
                 RequestType requestType = RequestType.valueOf(((String) requestJSON.get(REQUEST_TYPE)).toUpperCase());
 
                 UUID requestUser = UUID.fromString((String) requestJSON.get(REQUEST_USER_ID));
-                User user = getUserbyID(requestUser, REQUESTER_JSON);
+                User user = getUserbyID(requestUser);
 
                 String comment = (String) requestJSON.get(REQUEST_COMMENT);
                 AssistanceType assistanceType = AssistanceType.valueOf(((String) requestJSON.get(REQUEST_ASSISTANCE_TYPE)).toUpperCase());
@@ -142,7 +123,7 @@ public class DataLoader extends AppConstants {
         ArrayList<HurricaneEvent> hurricaneEvents = new ArrayList<HurricaneEvent>();
 
         try {
-            FileReader reader = new FileReader(getReaderFromFile(HURICANE_JSON, HURICANE_JUNIT).toString());
+            BufferedReader reader = getReaderFromFile(HURICANE_JSON, HURICANE_JUNIT);
             JSONArray hurricanesJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < hurricanesJSON.size(); i++) {
@@ -179,7 +160,7 @@ public class DataLoader extends AppConstants {
         ArrayList<Shelter> shelters = new ArrayList<Shelter>();
 
         try {
-            FileReader reader = new FileReader(getReaderFromFile(SHELTER_JSON, SHELTER_JUNIT).toString());
+            BufferedReader reader = getReaderFromFile(SHELTER_JSON, SHELTER_JUNIT);
             JSONArray sheltersJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < sheltersJSON.size(); i++) {
@@ -229,7 +210,7 @@ public class DataLoader extends AppConstants {
         ArrayList<Coordinator> coordinators = new ArrayList<Coordinator>();
 
         try {
-            FileReader reader = new FileReader(getReaderFromFile(COORDINATOR_JSON, COORDINATOR_JUNIT).toString());
+            BufferedReader reader = getReaderFromFile(COORDINATOR_JSON, COORDINATOR_JUNIT);
             JSONArray coordinatorsJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < coordinatorsJSON.size(); i++) {
@@ -256,7 +237,7 @@ public class DataLoader extends AppConstants {
         ArrayList<AidRequester> requesters = new ArrayList<AidRequester>();
 
         try {
-            FileReader reader = new FileReader(getReaderFromFile(REQUESTER_JSON, REQUESTER_JUNIT).toString());
+            BufferedReader reader = getReaderFromFile(REQUESTER_JSON, REQUESTER_JUNIT);
             JSONArray requestersJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < requestersJSON.size(); i++) {
@@ -288,7 +269,7 @@ public class DataLoader extends AppConstants {
         ArrayList<Volunteer> volunteers = new ArrayList<Volunteer>();
 
         try {
-            FileReader reader = new FileReader(getReaderFromFile(VOLUNTEER_JSON, VOLUNTEER_JUNIT).toString());
+            BufferedReader reader = getReaderFromFile(VOLUNTEER_JSON, VOLUNTEER_JUNIT);
             JSONArray volunteersJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < volunteersJSON.size(); i++) {
@@ -400,8 +381,8 @@ public class DataLoader extends AppConstants {
      * @param userFile the file to look through
      * @return returns the user found or null on failure to find
      */
-    private static User getUserbyID(UUID id, String userFile, String junitFile) {
-        ArrayList<User> users = getUsers(getReaderFromFile(userFile, junitFile).toString());
+    public static User getUserbyID(UUID id) {
+        ArrayList<User> users = getAllUsers();
 
         for (User user : users) {
             if (user.getUserId().equals(id)) return user;
@@ -432,6 +413,12 @@ public class DataLoader extends AppConstants {
     }
 
 
+    /**
+     * a method to route to the correct file
+     * @param fileName the junit test file
+     * @param jsonFileName the plain json file name
+     * @return returns the file or null
+     */
     private static BufferedReader getReaderFromFile(String fileName, String jsonFileName){
 		try {
 			if(isJUnitTest()){
@@ -444,6 +431,7 @@ public class DataLoader extends AppConstants {
 			}
 		} catch(Exception e){
 			System.out.println("Can't load");
+            e.printStackTrace();
 			return null;
 		}
 			
