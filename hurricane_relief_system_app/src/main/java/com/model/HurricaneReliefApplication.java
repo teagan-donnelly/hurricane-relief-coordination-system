@@ -121,7 +121,7 @@ public class HurricaneReliefApplication {
 
         int householdSize, AssistanceType assistanceType, ArrayList<String> pastRequests) {
             
-        AccountManager.createUser(type, firstName, lastName, email, location, birthDate,
+        accountManager.createUser(type, firstName, lastName, email, location, birthDate,
             availability, travelDistance, skills, credentials, supplies, isVerified, isDispached, volunteerHours,
             householdSize, assistanceType, pastRequests);
     }

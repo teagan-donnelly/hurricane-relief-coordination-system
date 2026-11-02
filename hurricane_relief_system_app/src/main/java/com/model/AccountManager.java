@@ -21,8 +21,8 @@ public class AccountManager {
     }
 
     /**
-     * Creates a new user account of the same kind as the given user.
-     * @param type a user whose class decides which kind of account is made
+     * Creates a new user account and adds it to this manager's list.
+     * @param type a user providing the account type, phone number, username, and password
      * @param firstName the new user's first name
      * @param lastName the new user's last name
      * @param email the new user's email address
@@ -40,7 +40,7 @@ public class AccountManager {
      * @param assistanceType the kind of help an aid requester needs
      * @param pastRequests an aid requester's past requests
      */
-    public static void createUser(User type, String firstName, String lastName, String email, Location location, LocalDate birthDate,
+    public void createUser(User type, String firstName, String lastName, String email, Location location, LocalDate birthDate,
 
         boolean availability, double travelDistance, ArrayList<String> skills, ArrayList<Credential> credentials,  
         ArrayList<String> supplies, boolean isVerified, boolean isDispached, double volunteerHours,
@@ -48,9 +48,12 @@ public class AccountManager {
         int householdSize, AssistanceType assistanceType, ArrayList<String> pastRequests) {
 
         UUID userID = UUID.randomUUID();
-        User.makeAccount(type, firstName, lastName, userID, email, type.getPhone(), location, birthDate,
+        User user = User.makeAccount(type, firstName, lastName, userID, email, type.getPhone(), location, birthDate,
             availability, travelDistance, skills, credentials, supplies, isVerified, isDispached, volunteerHours,
             householdSize, assistanceType, pastRequests);
+        if (user != null) {
+            addUser(user);
+        }
     }
 
     /**

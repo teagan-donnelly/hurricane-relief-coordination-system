@@ -74,7 +74,7 @@ public abstract class User {
 
     /**
      * Makes a new account based on the type of user.
-     * @param type Type of user to make
+     * @param type Example user providing the account type, username, and password
      * @param firstName First name
      * @param lastName Last name
      * @param userID ID of the user
@@ -93,8 +93,9 @@ public abstract class User {
      * @param householdSize Number of people in the requester's household
      * @param assistanceType Type of assistance the requester needs
      * @param pastRequests List of the requester's past requests
+     * @return The new account, or null if the user type is unsupported
      */
-    public static void makeAccount(User type, String firstName, String lastName,
+    public static User makeAccount(User type, String firstName, String lastName,
                         UUID userID, String email, String phone, Location location,
                         LocalDate birthDate, boolean availability, double travelDistance,
                         ArrayList<String> skills, ArrayList<Credential> credentials, ArrayList<String> supplies,
@@ -103,21 +104,21 @@ public abstract class User {
 
         switch (type.getClass().getSimpleName()) {
             case "Volunteer":
-                new Volunteer(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
+                return new Volunteer(firstName, lastName, userID, email, phone, location, birthDate,
+                    type.getUserName(), type.getPassword(), NotificationType.EMAIL, new ArrayList<String>(),
                     availability, travelDistance, skills, credentials, supplies, isVerified, isDispached, volunteerHours);
-                break;
             case "AidRequester":
-                new AidRequester(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>(),
+                return new AidRequester(firstName, lastName, userID, email, phone, location, birthDate,
+                    type.getUserName(), type.getPassword(), NotificationType.EMAIL, new ArrayList<String>(),
                     householdSize, assistanceType, pastRequests);
-                break;
-            case "AidCoordinator":
-                System.out.println("Can not create an AidCoordinator account at this time.");
-                //new AidCoordinator(firstName, lastName, userID, email, phone, location, birthDate, "", "", NotificationType.EMAIL, new ArrayList<String>());
+            case "Coordinator":
+                System.out.println("Can not create a Coordinator account at this time.");
                 break;
             default:
                 System.out.println("Invalid user type. Account creation failed.");
                 break;
         }
+        return null;
     }
 
     /**

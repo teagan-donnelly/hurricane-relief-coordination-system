@@ -13,6 +13,13 @@ import org.junit.Test;
  * +----------------------------------------+----------------------------------------------------------------------------------------+
  * | Test                                   | Explanation                                                                            |
  * +----------------------------------------+----------------------------------------------------------------------------------------+
+ * | creatingRequesterStoresAccount         | A created requester should be retained in the manager's list.                          |
+ * | creatingVolunteerStoresAccount         | Creating a volunteer should retain an account with the correct user type.              |
+ * | creatingUserKeepsExistingAccount       | Registering a new user should keep accounts that were already registered.              |
+ * | creatingRequesterAllowsLogin          | A new requester should be able to log in with the supplied account credentials.        |
+ * | creatingVolunteerAllowsLogin          | A new volunteer should also keep usable login credentials.                            |
+ * | creatingUserAssignsNewId              | A new account should receive its own ID instead of reusing the example user's ID.      |
+ * | unsupportedUserTypeDoesNotAddAccount  | An unsupported account type should not add a null entry to the account list.           |
  * | addingUserStoresAccount                | A newly added account should be available in the manager's list.                       |
  * | addingAnotherUserKeepsExistingAccount  | Adding an account should not replace an unrelated account.                             |
  * | deletingUserRemovesAccount             | Deleting a stored account should remove it from the managed list.                      |
@@ -43,10 +50,11 @@ public class AccountManagerTest {
     private ArrayList<User> users;
     private AidRequester user;
     private AidRequester otherUser;
+    private Volunteer volunteer;
     private Location location;
 
     /**
-     * Sets up an empty manager and two different user accounts.
+     * Sets up an empty manager and example user accounts.
      */
     @Before
     public void setUp() {
@@ -58,6 +66,12 @@ public class AccountManagerTest {
             "michaelcarter", "demo123");
         otherUser = user(UUID.fromString("00000000-0000-4000-8000-000000000002"),
             "emilycarter", "otherpass123");
+        volunteer = new Volunteer("Rosa", "Martinez",
+            UUID.fromString("00000000-0000-4000-8000-000000000003"), "rosa@example.com",
+            "843-555-0182", location, LocalDate.of(1990, 6, 15), "rosamartinez", "volunteer123",
+            NotificationType.EMAIL, new ArrayList<String>(), true, 25.0,
+            new ArrayList<String>(), new ArrayList<Credential>(), new ArrayList<String>(),
+            false, false, 0.0);
     }
 
     /**
@@ -72,6 +86,85 @@ public class AccountManagerTest {
             "843-555-0147", location, LocalDate.of(1987, 4, 12), username, password,
             NotificationType.EMAIL, new ArrayList<String>(), 3,
             AssistanceType.TRANSPORT, new ArrayList<String>());
+    }
+
+    /**
+     * Creates an account using the given example user and concrete registration details.
+     * @param type Example user with the account type and login credentials
+     */
+    private void createUser(User type) {
+        manager.createUser(type, type.getFirstName(), type.getLastName(), type.getEmail(),
+            location, LocalDate.of(1987, 4, 12), true, 25.0, new ArrayList<String>(),
+            new ArrayList<Credential>(), new ArrayList<String>(), false, false, 0.0,
+            3, AssistanceType.TRANSPORT, new ArrayList<String>());
+    }
+
+    /**
+     * Tests that creating a requester stores a requester account.
+     */
+    @Test
+    public void creatingRequesterStoresAccount() {
+        createUser(user);
+        assertEquals(1, manager.getUsers().size());
+        assertTrue(manager.getUsers().get(0) instanceof AidRequester);
+    }
+
+    /**
+     * Tests that creating a volunteer stores a volunteer account.
+     */
+    @Test
+    public void creatingVolunteerStoresAccount() {
+        createUser(volunteer);
+        assertEquals(1, manager.getUsers().size());
+        assertTrue(manager.getUsers().get(0) instanceof Volunteer);
+    }
+
+    /**
+     * Tests that creating an account keeps the existing accounts.
+     */
+    @Test
+    public void creatingUserKeepsExistingAccount() {
+        manager.addUser(otherUser);
+        createUser(user);
+        assertSame(otherUser, users.get(0));
+    }
+
+    /**
+     * Tests that a newly created requester can log in.
+     */
+    @Test
+    public void creatingRequesterAllowsLogin() {
+        createUser(user);
+        assertTrue(manager.login("michaelcarter", "demo123"));
+    }
+
+    /**
+     * Tests that a newly created volunteer can log in.
+     */
+    @Test
+    public void creatingVolunteerAllowsLogin() {
+        createUser(volunteer);
+        assertTrue(manager.login("rosamartinez", "volunteer123"));
+    }
+
+    /**
+     * Tests that a created account receives a new ID.
+     */
+    @Test
+    public void creatingUserAssignsNewId() {
+        createUser(user);
+        assertNotEquals(user.getUserId(), users.get(0).getUserId());
+    }
+
+    /**
+     * Tests that an unsupported account type does not add a null user.
+     */
+    @Test
+    public void unsupportedUserTypeDoesNotAddAccount() {
+        Coordinator coordinator = new Coordinator(CoordinatorRole.AID, "Alex", "Taylor",
+            "alex@example.com", "843-555-0191", "alextaylor", "coordinator123", null);
+        createUser(coordinator);
+        assertTrue(users.isEmpty());
     }
 
     /**
