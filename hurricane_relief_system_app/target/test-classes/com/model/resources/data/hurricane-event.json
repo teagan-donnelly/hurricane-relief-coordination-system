@@ -1,0 +1,74 @@
+[
+  {
+    "hurricaneID": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "name": "Hurricane Tortilla",
+    "category": 5,
+    "status": "DISSIPATED",
+    "affectedZipCodes": [
+      "29401",
+      "29402",
+      "29403"
+    ],
+    "startDate": "2026-09-20T08:00:00",
+    "endDate": "2026-09-26T18:00:00",
+    "description": "Very strong winds, expected to cause major damage"
+  },
+  {
+    "hurricaneID": "c9bf9e57-1685-4c89-bafb-ff5af830be8a",
+    "name": "Hurricane Jorge",
+    "category": 3,
+    "status": "DISSIPATED",
+    "affectedZipCodes": [
+      "31401",
+      "31402"
+    ],
+    "startDate": "2026-09-10T12:30:00",
+    "endDate": "2026-09-15T09:15:00",
+    "description": "Moderate Storm"
+  },
+  {
+    "hurricaneID": "71c9e4a2-6b83-4fd0-9a15-3e827c6d504b",
+    "name": "Hurricane Scarlet",
+    "category": 4,
+    "status": "ACTIVE",
+    "affectedZipCodes": [
+      "29401",
+      "29403",
+      "29407",
+      "29412",
+      "29464",
+      "29482"
+    ],
+    "startDate": "2026-09-22T06:00:00",
+    "endDate": "2026-09-28T18:00:00",
+    "description": "Expected to make landfall near Charleston, SC, bringing destructive winds, storm surge, and widespread flooding"
+  },
+  {
+    "hurricaneID": "a83f2d61-9c47-4be5-802a-6d1e93b7f054",
+    "name": "Hurricane Jasper",
+    "category": 2,
+    "status": "DISSIPATED",
+    "affectedZipCodes": [
+      "31401",
+      "31404",
+      "31406"
+    ],
+    "startDate": "2026-09-05T12:00:00",
+    "endDate": "2026-09-09T15:30:00",
+    "description": "Brought strong winds and heavy rainfall to the Savannah, GA, area before dissipating inland"
+  },
+  {
+    "hurricaneID": "e26b7c90-3a54-48df-b612-9f0d5a83c741",
+    "name": "Hurricane Marlow",
+    "category": 3,
+    "status": "DISSIPATED",
+    "affectedZipCodes": [
+      "28401",
+      "28403",
+      "28405"
+    ],
+    "startDate": "2026-08-18T09:00:00",
+    "endDate": "2026-08-23T21:00:00",
+    "description": "Caused coastal flooding, power outages, and property damage near Wilmington, NC, before dissipating"
+  }
+]
