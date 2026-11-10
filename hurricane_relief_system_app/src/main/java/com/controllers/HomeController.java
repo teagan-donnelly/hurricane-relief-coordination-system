@@ -1,12 +1,13 @@
-package com.hurricane_relief_system;
+package com.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import com.hurricane_relief_system.App;
 
 /**
  * Controller for the primary screen.
  */
-public class PrimaryController {
+public class HomeController {
 
     /**
      * Switches to the secondary screen.
@@ -14,6 +15,6 @@ public class PrimaryController {
      */
     @FXML
     private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
+        App.setRoot("login");
     }
 }
