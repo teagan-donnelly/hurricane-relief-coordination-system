@@ -1,0 +1,5 @@
+.button {
+    -fx-background-color: darkgreen;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
