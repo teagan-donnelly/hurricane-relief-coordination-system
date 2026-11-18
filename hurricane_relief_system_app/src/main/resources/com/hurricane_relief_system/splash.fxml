@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="viewport"
+           prefWidth="600.0"
+           prefHeight="400.0"
+           minWidth="0.0"
+           minHeight="0.0"
+           alignment="CENTER"
+           style="-fx-background-color: #466669;"
+           xmlns="http://javafx.com/javafx/26"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.hurricane_relief_system.SplashController">
+
+    <children>
+        <Group>
+            <children>
+                <Pane fx:id="designPane"
+                  prefWidth="600.0" prefHeight="400.0"
+                  minWidth="600.0" minHeight="400.0"
+                  maxWidth="600.0" maxHeight="400.0"
+                  style="-fx-background-color: #466669;">
+
+                    <children><!-- layout by APR, containers and resizing alignment aided by GPT-->
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#214669" height="350.0" layoutX="-2.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="603.0" />
+                        <ImageView fx:id="hurricaneImage" fitHeight="400.0" fitWidth="400.0" preserveRatio="true" layoutX="100.0" layoutY="0.0">
+                           <image>
+                              <Image url="@images/hurricaneLogo.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fill="#17324d" layoutX="300.0" layoutY="200.0" radius="100.0" stroke="#a7b96a" strokeType="INSIDE" strokeWidth="5.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#17324d" height="98.0" layoutY="151.0" stroke="#a7b96a" strokeType="INSIDE" strokeWidth="5.0" width="600.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#17324d" height="100.0" layoutX="218.0" layoutY="150.0" stroke="#17324d" strokeType="INSIDE" strokeWidth="0.0" width="164.0" />
+                        <Text fill="WHITE" layoutX="88.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Hurricane Relief Coordination System">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+
+                </Pane>
+            </children>
+        </Group>
+    </children>
+</StackPane>

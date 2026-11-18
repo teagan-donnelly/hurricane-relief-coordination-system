@@ -1,10 +1,12 @@
 package com.hurricane_relief_system;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -22,9 +24,20 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("home"), 640, 480);
+        scene = new Scene(loadFXML("splash"), 640, 480);
         stage.setScene(scene);
         stage.show();
+
+        PauseTransition delay = new PauseTransition(Duration.seconds(5));
+        delay.setOnFinished(event -> {
+            try {
+                setRoot("primary");
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        });
+
+        delay.play();
     }
 
     /**
