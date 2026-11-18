@@ -31,7 +31,7 @@ public class App extends Application {
         PauseTransition delay = new PauseTransition(Duration.seconds(5));
         delay.setOnFinished(event -> {
             try {
-                setRoot("primary");
+                setRoot("login");
             } catch (IOException e){
                 e.printStackTrace();
             }
