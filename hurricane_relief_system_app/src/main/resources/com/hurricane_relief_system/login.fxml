@@ -1,20 +1,246 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<VBox alignment="CENTER" spacing="20.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
-    <children>
-      <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="37.0" prefWidth="64.0" text="Back" />
-      <TextField fx:id="txt_username" promptText="Username" />
-        <TextField fx:id="txt_password" promptText="Password" />
-        <Label fx:id="lbl_error" text="Please sign in" />
-        <Button fx:id="secondaryButton" text="Login" onAction="#btnLoginClicked" />
-    </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-</VBox>
+<BorderPane prefHeight="900.0" prefWidth="1440.0" styleClass="resources-page" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
+   <stylesheets>
+      <URL value="@resources.css" />
+      <URL value="@login.css" />
+   </stylesheets>
+
+   <!-- Nav bar -->
+   <top>
+      <HBox alignment="CENTER_LEFT" minHeight="72.0" prefHeight="72.0" styleClass="nav-bar">
+         <padding>
+            <Insets left="64.0" right="64.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/resources/logo-wave.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label styleClass="nav-brand-name" text="Hurricane Relief" />
+                        <Label text="Coordination System">
+                           <styleClass>
+                              <String fx:value="body-small" />
+                              <String fx:value="muted" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER" spacing="40.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="72.0" styleClass="nav-link" text="Home" />
+                  <Button mnemonicParsing="false" prefHeight="72.0" styleClass="nav-link" text="Request Help" />
+                  <Button mnemonicParsing="false" prefHeight="72.0" styleClass="nav-link" text="My Requests" />
+                  <Button mnemonicParsing="false" onAction="#switchToResources" prefHeight="72.0" styleClass="nav-link" text="Resources" />
+               </children>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button graphicTextGap="8.0" minWidth="-Infinity" mnemonicParsing="false" prefWidth="148.0" styleClass="account-button" text="Log In">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/resources/user.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+
+   <center>
+      <HBox>
+         <children>
+
+            <!-- Sign in form -->
+            <VBox alignment="CENTER_LEFT" spacing="8.0" styleClass="login-form" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets left="120.0" right="40.0" />
+               </padding>
+               <children>
+                  <Label styleClass="h1" text="Sign In" />
+                  <Label maxWidth="460.0" styleClass="body-large" text="Access your account to create, view, and manage relief requests." wrapText="true" />
+                  <HBox spacing="3.0">
+                     <VBox.margin>
+                        <Insets bottom="12.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label styleClass="required-star" text="*" />
+                        <Label text="Required field">
+                           <styleClass>
+                              <String fx:value="body-small" />
+                              <String fx:value="muted" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </HBox>
+
+                  <!-- Username -->
+                  <HBox spacing="2.0">
+                     <children>
+                        <Label styleClass="label-text" text="Username" />
+                        <Label styleClass="required-star" text="*" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="txt_username" maxWidth="460.0" promptText="Enter your username" styleClass="text-input-box">
+                     <VBox.margin>
+                        <Insets bottom="12.0" />
+                     </VBox.margin>
+                  </TextField>
+
+                  <!-- Password -->
+                  <HBox spacing="2.0">
+                     <children>
+                        <Label styleClass="label-text" text="Password" />
+                        <Label styleClass="required-star" text="*" />
+                     </children>
+                  </HBox>
+                  <StackPane alignment="CENTER_LEFT" maxWidth="460.0">
+                     <children>
+                        <PasswordField fx:id="txt_password" onAction="#btnLoginClicked" promptText="Enter your password" styleClass="text-input-box" />
+                        <TextField fx:id="txt_password_visible" managed="false" onAction="#btnLoginClicked" promptText="Enter your password" styleClass="text-input-box" visible="false" />
+                     </children>
+                  </StackPane>
+
+                  <!-- Checkboxes -->
+                  <HBox alignment="CENTER_LEFT" maxWidth="460.0">
+                     <VBox.margin>
+                        <Insets bottom="8.0" top="8.0" />
+                     </VBox.margin>
+                     <children>
+                        <CheckBox fx:id="chk_remember_me" mnemonicParsing="false" text="Remember me" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <CheckBox fx:id="chk_show_password" mnemonicParsing="false" onAction="#togglePassword" text="Show password" />
+                     </children>
+                  </HBox>
+
+                  <!-- Error message -->
+                  <Label fx:id="lbl_error" managed="false" maxWidth="460.0" styleClass="error-label" visible="false" wrapText="true" />
+
+                  <Button defaultButton="true" maxWidth="460.0" mnemonicParsing="false" onAction="#btnLoginClicked" styleClass="primary-button" text="Sign In" />
+
+                  <Separator maxWidth="460.0">
+                     <VBox.margin>
+                        <Insets bottom="8.0" top="20.0" />
+                     </VBox.margin>
+                  </Separator>
+
+                  <HBox alignment="CENTER" maxWidth="460.0" spacing="6.0">
+                     <children>
+                        <Label styleClass="body" text="Don't have an account?" />
+                        <Button mnemonicParsing="false" onAction="#goToCreateAccount" styleClass="text-link" text="Create Account" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <!-- Welcome panel -->
+            <VBox maxWidth="560.0" minWidth="560.0" prefWidth="560.0" styleClass="side-panel">
+               <children>
+                  <ImageView fitHeight="210.0" fitWidth="560.0">
+                     <image>
+                        <Image url="@images/login-banner.jpg" />
+                     </image>
+                  </ImageView>
+                  <Region minHeight="6.0" prefHeight="6.0" styleClass="login-accent" />
+
+                  <VBox spacing="16.0">
+                     <padding>
+                        <Insets left="64.0" right="56.0" top="56.0" />
+                     </padding>
+                     <children>
+                        <Label styleClass="side-title" text="Welcome Back" />
+                        <Region maxHeight="4.0" maxWidth="48.0" minHeight="4.0" minWidth="48.0" prefHeight="4.0" prefWidth="48.0" styleClass="login-accent" />
+                        <Label styleClass="side-text" text="Sign in to check the status of your requests, update your details, and see who is assigned to help you." wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="6.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                           <children>
+                              <Label styleClass="check-icon" text="&#10003;" />
+                              <Label styleClass="side-text" text="Track every request in one place" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                           <children>
+                              <Label styleClass="check-icon" text="&#10003;" />
+                              <Label styleClass="side-text" text="See your assigned volunteer and shelter" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                           <children>
+                              <Label styleClass="check-icon" text="&#10003;" />
+                              <Label styleClass="side-text" text="Edit or cancel a request anytime" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <Region VBox.vgrow="ALWAYS" />
+
+                  <!-- Waves -->
+                  <Pane minHeight="110.0" prefHeight="110.0">
+                     <children>
+                        <SVGPath content="M0,35 C140,-5 360,-5 560,50 L560,110 L0,110 Z" styleClass="wave-back" />
+                        <SVGPath content="M0,68 C180,40 380,50 560,95 L560,110 L0,110 Z" styleClass="wave-front" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+
+   <!-- Footer -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="24.0" styleClass="site-footer">
+         <padding>
+            <Insets bottom="28.0" left="64.0" right="64.0" top="28.0" />
+         </padding>
+         <children>
+            <VBox spacing="2.0">
+               <children>
+                  <Label styleClass="footer-title" text="Hurricane Relief Coordination System" />
+                  <Label text="In a life-threatening emergency, always call 911." />
+               </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox spacing="28.0">
+               <children>
+                  <Label minWidth="-Infinity" text="Accessibility" />
+                  <Label minWidth="-Infinity" text="Privacy" />
+                  <Label minWidth="-Infinity" text="Contact Us" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
