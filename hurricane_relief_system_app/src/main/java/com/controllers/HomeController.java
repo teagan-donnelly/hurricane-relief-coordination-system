@@ -17,4 +17,13 @@ public class HomeController {
     private void switchToSecondary() throws IOException {
         App.setRoot("login");
     }
+
+    /**
+     * Switches to the resources screen.
+     * @throws IOException if the resources screen cannot be loaded
+     */
+    @FXML
+    private void switchToResources() throws IOException {
+        App.setRoot("resources");
+    }
 }

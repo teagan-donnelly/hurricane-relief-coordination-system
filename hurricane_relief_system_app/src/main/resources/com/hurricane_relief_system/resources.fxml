@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Resources screen, built from the Figma prototype page "Resources" (frame "Resources – v2").
+  Sections: navigation, page header, 911 notice, emergency contacts, open shelters,
+  preparedness guides, FAQ, footer.
+
+  The three shelter cards below are design-time samples so the layout previews in Scene Builder.
+  At runtime ResourcesController replaces them with live shelters from the data layer.
+-->
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" prefHeight="900.0" prefWidth="1440.0" styleClass="resources-page" stylesheets="@resources.css" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ResourcesController">
+
+   <!-- ============ Navigation ============ -->
+   <top>
+      <HBox fx:id="navBar" alignment="CENTER_LEFT" minHeight="72.0" prefHeight="72.0" styleClass="nav-bar">
+         <padding>
+            <Insets left="64.0" right="64.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/resources/logo-wave.png" />
+                     </image>
+                  </ImageView>
+                  <VBox fx:id="brandName" alignment="CENTER_LEFT">
+                     <children>
+                        <Label styleClass="nav-brand-name" text="Hurricane Relief" />
+                        <Label text="Coordination System">
+                           <styleClass>
+                              <String fx:value="body-small" />
+                              <String fx:value="muted" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox fx:id="navLinks" alignment="CENTER" spacing="40.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goHome" prefHeight="72.0" styleClass="nav-link" text="Home" />
+                  <Button mnemonicParsing="false" onAction="#goRequestHelp" prefHeight="72.0" styleClass="nav-link" text="Request Help" />
+                  <Button mnemonicParsing="false" onAction="#goMyRequests" prefHeight="72.0" styleClass="nav-link" text="My Requests" />
+                  <Button mnemonicParsing="false" prefHeight="72.0" text="Resources">
+                     <styleClass>
+                        <String fx:value="nav-link" />
+                        <String fx:value="nav-link-active" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="accountButton" graphicTextGap="8.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#goLogin" prefWidth="148.0" styleClass="account-button" text="Log In">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/resources/user.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+
+   <center>
+      <ScrollPane fx:id="scroll" fitToWidth="true" hbarPolicy="NEVER" styleClass="resources-scroll">
+         <content>
+            <VBox alignment="TOP_CENTER">
+               <children>
+
+                  <!-- ============ Page header ============ -->
+                  <StackPane minHeight="180.0" prefHeight="180.0" styleClass="page-header">
+                     <children>
+                        <Pane fx:id="photoPane" maxHeight="180.0" maxWidth="620.0" minHeight="180.0" prefHeight="180.0" prefWidth="620.0" StackPane.alignment="CENTER_RIGHT">
+                           <children>
+                              <ImageView fx:id="headerPhoto" fitHeight="180.0" fitWidth="620.0">
+                                 <image>
+                                    <Image url="@images/resources/storm-damage.png" />
+                                 </image>
+                              </ImageView>
+                              <Region fx:id="photoFade" prefHeight="180.0" prefWidth="280.0" styleClass="photo-fade" />
+                           </children>
+                        </Pane>
+                        <VBox fx:id="headerColumn" maxWidth="1440.0" spacing="8.0" StackPane.alignment="TOP_CENTER">
+                           <padding>
+                              <Insets left="120.0" right="120.0" top="36.0" />
+                           </padding>
+                           <children>
+                              <Label text="Home  /  Resources">
+                                 <styleClass>
+                                    <String fx:value="body-small" />
+                                    <String fx:value="muted" />
+                                 </styleClass>
+                              </Label>
+                              <Label styleClass="h1" text="Resources" />
+                              <Label fx:id="headerDescription" styleClass="body-large" text="Emergency contacts, open shelters, and guides to help you stay safe." wrapText="true" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </StackPane>
+
+                  <!-- ============ Main content ============ -->
+                  <VBox fx:id="mainContent" maxWidth="1440.0" spacing="56.0">
+                     <padding>
+                        <Insets bottom="80.0" left="120.0" right="120.0" top="48.0" />
+                     </padding>
+                     <children>
+
+                        <!-- Emergency notice (HR19: 911 advisory) -->
+                        <HBox alignment="CENTER_LEFT" spacing="16.0" styleClass="emergency-notice">
+                           <padding>
+                              <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
+                           </padding>
+                           <children>
+                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/resources/alert.png" />
+                                 </image>
+                              </ImageView>
+                              <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label styleClass="h3" text="In a life-threatening emergency, call 911." wrapText="true" />
+                                    <Label styleClass="body" text="Call first. You can submit a relief request once you are safe." wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+
+                        <!-- Emergency contacts -->
+                        <VBox spacing="24.0">
+                           <children>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <Label styleClass="h2" text="Emergency Contacts" />
+                                    <Region maxHeight="4.0" maxWidth="48.0" minHeight="4.0" minWidth="48.0" prefHeight="4.0" prefWidth="48.0" styleClass="heading-accent" />
+                                    <Label text="Save these numbers before the storm arrives." wrapText="true">
+                                       <styleClass>
+                                          <String fx:value="body" />
+                                          <String fx:value="muted" />
+                                       </styleClass>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <GridPane fx:id="contactGrid" hgap="24.0" vgap="24.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <children>
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" spacing="10.0" styleClass="card">
+                                       <padding>
+                                          <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                                       </padding>
+                                       <children>
+                                          <StackPane maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0">
+                                             <styleClass>
+                                                <String fx:value="icon-tile" />
+                                                <String fx:value="icon-tile-danger" />
+                                             </styleClass>
+                                             <children>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/resources/emergency.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </StackPane>
+                                          <Region minHeight="4.0" prefHeight="4.0" />
+                                          <Label styleClass="label-text,muted" text="Emergency" />
+                                          <Label text="911">
+                                             <styleClass>
+                                                <String fx:value="contact-number" />
+                                                <String fx:value="contact-number-danger" />
+                                             </styleClass>
+                                          </Label>
+                                          <Label styleClass="body-small" text="Police, fire, and medical emergencies." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" spacing="10.0" styleClass="card" GridPane.columnIndex="1">
+                                       <padding>
+                                          <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                                       </padding>
+                                       <children>
+                                          <StackPane maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" styleClass="icon-tile">
+                                             <children>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/resources/life-buoy.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </StackPane>
+                                          <Region minHeight="4.0" prefHeight="4.0" />
+                                          <Label styleClass="label-text,muted" text="Local Help Line" />
+                                          <Label styleClass="contact-number" text="211" />
+                                          <Label styleClass="body-small" text="Food, shelter, utilities, and other local services." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" spacing="10.0" styleClass="card" GridPane.columnIndex="2">
+                                       <padding>
+                                          <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                                       </padding>
+                                       <children>
+                                          <StackPane maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" styleClass="icon-tile">
+                                             <children>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/resources/landmark.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </StackPane>
+                                          <Region minHeight="4.0" prefHeight="4.0" />
+                                          <Label styleClass="label-text,muted" text="FEMA Helpline" />
+                                          <Label styleClass="contact-number" text="1-800-621-3362" />
+                                          <Label styleClass="body-small" text="Apply for federal disaster assistance. Open 7 a.m.–11 p.m. ET, every day." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" spacing="10.0" styleClass="card" GridPane.columnIndex="3">
+                                       <padding>
+                                          <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                                       </padding>
+                                       <children>
+                                          <StackPane maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" styleClass="icon-tile">
+                                             <children>
+                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/resources/heart.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </StackPane>
+                                          <Region minHeight="4.0" prefHeight="4.0" />
+                                          <Label styleClass="label-text,muted" text="American Red Cross" />
+                                          <Label styleClass="contact-number" text="1-800-733-2767" />
+                                          <Label styleClass="body-small" text="Shelter, food, and emotional support after a disaster." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+
+                        <!-- Open shelters -->
+                        <VBox spacing="24.0">
+                           <children>
+                              <HBox alignment="BOTTOM_LEFT" spacing="16.0">
+                                 <children>
+                                    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label styleClass="h2" text="Open Shelters" />
+                                          <Region maxHeight="4.0" maxWidth="48.0" minHeight="4.0" minWidth="48.0" prefHeight="4.0" prefWidth="48.0" styleClass="heading-accent" />
+                                          <Label fx:id="shelterSubtitle" text="Shelters near Columbia, SC, with live space updates." wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="body" />
+                                                <String fx:value="muted" />
+                                             </styleClass>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <Label fx:id="shelterMeta" minWidth="-Infinity" text="Updated 15 minutes ago">
+                                       <styleClass>
+                                          <String fx:value="body-small" />
+                                          <String fx:value="muted" />
+                                       </styleClass>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <Label fx:id="shelterEmpty" managed="false" styleClass="body" text="Shelter information isn't available right now. Call 211 to find the nearest open shelter." visible="false" wrapText="true" />
+                              <GridPane fx:id="shelterGrid" hgap="24.0" vgap="24.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <children>
+                                    <!-- Sample card: space available -->
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" spacing="14.0" styleClass="card">
+                                       <padding>
+                                          <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                                       </padding>
+                                       <children>
+                                          <VBox spacing="4.0">
+                                             <children>
+                                                <Label styleClass="h3" text="Riverbend Community Shelter" wrapText="true" />
+                                                <Label text="1720 Riverbend Rd, Columbia, SC 29201" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="body-small" />
+                                                      <String fx:value="muted" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <FlowPane hgap="8.0" vgap="8.0">
+                                             <children>
+                                                <StackPane styleClass="chip">
+                                                   <children>
+                                                      <Label styleClass="body-small" text="Pets allowed" />
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane styleClass="chip">
+                                                   <children>
+                                                      <Label styleClass="body-small" text="Wheelchair accessible" />
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </FlowPane>
+                                          <VBox spacing="8.0">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <Label styleClass="label-text,status-ok" text="Space available" />
+                                                      <Region HBox.hgrow="ALWAYS" />
+                                                      <Label styleClass="body-small,muted" text="138 of 250 beds open" />
+                                                   </children>
+                                                </HBox>
+                                                <GridPane maxHeight="8.0" minHeight="8.0" prefHeight="8.0" styleClass="capacity-track">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints percentWidth="45.0" />
+                                                      <ColumnConstraints percentWidth="55.0" />
+                                                   </columnConstraints>
+                                                   <children>
+                                                      <Region maxHeight="Infinity" maxWidth="Infinity" styleClass="capacity-fill,status-ok" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Button contentDisplay="RIGHT" graphicTextGap="4.0" mnemonicParsing="false" styleClass="text-link" text="Get directions">
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/resources/chevron-right.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <!-- Sample card: almost full -->
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" spacing="14.0" styleClass="card" GridPane.columnIndex="1">
+                                       <padding>
+                                          <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                                       </padding>
+                                       <children>
+                                          <VBox spacing="4.0">
+                                             <children>
+                                                <Label styleClass="h3" text="Lakeview High School Gym" wrapText="true" />
+                                                <Label text="400 Lakeview Dr, Columbia, SC 29204" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="body-small" />
+                                                      <String fx:value="muted" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <FlowPane hgap="8.0" vgap="8.0">
+                                             <children>
+                                                <StackPane styleClass="chip">
+                                                   <children>
+                                                      <Label styleClass="body-small" text="Wheelchair accessible" />
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </FlowPane>
+                                          <VBox spacing="8.0">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <Label styleClass="label-text,status-low" text="Almost full" />
+                                                      <Region HBox.hgrow="ALWAYS" />
+                                                      <Label styleClass="body-small,muted" text="27 of 180 beds open" />
+                                                   </children>
+                                                </HBox>
+                                                <GridPane maxHeight="8.0" minHeight="8.0" prefHeight="8.0" styleClass="capacity-track">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints percentWidth="85.0" />
+                                                      <ColumnConstraints percentWidth="15.0" />
+                                                   </columnConstraints>
+                                                   <children>
+                                                      <Region maxHeight="Infinity" maxWidth="Infinity" styleClass="capacity-fill,status-low" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Button contentDisplay="RIGHT" graphicTextGap="4.0" mnemonicParsing="false" styleClass="text-link" text="Get directions">
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/resources/chevron-right.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <!-- Sample card: full -->
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" spacing="14.0" styleClass="card" GridPane.columnIndex="2">
+                                       <padding>
+                                          <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+                                       </padding>
+                                       <children>
+                                          <VBox spacing="4.0">
+                                             <children>
+                                                <Label styleClass="h3" text="Oakwood Recreation Center" wrapText="true" />
+                                                <Label text="92 Oakwood Ave, Columbia, SC 29205" wrapText="true">
+                                                   <styleClass>
+                                                      <String fx:value="body-small" />
+                                                      <String fx:value="muted" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <FlowPane hgap="8.0" vgap="8.0">
+                                             <children>
+                                                <StackPane styleClass="chip">
+                                                   <children>
+                                                      <Label styleClass="body-small" text="Pets allowed" />
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </FlowPane>
+                                          <VBox spacing="8.0">
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <Label styleClass="label-text,status-full" text="Full" />
+                                                      <Region HBox.hgrow="ALWAYS" />
+                                                      <Label styleClass="body-small,muted" text="0 of 120 beds open" />
+                                                   </children>
+                                                </HBox>
+                                                <GridPane maxHeight="8.0" minHeight="8.0" prefHeight="8.0" styleClass="capacity-track">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints percentWidth="100.0" />
+                                                      <ColumnConstraints percentWidth="0.0" />
+                                                   </columnConstraints>
+                                                   <children>
+                                                      <Region maxHeight="Infinity" maxWidth="Infinity" styleClass="capacity-fill,status-full" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Button contentDisplay="RIGHT" graphicTextGap="4.0" mnemonicParsing="false" styleClass="text-link" text="Get directions">
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/resources/chevron-right.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+
+                        <!-- Preparedness guides -->
+                        <VBox spacing="24.0">
+                           <children>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <Label styleClass="h2" text="Preparedness Guides" />
+                                    <Region maxHeight="4.0" maxWidth="48.0" minHeight="4.0" minWidth="48.0" prefHeight="4.0" prefWidth="48.0" styleClass="heading-accent" />
+                                    <Label text="Step-by-step help for every stage of a hurricane." wrapText="true">
+                                       <styleClass>
+                                          <String fx:value="body" />
+                                          <String fx:value="muted" />
+                                       </styleClass>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <FlowPane hgap="12.0" vgap="12.0">
+                                 <children>
+                                    <ToggleButton fx:id="tabBefore" mnemonicParsing="false" selected="true" styleClass="guide-tab" text="Before the Storm" userData="0">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="guideTabs" />
+                                       </toggleGroup>
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="tabDuring" mnemonicParsing="false" styleClass="guide-tab" text="During the Storm" toggleGroup="$guideTabs" userData="1" />
+                                    <ToggleButton fx:id="tabAfter" mnemonicParsing="false" styleClass="guide-tab" text="After the Storm" toggleGroup="$guideTabs" userData="2" />
+                                 </children>
+                              </FlowPane>
+                              <GridPane fx:id="guideGrid" hgap="24.0" vgap="24.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <children>
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" styleClass="card">
+                                       <padding>
+                                          <Insets bottom="28.0" left="28.0" right="28.0" top="28.0" />
+                                       </padding>
+                                       <children>
+                                          <VBox spacing="14.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <StackPane maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" styleClass="icon-tile">
+                                                   <children>
+                                                      <ImageView fx:id="guideIcon0" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/resources/package.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </StackPane>
+                                                <Label fx:id="guideTitle0" styleClass="h3" text="Build an Emergency Kit" wrapText="true" />
+                                                <Label fx:id="guideBody0" styleClass="body" text="Water, food, medicine, flashlights, and batteries to last your household several days." wrapText="true" />
+                                             </children>
+                                          </VBox>
+                                          <HBox alignment="CENTER_LEFT">
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                             <children>
+                                                <Label fx:id="guideTime0" styleClass="body-small,muted" text="5 min read" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button contentDisplay="RIGHT" graphicTextGap="4.0" mnemonicParsing="false" onAction="#readGuide" styleClass="text-link" text="Read guide" userData="0">
+                                                   <graphic>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/resources/chevron-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" styleClass="card" GridPane.columnIndex="1">
+                                       <padding>
+                                          <Insets bottom="28.0" left="28.0" right="28.0" top="28.0" />
+                                       </padding>
+                                       <children>
+                                          <VBox spacing="14.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <StackPane maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" styleClass="icon-tile">
+                                                   <children>
+                                                      <ImageView fx:id="guideIcon1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/resources/map.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </StackPane>
+                                                <Label fx:id="guideTitle1" styleClass="h3" text="Make an Evacuation Plan" wrapText="true" />
+                                                <Label fx:id="guideBody1" styleClass="body" text="Know your evacuation zone, your route out, and where you will stay." wrapText="true" />
+                                             </children>
+                                          </VBox>
+                                          <HBox alignment="CENTER_LEFT">
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                             <children>
+                                                <Label fx:id="guideTime1" styleClass="body-small,muted" text="4 min read" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button contentDisplay="RIGHT" graphicTextGap="4.0" mnemonicParsing="false" onAction="#readGuide" styleClass="text-link" text="Read guide" userData="1">
+                                                   <graphic>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/resources/chevron-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="Infinity" maxWidth="Infinity" styleClass="card" GridPane.columnIndex="2">
+                                       <padding>
+                                          <Insets bottom="28.0" left="28.0" right="28.0" top="28.0" />
+                                       </padding>
+                                       <children>
+                                          <VBox spacing="14.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <StackPane maxHeight="48.0" maxWidth="48.0" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" styleClass="icon-tile">
+                                                   <children>
+                                                      <ImageView fx:id="guideIcon2" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/resources/file-text.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </StackPane>
+                                                <Label fx:id="guideTitle2" styleClass="h3" text="Protect Important Documents" wrapText="true" />
+                                                <Label fx:id="guideBody2" styleClass="body" text="Keep IDs, insurance papers, and medical records in a waterproof bag." wrapText="true" />
+                                             </children>
+                                          </VBox>
+                                          <HBox alignment="CENTER_LEFT">
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                             <children>
+                                                <Label fx:id="guideTime2" styleClass="body-small,muted" text="3 min read" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button contentDisplay="RIGHT" graphicTextGap="4.0" mnemonicParsing="false" onAction="#readGuide" styleClass="text-link" text="Read guide" userData="2">
+                                                   <graphic>
+                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/resources/chevron-right.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+
+                        <!-- FAQ: click a question to expand or collapse it -->
+                        <VBox spacing="24.0">
+                           <children>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <Label styleClass="h2" text="Frequently Asked Questions" />
+                                    <Region maxHeight="4.0" maxWidth="48.0" minHeight="4.0" minWidth="48.0" prefHeight="4.0" prefWidth="48.0" styleClass="heading-accent" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="12.0">
+                                 <children>
+                                    <VBox onMouseClicked="#toggleFaq" spacing="10.0" styleClass="card,faq-item">
+                                       <padding>
+                                          <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
+                                       </padding>
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" spacing="16.0">
+                                             <children>
+                                                <Label maxWidth="Infinity" styleClass="h3" text="Do I need an account to get help?" wrapText="true" HBox.hgrow="ALWAYS" />
+                                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" styleClass="faq-chevron">
+                                                   <image>
+                                                      <Image url="@images/resources/chevron-up.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <Label styleClass="body,faq-answer" text="You need an account to submit and track a relief request. Shelters, contacts, and guides on this page are open to everyone." wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox onMouseClicked="#toggleFaq" styleClass="card,faq-item">
+                                       <padding>
+                                          <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
+                                       </padding>
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" spacing="16.0">
+                                             <children>
+                                                <Label maxWidth="Infinity" styleClass="h3" text="How soon will someone contact me?" wrapText="true" HBox.hgrow="ALWAYS" />
+                                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" styleClass="faq-chevron">
+                                                   <image>
+                                                      <Image url="@images/resources/chevron-down.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <Label managed="false" styleClass="body,faq-answer" text="Most requests are reviewed within a few hours. Requests marked urgent are reviewed first." visible="false" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox onMouseClicked="#toggleFaq" styleClass="card,faq-item">
+                                       <padding>
+                                          <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
+                                       </padding>
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" spacing="16.0">
+                                             <children>
+                                                <Label maxWidth="Infinity" styleClass="h3" text="Can I bring my pet to a shelter?" wrapText="true" HBox.hgrow="ALWAYS" />
+                                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" styleClass="faq-chevron">
+                                                   <image>
+                                                      <Image url="@images/resources/chevron-down.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <Label managed="false" styleClass="body,faq-answer" text="Some shelters accept pets. Look for the “Pets allowed” tag on each shelter card above." visible="false" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox onMouseClicked="#toggleFaq" styleClass="card,faq-item">
+                                       <padding>
+                                          <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
+                                       </padding>
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" spacing="16.0">
+                                             <children>
+                                                <Label maxWidth="Infinity" styleClass="h3" text="What if my request status hasn’t changed?" wrapText="true" HBox.hgrow="ALWAYS" />
+                                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" styleClass="faq-chevron">
+                                                   <image>
+                                                      <Image url="@images/resources/chevron-down.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
+                                          <Label managed="false" styleClass="body,faq-answer" text="Open the request from My Requests to see its latest update, or contact your assigned volunteer." visible="false" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+
+                  <!-- ============ Footer ============ -->
+                  <HBox fx:id="footer" alignment="CENTER_LEFT" maxWidth="Infinity" spacing="24.0" styleClass="site-footer">
+                     <padding>
+                        <Insets bottom="28.0" left="64.0" right="64.0" top="28.0" />
+                     </padding>
+                     <children>
+                        <VBox spacing="2.0">
+                           <children>
+                              <Label styleClass="footer-title" text="Hurricane Relief Coordination System" wrapText="true" />
+                              <Label text="In a life-threatening emergency, always call 911." wrapText="true" />
+                           </children>
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox spacing="28.0">
+                           <children>
+                              <Label minWidth="-Infinity" text="Accessibility" />
+                              <Label minWidth="-Infinity" text="Privacy" />
+                              <Label minWidth="-Infinity" text="Contact Us" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

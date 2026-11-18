@@ -2,6 +2,7 @@ package com.hurricane_relief_system;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    private static HostServices hostServices;
 
     /**
      * Starts the JavaFX app and shows the primary screen.
@@ -24,6 +26,7 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
+        hostServices = getHostServices();
         scene = new Scene(loadFXML("splash"), 640, 480);
         stage.setScene(scene);
         stage.show();
@@ -47,6 +50,16 @@ public class App extends Application {
      */
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
+    }
+
+    /**
+     * Opens a web page in the user's default browser.
+     * @param url Address of the page to open
+     */
+    public static void openWebPage(String url) {
+        if (hostServices != null) {
+            hostServices.showDocument(url);
+        }
     }
 
     /**

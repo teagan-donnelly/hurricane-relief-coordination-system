@@ -1,0 +1,280 @@
+/*
+ * Resources screen styles, translated from the Figma prototype ("Resources – v2").
+ * Colour tokens and the nav / footer / card / heading classes follow the prototype's
+ * design system, so other screens can reuse them by adding this stylesheet.
+ */
+
+@font-face {
+    font-family: "Public Sans";
+    src: url("fonts/PublicSans-Regular.ttf");
+}
+@font-face {
+    font-family: "Public Sans Medium";
+    src: url("fonts/PublicSans-Medium.ttf");
+}
+@font-face {
+    font-family: "Public Sans SemiBold";
+    src: url("fonts/PublicSans-SemiBold.ttf");
+}
+@font-face {
+    font-family: "Public Sans";
+    src: url("fonts/PublicSans-Bold.ttf");
+}
+
+/* ---------- Tokens ---------- */
+
+.resources-page {
+    -hr-navy-900: #17324d;
+    -hr-blue-700: #2e5e8c;
+    -hr-blue-50: #e9f1f8;
+    -hr-neutral-0: #ffffff;
+    -hr-neutral-50: #f5f7f9;
+    -hr-neutral-200: #d3dae1;
+    -hr-neutral-500: #66727f;
+    -hr-neutral-800: #24313d;
+    -hr-green-600: #6b8a2f;
+    -hr-green-700: #4f6a1c;
+    -hr-amber-50: #fff4e0;
+    -hr-amber-600: #c77700;
+    -hr-amber-700: #8a5300;
+    -hr-red-50: #fcebea;
+    -hr-red-600: #b3261e;
+
+    -fx-background-color: -hr-neutral-50;
+    -fx-font-family: "Public Sans";
+    -fx-font-size: 16px;
+}
+
+.resources-page .label,
+.resources-page .button,
+.resources-page .toggle-button {
+    -fx-font-family: "Public Sans";
+    -fx-text-fill: -hr-neutral-800;
+}
+
+/* ---------- Type scale ---------- */
+
+.resources-page .h1 {
+    -fx-font-weight: bold;
+    -fx-font-size: 36px;
+    -fx-text-fill: -hr-navy-900;
+}
+.resources-page .h2 {
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-text-fill: -hr-navy-900;
+}
+.resources-page .h3 {
+    -fx-font-family: "Public Sans SemiBold";
+    -fx-font-size: 18px;
+    -fx-text-fill: -hr-navy-900;
+    -fx-line-spacing: 4px;
+}
+.resources-page .body {
+    -fx-font-size: 16px;
+    -fx-line-spacing: 5px;
+}
+.resources-page .body-large {
+    -fx-font-size: 18px;
+    -fx-line-spacing: 5px;
+}
+.resources-page .body-small {
+    -fx-font-size: 14px;
+    -fx-line-spacing: 3px;
+}
+.resources-page .muted {
+    -fx-text-fill: -hr-neutral-500;
+}
+.resources-page .label-text {
+    -fx-font-family: "Public Sans SemiBold";
+    -fx-font-size: 14px;
+}
+
+/* ---------- Navigation ---------- */
+
+.nav-bar {
+    -fx-background-color: -hr-neutral-0;
+    -fx-border-color: transparent transparent -hr-neutral-200 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.resources-page .nav-brand-name {
+    -fx-font-family: "Public Sans SemiBold";
+    -fx-font-size: 18px;
+    -fx-text-fill: -hr-navy-900;
+}
+.resources-page .nav-link {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 3 0;
+    -fx-padding: 3 0 0 0;
+    -fx-font-family: "Public Sans Medium";
+    -fx-font-size: 16px;
+    -fx-text-fill: -hr-neutral-800;
+    -fx-cursor: hand;
+}
+.resources-page .nav-link:hover,
+.resources-page .nav-link:focused {
+    -fx-text-fill: -hr-blue-700;
+}
+.resources-page .nav-link-active {
+    -fx-text-fill: -hr-blue-700;
+    -fx-border-color: transparent transparent -hr-green-600 transparent;
+}
+.resources-page .account-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-color: -hr-navy-900;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 8;
+    -fx-padding: 10 16 10 16;
+    -fx-font-family: "Public Sans SemiBold";
+    -fx-font-size: 16px;
+    -fx-text-fill: -hr-navy-900;
+    -fx-cursor: hand;
+}
+.resources-page .account-button:hover {
+    -fx-background-color: -hr-blue-50;
+}
+
+/* ---------- Page header ---------- */
+
+.page-header {
+    -fx-background-color: -hr-blue-50;
+}
+.photo-fade {
+    -fx-background-color: linear-gradient(to right, #e9f1f8 0%, rgba(233, 241, 248, 0) 100%);
+}
+
+/* ---------- Emergency notice ---------- */
+
+.emergency-notice {
+    -fx-background-color: -hr-amber-50;
+    -fx-background-radius: 4;
+    -fx-border-color: transparent transparent transparent -hr-amber-600;
+    -fx-border-width: 0 0 0 4;
+    -fx-border-radius: 4;
+}
+
+/* ---------- Section headings ---------- */
+
+.heading-accent {
+    -fx-background-color: -hr-green-600;
+    -fx-background-radius: 2;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+    -fx-background-color: -hr-neutral-0;
+    -fx-background-radius: 12;
+    -fx-border-color: -hr-neutral-200;
+    -fx-border-radius: 12;
+}
+.icon-tile {
+    -fx-background-color: -hr-blue-50;
+    -fx-background-radius: 10;
+}
+.icon-tile-danger {
+    -fx-background-color: -hr-red-50;
+}
+.resources-page .contact-number {
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-text-fill: -hr-navy-900;
+}
+.resources-page .contact-number-danger {
+    -fx-text-fill: -hr-red-600;
+}
+
+/* Text-style link with a trailing chevron ("Get directions", "Read guide") */
+.resources-page .text-link {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-font-family: "Public Sans SemiBold";
+    -fx-font-size: 16px;
+    -fx-text-fill: -hr-blue-700;
+    -fx-cursor: hand;
+}
+.resources-page .text-link:hover .text,
+.resources-page .text-link:focused .text {
+    -fx-underline: true;
+}
+
+/* Shelter feature chips */
+.chip {
+    -fx-background-color: -hr-neutral-50;
+    -fx-background-radius: 999;
+    -fx-border-color: -hr-neutral-200;
+    -fx-border-radius: 999;
+    -fx-padding: 4 10 4 10;
+}
+
+/* Shelter capacity */
+.resources-page .status-ok   { -fx-text-fill: -hr-green-700; }
+.resources-page .status-low  { -fx-text-fill: -hr-amber-700; }
+.resources-page .status-full { -fx-text-fill: -hr-red-600; }
+.capacity-track {
+    -fx-background-color: -hr-neutral-200;
+    -fx-background-radius: 4;
+}
+.capacity-fill {
+    -fx-background-radius: 4;
+    -fx-min-height: 8;
+}
+.capacity-fill.status-ok   { -fx-background-color: -hr-green-600; }
+.capacity-fill.status-low  { -fx-background-color: -hr-amber-600; }
+.capacity-fill.status-full { -fx-background-color: -hr-red-600; }
+
+/* ---------- Guide tabs ---------- */
+
+.resources-page .guide-tab {
+    -fx-background-color: -hr-neutral-0;
+    -fx-background-radius: 999;
+    -fx-border-color: -hr-neutral-200;
+    -fx-border-radius: 999;
+    -fx-padding: 10 20 10 20;
+    -fx-font-family: "Public Sans SemiBold";
+    -fx-font-size: 16px;
+    -fx-text-fill: -hr-neutral-800;
+    -fx-cursor: hand;
+}
+.resources-page .guide-tab:hover {
+    -fx-border-color: -hr-navy-900;
+}
+.resources-page .guide-tab:selected {
+    -fx-background-color: -hr-navy-900;
+    -fx-border-color: -hr-navy-900;
+    -fx-text-fill: -hr-neutral-0;
+}
+
+/* ---------- FAQ ---------- */
+
+.faq-item {
+    -fx-cursor: hand;
+}
+.faq-item:hover {
+    -fx-border-color: -hr-blue-700;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+    -fx-background-color: -hr-navy-900;
+}
+.resources-page .site-footer .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -hr-neutral-0;
+}
+.resources-page .site-footer .footer-title {
+    -fx-font-family: "Public Sans SemiBold";
+}
+
+/* ---------- Scroll container ---------- */
+
+.resources-scroll,
+.resources-scroll > .viewport {
+    -fx-background-color: -hr-neutral-50;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
