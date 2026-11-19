@@ -1,4 +1,4 @@
-package com.hurricane_relief_system;
+package com.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

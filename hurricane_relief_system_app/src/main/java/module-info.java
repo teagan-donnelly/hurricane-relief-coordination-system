@@ -1,6 +1,7 @@
 module com.hurricane_relief_system {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.web;
     requires json.simple;
     requires junit;
 
